@@ -1,13 +1,17 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
 # compiled output
-/build
 /dist
 /tmp
 /out-tsc
-/coverage
+# Only exists if Bazel was run
+/bazel-out
 
 # dependencies
 /node_modules
-yarn.lock
+
+# profiling files
+chrome-profiler-events*.json
 
 # IDEs and editors
 /.idea
@@ -20,13 +24,11 @@ yarn.lock
 
 # IDE - VSCode
 .vscode/*
-# !.vscode/settings.json
-# !.vscode/tasks.json
-# !.vscode/launch.json
-# !.vscode/extensions.json
-
-# compodoc
-/documentation
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
 
 # misc
 /.sass-cache
@@ -34,19 +36,10 @@ yarn.lock
 /coverage
 /libpeerconnection.log
 npm-debug.log
+yarn-error.log
 testem.log
-tslint-to-eslint-config.log
 /typings
-
-# e2e
-/e2e/src/*.js
-/e2e/src/*.map
-/cypress/screenshots
 
 # System Files
 .DS_Store
 Thumbs.db
-.node-version
-
-# debug
-debug.log
