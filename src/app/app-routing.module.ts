@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -13,7 +13,7 @@ const routes: Routes = [
         import('./features/home/home.module').then((m) => m.HomeModule)
   },
   {
-    path: '**', //if route not found -> redirect to main ''
+    path: '**', //if route not found -> redirect to main
     redirectTo: ''
   }
 ];
@@ -24,4 +24,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
