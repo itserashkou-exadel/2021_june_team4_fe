@@ -1,25 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './modules/authorization/store/authorization/login/login.component';
-import {HomeComponent} from "./modules/authorization/store/home/home.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    loadChildren: () =>
+         import('./features/login/login.module').then((m) => m.LoginModule)
   },
   {
     path: 'home',
-    component: HomeComponent
+    loadChildren: () =>
+        import('./features/home/home.module').then((m) => m.HomeModule)
   },
   {
-    path: '**', //if route not found -> redirect to main ''
+    path: '**', //if route not found -> redirect to main
     redirectTo: ''
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {})
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
