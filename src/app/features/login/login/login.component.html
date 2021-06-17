@@ -1,23 +1,73 @@
-<mat-card>
-  <mat-card-content>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <h2>Log In</h2>
-      <mat-error *ngIf="loginInvalid">
-        The username and password were not recognized
-      </mat-error>
-      <mat-form-field class="full-width-input">
-        <input matInput placeholder="Email" formControlName="username" required>
-        <mat-error>
-          Please provide a valid email address
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="full-width-input">
-        <input matInput type="password" placeholder="Password" formControlName="password" required>
-        <mat-error>
-          Please provide a valid password
-        </mat-error>
-      </mat-form-field>
-      <button color="primary" mat-raised-button routerLink="home">Login</button>
-    </form>
-  </mat-card-content>
-</mat-card>
+<div class="login">
+  <div class="login-container">
+    <div class="info">
+      <img
+        class="info-img"
+        src="../../../assets/images/DiscountiE.PNG"
+        alt="DiscountiE"
+      />
+      <p class="info-description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    </div>
+
+    <div class="form-wrapper">
+      <form
+        class="form"
+        novalidate
+        [formGroup]="loginForm"
+        (ngSubmit)="submit()"
+      >
+        <h1 class="form-heading">Log In</h1>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="emailControl" />
+          <mat-error
+            *ngIf="
+              loginForm.controls['emailControl'].invalid &&
+              loginForm.controls['emailControl'].touched
+            "
+          >
+            Please provide a valid Email
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-password">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="passwordControl" />
+          <mat-error
+            *ngIf="
+              loginForm.controls['passwordControl'].invalid &&
+              loginForm.controls['passwordControl'].touched
+            "
+          >
+            Please provide a valid password
+          </mat-error>
+        </mat-form-field>
+        <button
+          *ngIf="
+            loginForm.controls['emailControl'].valid &&
+              loginForm.controls['passwordControl'].valid;
+            else disabledBtn
+          "
+          routerLink="/home"
+          mat-raised-button
+          color="primary"
+          type="submit"
+        >
+          Log In
+        </button>
+        <ng-template #disabledBtn>
+          <button mat-raised-button disabled>
+            Log In
+          </button>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</div>
