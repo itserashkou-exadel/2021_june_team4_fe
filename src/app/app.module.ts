@@ -19,6 +19,7 @@ import { AppComponent } from './app/app.component';
     // app
     AppRoutingModule
   ],
+  // exports:[ HomeModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,27 @@
+.container {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    div {
+        display: flex;
+        align-items: center;
+    }
+    .left-block {
+        width: 45%;
+        display: flex;
+        justify-content: space-between;
+        // flex-direction: column;
+    }
+    .right-block {
+        width: 45%;
+        display: flex;
+        justify-content: space-between;
+        padding-right: 20px;
+    }
+}
+.tabs {
+   div { background-color: burlywood;}
+}
+.mat-tab-label {
+    background-color: burlywood;
+}
