@@ -1,16 +1,31 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-         import('./features/login/login.module').then((m) => m.LoginModule)
+      import('./features/login/login.module').then((m) => m.LoginModule)
   },
   {
     path: 'home',
     loadChildren: () =>
-        import('./features/home/home.module').then((m) => m.HomeModule)
+      import('./features/home/home.module').then((m) => m.HomeModule)
+  },
+  {
+    path: 'description',
+    loadChildren: () =>
+      import('./features/description/description.module').then((m) => m.DescriptionModule)
+  },
+  {
+    path: 'vendor',
+    loadChildren: () =>
+      import('./features/vendor/vendor.module').then((m) => m.VendorModule)
+  },
+  {
+    path: 'statistic',
+    loadChildren: () =>
+      import('./features/statistic/statistic.module').then((m) => m.StatisticModule)
   },
   {
     path: '**', //if route not found -> redirect to main

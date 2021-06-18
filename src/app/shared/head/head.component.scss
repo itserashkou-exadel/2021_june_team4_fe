@@ -1,46 +1,27 @@
 .container {
-    //   border: 1px solid black;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      div {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    div {
         display: flex;
         align-items: center;
-      }
-      .left-block {
-        min-width: 49%;
+    }
+    .left-block {
+        width: 45%;
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
-        align-items: center;
-        // border: 1px solid red;
         // flex-direction: column;
-      }
-      .right-block {
-        min-width: 49%;
+    }
+    .right-block {
+        width: 45%;
         display: flex;
-        justify-content: space-around;
-        // padding-right: 20px;
-        // border: 1px solid yellow;
-        .notifications {
-        //   border: 1px solid red;
-          min-width: 15%;
-          display: flex;
-          justify-content: space-around;
-        }
-      }
+        justify-content: space-between;
+        padding-right: 20px;
     }
-    
-    .notifications {
-      * {
-        cursor: pointer;
-      }
-    }
-    // [placeholder="Search for discount"]{
-    //     color: red;
-    //     display: flex;
-    //     align-items: center;
-    //     box-shadow: 0 0 0 2px black;
-    // }
-    
+}
+.tabs {
+   div { background-color: burlywood;}
+}
+.mat-tab-label {
+    background-color: burlywood;
+}
