@@ -21,6 +21,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HeadComponent } from './head/head.component';
+import { TileComponent } from './tile/tile.component';
 
 @NgModule({
   imports: [
@@ -66,13 +67,10 @@ import { HeadComponent } from './head/head.component';
     MatSliderModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    TileComponent,
   ],
-  declarations: [
-    HeadComponent
-  ]
+  declarations: [HeadComponent, TileComponent],
 })
 export class SharedModule {
-  constructor() {
-
-  }
+  constructor() {}
 }
