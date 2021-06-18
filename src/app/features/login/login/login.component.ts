@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject } from "rxjs";
-
-// import { AuthService } from '../auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,46 +7,19 @@ import { BehaviorSubject } from "rxjs";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
-  public loginInvalid = false;
-  private formSubmitAttempt = false;
-  private returnUrl: string;
+  loginForm: FormGroup = new FormGroup({
+    emailControl: new FormControl('', [Validators.required, Validators.email]),
+    passwordControl: new FormControl('', [Validators.required, Validators.minLength(5)])
+  })
 
-  public isAuthenticated = new BehaviorSubject<boolean>(false);//in AuthService
+  constructor() { }
 
-  constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    // private authService: AuthService
-  ) {
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/home';
-
-    this.form = this.fb.group({
-      username: ['', Validators.email],
-      password: ['', Validators.required]
-    });
+  ngOnInit(): void {
+    // this.loginForm.valueChanges.subscribe(value => console.log(value))
+    // this.loginForm.statusChanges.subscribe(status => console.log(status))
   }
 
-  async ngOnInit(): Promise<void> {
-    // if (await this.authService.checkAuthenticated()) {
-    //   await this.router.navigate([this.returnUrl]);
-    // }
-  }
-
-  async onSubmit(): Promise<void> {
-    this.loginInvalid = false;
-    this.formSubmitAttempt = false;
-    if (this.form.valid) {
-      try {
-        const username = this.form.get('username')?.value;
-        const password = this.form.get('password')?.value;
-        // await this.authService.login(username, password);
-      } catch (err) {
-        this.loginInvalid = true;
-      }
-    } else {
-      this.formSubmitAttempt = true;
-    }
+  submit() {
+    // console.log(this.loginForm)
   }
 }
