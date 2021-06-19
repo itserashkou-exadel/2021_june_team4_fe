@@ -22,6 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 // import { HeadComponent } from './head/head/head.component';
 import {RouterModule} from "@angular/router";
+import { TileComponent } from './tile/tile.component';
 
 @NgModule({
     imports: [
@@ -68,9 +69,12 @@ import {RouterModule} from "@angular/router";
     MatSliderModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    TileComponent
   ],
   declarations: [
     // HeadComponent
+  
+    TileComponent
   ]
 })
 export class SharedModule {
