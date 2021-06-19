@@ -25,7 +25,14 @@ export class HeadComponent implements OnInit {
     'Logout',
     'Close',
   ];
-  tabItems = ['Home', 'Profile', 'Vendor', 'Statistics'];
+
+  tabItems = [
+    { link: 'home', label: 'Home' },
+    { link: 'profile', label: 'Profile' },
+    { link: 'vendor', label: 'Vendor' },
+    { link: 'statistic', label: 'Statistic' },
+    { link: 'description', label: 'Description'}
+  ];
 
   pmClick(ev: Event) {
     console.log((ev.target as HTMLButtonElement).innerText);

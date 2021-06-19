@@ -4,32 +4,22 @@ import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
     loadChildren: () =>
       import('./features/login/login.module').then((m) => m.LoginModule)
   },
   {
-    path: 'home',
+    path: 'head',
     loadChildren: () =>
-      import('./features/home/home.module').then((m) => m.HomeModule)
+      import('./features/head/head.module').then((m) => m.HeadModule)
   },
   {
-    path: 'description',
-    loadChildren: () =>
-      import('./features/description/description.module').then((m) => m.DescriptionModule)
-  },
-  {
-    path: 'vendor',
-    loadChildren: () =>
-      import('./features/vendor/vendor.module').then((m) => m.VendorModule)
-  },
-  {
-    path: 'statistic',
-    loadChildren: () =>
-      import('./features/statistic/statistic.module').then((m) => m.StatisticModule)
-  },
-  {
-    path: '**', //if route not found -> redirect to main
-    redirectTo: ''
+    path: '**',
+    redirectTo: 'login'
   }
 ];
 

@@ -20,34 +20,36 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { HeadComponent } from './head/head.component';
+// import { HeadComponent } from './head/head/head.component';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
+    imports: [
+        CommonModule,
+        FormsModule,
 
-    MatButtonModule,
-    MatSelectModule,
-    MatTabsModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatChipsModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatListModule,
-    MatMenuModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSnackBarModule,
-    MatSlideToggleModule,
-    MatDividerModule,
-  ],
+        MatButtonModule,
+        MatSelectModule,
+        MatTabsModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        MatChipsModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatListModule,
+        MatMenuModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSnackBarModule,
+        MatSlideToggleModule,
+        MatDividerModule,
+        RouterModule,
+    ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HeadComponent,
+    // HeadComponent,
     MatButtonModule,
     MatMenuModule,
     MatTabsModule,
@@ -68,7 +70,7 @@ import { HeadComponent } from './head/head.component';
     MatNativeDateModule,
   ],
   declarations: [
-    HeadComponent
+    // HeadComponent
   ]
 })
 export class SharedModule {
