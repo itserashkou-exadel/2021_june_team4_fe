@@ -7,8 +7,13 @@ import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
 
+import { StoreModule } from '@ngrx/store';
+import { headReducer } from './features/head/head.reducer';
+
 @NgModule({
   imports: [
+
+    StoreModule.forRoot({ head : headReducer}),
     // angular
     BrowserAnimationsModule,
     BrowserModule,
