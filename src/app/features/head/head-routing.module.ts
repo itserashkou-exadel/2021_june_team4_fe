@@ -12,11 +12,12 @@ const routes: Routes = [
   {
     path: '',
     component: HeadComponent,
+    // data: { title: 'anms.menu.home' }
     children: [
       {
         path: '',
         redirectTo: 'home',
-        // pathMatch: 'full'
+        pathMatch: 'full'
       },
       {
         path: 'home',
