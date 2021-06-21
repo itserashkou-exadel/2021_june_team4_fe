@@ -17,7 +17,7 @@ const routes: Routes = [
       import('./features/login/login.module').then((m) => m.LoginModule)
   },
   {
-    path: 'app',
+    path: '',
     loadChildren: () =>
       import('./features/head/head.module').then((m) => m.HeadModule),
     canActivate: [AuthGuardService]
