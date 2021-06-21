@@ -9,6 +9,7 @@ import { VendorComponent } from "./vendor/vendor/vendor.component";
 import { HeadComponent } from "./head/head.component";
 import { RouterModule } from "@angular/router";
 import { HeadRoutingModule } from "./head-routing.module";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HeadRoutingModule } from "./head-routing.module";
     DescriptionComponent,
     ProfileComponent,
     StatisticComponent,
-    VendorComponent
+    VendorComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
