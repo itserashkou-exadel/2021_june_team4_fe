@@ -20,9 +20,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-// import { HeadComponent } from './head/head/head.component';
+import {MatRadioModule} from '@angular/material/radio';
 import {RouterModule} from "@angular/router";
 import { TileComponent } from './tile/tile.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
     imports: [
@@ -69,7 +70,9 @@ import { TileComponent } from './tile/tile.component';
     MatSliderModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    TileComponent
+    TileComponent,
+    MatRadioModule,
+    MatButtonToggleModule
   ],
   declarations: [
     // HeadComponent
