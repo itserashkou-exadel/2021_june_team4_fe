@@ -11,7 +11,8 @@ import { RouterModule } from "@angular/router";
 import { HeadRoutingModule } from "./head-routing.module";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MapComponent } from './home/home/map/map.component';
-import { MarkerService} from "./home/home/map/marker.service";
+import { CarouselComponent } from './description/description/carousel/carousel.component';
+import {NgbCarouselModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -22,13 +23,15 @@ import { MarkerService} from "./home/home/map/marker.service";
     StatisticComponent,
     VendorComponent,
     NotFoundComponent,
-    MapComponent
+    MapComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule,
     HeadRoutingModule,
+    NgbCarouselModule,
   ]
 })
 export class HeadModule { }

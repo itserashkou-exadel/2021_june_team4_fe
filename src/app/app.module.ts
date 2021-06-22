@@ -6,10 +6,14 @@ import { CoreModule } from './core/core.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from "@angular/common/http";
+import { MarkerService } from "./features/head/home/home/map/marker.service";
 
 @NgModule({
   imports: [
     // angular
+    HttpClientModule,
     BrowserAnimationsModule,
     BrowserModule,
 
@@ -17,11 +21,15 @@ import { AppComponent } from './app/app.component';
     CoreModule,
 
     // app
-    AppRoutingModule
+    AppRoutingModule,
+      NgbModule
   ],
   // exports:[ HomeModule],
   declarations: [AppComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    MarkerService
+  ]
 })
 export class AppModule {}
 
