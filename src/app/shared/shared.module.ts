@@ -20,14 +20,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-// import { HeadComponent } from './head/head/head.component';
-import {RouterModule} from "@angular/router";
+
+import { RouterModule } from "@angular/router";
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-
         MatButtonModule,
         MatSelectModule,
         MatTabsModule,
@@ -49,7 +48,6 @@ import {RouterModule} from "@angular/router";
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    // HeadComponent,
     MatButtonModule,
     MatMenuModule,
     MatTabsModule,
@@ -69,9 +67,7 @@ import {RouterModule} from "@angular/router";
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  declarations: [
-    // HeadComponent
-  ]
+  declarations: []
 })
 export class SharedModule {
   constructor() {

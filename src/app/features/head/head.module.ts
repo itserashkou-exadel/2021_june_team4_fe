@@ -10,6 +10,7 @@ import { HeadComponent } from "./head/head.component";
 import { RouterModule } from "@angular/router";
 import { HeadRoutingModule } from "./head-routing.module";
 import { NotFoundComponent } from './not-found/not-found.component';
+import { MapComponent } from './home/home/map/map.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ProfileComponent,
     StatisticComponent,
     VendorComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,
