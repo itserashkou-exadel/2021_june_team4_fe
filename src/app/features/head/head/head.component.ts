@@ -3,28 +3,32 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { createSelector } from '@ngrx/store';
-import { IHeadState } from '../head.variables';
-import { IAppState } from '../head.variables';
+import { IDiscount, IHeadState, IAppState } from '../head.variables';
+// import { IAppState } from '../head.variables';
+import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-head',
   templateUrl: './head.component.html',
   styleUrls: ['./head.component.scss'],
 })
-
 export class HeadComponent implements OnInit {
-  
-  location$: Observable<string>;
+  discounts$: Observable<IDiscount[]>;
+  res: any;
 
   selectHead = (state: IAppState) => state.head;
 
-  selectLocation = createSelector(
+  selectDiscounts = createSelector(
     this.selectHead,
-    (state: IHeadState) => state.currentLocation
+    (state: IHeadState) => state.discounts
   );
 
   constructor(private store: Store<IAppState>) {
-    this.location$ = this.store.select(this.selectLocation);
+    this.discounts$ = this.store.select(this.selectDiscounts);
+    this.discounts$.forEach((el) => {
+      // this.res = el;
+      // console.log(el);
+    });
   }
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 
 export interface IHeadState {
-    currentLocation: string
+    discounts: IDiscount []
 }
 
 export interface IAppState {

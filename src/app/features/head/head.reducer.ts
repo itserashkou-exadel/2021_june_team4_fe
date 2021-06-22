@@ -2,8 +2,38 @@ import { createReducer, on } from '@ngrx/store';
 import { increment, decrement, reset } from './head.actions';
 import { IHeadState } from './head.variables';
 import { IAppState } from './head.variables';
+import { IDiscount } from './head.variables';
 
-export const initialState = { currentLocation: 'Vinnytsia' };
+export const initialState = {
+  discounts: [
+    {
+      id: 0,
+      name: 'Huawei',
+      vendor: 'Discount vendor0',
+      added: '21-06-2021',
+      expired: '21-11-2021',
+      location: 'kharkiv',
+      tag: 'tag',
+      cathegory: 'cathegory',
+      isActive: true,
+      description: 'string',
+      percent: 10,
+    },
+    {
+      id: 1,
+      name: 'Discount',
+      vendor: 'Discount vendor',
+      added: '21-06-2021',
+      expired: '21-11-2021',
+      location: 'Kyiv',
+      tag: 'tag',
+      cathegory: 'cathegory',
+      isActive: true,
+      description: 'string',
+      percent: 10,
+    },
+  ],
+};
 
 const _headReducer = createReducer(
   initialState
