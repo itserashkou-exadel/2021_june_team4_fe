@@ -11,6 +11,7 @@ import { RouterModule } from "@angular/router";
 import { HeadRoutingModule } from "./head-routing.module";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MapComponent } from './home/home/map/map.component';
+import { MarkerService} from "./home/home/map/marker.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { MapComponent } from './home/home/map/map.component';
     CommonModule,
     SharedModule,
     RouterModule,
-    HeadRoutingModule
+    HeadRoutingModule,
   ]
 })
 export class HeadModule { }
