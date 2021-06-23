@@ -1,11 +1,7 @@
 <div class="login">
   <div class="login-container">
     <div class="info">
-      <img
-        class="info-img"
-        src="../../../../assets/images/DiscountiE.PNG"
-        alt="DiscountiE"
-      />
+      <img class="info-img" src="../../../../assets/logo.png" alt="Discounti" />
       <p class="info-description">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -34,7 +30,12 @@
               loginForm.controls['emailControl'].touched
             "
           >
-            Please provide a valid Email
+            <span *ngIf="loginForm.controls.emailControl.errors?.required">
+              Email can't be empty
+            </span>
+            <span *ngIf="loginForm.controls.emailControl.errors?.email">
+              Please provide a valid Email
+            </span>
           </mat-error>
         </mat-form-field>
         <mat-form-field class="form-password">
