@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { createSelector } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IDiscount, IHeadState, IAppState } from '../../head.variables';
+import { IDiscount, IHeadState, IAppState } from '../../../../shared/variables';
 import { Store } from '@ngrx/store';
 import { state } from '@angular/animations';
 

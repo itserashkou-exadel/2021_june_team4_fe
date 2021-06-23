@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { createSelector } from '@ngrx/store';
-import { IDiscount, IHeadState, IAppState } from '../head.variables';
+import { IDiscount, IHeadState, IAppState } from '../../../shared/variables';
 // import { IAppState } from '../head.variables';
 import { state } from '@angular/animations';
 

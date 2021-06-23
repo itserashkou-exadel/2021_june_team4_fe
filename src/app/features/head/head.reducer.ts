@@ -1,8 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import { increment, decrement, reset } from './head.actions';
-import { IHeadState } from './head.variables';
-import { IAppState } from './head.variables';
-import { IDiscount } from './head.variables';
+import { IHeadState } from '../../shared/variables';
+import { IAppState } from '../../shared/variables';
+import { IDiscount } from '../../shared/variables';
 
 export const initialState = {
   discounts: [
