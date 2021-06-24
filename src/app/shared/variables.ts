@@ -1,4 +1,5 @@
 export interface IHeadState {
+  user: string,
   discounts: IDiscount[];
 }
 
@@ -30,6 +31,8 @@ export interface IInputTile {
   discountLocation: string;
   discountValue: number;
 }
+
+
 const discount: IDiscount = {
   id: 1,
   name: 'Discount',

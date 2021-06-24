@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { createSelector } from '@ngrx/store';
+import { createSelector ,createFeatureSelector} from '@ngrx/store';
 import { IDiscount, IHeadState, IAppState } from '../../../shared/variables';
 // import { IAppState } from '../head.variables';
 import { state } from '@angular/animations';
+import { select } from '@ngrx/store';
 
 @Component({
   selector: 'app-head',
@@ -13,26 +14,17 @@ import { state } from '@angular/animations';
   styleUrls: ['./head.component.scss'],
 })
 export class HeadComponent implements OnInit {
+
   discounts$: Observable<IDiscount[]>;
-  res: any;
 
-  selectHead = (state: IAppState) => state.head;
 
-  selectDiscounts = createSelector(
-    this.selectHead,
-    (state: IHeadState) => state.discounts
-  );
-
-  constructor(private store: Store<IAppState>) {
-    this.discounts$ = this.store.select(this.selectDiscounts);
-    this.discounts$.forEach((el) => {
-      // this.res = el;
-      // console.log(el);
-    });
+  constructor(private store: Store<IAppState>){
+    this.discounts$ = this.store.pipe(select( state => state.head.discounts));
   }
 
   ngOnInit(): void {
-    console.log('init');
+   
+    console.log(this.discounts$);
   }
 
   discountSearch = new FormControl('');

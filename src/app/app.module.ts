@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
 
 import { StoreModule } from '@ngrx/store';
-import { headReducer } from './features/head/head.reducer';
+import { headReducer } from './core/store/redeucers/head.reducer';
 
 @NgModule({
   imports: [

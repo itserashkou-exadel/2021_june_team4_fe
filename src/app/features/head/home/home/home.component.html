@@ -8,7 +8,7 @@
   <div class="control-bar">
     <mat-form-field appearance="fill">
       <mat-label>Sort by</mat-label>
-      <mat-select matNativeControl>
+      <mat-select matNativeControl (selectionChange)="someMethod($event.value)">
         <mat-option value="addition">Date of addition</mat-option>
         <mat-option value="expire">Time to expire</mat-option>
         <mat-option value="raiting">Rating</mat-option>
@@ -16,7 +16,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="setIsMap()">
       <mat-button-toggle value="map" checked="true"
         ><mat-icon aria-hidden="false" aria-label="Example home icon"
           >map</mat-icon
@@ -30,11 +30,14 @@
       <!-- <mat-button-toggle value="underline">Underline</mat-button-toggle> -->
     </mat-button-toggle-group>
   </div>
-  <div class="main-row">
+  <div   class="main-row" >
     <div class="sidebar">SIDEBAR</div>
-    <section class="main-section">
-      <app-tile></app-tile>
-      <app-tile></app-tile>
+    <section class="main-section" *ngIf="isMap">
+      <app-tile *ngFor="let discount of discountsData" [discount]="discount"></app-tile>
+    </section>
+    <section class="map" *ngIf="!isMap">
+      <h2 *ngFor="let i of arrayMap">MAP placeholder</h2>
     </section>
   </div>
 </div>
+<!-- <div *ngFor="let discount of discounts">{{discount.vendor}} - {{discount.location}}</div> -->
