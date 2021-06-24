@@ -12,7 +12,7 @@ import { HeadRoutingModule } from "./head-routing.module";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MapComponent } from './home/home/map/map.component';
 import { CarouselComponent } from './description/description/carousel/carousel.component';
-import {NgbCarouselModule} from "@ng-bootstrap/ng-bootstrap";
+import { NgbCarouselModule, NgbRatingModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import {NgbCarouselModule} from "@ng-bootstrap/ng-bootstrap";
     VendorComponent,
     NotFoundComponent,
     MapComponent,
-    CarouselComponent
+    CarouselComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +32,7 @@ import {NgbCarouselModule} from "@ng-bootstrap/ng-bootstrap";
     RouterModule,
     HeadRoutingModule,
     NgbCarouselModule,
+    NgbRatingModule,
   ]
 })
 export class HeadModule { }

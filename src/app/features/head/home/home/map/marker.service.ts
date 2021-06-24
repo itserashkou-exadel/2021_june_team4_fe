@@ -11,13 +11,13 @@ export class MarkerService {
 
   constructor(private http: HttpClient) { }
 
-  makeCapitalCircleMarkers(map: L.Map): void {
+  makeCapitalMarkers(map: L.Map): void {
 
     this.http.get(this.capitals).subscribe((res: any) => {
       for (const c of res.features) {
         const lon = c.geometry.coordinates[0];
         const lat = c.geometry.coordinates[1];
-        const circle = L.circleMarker([lat, lon]);
+        const circle = L.marker([lat, lon]);
 
         circle.addTo(map);
       }

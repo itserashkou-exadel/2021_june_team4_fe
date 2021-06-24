@@ -22,6 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 import { RouterModule } from "@angular/router";
+import { FooterComponent } from "./footer/footer.component";
 
 @NgModule({
     imports: [
@@ -42,7 +43,7 @@ import { RouterModule } from "@angular/router";
         MatSnackBarModule,
         MatSlideToggleModule,
         MatDividerModule,
-        RouterModule,
+        RouterModule
     ],
   exports: [
     CommonModule,
@@ -66,8 +67,9 @@ import { RouterModule } from "@angular/router";
     MatSliderModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    FooterComponent,
   ],
-  declarations: []
+  declarations: [ FooterComponent ]
 })
 export class SharedModule {
   constructor() {
