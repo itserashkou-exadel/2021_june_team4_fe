@@ -1,14 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatMenuModule } from '@angular/material/menu';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
+import { IHeadState } from '../head.variables';
+import { IAppState } from '../head.variables';
 
 @Component({
   selector: 'app-head',
   templateUrl: './head.component.html',
   styleUrls: ['./head.component.scss'],
 })
+
 export class HeadComponent implements OnInit {
-  constructor() {}
+
+  location$: Observable<string>;
+
+  selectHead = (state: IAppState) => state.head;
+
+  selectLocation = createSelector(
+    this.selectHead,
+    (state: IHeadState) => state.currentLocation
+  );
+
+  constructor(private store: Store<IAppState>) {
+    this.location$ = this.store.select(this.selectLocation);
+  }
 
   ngOnInit(): void {
     console.log('init');
@@ -16,7 +33,6 @@ export class HeadComponent implements OnInit {
 
   discountSearch = new FormControl('');
   profileMenu = new FormControl('');
-  // MenU = document.getElementById('mat-menu');
   profileMenuItems = [
     'Select cathegory',
     'History',
@@ -36,5 +52,4 @@ export class HeadComponent implements OnInit {
   pmClick(ev: Event) {
     console.log((ev.target as HTMLButtonElement).innerText);
   }
-
 }

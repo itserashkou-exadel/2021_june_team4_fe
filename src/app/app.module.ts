@@ -10,8 +10,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from "@angular/common/http";
 import { MarkerService } from "./features/head/home/home/map/marker.service";
 
+import { StoreModule } from '@ngrx/store';
+import { headReducer } from './features/head/head.reducer';
+
 @NgModule({
   imports: [
+
+    StoreModule.forRoot({ head : headReducer}),
     // angular
     HttpClientModule,
     BrowserAnimationsModule,

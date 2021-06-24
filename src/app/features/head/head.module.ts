@@ -15,24 +15,27 @@ import { CarouselComponent } from './description/description/carousel/carousel.c
 import { NgbCarouselModule, NgbRatingModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
-  declarations: [
-    HeadComponent,
-    HomeComponent,
-    DescriptionComponent,
-    ProfileComponent,
-    StatisticComponent,
-    VendorComponent,
-    NotFoundComponent,
-    MapComponent,
-    CarouselComponent,
-  ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule,
-    HeadRoutingModule,
-    NgbCarouselModule,
-    NgbRatingModule,
-  ]
+    declarations: [
+        HeadComponent,
+        HomeComponent,
+        DescriptionComponent,
+        ProfileComponent,
+        StatisticComponent,
+        VendorComponent,
+        NotFoundComponent,
+        MapComponent,
+        CarouselComponent,
+    ],
+    exports: [
+        MapComponent
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule,
+        HeadRoutingModule,
+        NgbCarouselModule,
+        NgbRatingModule,
+    ]
 })
 export class HeadModule { }

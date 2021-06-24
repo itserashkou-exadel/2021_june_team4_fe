@@ -23,28 +23,29 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 import { RouterModule } from "@angular/router";
 import { FooterComponent } from "./footer/footer.component";
+import { TileComponent } from './tile/tile.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        MatButtonModule,
-        MatSelectModule,
-        MatTabsModule,
-        MatInputModule,
-        MatProgressSpinnerModule,
-        MatChipsModule,
-        MatCardModule,
-        MatCheckboxModule,
-        MatListModule,
-        MatMenuModule,
-        MatIconModule,
-        MatTooltipModule,
-        MatSnackBarModule,
-        MatSlideToggleModule,
-        MatDividerModule,
-        RouterModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatSlideToggleModule,
+    MatDividerModule,
+    RouterModule
+  ],
   exports: [
     CommonModule,
     FormsModule,
@@ -68,8 +69,12 @@ import { FooterComponent } from "./footer/footer.component";
     MatDatepickerModule,
     MatNativeDateModule,
     FooterComponent,
+    TileComponent,
   ],
-  declarations: [ FooterComponent ]
+  declarations: [
+    FooterComponent,
+    TileComponent
+  ]
 })
 export class SharedModule {
   constructor() {
