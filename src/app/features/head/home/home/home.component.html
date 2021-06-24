@@ -31,7 +31,7 @@
       <app-tile *ngFor="let discount of discountsData" [discount]="discount"></app-tile>
     </section>
     <section class="map" *ngIf="!isMap">
-      <h2 *ngFor="let i of arrayMap">HERE is MAP</h2>
+      <app-map></app-map>
     </section>
   </div>
 </div>

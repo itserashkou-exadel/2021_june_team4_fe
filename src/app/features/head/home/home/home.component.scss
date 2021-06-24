@@ -16,7 +16,7 @@
   background-color: #40bfef;
   .sidebar {
     width: 200px;
-    border: 2px dotted blueviolet;
+    border-right: 2px solid white;
 }
 }
 
@@ -27,4 +27,12 @@ mat-form-field {
 .mat-button-toggle-checked {
     background-color: #0082ca;
     color: white;
+}
+.map {
+  margin: 0 auto;
+  position: relative;
+  width: 80%;
+  height: 500px;
+  // border: 3px solid red;
+  overflow: hidden;
 }
