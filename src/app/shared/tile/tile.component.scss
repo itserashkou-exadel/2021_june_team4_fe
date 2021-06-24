@@ -31,7 +31,19 @@
 }
 
 .mat-card-header {
-  height: 65px;
+  height: 70px;
+  width: 100%;
+  word-wrap: break-word;
+  overflow: wrap;
+  * {
+    width: 150px;
+    // border: 1px solid blue;
+    display: inline-block;
+    margin-left: -15px;
+  }
+  .mat-card-header-text {
+   
+  }
 }
 .mat-card-image {
   object-fit: cover;
