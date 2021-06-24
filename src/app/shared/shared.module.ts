@@ -26,6 +26,8 @@ import { FooterComponent } from "./footer/footer.component";
 import {MatRadioModule} from '@angular/material/radio';
 import { TileComponent } from './tile/tile.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   imports: [
@@ -46,7 +48,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatSnackBarModule,
     MatSlideToggleModule,
     MatDividerModule,
-    RouterModule
+    RouterModule,
+    MatDialogModule
   ],
   exports: [
     CommonModule,

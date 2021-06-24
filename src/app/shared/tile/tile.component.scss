@@ -1,8 +1,17 @@
 .example-card {
-  max-width: 150px;
+  width: 170px;
   display: inline-block;
   margin: 20px;
-  // height: 500px;
+}
+.mat-card-content {
+  p {
+    height: 35px;
+    font-size: .8em;
+    overflow: hidden;
+    *{
+      color: gray !important;
+    }
+  }
 }
 
 .example-header-image {
@@ -33,18 +42,22 @@
 .mat-card-header {
   height: 70px;
   width: 100%;
-  word-wrap: break-word;
+  // word-wrap: break-word;
   overflow: wrap;
+  
   * {
     width: 150px;
-    // border: 1px solid blue;
     display: inline-block;
     margin-left: -15px;
-  }
-  .mat-card-header-text {
-   
+    word-wrap: break-word;
+    // overflow: wrap;
   }
 }
 .mat-card-image {
   object-fit: cover;
+}
+
+.tooltip-block {
+  background-color: #0082ca;
+  font-size: .9em;
 }
