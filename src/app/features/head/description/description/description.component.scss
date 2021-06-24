@@ -1,0 +1,69 @@
+.price-container {
+  position: relative;
+}
+
+.sticky-wrapper {
+  position: sticky;
+  top: 20px;
+}
+
+.header, .address-block, .article-title{
+  margin: 20px;
+  text-align: start;
+}
+
+
+h1 {
+  margin: 0 !important;
+}
+
+
+.header {
+  span {
+    font-size: 13px;
+  }
+}
+
+.article-title {
+  h3 {
+    font-size: 21px;
+    font-weight: 500;
+    margin: 20px 0;
+  }
+}
+
+.price {
+  margin: 20px;
+  height: 60px;
+  font-size: 40px;
+  padding-top: 20px;
+}
+
+.activate-btn {
+  border-style: dotted;
+  width: 144px;
+  height: 45px;
+  margin: 5px;
+}
+
+.discount {
+  margin: 20px;
+  font-size: large;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.m-t-sm {
+  margin-top: 40px;
+}
+
+.filled {
+  color: #ffd740;
+}
+
+.map-wrapper {
+  height: 250px;
+  width: 350px;
+}

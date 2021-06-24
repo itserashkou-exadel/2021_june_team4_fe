@@ -20,37 +20,36 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-// import { HeadComponent } from './head/head/head.component';
-import {RouterModule} from "@angular/router";
+
+import { RouterModule } from "@angular/router";
+import { FooterComponent } from "./footer/footer.component";
 import { TileComponent } from './tile/tile.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-
-        MatButtonModule,
-        MatSelectModule,
-        MatTabsModule,
-        MatInputModule,
-        MatProgressSpinnerModule,
-        MatChipsModule,
-        MatCardModule,
-        MatCheckboxModule,
-        MatListModule,
-        MatMenuModule,
-        MatIconModule,
-        MatTooltipModule,
-        MatSnackBarModule,
-        MatSlideToggleModule,
-        MatDividerModule,
-        RouterModule,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatSlideToggleModule,
+    MatDividerModule,
+    RouterModule
+  ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    // HeadComponent,
     MatButtonModule,
     MatMenuModule,
     MatTabsModule,
@@ -69,11 +68,11 @@ import { TileComponent } from './tile/tile.component';
     MatSliderModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    TileComponent
+    FooterComponent,
+    TileComponent,
   ],
   declarations: [
-    // HeadComponent
-  
+    FooterComponent,
     TileComponent
   ]
 })

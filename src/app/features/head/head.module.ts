@@ -10,22 +10,32 @@ import { HeadComponent } from "./head/head.component";
 import { RouterModule } from "@angular/router";
 import { HeadRoutingModule } from "./head-routing.module";
 import { NotFoundComponent } from './not-found/not-found.component';
+import { MapComponent } from './home/home/map/map.component';
+import { CarouselComponent } from './description/description/carousel/carousel.component';
+import { NgbCarouselModule, NgbRatingModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
-  declarations: [
-    HeadComponent,
-    HomeComponent,
-    DescriptionComponent,
-    ProfileComponent,
-    StatisticComponent,
-    VendorComponent,
-    NotFoundComponent
-  ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule,
-    HeadRoutingModule
-  ]
+    declarations: [
+        HeadComponent,
+        HomeComponent,
+        DescriptionComponent,
+        ProfileComponent,
+        StatisticComponent,
+        VendorComponent,
+        NotFoundComponent,
+        MapComponent,
+        CarouselComponent,
+    ],
+    exports: [
+        MapComponent
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule,
+        HeadRoutingModule,
+        NgbCarouselModule,
+        NgbRatingModule,
+    ]
 })
 export class HeadModule { }

@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
     passwordControl: new FormControl('', [Validators.required, Validators.minLength(5)])
   })
 
-  path = '/app'
+  path = '/home'
 
   constructor() { }
 

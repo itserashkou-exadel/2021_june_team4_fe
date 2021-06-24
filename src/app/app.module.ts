@@ -6,6 +6,9 @@ import { CoreModule } from './core/core.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from "@angular/common/http";
+import { MarkerService } from "./features/head/home/home/map/marker.service";
 
 import { StoreModule } from '@ngrx/store';
 import { headReducer } from './features/head/head.reducer';
@@ -15,6 +18,7 @@ import { headReducer } from './features/head/head.reducer';
 
     StoreModule.forRoot({ head : headReducer}),
     // angular
+    HttpClientModule,
     BrowserAnimationsModule,
     BrowserModule,
 
@@ -22,11 +26,15 @@ import { headReducer } from './features/head/head.reducer';
     CoreModule,
 
     // app
-    AppRoutingModule
+    AppRoutingModule,
+      NgbModule
   ],
   // exports:[ HomeModule],
   declarations: [AppComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    MarkerService
+  ]
 })
 export class AppModule {}
 

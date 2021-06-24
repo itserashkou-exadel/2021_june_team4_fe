@@ -13,7 +13,7 @@ import { IAppState } from '../head.variables';
 })
 
 export class HeadComponent implements OnInit {
-  
+
   location$: Observable<string>;
 
   selectHead = (state: IAppState) => state.head;
@@ -46,8 +46,7 @@ export class HeadComponent implements OnInit {
     { link: 'home', label: 'Home' },
     { link: 'profile', label: 'Profile' },
     { link: 'vendor', label: 'Vendor' },
-    { link: 'statistic', label: 'Statistic' },
-    { link: 'description', label: 'Description' },
+    { link: 'statistic', label: 'Statistic' }
   ];
 
   pmClick(ev: Event) {
