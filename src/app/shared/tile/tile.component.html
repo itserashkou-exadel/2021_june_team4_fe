@@ -1,0 +1,23 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <mat-card-title>{{tileTitle}}</mat-card-title>
+        <mat-card-subtitle>{{cathegory}}</mat-card-subtitle>
+    </mat-card-header>
+    <img height="150" mat-card-image src={{tileImg}} alt="Photo of a Shiba Inu">
+    <mat-card-content>
+        <p>
+            {{tileDescription}}
+        </p>
+        <span></span>
+        <div class="info-box"><b>Discount :</b><b>{{discountValue}}% </b></div>
+        <div class="info-box"><b>Location :</b>{{discountLocation}}</div>
+        <div class="info-box"><b>Vendor :</b>{{vendorName}}</div>
+        <div class="info-box"> <b>Expire :</b> {{timeEnd}}</div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button>WANT</button>
+        <mat-icon aria-hidden="false" aria-label="Example home icon">favorite</mat-icon>
+
+    </mat-card-actions>
+</mat-card>
