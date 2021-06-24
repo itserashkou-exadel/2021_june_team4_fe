@@ -11,7 +11,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { MarkerService } from "./features/head/home/home/map/marker.service";
 
 import { StoreModule } from '@ngrx/store';
-import { headReducer } from './features/head/head.reducer';
+import { headReducer } from './core/store/redeucers/head.reducer';
 
 @NgModule({
   imports: [

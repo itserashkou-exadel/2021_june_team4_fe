@@ -23,7 +23,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 import { RouterModule } from "@angular/router";
 import { FooterComponent } from "./footer/footer.component";
+import {MatRadioModule} from '@angular/material/radio';
 import { TileComponent } from './tile/tile.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   imports: [
@@ -70,6 +72,8 @@ import { TileComponent } from './tile/tile.component';
     MatNativeDateModule,
     FooterComponent,
     TileComponent,
+    MatRadioModule,
+    MatButtonToggleModule
   ],
   declarations: [
     FooterComponent,
