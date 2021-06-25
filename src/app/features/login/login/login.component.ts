@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IUser } from 'src/app/shared/variables';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor ( private auth: AuthService,
                 private tokenStorage: TokenStorageService,
-                private router: Router ) { }
+                private router: Router,
+                private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -32,6 +33,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.isLoggedIn = true;
       // this.roles = this.tokenStorage.getUser().roles
     }
+
+    this.route.queryParams.subscribe(( params: Params) => {
+      if (params['accessDenied']) {
+        alert("You can't get this page. Login at first")
+      }
+    })
   }
 
   ngOnDestroy(): void {
