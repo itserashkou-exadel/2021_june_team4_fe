@@ -5,7 +5,7 @@ import {
   IDiscount,
   IHeadState,
   IAppState,
-  IInputTile,
+  // IInputTile,
 } from 'src/app/shared/variables';
 
 import { Store } from '@ngrx/store';
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
   discounts: any;
   isMap: boolean;
-  discountsData: IInputTile[];
+  discountsData: IDiscount[];
   arrayMap: any;
   sortBy: string;
 
@@ -40,41 +40,27 @@ export class HomeComponent implements OnInit {
     this.isMap = false;
 
     this.discountsData = [
+
       {
-        tileTitle: 'Title 1',
-        tileImg: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-        tileDescription: 'Text description discount programm',
-        vendorName: 'Vendor name',
-        cathegory: 'Cathegory',
-        timeEnd: '10/11/2021',
-        discountLocation: 'Kyiv',
-        discountValue: 15,
-      },
-      {
-        tileTitle: 'Title long name of discount',
-        tileImg: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-        tileDescription: 'Text description discount programm',
-        vendorName: 'ATB',
-        cathegory: 'Food',
-        timeEnd: '10/11/2021',
-        discountLocation: 'Vinnytsia',
-        discountValue: 15,
-      },
-      {
-        tileTitle: 'Title_long_name_discount ',
-        tileImg: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-        tileDescription: 'Text description discount programm',
-        vendorName: 'ATB',
-        cathegory: 'Food',
-        timeEnd: '10/11/2021',
-        discountLocation: 'Odessa',
-        discountValue: 10,
+        id: 0,
+        name: 'Huawei',
+        vendor: 'Discount vendor0',
+        added: '21-06-2021',
+        expired: '21-11-2021',
+        location: 'kharkiv',
+        tag: 'tag',
+        cathegory: 'cathegory',
+        isActive: true,
+        description: 'string',
+        percent: 10,
+        image:'https://material.angular.io/assets/img/examples/shiba2.jpg'
       },
     ];
   }
 
   ngOnInit(): void {
     this.store.subscribe((value) => (this.discounts = value.head.discounts));
+    this.discountsData = this.discounts;
     console.log(this.discounts);
   }
 

@@ -19,21 +19,19 @@ export interface IDiscount {
   isActive: boolean;
   description: string;
   percent: number;
+  image: string
 }
 
-export interface IInputTile {
-  tileTitle: string;
-  tileImg: string;
-  tileDescription: string;
-  vendorName: string;
-  cathegory: string;
-  timeEnd: string;
-  discountLocation: string;
-  discountValue: number;
+export interface IUser {
+  id: number;
+  name: string;
+  email: string;
+  isAdmin: boolean;
+  subscribes: string[];
+  favorit: string[];
 }
 
-
-const discount: IDiscount = {
+const discountExample: IDiscount = {
   id: 1,
   name: 'Discount',
   vendor: 'Discount vendor',
@@ -45,6 +43,7 @@ const discount: IDiscount = {
   isActive: true,
   description: 'string',
   percent: 10,
+  image: ''
 };
 
 export interface IUser {
