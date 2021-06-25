@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IUser } from 'src/app/shared/variables';
+import { IUserLogin } from 'src/app/shared/variables';
 import { AuthService } from 'src/app/_services/auth.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 @Component({
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.form.disable()
 
-    const loginData: IUser = {
+    const loginData: IUserLogin = {
       username: this.form.value.username.trim(),
       password: this.form.value.password.trim()
     }
