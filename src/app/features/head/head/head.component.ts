@@ -7,6 +7,7 @@ import { IDiscount, IHeadState, IAppState } from '../../../shared/variables';
 // import { IAppState } from '../head.variables';
 import { state } from '@angular/animations';
 import { select } from '@ngrx/store';
+import { DialogComponent } from "../../../shared/dialog/dialog.component";
 
 @Component({
   selector: 'app-head',
@@ -19,12 +20,21 @@ export class HeadComponent implements OnInit {
   discounts$: Observable<IDiscount[]>;
 
 
-  constructor(private store: Store<IAppState>){
+  constructor(private store: Store<IAppState>, public dialogRef: DialogComponent){
     this.discounts$ = this.store.pipe(select( state => state.head.discounts));
   }
 
+  openDialog() {
+    // let dialogConfig = {
+    //   width: '750px',
+    //   height: '500px',
+    //   data: { title: 'location' },
+    // }
+    this.dialogRef.openDialog();//dialogConfig
+  }
+
   ngOnInit(): void {
-   
+
     console.log(this.discounts$);
   }
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogContentComponent } from "./dialog-content/dialog-content.component";
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { DialogContentComponent } from "../dialog-content/dialog-content.component";
 
 @Component({
   selector: 'app-dialog',
@@ -16,6 +16,10 @@ export class DialogComponent {
       width: '750px',
       height:'500px'
     });
+
+    // openDialog(config: MatDialogConfig<any> | undefined) {
+    //   const dialogRef = this.dialog.open(DialogContentComponent, config);
+    // }
   }
 }
 

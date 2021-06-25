@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from "@angular/common/http";
-import { MarkerService } from "./features/head/home/home/map/marker.service";
+import { MarkerService } from "./shared/map/marker.service";
 
 import { StoreModule } from '@ngrx/store';
 import { headReducer } from './core/store/redeucers/head.reducer';
