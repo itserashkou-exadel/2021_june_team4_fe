@@ -64,6 +64,12 @@ h1 {
 }
 
 .map-wrapper {
+  position: relative;
+  outline: none;
   height: 250px;
   width: 350px;
+}
+
+.pointer {
+  cursor: pointer;
 }

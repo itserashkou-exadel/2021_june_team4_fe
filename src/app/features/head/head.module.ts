@@ -12,7 +12,10 @@ import { HeadRoutingModule } from "./head-routing.module";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MapComponent } from './home/home/map/map.component';
 import { CarouselComponent } from './description/description/carousel/carousel.component';
-import { NgbCarouselModule, NgbRatingModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbCarouselModule, NgbRatingModule, NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
+import { DialogComponent } from './description/description/dialog/dialog.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { DialogContentComponent } from './description/description/dialog/dialog-content/dialog-content.component';
 
 @NgModule({
     declarations: [
@@ -25,17 +28,22 @@ import { NgbCarouselModule, NgbRatingModule} from "@ng-bootstrap/ng-bootstrap";
         NotFoundComponent,
         MapComponent,
         CarouselComponent,
+        DialogComponent,
+        DialogContentComponent,
     ],
     exports: [
         MapComponent
     ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        RouterModule,
-        HeadRoutingModule,
-        NgbCarouselModule,
-        NgbRatingModule,
-    ]
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule,
+    HeadRoutingModule,
+    NgbCarouselModule,
+    NgbRatingModule,
+    MatDialogModule,
+    NgbTooltipModule,
+  ],
+  providers: [ DialogComponent ]
 })
 export class HeadModule { }
