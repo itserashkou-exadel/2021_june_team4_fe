@@ -19,30 +19,25 @@ export interface IDiscount {
   isActive: boolean;
   description: string;
   percent: number;
+  image: string
 }
 
-export interface IInputTile {
-  tileTitle: string;
-  tileImg: string;
-  tileDescription: string;
-  vendorName: string;
-  cathegory: string;
-  timeEnd: string;
-  discountLocation: string;
-  discountValue: number;
+export interface IUser {
+  id: number;
+  name: string;
+  email: string;
+  isAdmin: boolean;
+  subscribes: string[];
+  favorit: string[];
 }
 
 
-const discount: IDiscount = {
-  id: 1,
-  name: 'Discount',
-  vendor: 'Discount vendor',
-  added: '21-06-2021',
-  expired: '21-11-2021',
-  location: 'kharkiv',
-  tag: 'tag',
-  cathegory: 'cathegory',
-  isActive: true,
-  description: 'string',
-  percent: 10,
-};
+export interface IUserLogin {
+  username: string;
+  password: string;
+}
+
+export interface IToken {
+  accessToken: string; 
+  refreshToken: string;
+}

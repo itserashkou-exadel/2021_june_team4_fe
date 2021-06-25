@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { authInterceptorProviders } from '../app/_helpers/auth.interceptor';
 
 import { CoreModule } from './core/core.module';
 
@@ -21,6 +22,7 @@ import { headReducer } from './core/store/redeucers/head.reducer';
     HttpClientModule,
     BrowserAnimationsModule,
     BrowserModule,
+    HttpClientModule,
 
     // core
     CoreModule,
@@ -32,9 +34,7 @@ import { headReducer } from './core/store/redeucers/head.reducer';
   // exports:[ HomeModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
-  providers: [
-    MarkerService
-  ]
+  providers: [authInterceptorProviders, MarkerService]
 })
 export class AppModule {}
 

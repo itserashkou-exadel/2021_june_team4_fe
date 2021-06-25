@@ -28,6 +28,7 @@ import { RouterModule } from "@angular/router";
 import { FooterComponent } from "./footer/footer.component";
 import { TileComponent } from './tile/tile.component';
 
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -50,10 +51,27 @@ import { TileComponent } from './tile/tile.component';
     MatSnackBarModule,
     MatSlideToggleModule,
     MatDividerModule,
-    // MatSidenavModule,
 
-    RouterModule
+
+        MatButtonModule,
+        MatSelectModule,
+        MatTabsModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        MatChipsModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatListModule,
+        MatMenuModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSnackBarModule,
+        MatSlideToggleModule,
+        MatDividerModule,
+        RouterModule,
+        MatDialogModule
   ],
+
   exports: [
     CommonModule,
 
