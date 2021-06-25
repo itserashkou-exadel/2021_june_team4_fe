@@ -15,21 +15,25 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+// import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { RouterModule } from "@angular/router";
 import { FooterComponent } from "./footer/footer.component";
-import {MatRadioModule} from '@angular/material/radio';
 import { TileComponent } from './tile/tile.component';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
+
 
 @NgModule({
   imports: [
     CommonModule,
+
     FormsModule,
     MatButtonModule,
     MatSelectModule,
@@ -46,10 +50,13 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatSnackBarModule,
     MatSlideToggleModule,
     MatDividerModule,
+    // MatSidenavModule,
+
     RouterModule
   ],
   exports: [
     CommonModule,
+
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -70,10 +77,12 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatSliderModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatRadioModule,
+    MatButtonToggleModule,
+    // MatSidenavModule,
+
     FooterComponent,
     TileComponent,
-    MatRadioModule,
-    MatButtonToggleModule
   ],
   declarations: [
     FooterComponent,
