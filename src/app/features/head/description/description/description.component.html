@@ -1,1 +1,84 @@
-<p>description works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-7">
+      <div class="row header">
+        <div class="col-md-8">
+          <h1>Discount name</h1>
+          <mat-icon placement="right" ngbTooltip="See it on the map" class="pointer" (click)="openDialog()">place</mat-icon>
+          <span> Shevchenka street, 5 </span>
+        </div>
+        <div class="col-md-4 text-align-center m-t-sm">
+          <span>from</span>
+          03.05.2021
+          <span>to</span>
+          31.08.2021
+        </div>
+      </div>
+
+      <app-carousel></app-carousel>
+
+      <section class="article-title">
+        <h3>Bonus program description</h3>
+        <p>What is Lorem Ipsum?
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+          Why do we use it?
+          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+        </p>
+      </section>
+
+      <section class="article-title">
+        <h3>Service description</h3>
+        <p>What is Lorem Ipsum?
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+        Why do we use it?
+        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+      </p>
+      </section>
+    </div>
+
+    <div class="col-md-3 price-container text-align-center">
+      <div class="sticky-wrapper">
+        <div class="price align-items-center">650
+          <small>uah</small>
+        </div>
+
+        <button mat-raised-button color="accent"><div class="activate-btn">Activate coupon </div></button>
+
+        <div class="discount">
+          <b>sale</b>
+          -68%
+        </div>
+
+        <button mat-fab color="warn" aria-label="Save in favorite">
+          <mat-icon>favorite</mat-icon>
+        </button>
+
+        <div class="address-block" id="address">
+          <h2>Contacts</h2>
+
+          <ngb-rating [rate]="3"></ngb-rating>
+
+          <div class="vendor">Spa salon</div>
+          <div class="websites">
+            <a target="_blank" rel="nofollow" href="">website.com.ua</a><br>
+            <a target="_blank" rel="nofollow" href="">Facebook</a><br>
+            <a target="_blank" rel="nofollow" href="">Instagram</a>
+          </div>
+
+          <div class="phones">
+            <b>+38 (093) 607-87-72</b>
+          </div>
+        </div>
+
+        <div class="map-wrapper">
+<!--          <app-map></app-map>-->
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>

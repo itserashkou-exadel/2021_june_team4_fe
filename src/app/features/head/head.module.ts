@@ -9,21 +9,41 @@ import { VendorComponent } from "./vendor/vendor/vendor.component";
 import { HeadComponent } from "./head/head.component";
 import { RouterModule } from "@angular/router";
 import { HeadRoutingModule } from "./head-routing.module";
+import { NotFoundComponent } from './not-found/not-found.component';
+import { MapComponent } from './home/home/map/map.component';
+import { CarouselComponent } from './description/description/carousel/carousel.component';
+import {NgbCarouselModule, NgbRatingModule, NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
+import { DialogComponent } from './description/description/dialog/dialog.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { DialogContentComponent } from './description/description/dialog/dialog-content/dialog-content.component';
 
 @NgModule({
-  declarations: [
-    HeadComponent,
-    HomeComponent,
-    DescriptionComponent,
-    ProfileComponent,
-    StatisticComponent,
-    VendorComponent
-  ],
+    declarations: [
+        HeadComponent,
+        HomeComponent,
+        DescriptionComponent,
+        ProfileComponent,
+        StatisticComponent,
+        VendorComponent,
+        NotFoundComponent,
+        MapComponent,
+        CarouselComponent,
+        DialogComponent,
+        DialogContentComponent,
+    ],
+    exports: [
+        MapComponent
+    ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule,
-    HeadRoutingModule
-  ]
+    HeadRoutingModule,
+    NgbCarouselModule,
+    NgbRatingModule,
+    MatDialogModule,
+    NgbTooltipModule,
+  ],
+  providers: [ DialogComponent ]
 })
 export class HeadModule { }

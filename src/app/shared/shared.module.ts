@@ -15,18 +15,43 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+// import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-// import { HeadComponent } from './head/head/head.component';
-import {RouterModule} from "@angular/router";
+import { MatRadioModule } from '@angular/material/radio';
+
+import { RouterModule } from "@angular/router";
+import { FooterComponent } from "./footer/footer.component";
+import { TileComponent } from './tile/tile.component';
+
+
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
+  imports: [
+    CommonModule,
+
+    FormsModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatSlideToggleModule,
+    MatDividerModule,
+    // MatSidenavModule,
+
 
         MatButtonModule,
         MatSelectModule,
@@ -43,14 +68,14 @@ import {RouterModule} from "@angular/router";
         MatSnackBarModule,
         MatSlideToggleModule,
         MatDividerModule,
-        RouterModule,
-        
-    ],
+        RouterModule
+  ],
+
   exports: [
     CommonModule,
+
     FormsModule,
     ReactiveFormsModule,
-    // HeadComponent,
     MatButtonModule,
     MatMenuModule,
     MatTabsModule,
@@ -69,9 +94,16 @@ import {RouterModule} from "@angular/router";
     MatSliderModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatRadioModule,
+    MatButtonToggleModule,
+    // MatSidenavModule,
+
+    FooterComponent,
+    TileComponent,
   ],
   declarations: [
-    // HeadComponent
+    FooterComponent,
+    TileComponent
   ]
 })
 export class SharedModule {

@@ -1,1 +1,37 @@
-<p>home works!</p>
+
+<div class="container">
+  <div class="control-bar">
+    <mat-form-field appearance="fill">
+      <mat-label>Sort by</mat-label>
+      <mat-select matNativeControl>
+        <mat-option value="addition">Date of addition</mat-option>
+        <mat-option value="expire">Time to expire</mat-option>
+        <mat-option value="raiting">Rating</mat-option>
+        <mat-option value="name">Default</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="setIsMap()">
+      <mat-button-toggle value="map" checked="true"
+        ><mat-icon aria-hidden="false" aria-label="Example home icon"
+          >map</mat-icon
+        ></mat-button-toggle
+      >
+      <mat-button-toggle value="list"
+        ><mat-icon aria-hidden="false" aria-label="Example home icon"
+          >list_alt</mat-icon
+        ></mat-button-toggle
+      >
+      <!-- <mat-button-toggle value="underline">Underline</mat-button-toggle> -->
+    </mat-button-toggle-group>
+  </div>
+  <div class="main-row" >
+    <div class="sidebar">SIDEBAR</div>
+    <section class="main-section" *ngIf="isMap">
+      <app-tile *ngFor="let discount of discountsData" [discount]="discount"></app-tile>
+    </section>
+    <section class="map" *ngIf="!isMap">
+      <app-map></app-map>
+    </section>
+  </div>
+</div>

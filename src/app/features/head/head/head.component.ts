@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatMenuModule } from '@angular/material/menu';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { createSelector ,createFeatureSelector} from '@ngrx/store';
+import { IDiscount, IHeadState, IAppState } from '../../../shared/variables';
+// import { IAppState } from '../head.variables';
+import { state } from '@angular/animations';
+import { select } from '@ngrx/store';
 
 @Component({
   selector: 'app-head',
@@ -8,15 +14,22 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrls: ['./head.component.scss'],
 })
 export class HeadComponent implements OnInit {
-  constructor() {}
+
+
+  discounts$: Observable<IDiscount[]>;
+
+
+  constructor(private store: Store<IAppState>){
+    this.discounts$ = this.store.pipe(select( state => state.head.discounts));
+  }
 
   ngOnInit(): void {
-    console.log('init');
+   
+    console.log(this.discounts$);
   }
 
   discountSearch = new FormControl('');
   profileMenu = new FormControl('');
-  // MenU = document.getElementById('mat-menu');
   profileMenuItems = [
     'Select cathegory',
     'History',
@@ -30,12 +43,10 @@ export class HeadComponent implements OnInit {
     { link: 'home', label: 'Home' },
     { link: 'profile', label: 'Profile' },
     { link: 'vendor', label: 'Vendor' },
-    { link: 'statistic', label: 'Statistic' },
-    { link: 'description', label: 'Description'}
+    { link: 'statistic', label: 'Statistic' }
   ];
 
   pmClick(ev: Event) {
     console.log((ev.target as HTMLButtonElement).innerText);
   }
-
 }

@@ -8,10 +8,19 @@ import { CoreModule } from './core/core.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from "@angular/common/http";
+import { MarkerService } from "./features/head/home/home/map/marker.service";
+
+import { StoreModule } from '@ngrx/store';
+import { headReducer } from './core/store/redeucers/head.reducer';
 
 @NgModule({
   imports: [
+
+    StoreModule.forRoot({ head : headReducer}),
     // angular
+    HttpClientModule,
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
@@ -20,12 +29,13 @@ import { AppComponent } from './app/app.component';
     CoreModule,
 
     // app
-    AppRoutingModule
+    AppRoutingModule,
+      NgbModule
   ],
   // exports:[ HomeModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
-  providers: [authInterceptorProviders]
+  providers: [authInterceptorProviders, MarkerService]
 })
 export class AppModule {}
 

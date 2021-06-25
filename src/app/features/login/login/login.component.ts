@@ -23,6 +23,9 @@ export class LoginComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private route: ActivatedRoute ) { }
 
+  path = '/home'
+
+
   ngOnInit(): void {
     this.form = new FormGroup({
       username: new FormControl(null, [Validators.required, Validators.email]),
@@ -58,7 +61,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.aSub = this.auth.login(loginData).subscribe(
       data => {
         console.log(data);
-        this.router.navigate(['/head']);
+        this.router.navigate(['/home']);
 
         this.tokenStorage.saveToken(data);
         // this.tokenStorage.saveUser(data);
