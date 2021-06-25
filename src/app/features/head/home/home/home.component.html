@@ -28,7 +28,7 @@
   <div class="main-row" >
     <div class="sidebar">SIDEBAR</div>
     <section class="main-section" *ngIf="isMap">
-      <app-tile *ngFor="let discount of discountsData" [discount]="discount"></app-tile>
+      <app-tile *ngFor="let discount of discountsData" [discount$]="discount"></app-tile>
     </section>
     <section class="map" *ngIf="!isMap">
       <app-map></app-map>
