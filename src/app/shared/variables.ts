@@ -45,3 +45,13 @@ const discountExample: IDiscount = {
   percent: 10,
   image: ''
 };
+
+export interface IUser {
+  username: string;
+  password: string;
+}
+
+export interface IToken {
+  accessToken: string; 
+  refreshToken: string;
+}

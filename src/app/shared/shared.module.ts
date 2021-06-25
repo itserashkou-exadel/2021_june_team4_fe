@@ -52,9 +52,26 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSlideToggleModule,
     MatDividerModule,
 
-    RouterModule,
-    MatDialogModule
+
+        MatButtonModule,
+        MatSelectModule,
+        MatTabsModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        MatChipsModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatListModule,
+        MatMenuModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSnackBarModule,
+        MatSlideToggleModule,
+        MatDividerModule,
+        RouterModule,
+        MatDialogModule
   ],
+
   exports: [
     CommonModule,
 
