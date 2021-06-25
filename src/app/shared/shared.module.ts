@@ -44,6 +44,7 @@ import {RouterModule} from "@angular/router";
         MatSlideToggleModule,
         MatDividerModule,
         RouterModule,
+        
     ],
   exports: [
     CommonModule,

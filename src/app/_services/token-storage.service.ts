@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { IToken } from '../shared/variables';
 
-// TODO: ??????
-const TOKEN_KEY = 'auth-token';
-const USER_KEY = 'auth-user'
+const TOKEN_KEY_ACCESS = 'accessToken';
+const TOKEN_KEY_REFRESH = 'refreshToken';
+const USER_KEY = 'auth-user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,18 +12,19 @@ export class TokenStorageService {
 
   constructor() { }
 
-  //TODO: What storage will we use? session or local
   logOut(): void {
     window.sessionStorage.clear()
   }
 
-  public saveToken(token: string): void {
-    window.sessionStorage.removeItem(TOKEN_KEY)
-    window.sessionStorage.setItem(TOKEN_KEY, token)
+  public saveToken(token: IToken): void {
+    window.sessionStorage.removeItem(TOKEN_KEY_ACCESS)
+    window.sessionStorage.setItem(TOKEN_KEY_ACCESS, token.accessToken)
+    window.sessionStorage.removeItem(TOKEN_KEY_REFRESH)
+    window.sessionStorage.setItem(TOKEN_KEY_REFRESH, token.refreshToken)
   }
 
   public getToken(): string | null {
-    return window.sessionStorage.getItem(TOKEN_KEY)
+    return window.sessionStorage.getItem(TOKEN_KEY_ACCESS)
   }
 
   public saveUser(user: any): void {

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IToken, IUser } from '../shared/variables';
 
-// TODO: add API link
-const AUTH_API = '';
+const AUTH_API = 'http://localhost:8080/authenticate/login';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -15,13 +15,9 @@ const httpOptions = {
 
 export class AuthService {
   constructor(private http: HttpClient) { }
-  
-  login(email: string, password: string): Observable<any> {
-    // TODO: Edit request link
-    return this.http.post(AUTH_API + '', {
-    //
-      email,
-      password
-    }, httpOptions)
+
+  login(user: IUser): Observable<IToken> {
+    return this.http.post<IToken>(AUTH_API, user, httpOptions)
   }
+
 }
