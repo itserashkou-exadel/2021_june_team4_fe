@@ -9,6 +9,7 @@ import {
 } from 'src/app/shared/variables';
 
 import { Store } from '@ngrx/store';
+import { setContent } from 'src/app/core/store/actions/config.actions';
 
 @Component({
   selector: 'app-home',
@@ -30,17 +31,17 @@ export class HomeComponent implements OnInit {
     (state: IHeadState) => state.discounts
   );
 
-  constructor(private store: Store<{ head: IHeadState }>) {
+  constructor(
+    private store: Store<{ head: IHeadState }>,
+    private configStore: Store<{ config: any }>
+  ) {
     this.sortBy = 'default';
-
-    this.arrayMap = new Array(14);
 
     this.discounts = this.store.select(this.selectDiscounts);
 
     this.isMap = false;
 
     this.discountsData = [
-
       {
         id: 0,
         name: 'Huawei',
@@ -53,22 +54,29 @@ export class HomeComponent implements OnInit {
         isActive: true,
         description: 'string',
         percent: 10,
-        image:'https://material.angular.io/assets/img/examples/shiba2.jpg'
+        image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
       },
     ];
   }
 
   ngOnInit(): void {
     this.store.subscribe((value) => (this.discounts = value.head.discounts));
+
+    this.configStore.subscribe(
+      (value) => (this.isMap = value.config.homeIsMap)
+    );
+
     this.discountsData = this.discounts;
     console.log(this.discounts);
   }
 
-  setIsMap(): void {
-    this.isMap = !this.isMap;
+  setIsMap(val: any): void {
+    this.configStore.dispatch(
+      setContent({ isMap: val === 'list' ? false : true })
+    );
   }
-  
-  someMethod(ev:any):void {
-    console.log(ev + ' -> ');
+
+  someMethod(): void {
+    console.log( ' -> ');
   }
 }

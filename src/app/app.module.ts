@@ -13,11 +13,12 @@ import { MarkerService } from "./features/head/home/home/map/marker.service";
 
 import { StoreModule } from '@ngrx/store';
 import { headReducer } from './core/store/redeucers/head.reducer';
+import { configReducer } from './core/store/redeucers/config.reducer';
 
 @NgModule({
   imports: [
 
-    StoreModule.forRoot({ head : headReducer}),
+    StoreModule.forRoot({ head : headReducer, config: configReducer }),
     // angular
     HttpClientModule,
     BrowserAnimationsModule,

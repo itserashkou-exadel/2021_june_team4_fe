@@ -11,13 +11,13 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="setIsMap()">
-      <mat-button-toggle value="map" checked="true"
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" #group="matButtonToggleGroup" (change)="setIsMap(group.value)">
+      <mat-button-toggle value="map" [checked]="isMap"
         ><mat-icon aria-hidden="false" aria-label="Example home icon"
           >map</mat-icon
         ></mat-button-toggle
       >
-      <mat-button-toggle value="list"
+      <mat-button-toggle value="list" [checked]="!isMap"
         ><mat-icon aria-hidden="false" aria-label="Example home icon"
           >list_alt</mat-icon
         ></mat-button-toggle
@@ -27,10 +27,10 @@
   </div>
   <div class="main-row" >
     <div class="sidebar">SIDEBAR</div>
-    <section class="main-section" *ngIf="isMap">
+    <section class="main-section" *ngIf="!isMap">>
       <app-tile *ngFor="let discount of discountsData" [discount$]="discount"></app-tile>
     </section>
-    <section class="map" *ngIf="!isMap">
+    <section class="map" *ngIf="isMap">
       <app-map></app-map>
     </section>
   </div>
