@@ -1,8 +1,5 @@
 .container {
   min-width: 100%;
-  display: flex;
-  flex-direction: column;
-  // border: 1px solid red;
   padding: 0px;
 }
 .control-bar {
@@ -12,27 +9,35 @@
 }
 
 .main-row {
-  display: flex;
+  display: flex; 
   background-color: #40bfef;
+  padding-top: 10px;
+  padding-bottom: 10px;
   .sidebar {
     width: 200px;
     border-right: 2px solid white;
-}
+  }
+  .main-section {
+    max-width: 1050px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
 }
 
 mat-form-field {
-    height: 50px;
-    margin-right: 20px;
+  height: 50px;
+  margin-right: 20px;
 }
 .mat-button-toggle-checked {
-    background-color: #0082ca;
-    color: white;
+  background-color: #0082ca;
+  color: white;
 }
 .map {
+  
   margin: 0 auto;
   position: relative;
   width: 80%;
   height: 500px;
-  // border: 3px solid red;
   overflow: hidden;
 }

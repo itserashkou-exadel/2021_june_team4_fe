@@ -1,13 +1,13 @@
 <mat-card class="example-card">
     <mat-card-header>
         <!-- <div mat-card-avatar class="example-header-image"></div> -->
-        <mat-card-title>{{discount$.name | slice: 0: 20}} {{setDotts(discount$.name, 20)}}</mat-card-title>
+        <mat-card-title>{{discount$.name | slice: 0: 35}} {{setDotts(discount$.name, 35)}}</mat-card-title>
         <mat-card-subtitle>{{discount$.cathegory}}</mat-card-subtitle>
     </mat-card-header>
     <img height="150" mat-card-image src={{discount$.image}} alt="Photo of a Shiba Inu">
     <mat-card-content>
         <p matTooltip="{{discount$.description}}" matTooltipClass="tooltip-block">
-            {{discount$.description | slice: 0: 50}}{{setDotts(discount$.description, 50)}}
+            {{discount$.description | slice: 0: 80}}{{setDotts(discount$.description, 80)}}
         </p>
         <span></span>
         <div class="info-box"><b>Discount :</b><b>{{discount$.percent}}% </b></div>
