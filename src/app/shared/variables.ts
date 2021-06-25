@@ -31,22 +31,8 @@ export interface IUser {
   favorit: string[];
 }
 
-const discountExample: IDiscount = {
-  id: 1,
-  name: 'Discount',
-  vendor: 'Discount vendor',
-  added: '21-06-2021',
-  expired: '21-11-2021',
-  location: 'kharkiv',
-  tag: 'tag',
-  cathegory: 'cathegory',
-  isActive: true,
-  description: 'string',
-  percent: 10,
-  image: ''
-};
 
-export interface IUser {
+export interface IUserLogin {
   username: string;
   password: string;
 }
