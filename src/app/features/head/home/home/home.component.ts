@@ -5,11 +5,12 @@ import {
   IDiscount,
   IHeadState,
   IAppState,
+  IUiConfigState,
   // IInputTile,
 } from 'src/app/shared/variables';
 
 import { Store } from '@ngrx/store';
-import { setContent } from 'src/app/core/store/actions/config.actions';
+import { setContent } from 'src/app/core/store/actions/ui-config.actions';
 
 @Component({
   selector: 'app-home',
@@ -17,11 +18,10 @@ import { setContent } from 'src/app/core/store/actions/config.actions';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  // discounts: Observable<IDiscount[]>;
-
+  isMap: Observable<boolean>;
+  discountsData: Observable<IDiscount[]>;
   discounts: any;
-  isMap: boolean;
-  discountsData: IDiscount[];
+  
   arrayMap: any;
   sortBy: string;
 
@@ -32,51 +32,28 @@ export class HomeComponent implements OnInit {
   );
 
   constructor(
-    private store: Store<{ head: IHeadState }>,
-    private configStore: Store<{ config: any }>
+    private store: Store<{ head: IHeadState, uiConfig: IUiConfigState }>,
   ) {
     this.sortBy = 'default';
 
-    this.discounts = this.store.select(this.selectDiscounts);
+    const selecUiConfig = (state: IAppState) => state.uiConfig;
+    const selectMap = createSelector(selecUiConfig, (state: IUiConfigState) => state.homeIsMap)
+    this.isMap = this.store.select(selectMap);
+    
+    const selecHead = (state: IAppState) => state.head;
+    const selectDiscounts = createSelector(selecHead, (state: IHeadState) => state.discounts)
+    this.discountsData = this.store.select(selectDiscounts);
 
-    this.isMap = false;
-
-    this.discountsData = [
-      {
-        id: 0,
-        name: 'Huawei',
-        vendor: 'Discount vendor0',
-        added: '21-06-2021',
-        expired: '21-11-2021',
-        location: 'kharkiv',
-        tag: 'tag',
-        cathegory: 'cathegory',
-        isActive: true,
-        description: 'string',
-        percent: 10,
-        image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      },
-    ];
   }
 
-  ngOnInit(): void {
-    this.store.subscribe((value) => (this.discounts = value.head.discounts));
-
-    this.configStore.subscribe(
-      (value) => (this.isMap = value.config.homeIsMap)
-    );
-
-    this.discountsData = this.discounts;
-    console.log(this.discounts);
-  }
+  ngOnInit(): void { }
 
   setIsMap(val: any): void {
-    this.configStore.dispatch(
+    this.store.dispatch(
       setContent({ isMap: val === 'list' ? false : true })
     );
   }
 
   someMethod(): void {
-    console.log( ' -> ');
-  }
+   }
 }
