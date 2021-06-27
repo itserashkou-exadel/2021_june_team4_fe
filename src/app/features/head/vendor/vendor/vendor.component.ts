@@ -1,15 +1,62 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { take } from 'rxjs/operators';
+import { IDiscount } from 'src/app/shared/variables';
 
 @Component({
   selector: 'app-vendor',
   templateUrl: './vendor.component.html',
-  styleUrls: ['./vendor.component.scss']
+  styleUrls: ['./vendor.component.scss'],
 })
 export class VendorComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private _ngZone: NgZone) {
+    // this.autosize = null;
   }
 
+  @ViewChild('autosize')
+  autosize!: CdkTextareaAutosize;
+
+  triggerResize() {
+    // Wait for changes to be applied, then trigger textarea resize.
+    this._ngZone.onStable
+      .pipe(take(1))
+      .subscribe(() => this.autosize.resizeToFitContent(true));
+  }
+
+  ngOnInit(): void {}
+
+  vendorForm = new FormGroup({
+    discountName: new FormControl(''),
+    vendorName: new FormControl(''),
+    startTime: new FormControl(''),
+    endTime: new FormControl(''),
+    discountLocation: new FormControl(''),
+    discountTag: new FormControl(''),
+    cathegory: new FormControl(''),
+    discountDescription: new FormControl(''),
+    discountPercent: new FormControl(''),
+    discountPromo: new FormControl(''),
+    discountPicture: new FormControl(''),
+  });
+
+  formSubmit(): void {
+    console.log(this.vendorForm.value);
+    const tr = this.vendorForm.value;
+    const newDisccount : IDiscount = {
+      id: 0,
+      name: tr.discountName,
+      vendor: tr.vendorName,
+      added: tr.startTime,
+      expired: tr.endTime,
+      location: tr.discountLocation,
+      tag: tr.discountTag,
+      cathegory: tr.cathegory,
+      isActive: true,
+      description: tr.discountDescription,
+      percent: tr.discountPercent,
+      image: tr.discountPicture,
+    }
+
+  }
 }

@@ -1,0 +1,17 @@
+.vendor-controls {
+    display: flex;
+    align-items: center;
+    .mat-form-field{ margin-left: 10px;}
+}
+
+.form-container{
+    form {
+        // display: flex;
+        // justify-content: space-between;
+        mat-form-field {
+            display: block;
+            width: 300px;
+        }
+    }
+   
+}

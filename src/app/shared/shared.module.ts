@@ -27,8 +27,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { RouterModule } from "@angular/router";
 import { FooterComponent } from "./footer/footer.component";
 import { TileComponent } from './tile/tile.component';
-
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatStepperModule} from '@angular/material/stepper';
+
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatSlideToggleModule,
         MatDividerModule,
         RouterModule,
-        MatDialogModule
+        MatDialogModule,
+        MatStepperModule
   ],
 
   exports: [
@@ -101,6 +103,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 
     FooterComponent,
     TileComponent,
+    MatStepperModule
+
   ],
   declarations: [
     FooterComponent,

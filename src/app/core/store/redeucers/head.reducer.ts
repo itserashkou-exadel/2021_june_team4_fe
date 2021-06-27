@@ -128,6 +128,9 @@ export const initialState : IHeadState= {
 
 export function headReducer(state: IHeadState  = initialState, action:any) {
   switch (action.type) {
+    case 'addDiscount':
+
+    return state;
     default:
         return state;
     }
