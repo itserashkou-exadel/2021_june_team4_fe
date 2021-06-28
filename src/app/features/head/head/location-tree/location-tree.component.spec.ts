@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogContentComponent } from './dialog-content.component';
+import { LocationTreeComponent } from './location-tree.component';
 
-describe('DialogContentComponent', () => {
-  let component: DialogContentComponent;
-  let fixture: ComponentFixture<DialogContentComponent>;
+describe('LocationTreeComponent', () => {
+  let component: LocationTreeComponent;
+  let fixture: ComponentFixture<LocationTreeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogContentComponent ]
+      declarations: [ LocationTreeComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogContentComponent);
+    fixture = TestBed.createComponent(LocationTreeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

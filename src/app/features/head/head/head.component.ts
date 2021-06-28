@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { createSelector ,createFeatureSelector} from '@ngrx/store';
-import { IDiscount, IHeadState, IAppState } from '../../../shared/variables';
-// import { IAppState } from '../head.variables';
-import { state } from '@angular/animations';
-import { select } from '@ngrx/store';
+import { IAppState } from '../../../shared/variables';
+
+import { DialogComponent } from "../../../shared/dialog/dialog/dialog.component";
+import {LocationTreeComponent} from "./location-tree/location-tree.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-head',
@@ -15,18 +14,27 @@ import { select } from '@ngrx/store';
 })
 export class HeadComponent implements OnInit {
 
-
- // discounts$: Observable<IDiscount[]>;
  activeLink : string;
 
-  constructor(private store: Store<IAppState>){
+  constructor( private store: Store<IAppState>,
+               public dialog: MatDialog) {
     this.activeLink = 'home'
-   // this.discounts$ = this.store.pipe(select( state => state.head.discounts));
+  }
+
+  openDialog() {
+    let dialogConfig = {
+      data: {
+        title: 'Title for tree location',
+        component: LocationTreeComponent,
+      },
+      width: '500px',
+      height: '300px'
+    }
+    this.dialog.open( DialogComponent, dialogConfig );
   }
 
   ngOnInit(): void {
-   
-   // console.log(this.discounts$);
+
   }
 
   discountSearch = new FormControl('');
