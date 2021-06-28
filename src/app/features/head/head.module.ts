@@ -10,12 +10,13 @@ import { HeadComponent } from "./head/head.component";
 import { RouterModule } from "@angular/router";
 import { HeadRoutingModule } from "./head-routing.module";
 import { NotFoundComponent } from './not-found/not-found.component';
-import { MapComponent } from './home/home/map/map.component';
+import { MapComponent } from '../../shared/map/map.component';
 import { CarouselComponent } from './description/description/carousel/carousel.component';
-import {NgbCarouselModule, NgbRatingModule, NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
-import { DialogComponent } from './description/description/dialog/dialog.component';
+import { NgbCarouselModule, NgbRatingModule, NgbTooltipModule } from "@ng-bootstrap/ng-bootstrap";
+import { DialogComponent } from '../../shared/dialog/dialog/dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
-import { DialogContentComponent } from './description/description/dialog/dialog-content/dialog-content.component';
+import { LocationTreeComponent } from './head/location-tree/location-tree.component';
+import { MatTreeModule } from "@angular/material/tree";
 
 @NgModule({
     declarations: [
@@ -29,7 +30,7 @@ import { DialogContentComponent } from './description/description/dialog/dialog-
         MapComponent,
         CarouselComponent,
         DialogComponent,
-        DialogContentComponent,
+        LocationTreeComponent
     ],
     exports: [
         MapComponent
@@ -43,7 +44,7 @@ import { DialogContentComponent } from './description/description/dialog/dialog-
     NgbRatingModule,
     MatDialogModule,
     NgbTooltipModule,
+    MatTreeModule,
   ],
-  providers: [ DialogComponent ]
 })
 export class HeadModule { }
