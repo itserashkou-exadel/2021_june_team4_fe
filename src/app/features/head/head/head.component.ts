@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { createSelector ,createFeatureSelector} from '@ngrx/store';
-import { IDiscount, IHeadState, IAppState } from '../../../shared/variables';
-// import { IAppState } from '../head.variables';
-import { state } from '@angular/animations';
-import { select } from '@ngrx/store';
+import { IAppState } from '../../../shared/variables';
+
 import { DialogComponent } from "../../../shared/dialog/dialog/dialog.component";
 import {LocationTreeComponent} from "./location-tree/location-tree.component";
 import {MatDialog} from "@angular/material/dialog";
@@ -18,13 +14,11 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class HeadComponent implements OnInit {
 
-
-  discounts$: Observable<IDiscount[]>;
-
+ activeLink : string;
 
   constructor( private store: Store<IAppState>,
                public dialog: MatDialog) {
-    this.discounts$ = this.store.pipe(select( state => state.head.discounts));
+    this.activeLink = 'home'
   }
 
   openDialog() {
@@ -41,7 +35,6 @@ export class HeadComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.discounts$);
   }
 
   discountSearch = new FormControl('');
@@ -64,5 +57,9 @@ export class HeadComponent implements OnInit {
 
   pmClick(ev: Event) {
     console.log((ev.target as HTMLButtonElement).innerText);
+  }
+
+  setActiveLink(val: string){
+    this.activeLink = val;
   }
 }

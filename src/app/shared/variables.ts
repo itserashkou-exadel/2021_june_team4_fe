@@ -1,10 +1,19 @@
+export interface IUiConfigState {
+  homeIsMap: boolean;
+}
+
 export interface IHeadState {
   user: string,
   discounts: IDiscount[];
 }
 
+export interface IAppLanguage {
+  appLanguage : EAppLanguage;
+}
+
 export interface IAppState {
   head: IHeadState;
+  uiConfig: IUiConfigState;
 }
 
 export interface IDiscount {
@@ -40,4 +49,8 @@ export interface IUserLogin {
 export interface IToken {
   accessToken: string; 
   refreshToken: string;
+}
+
+enum EAppLanguage {
+  'EN', 'RU'
 }

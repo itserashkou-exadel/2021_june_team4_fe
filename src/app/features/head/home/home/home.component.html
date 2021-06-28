@@ -11,27 +11,48 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="setIsMap()">
-      <mat-button-toggle value="map" checked="true"
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" #group="matButtonToggleGroup" (change)="setIsMap(group.value)">
+      <mat-button-toggle value="map" [checked]="isMap | async"
         ><mat-icon aria-hidden="false" aria-label="Example home icon"
           >map</mat-icon
         ></mat-button-toggle
       >
-      <mat-button-toggle value="list"
+      <mat-button-toggle value="list" [checked]="!(isMap | async)"
         ><mat-icon aria-hidden="false" aria-label="Example home icon"
           >list_alt</mat-icon
         ></mat-button-toggle
       >
-      <!-- <mat-button-toggle value="underline">Underline</mat-button-toggle> -->
     </mat-button-toggle-group>
   </div>
   <div class="main-row" >
     <div class="sidebar">SIDEBAR</div>
-    <section class="main-section" *ngIf="isMap">
-      <app-tile *ngFor="let discount of discountsData" [discount$]="discount"></app-tile>
+    <section class="main-section" *ngIf="!(isMap | async)">
+      <app-tile *ngFor="let discount of discountsData | async" [discount$]="discount"></app-tile>
     </section>
-    <section class="map" *ngIf="!isMap">
+    <section class="map" *ngIf="isMap | async">
       <app-map></app-map>
     </section>
+    
+    
+
+<!-- 
+    <mat-tab-group [selectedIndex]="(isMap | async) ? 0 : 1"  (selectedTabChange)="setIsMap1($event)">
+      <mat-tab label="map"> <section class="map" >
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">map</mat-icon>
+          
+        </ng-template>
+        <app-map></app-map>
+      </section> </mat-tab>
+      <mat-tab label="list" > <section class="main-section" >
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">list_alt</mat-icon>
+          
+        </ng-template>
+        <app-tile *ngFor="let discount of discountsData | async" [discount$]="discount"></app-tile>
+      </section> </mat-tab>
+      
+      
+    </mat-tab-group> -->
   </div>
 </div>

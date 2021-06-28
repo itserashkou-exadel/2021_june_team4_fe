@@ -13,15 +13,16 @@ import { MarkerService } from "./shared/map/marker.service";
 
 import { StoreModule } from '@ngrx/store';
 import { headReducer } from './core/store/redeucers/head.reducer';
+
 import { DialogComponent } from "./shared/dialog/dialog/dialog.component";
 import { MapComponent } from "./shared/map/map.component";
 import { LocationTreeComponent } from "./features/head/head/location-tree/location-tree.component";
-
+import { uiConfigReducer } from './core/store/redeucers/ui-config.reducer';
 
 @NgModule({
   imports: [
 
-    StoreModule.forRoot({ head : headReducer}),
+    StoreModule.forRoot({ head : headReducer, uiConfig: uiConfigReducer }),
     // angular
     HttpClientModule,
     BrowserAnimationsModule,

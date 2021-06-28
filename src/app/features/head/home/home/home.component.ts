@@ -5,10 +5,13 @@ import {
   IDiscount,
   IHeadState,
   IAppState,
+  IUiConfigState,
   // IInputTile,
 } from 'src/app/shared/variables';
 
 import { Store } from '@ngrx/store';
+import { setContent } from 'src/app/core/store/actions/ui-config.actions';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-home',
@@ -16,11 +19,10 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  // discounts: Observable<IDiscount[]>;
-
-  discounts: any;
-  isMap: boolean;
-  discountsData: IDiscount[];
+  isMap: Observable<boolean>;
+  discountsData: Observable<IDiscount[]>;
+  //discounts: any;
+  
   arrayMap: any;
   sortBy: string;
 
@@ -30,45 +32,37 @@ export class HomeComponent implements OnInit {
     (state: IHeadState) => state.discounts
   );
 
-  constructor(private store: Store<{ head: IHeadState }>) {
+  constructor(
+    private store: Store<{ head: IHeadState, uiConfig: IUiConfigState }>,
+  ) {
     this.sortBy = 'default';
 
-    this.arrayMap = new Array(14);
+    const selecUiConfig = (state: IAppState) => state.uiConfig;
+    const selectMap = createSelector(selecUiConfig, (state: IUiConfigState) => state.homeIsMap)
+    this.isMap = this.store.select(selectMap);
+    
+    const selecHead = (state: IAppState) => state.head;
+    const selectDiscounts = createSelector(selecHead, (state: IHeadState) => state.discounts)
+    this.discountsData = this.store.select(selectDiscounts);
 
-    this.discounts = this.store.select(this.selectDiscounts);
-
-    this.isMap = false;
-
-    this.discountsData = [
-
-      {
-        id: 0,
-        name: 'Huawei',
-        vendor: 'Discount vendor0',
-        added: '21-06-2021',
-        expired: '21-11-2021',
-        location: 'kharkiv',
-        tag: 'tag',
-        cathegory: 'cathegory',
-        isActive: true,
-        description: 'string',
-        percent: 10,
-        image:'https://material.angular.io/assets/img/examples/shiba2.jpg'
-      },
-    ];
   }
 
-  ngOnInit(): void {
-    this.store.subscribe((value) => (this.discounts = value.head.discounts));
-    this.discountsData = this.discounts;
-    console.log(this.discounts);
+  ngOnInit(): void { }
+
+  setIsMap(val: any): void {
+    // console.log(val);
+    this.store.dispatch(
+      setContent({ isMap: val === 'list' ? false : true })
+    );
   }
 
-  setIsMap(): void {
-    this.isMap = !this.isMap;
+  setIsMap1(event: MatTabChangeEvent){
+    console.log(event.index);
+    this.store.dispatch(
+      setContent({ isMap: event.index === 1 ? false : true })
+    );
   }
-  
-  someMethod(ev:any):void {
-    console.log(ev + ' -> ');
-  }
+
+  someMethod(): void {
+   }
 }

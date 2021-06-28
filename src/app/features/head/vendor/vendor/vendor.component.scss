@@ -1,0 +1,24 @@
+.vendor-controls {
+    display: flex;
+    align-items: center;
+    .mat-form-field{ margin-left: 10px;}
+}
+
+.form-container{
+    form {
+         display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        mat-form-field, .mat-button {
+            display: block;
+            width: 300px;
+        }
+        .mat-button {
+            background-color: #0082ca;
+            color: white;
+            height: 51px;
+            letter-spacing: 1em;
+        }
+    }
+   
+}

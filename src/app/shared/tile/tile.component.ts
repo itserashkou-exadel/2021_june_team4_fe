@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 //import { IInputTile } from '../variables';
 import { SlicePipe } from '@angular/common';
 import { IDiscount } from '../variables';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class TileComponent implements OnInit {
 
   
 
-  constructor() {
+  constructor(private router: Router) {
     
   }
 
@@ -40,6 +41,10 @@ export class TileComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  redirectToDescription() :void{
+    this.router.navigate(['/description']);
+  }
 
   
 }
