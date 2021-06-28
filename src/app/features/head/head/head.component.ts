@@ -7,7 +7,9 @@ import { IDiscount, IHeadState, IAppState } from '../../../shared/variables';
 // import { IAppState } from '../head.variables';
 import { state } from '@angular/animations';
 import { select } from '@ngrx/store';
-import { DialogComponent } from "../../../shared/dialog/dialog.component";
+import { DialogComponent } from "../../../shared/dialog/dialog/dialog.component";
+import {LocationTreeComponent} from "./location-tree/location-tree.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-head',
@@ -20,17 +22,21 @@ export class HeadComponent implements OnInit {
   discounts$: Observable<IDiscount[]>;
 
 
-  constructor(private store: Store<IAppState>, public dialogRef: DialogComponent){
+  constructor( private store: Store<IAppState>,
+               public dialog: MatDialog) {
     this.discounts$ = this.store.pipe(select( state => state.head.discounts));
   }
 
   openDialog() {
-    // let dialogConfig = {
-    //   width: '750px',
-    //   height: '500px',
-    //   data: { title: 'location' },
-    // }
-    this.dialogRef.openDialog();//dialogConfig
+    let dialogConfig = {
+      data: {
+        title: 'Title for tree location',
+        component: LocationTreeComponent,
+      },
+      width: '500px',
+      height: '300px'
+    }
+    this.dialog.open( DialogComponent, dialogConfig );
   }
 
   ngOnInit(): void {

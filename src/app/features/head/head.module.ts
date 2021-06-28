@@ -13,9 +13,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { MapComponent } from '../../shared/map/map.component';
 import { CarouselComponent } from './description/description/carousel/carousel.component';
 import { NgbCarouselModule, NgbRatingModule, NgbTooltipModule } from "@ng-bootstrap/ng-bootstrap";
-import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { DialogComponent } from '../../shared/dialog/dialog/dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
-import { DialogContentComponent } from '../../shared/dialog-content/dialog-content.component';
+import { LocationTreeComponent } from './head/location-tree/location-tree.component';
+import { MatTreeModule } from "@angular/material/tree";
 
 @NgModule({
     declarations: [
@@ -29,7 +30,7 @@ import { DialogContentComponent } from '../../shared/dialog-content/dialog-conte
         MapComponent,
         CarouselComponent,
         DialogComponent,
-        DialogContentComponent,
+        LocationTreeComponent
     ],
     exports: [
         MapComponent
@@ -43,7 +44,7 @@ import { DialogContentComponent } from '../../shared/dialog-content/dialog-conte
     NgbRatingModule,
     MatDialogModule,
     NgbTooltipModule,
+    MatTreeModule,
   ],
-  providers: [ DialogComponent ]
 })
 export class HeadModule { }
