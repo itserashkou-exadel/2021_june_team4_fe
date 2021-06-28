@@ -16,16 +16,17 @@ import { select } from '@ngrx/store';
 export class HeadComponent implements OnInit {
 
 
-  discounts$: Observable<IDiscount[]>;
-
+ // discounts$: Observable<IDiscount[]>;
+ activeLink : string;
 
   constructor(private store: Store<IAppState>){
-    this.discounts$ = this.store.pipe(select( state => state.head.discounts));
+    this.activeLink = 'home'
+   // this.discounts$ = this.store.pipe(select( state => state.head.discounts));
   }
 
   ngOnInit(): void {
    
-    console.log(this.discounts$);
+   // console.log(this.discounts$);
   }
 
   discountSearch = new FormControl('');
@@ -48,5 +49,9 @@ export class HeadComponent implements OnInit {
 
   pmClick(ev: Event) {
     console.log((ev.target as HTMLButtonElement).innerText);
+  }
+
+  setActiveLink(val: string){
+    this.activeLink = val;
   }
 }

@@ -15,7 +15,7 @@
     <form [formGroup]="vendorForm" (submit)="formSubmit()">
       <mat-form-field appearance="fill">
         <mat-label>Discount name</mat-label>
-        <input matInput type="text" formControlName="discountName">
+        <input matInput type="text" formControlName="discountName" required>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Vendor name</mat-label>
@@ -41,10 +41,6 @@
         <mat-label>Cathegory</mat-label>
         <input matInput type="text" formControlName="cathegory">
       </mat-form-field>
-      <!-- <mat-form-field appearance="fill">
-        <mat-label>Vendor description</mat-label>
-        <input matInput type="textarea"  id="vendor-description" formControlName="vendorDescription ">
-      </mat-form-field> -->
       <mat-form-field  appearance="fill">
         <mat-label>Description</mat-label>
         <textarea matInput formControlName="discountDescription"
@@ -66,7 +62,7 @@
         <input matInput type="text" formControlName="discountPicture">
       </mat-form-field>
      
-      <input type="submit">
+      <button mat-button>CREATE</button>
     </form>
   </div>
   

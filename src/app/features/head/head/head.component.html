@@ -52,8 +52,10 @@
 <hr>
 <div class="tabs">
   <nav mat-tab-nav-bar class="d-none d-sm-flex">
-    <a mat-tab-link
-       *ngFor="let tab of tabItems"
+    <a mat-tab-link  *ngFor="let tab of tabItems"
+    (click)="activeLink = tab.link"
+    [active]="activeLink == tab.link"
+      
        [routerLink]="tab.link">
       {{tab.label}}
     </a>

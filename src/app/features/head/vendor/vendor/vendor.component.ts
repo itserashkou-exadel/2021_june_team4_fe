@@ -2,7 +2,16 @@ import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
-import { IDiscount } from 'src/app/shared/variables';
+import {
+  IDiscount,
+  IHeadState,
+  IAppState,
+  IUiConfigState,
+  // IInputTile,
+} from 'src/app/shared/variables';
+
+import { Store } from '@ngrx/store';
+import { addDiscount } from 'src/app/core/store/actions/head.actions';
 
 @Component({
   selector: 'app-vendor',
@@ -10,7 +19,10 @@ import { IDiscount } from 'src/app/shared/variables';
   styleUrls: ['./vendor.component.scss'],
 })
 export class VendorComponent implements OnInit {
-  constructor(private _ngZone: NgZone) {
+  constructor(
+    private _ngZone: NgZone,
+    private store: Store<{ head: IHeadState; uiConfig: IUiConfigState }>
+  ) {
     // this.autosize = null;
   }
 
@@ -37,13 +49,13 @@ export class VendorComponent implements OnInit {
     discountDescription: new FormControl(''),
     discountPercent: new FormControl(''),
     discountPromo: new FormControl(''),
-    discountPicture: new FormControl(''),
+    discountPicture: new FormControl('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU'),
   });
 
   formSubmit(): void {
-    console.log(this.vendorForm.value);
+   // console.log(this.vendorForm.value);
     const tr = this.vendorForm.value;
-    const newDisccount : IDiscount = {
+    const newDiscount: IDiscount = {
       id: 0,
       name: tr.discountName,
       vendor: tr.vendorName,
@@ -56,7 +68,8 @@ export class VendorComponent implements OnInit {
       description: tr.discountDescription,
       percent: tr.discountPercent,
       image: tr.discountPicture,
-    }
+    };
 
+    this.store.dispatch(addDiscount({newDiscount}));
   }
 }
