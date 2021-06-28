@@ -2,7 +2,8 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 //import { IInputTile } from '../variables';
 import { SlicePipe } from '@angular/common';
 import { IDiscount } from '../variables';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -27,24 +28,33 @@ export class TileComponent implements OnInit {
       description: 'string',
       percent: 10,
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-    
+
   };
 
-  
 
-  constructor(private router: Router) {
-    
+  // description$: Observable;
+  constructor(private router: Router,
+              private route: ActivatedRoute,) {
+
   }
 
   setDotts(value:string, limit: number): string{
    return value.length < limit ? '': '...'
   }
 
-  ngOnInit(): void {}
-
-  redirectToDescription() :void{
-    this.router.navigate(['/description']);
+  ngOnInit(): void {
+    // const descriptionId = this.route.snapshot.paramMap.get('id');
+    // this.description$ = this.service.getDescription(descriptionId);
   }
 
-  
+  redirectToDescription() :void {
+    console.log('discount$.id',this.discount$.id);
+    // const descriptionId = description ? description.id : null;
+    // console.log('descriptionId', descriptionId)
+    const descriptionId = this.discount$.id;
+    this.router.navigate([`home/${descriptionId}/description`]);
+    // this.router.navigate(['/description']);
+  }
+
+
 }

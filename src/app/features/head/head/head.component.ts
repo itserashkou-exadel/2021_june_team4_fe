@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { IAppState } from '../../../shared/variables';
 
 import { DialogComponent } from "../../../shared/dialog/dialog/dialog.component";
-import {LocationTreeComponent} from "./location-tree/location-tree.component";
-import {MatDialog} from "@angular/material/dialog";
+import { LocationTreeComponent } from "./location-tree/location-tree.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-head',
@@ -25,7 +25,7 @@ export class HeadComponent implements OnInit {
     let dialogConfig = {
       data: {
         title: 'Title for tree location',
-        component: LocationTreeComponent,
+        component: LocationTreeComponent
       },
       width: '500px',
       height: '300px'

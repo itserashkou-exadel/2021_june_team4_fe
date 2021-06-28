@@ -12,7 +12,6 @@ const routes: Routes = [
   {
     path: '',
     component: HeadComponent,
-    // data: { title: 'anms.menu.home' }
     children: [
       {
         path: '',
@@ -21,7 +20,11 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+      },
+      {
+        path: 'home/:id/description',
+        component: DescriptionComponent,
       },
       {
         path: 'vendor',
@@ -34,10 +37,6 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent
-      },
-      {
-        path: 'description',
-        component: DescriptionComponent
       }
     ]
   }

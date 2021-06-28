@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { createSelector, State } from '@ngrx/store';
 import { Observable } from 'rxjs';
+
 import {
   IDiscount,
   IHeadState,
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
   isMap: Observable<boolean>;
   discountsData: Observable<IDiscount[]>;
   //discounts: any;
-  
+
   arrayMap: any;
   sortBy: string;
 
@@ -40,14 +41,15 @@ export class HomeComponent implements OnInit {
     const selecUiConfig = (state: IAppState) => state.uiConfig;
     const selectMap = createSelector(selecUiConfig, (state: IUiConfigState) => state.homeIsMap)
     this.isMap = this.store.select(selectMap);
-    
+
     const selecHead = (state: IAppState) => state.head;
     const selectDiscounts = createSelector(selecHead, (state: IHeadState) => state.discounts)
     this.discountsData = this.store.select(selectDiscounts);
 
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   setIsMap(val: any): void {
     // console.log(val);
