@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IDiscount, IHeadState, IAppState } from '../../../shared/variables';
+import { IDiscount } from '../../../shared/variables';
 
 interface Action {
     type: string;

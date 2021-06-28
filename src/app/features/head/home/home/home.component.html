@@ -26,12 +26,16 @@
   </div>
   <div class="main-row" >
     <div class="sidebar">SIDEBAR</div>
-    <section class="main-section" *ngIf="!(isMap | async)">
-      <app-tile *ngFor="let discount of discountsData | async" [discount$]="discount"></app-tile>
-    </section>
-    <section class="map" *ngIf="isMap | async">
-      <app-map></app-map>
-    </section>
+
+    <div class="content-area">
+      <section class="main-section" *ngIf="!(isMap | async)">
+        <app-tile *ngFor="let discount of discountsData | async" [discount$]="discount"></app-tile>
+      </section>
+      <section class="map" *ngIf="isMap | async">
+        <app-map></app-map>
+      </section>
+    </div>
+    
     
     
 

@@ -1,13 +1,5 @@
-import { createReducer, on } from '@ngrx/store';
-import {
-  increment,
-  decrement,
-  reset,
-} from '../../../features/head/head.actions';
+
 import { IHeadState } from '../../../shared/variables';
-import { IAppState } from '../../../shared/variables';
-import { IDiscount } from '../../../shared/variables';
-import { Action } from 'rxjs/internal/scheduler/Action';
 
 export const initialState: IHeadState = {
   user: 'UserName',
@@ -144,13 +136,3 @@ export function headReducer(state: IHeadState = initialState, action: any) {
       return state;
   }
 }
-// const _headReducer = createReducer(
-//   initialState
-//   // on(increment, (state) => state),
-//   // on(decrement, (state) => state),
-//   // on(reset, (state) => state)
-// );
-
-// export function headReducer(state: IHeadState | undefined, action: any) {
-//   return _headReducer(state, action);
-// }

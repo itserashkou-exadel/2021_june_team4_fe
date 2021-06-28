@@ -9,23 +9,23 @@
   justify-content: flex-end;
   align-items: center;
 }
-
+.content-area {
+  width: 80%;
+}
 .main-row {
   display: flex; 
   background-color: #40bfef;
   padding-top: 10px;
   padding-bottom: 10px;
   .sidebar {
-    width: 200px;
+    width: 19%;
     border-right: 2px solid white;
   }
   .main-section {
-    max-width: 1050px;
-    // width: 100%;
+    transition: 1s;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    // border: 1px solid red;
   }
 }
 
@@ -37,14 +37,13 @@ mat-form-field {
   background-color: #0082ca;
   color: white;
 }
-.map {
-  
+.map { 
+  transition: 1s;
   margin: 0 auto;
-  // position: relative;
+  position: relative;
   width: 1000px;
   height: 700px;
-  //overflow: hidden;
- // border: 1px solid red;
+  overflow: hidden;
 }
 mat-tab {
   width: 500px;

@@ -50,16 +50,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void { }
 
   setIsMap(val: any): void {
-    // console.log(val);
     this.store.dispatch(
-      setContent({ isMap: val === 'list' ? false : true })
-    );
-  }
-
-  setIsMap1(event: MatTabChangeEvent){
-    console.log(event.index);
-    this.store.dispatch(
-      setContent({ isMap: event.index === 1 ? false : true })
+      setContent({ isMap: val !== 'list' })
     );
   }
 
