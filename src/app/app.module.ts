@@ -12,7 +12,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { MarkerService } from "./shared/map/marker.service";
 
 import { StoreModule } from '@ngrx/store';
-import { headReducer } from './core/store/redeucers/head.reducer';
+import { headReducer } from './core/store/redeucers/home.reducer';
 
 import { DialogComponent } from "./shared/dialog/dialog/dialog.component";
 import { MapComponent } from "./shared/map/map.component";
@@ -22,7 +22,7 @@ import { uiConfigReducer } from './core/store/redeucers/ui-config.reducer';
 @NgModule({
   imports: [
 
-    StoreModule.forRoot({ head : headReducer, uiConfig: uiConfigReducer }),
+    StoreModule.forRoot({ home : headReducer, uiConfig: uiConfigReducer }),
     // angular
     HttpClientModule,
     BrowserAnimationsModule,
@@ -38,7 +38,9 @@ import { uiConfigReducer } from './core/store/redeucers/ui-config.reducer';
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
-  providers: [authInterceptorProviders, MarkerService],
+  providers: [
+    ///authInterceptorProviders,
+     MarkerService],
   entryComponents: [//for dynamical load components
     DialogComponent,
     MapComponent,

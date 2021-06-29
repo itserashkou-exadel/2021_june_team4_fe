@@ -1,7 +1,7 @@
 
-import { IHeadState } from '../../../shared/variables';
+import { IHomeState } from '../../../shared/variables';
 
-export const initialState: IHeadState = {
+export const initialState: IHomeState = {
   user: 'UserName',
   discounts: [
     {
@@ -35,7 +35,7 @@ export const initialState: IHeadState = {
       image: 'https://www.any.do/images/logo.png',
     },
     {
-      id: 1,
+      id: 2,
       name: 'Discount',
       vendor: 'Vendor',
       added: '21-06-2021',
@@ -50,7 +50,7 @@ export const initialState: IHeadState = {
         'https://www.estradasurfing.co.nz/wp-content/uploads/2017/12/rambo-estrada-surf-and-ocean-photography-lightroom-preset-pack-sq.jpg',
     },
     {
-      id: 1,
+      id: 3,
       name: 'Discount',
       vendor: 'Vendor',
       added: '21-06-2021',
@@ -124,14 +124,14 @@ export const initialState: IHeadState = {
   ],
 };
 
-export function headReducer(state: IHeadState = initialState, action: any) {
+export function headReducer(state: IHomeState = initialState, action: any) {
   switch (action.type) {
     case 'addDiscount':
-      const res = {
+      const newState = {
         ...state,
         ...{ discounts: [...state.discounts, action.newDiscount] },
       };
-      return res;
+      return newState;
     default:
       return state;
   }

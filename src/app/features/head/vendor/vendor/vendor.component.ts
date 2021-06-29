@@ -4,14 +4,14 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
 import {
   IDiscount,
-  IHeadState,
+  IHomeState,
   IAppState,
   IUiConfigState,
   // IInputTile,
 } from 'src/app/shared/variables';
 
 import { Store } from '@ngrx/store';
-import { addDiscount } from 'src/app/core/store/actions/head.actions';
+import { addDiscount } from 'src/app/core/store/actions/home.actions';
 
 @Component({
   selector: 'app-vendor',
@@ -21,7 +21,7 @@ import { addDiscount } from 'src/app/core/store/actions/head.actions';
 export class VendorComponent implements OnInit {
   constructor(
     private _ngZone: NgZone,
-    private store: Store<{ head: IHeadState; uiConfig: IUiConfigState }>
+    private store: Store<IAppState>
   ) {
     // this.autosize = null;
   }

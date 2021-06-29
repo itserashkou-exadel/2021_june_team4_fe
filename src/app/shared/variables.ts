@@ -2,7 +2,7 @@ export interface IUiConfigState {
   homeIsMap: boolean;
 }
 
-export interface IHeadState {
+export interface IHomeState {
   user: string,
   discounts: IDiscount[];
 }
@@ -12,7 +12,7 @@ export interface IAppLanguage {
 }
 
 export interface IAppState {
-  head: IHeadState;
+  home: IHomeState;
   uiConfig: IUiConfigState;
 }
 
