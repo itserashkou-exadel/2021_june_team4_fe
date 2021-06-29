@@ -1,1 +1,163 @@
-<p>vendor works!</p>
+<div class="vendor">
+  <mat-stepper orientation="vertical">
+    <!-- First Step -->
+    <mat-step>
+      <ng-template matStepLabel>Information about Vendor</ng-template>
+      <ng-template matStepContent>
+        <form class="form" [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+            <!-- Vendor name -->
+            <div class="form-row__item">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Vendor name</mat-label>
+                <mat-select formControlName="name">
+                  <mat-option
+                    *ngFor="let vendor of vendors"
+                    [value]="vendor.name"
+                  >
+                    {{ vendor.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button class="add-btn">
+                <mat-icon>add_box</mat-icon>
+              </button>
+            </div>
+            <!-- /Vendor name -->
+
+            <!-- Vendor category -->
+            <div class="form-row__item">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Vendor category</mat-label>
+                <mat-select formControlName="category">
+                  <mat-option
+                    *ngFor="let vendor of vendors"
+                    [value]="vendor.category"
+                  >
+                    {{ vendor.category }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button class="add-btn">
+                <mat-icon>add_box</mat-icon>
+              </button>
+            </div>
+            <!-- /Vendor category -->
+
+            <!-- Vendor tag -->
+            <div class="form-row__item">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Vendor tag</mat-label>
+                <mat-select formControlName="tag">
+                  <mat-option
+                    *ngFor="let vendor of vendors"
+                    [value]="vendor.tag"
+                  >
+                    {{ vendor.tag }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button class="add-btn">
+                <mat-icon>add_box</mat-icon>
+              </button>
+            </div>
+            <!-- /Vendor tag -->
+          </div>
+          <div class="form-row">
+            <!-- Vendor Description -->
+            <div class="form-row__item">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Description</mat-label>
+                <textarea
+                  matInput
+                  placeholder="Description"
+                  formControlName="description"
+                ></textarea>
+              </mat-form-field>
+            </div>
+            <!-- /Vendor Description -->
+
+            <!-- Vendor photos -->
+            <div class="form-row__item">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Vendor photos</mat-label>
+                <input
+                  matInput
+                  placeholder="Add some photos"
+                  formControlName="photos"
+                />
+              </mat-form-field>
+            </div>
+            <!-- /Vendor photos -->
+
+            <!-- Vendor locations -->
+            <div class="form-row__item">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Locations</mat-label>
+                <input matInput formControlName="locations" />
+              </mat-form-field>
+            </div>
+            <!-- /Vendor locations -->
+          </div>
+          <div class="form-row">
+            <!-- Vendor event's start -->
+            <div class="form-row__item">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Event's start</mat-label>
+                <input matInput type="date" formControlName="startDate" />
+              </mat-form-field>
+            </div>
+            <!-- /Vendor event's start -->
+
+            <!-- Vendor event's end -->
+            <div class="form-row__item">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Event's end</mat-label>
+                <input matInput type="date" formControlName="endDate" />
+              </mat-form-field>
+            </div>
+            <!-- /Vendor event's end -->
+
+            <!-- Vendor contacts -->
+            <div class="form-row__item">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Contacts</mat-label>
+                <input matInput formControlName="contacts" />
+              </mat-form-field>
+            </div>
+            <!-- /Vendor contacts -->
+          </div>
+          <div class="btn-wrapper">
+            <button
+              type="submit"
+              class="save-btn"
+              mat-flat-button
+              color="primary"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </ng-template>
+    </mat-step>
+    <!-- /First Step -->
+
+    <!-- Second Step -->
+    <mat-step>
+      <ng-template matStepLabel>Information about Bonus program</ng-template>
+      <ng-template matStepContent>
+        <app-tile></app-tile>
+      </ng-template>
+    </mat-step>
+    <!-- /Second Step -->
+
+    <!-- Third Step -->
+    <mat-step>
+      <ng-template matStepLabel>Message</ng-template>
+      <ng-template matStepContent>
+        All information were saved successfully!
+      </ng-template>
+    </mat-step>
+    <!-- /Third Step -->
+  </mat-stepper>
+</div>

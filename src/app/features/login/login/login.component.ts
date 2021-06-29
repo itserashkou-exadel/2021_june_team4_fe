@@ -60,7 +60,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.aSub = this.auth.login(loginData).subscribe(
       data => {
-        console.log(data);
         this.router.navigate(['/home']);
 
         this.tokenStorage.saveToken(data);
@@ -69,7 +68,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         // this.roles = this.tokenStorage.getUser().roles;
-        console.log(sessionStorage);
       },
       err => {
         this.errorMessage = err.error;

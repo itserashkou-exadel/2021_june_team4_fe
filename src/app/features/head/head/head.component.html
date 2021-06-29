@@ -5,18 +5,14 @@
     </div>
 
     <div class="location-block">
-      <mat-icon aria-hidden="false" aria-label="Example home icon"
-      >location_on</mat-icon
-      >
-      <span> PLUG</span>
+      <mat-icon aria-hidden="false" aria-label="Example home icon">
+        location_on
+      </mat-icon>
+      <span>PLUG</span>
     </div>
     <div class="search-container">
       <mat-form-field class="example-full-width search">
-        <input
-          matInput
-          placeholder="Search for discount"
-          type="text"
-        />
+        <input matInput placeholder="Search for discount" type="text" />
       </mat-form-field>
       <mat-icon matPrefix>search</mat-icon>
     </div>
@@ -24,18 +20,18 @@
 
   <div class="right-block">
     <div class="notifications">
-      <mat-icon aria-hidden="false" aria-label="Example home icon"
-      >favorite_border</mat-icon
-      >
-      <mat-icon aria-hidden="false" aria-label="Example home icon"
-      >notifications_none</mat-icon
-      >
+      <mat-icon aria-hidden="false" aria-label="Example home icon">
+        favorite_border
+      </mat-icon>
+      <mat-icon aria-hidden="false" aria-label="Example home icon">
+        notifications_none
+      </mat-icon>
     </div>
     <div class="user-block">
-      <mat-icon aria-hidden="false" aria-label="Example home icon"
-      >person_outline</mat-icon
-      >
-      <button mat-button [matMenuTriggerFor]="menu" >Nikita Martinov</button>
+      <mat-icon aria-hidden="false" aria-label="Example home icon">
+        person_outline
+      </mat-icon>
+      <button mat-button [matMenuTriggerFor]="menu">Nikita Martinov</button>
       <mat-menu #menu="matMenu">
         <button
           mat-menu-item
@@ -46,20 +42,22 @@
         </button>
       </mat-menu>
     </div>
-    <span><a href="#">EN</a> </span>
+    <span><a href="#">EN</a></span>
   </div>
 </div>
-<hr>
+<hr />
 <div class="tabs">
   <nav mat-tab-nav-bar class="d-none d-sm-flex">
-    <a mat-tab-link
-       *ngFor="let tab of tabItems"
-       [routerLink]="tab.link">
-      {{tab.label}}
+    <a
+      mat-tab-link
+      class="nav-link"
+      *ngFor="let tab of tabItems"
+      [routerLink]="tab.link"
+    >
+      {{ tab.label }}
     </a>
   </nav>
 </div>
 <div>
   <router-outlet></router-outlet>
 </div>
-

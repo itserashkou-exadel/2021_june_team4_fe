@@ -25,7 +25,7 @@ export class HeadComponent implements OnInit {
 
   ngOnInit(): void {
    
-    console.log(this.discounts$);
+    // console.log(this.discounts$);
   }
 
   discountSearch = new FormControl('');
