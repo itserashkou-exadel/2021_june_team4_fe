@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-//////////////////////////////////////////
+
 interface FoodNode {
   name: string;
   children?: FoodNode[];
@@ -43,13 +42,13 @@ interface ExampleFlatNode {
   level: number;
 }
 
-/////////////////////////////////////////
+
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  styleUrls: ['./category.component.scss']
 })
-////////////////////////////////////////
+
 export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
@@ -76,5 +75,5 @@ export class CategoryComponent implements OnInit {
   }
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
-  //-----------------------------------
+
 }

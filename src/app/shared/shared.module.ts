@@ -29,6 +29,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { TileComponent } from './tile/tile.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from '@angular/material/stepper';
+import { CheckboxComponent } from './checkbox/checkbox/checkbox.component';
 
 
 
@@ -107,7 +108,8 @@ import {MatStepperModule} from '@angular/material/stepper';
   ],
   declarations: [
     FooterComponent,
-    TileComponent
+    TileComponent,
+    CheckboxComponent
   ]
 })
 export class SharedModule {

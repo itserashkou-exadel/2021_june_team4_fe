@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   isMap: Observable<boolean>;
   discountsData: Observable<IDiscount[]>;
   remoteData: any; // <<<<<<<<<<<<<<<<<<<   ТУТ
+
   arrayMap: any;
   sortBy: string;
 
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
     private store: Store<IAppState>,
     private http: HttpClient
     
+
   ) {
     this.sortBy = 'default';
 
@@ -51,12 +53,14 @@ export class HomeComponent implements OnInit {
       selecHead,
       (state: IHomeState) => state.discounts
     );
+
     this.discountsData = this.store.select(selectDiscounts);
 
     
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   setIsMap(val: any): void {
     this.remoteData;
