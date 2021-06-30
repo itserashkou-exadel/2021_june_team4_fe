@@ -25,7 +25,9 @@
     </mat-button-toggle-group>
   </div>
   <div class="main-row" >
-    <div class="sidebar">SIDEBAR</div>
+    <div class="sidebar">
+      <app-side-bar-filter></app-side-bar-filter>
+    </div>
     <section class="main-section" *ngIf="!(isMap | async)">
       <app-tile *ngFor="let discount of discountsData | async" [discount$]="discount"></app-tile>
     </section>
@@ -56,3 +58,5 @@
     </mat-tab-group> -->
   </div>
 </div>
+
+<app-footer></app-footer>
