@@ -1,5 +1,5 @@
-
 import { IHomeState } from '../../../shared/variables';
+import { HomeService } from '../../home/home.service';
 
 export const initialState: IHomeState = {
   user: 'UserName',
@@ -126,6 +126,10 @@ export const initialState: IHomeState = {
 
 export function headReducer(state: IHomeState = initialState, action: any) {
   switch (action.type) {
+    case 'requestDiscounts':
+      return {...state ,  discounts : action.data};
+    case 'getNewDiscounts':
+      return state;
     case 'addDiscount':
       const newState = {
         ...state,

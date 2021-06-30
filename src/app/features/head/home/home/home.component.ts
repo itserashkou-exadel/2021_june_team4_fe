@@ -12,6 +12,7 @@ import {
 import { Store } from '@ngrx/store';
 import { setContent } from 'src/app/core/store/actions/ui-config.actions';
 import { HttpClient } from '@angular/common/http';
+import { getNewDiscounts } from 'src/app/core/store/actions/home.actions';
 
 @Component({
   selector: 'app-home',
@@ -60,12 +61,7 @@ export class HomeComponent implements OnInit {
   setIsMap(val: any): void {
     this.remoteData;
     this.store.dispatch(setContent({ isMap: val !== 'list' }));
-
-    this.http.get<any>('http://localhost:8080/discounts').subscribe(data => {
-        this.remoteData = data;
-        console.log(this.remoteData);
-
-    })  
+    this.store.dispatch(getNewDiscounts());
   }
 
   someMethod(): void {}

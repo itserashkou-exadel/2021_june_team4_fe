@@ -18,10 +18,12 @@ import { DialogComponent } from "./shared/dialog/dialog/dialog.component";
 import { MapComponent } from "./shared/map/map.component";
 import { LocationTreeComponent } from "./features/head/head/location-tree/location-tree.component";
 import { uiConfigReducer } from './core/store/redeucers/ui-config.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { HomeEffects } from './features/head/home/home.effects';
 
 @NgModule({
   imports: [
-
+EffectsModule.forRoot([HomeEffects]),
     StoreModule.forRoot({ home : headReducer, uiConfig: uiConfigReducer }),
     // angular
     HttpClientModule,
