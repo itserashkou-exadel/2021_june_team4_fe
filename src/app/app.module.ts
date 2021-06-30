@@ -18,11 +18,19 @@ import { DialogComponent } from "./shared/dialog/dialog/dialog.component";
 import { MapComponent } from "./shared/map/map.component";
 import { LocationTreeComponent } from "./features/head/head/location-tree/location-tree.component";
 import { uiConfigReducer } from './core/store/redeucers/ui-config.reducer';
+import { descriptionReducer } from "./core/store/redeucers/discription.reducer";
+import { DescriptionEffects } from "./core/store/description.effects";
+import { EffectsModule } from "@ngrx/effects";
+import { DescriptionService } from "./core/store/description.service";
 
 @NgModule({
   imports: [
 
-    StoreModule.forRoot({ head : headReducer, uiConfig: uiConfigReducer }),
+    StoreModule.forRoot({
+      head : headReducer,
+      uiConfig: uiConfigReducer,
+      description: descriptionReducer }),
+    EffectsModule.forRoot([DescriptionEffects]),
     // angular
     HttpClientModule,
     BrowserAnimationsModule,
@@ -38,7 +46,10 @@ import { uiConfigReducer } from './core/store/redeucers/ui-config.reducer';
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
-  providers: [authInterceptorProviders, MarkerService],
+  providers: [
+    authInterceptorProviders,
+    DescriptionService,
+    MarkerService],
   entryComponents: [//for dynamical load components
     DialogComponent,
     MapComponent,

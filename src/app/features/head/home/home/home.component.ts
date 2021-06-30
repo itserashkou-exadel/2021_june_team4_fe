@@ -22,7 +22,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 export class HomeComponent implements OnInit {
   isMap: Observable<boolean>;
   discountsData: Observable<IDiscount[]>;
-  //discounts: any;
+
 
   arrayMap: any;
   sortBy: string;
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   );
 
   constructor(
-    private store: Store<{ head: IHeadState, uiConfig: IUiConfigState }>,
+    private store: Store<IAppState>,
   ) {
     this.sortBy = 'default';
 

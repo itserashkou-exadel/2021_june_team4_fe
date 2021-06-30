@@ -5,6 +5,8 @@ import { IDiscount } from '../variables';
 import { Router, ActivatedRoute} from '@angular/router';
 import { Observable } from 'rxjs';
 
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-tile',
@@ -13,9 +15,9 @@ import { Observable } from 'rxjs';
   // encapsulation: ViewEncapsulation.None,
 })
 export class TileComponent implements OnInit {
+  remoteData: any;
 
   @Input() discount$: IDiscount = {
-
       id: 1,
       name: 'Discount',
       vendor: 'Discount vendor',
@@ -34,7 +36,8 @@ export class TileComponent implements OnInit {
 
   // description$: Observable;
   constructor(private router: Router,
-              private route: ActivatedRoute,) {
+              private route: ActivatedRoute,
+              private http: HttpClient) {
 
   }
 
@@ -48,12 +51,8 @@ export class TileComponent implements OnInit {
   }
 
   redirectToDescription() :void {
-    console.log('discount$.id',this.discount$.id);
-    // const descriptionId = description ? description.id : null;
-    // console.log('descriptionId', descriptionId)
-    const descriptionId = this.discount$.id;
+    const descriptionId = '5f69268b-705e-4fb9-8147-722b4ec1d9da';
     this.router.navigate([`home/${descriptionId}/description`]);
-    // this.router.navigate(['/description']);
   }
 
 
