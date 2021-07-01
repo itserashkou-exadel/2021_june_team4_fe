@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { createSelector, State } from '@ngrx/store';
 import { Observable } from 'rxjs';
+
 import {
   IDiscount,
-  IHeadState,
+  IHomeState,
   IAppState,
   IUiConfigState,
-  // IInputTile,
 } from 'src/app/shared/variables';
 
 import { Store } from '@ngrx/store';
 import { setContent } from 'src/app/core/store/actions/ui-config.actions';
-import { MatTabChangeEvent } from '@angular/material/tabs';
+import { HttpClient } from '@angular/common/http';
+import { getNewDiscounts } from 'src/app/core/store/actions/home.actions';
 
 @Component({
   selector: 'app-home',
@@ -21,48 +22,48 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 export class HomeComponent implements OnInit {
   isMap: Observable<boolean>;
   discountsData: Observable<IDiscount[]>;
-  //discounts: any;
-  
+  remoteData: any; // <<<<<<<<<<<<<<<<<<<   ТУТ
+
   arrayMap: any;
   sortBy: string;
 
-  selectHead = (state: IAppState) => state.head;
+  selectHead = (state: IAppState) => state.home;
   selectDiscounts = createSelector(
     this.selectHead,
-    (state: IHeadState) => state.discounts
+    (state: IHomeState) => state.discounts
   );
 
   constructor(
-    private store: Store<{ head: IHeadState, uiConfig: IUiConfigState }>,
+    private store: Store<IAppState>,
+    private http: HttpClient
+
+
   ) {
     this.sortBy = 'default';
 
     const selecUiConfig = (state: IAppState) => state.uiConfig;
-    const selectMap = createSelector(selecUiConfig, (state: IUiConfigState) => state.homeIsMap)
+    const selectMap = createSelector(
+      selecUiConfig,
+      (state: IUiConfigState) => state.homeIsMap
+    );
     this.isMap = this.store.select(selectMap);
-    
-    const selecHead = (state: IAppState) => state.head;
-    const selectDiscounts = createSelector(selecHead, (state: IHeadState) => state.discounts)
-    this.discountsData = this.store.select(selectDiscounts);
 
+    const selecHead = (state: IAppState) => state.home;
+    const selectDiscounts = createSelector(
+      selecHead,
+      (state: IHomeState) => state.discounts
+    );
+
+    this.discountsData = this.store.select(selectDiscounts);
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   setIsMap(val: any): void {
-    // console.log(val);
-    this.store.dispatch(
-      setContent({ isMap: val === 'list' ? false : true })
-    );
+    this.remoteData;
+    this.store.dispatch(setContent({ isMap: val !== 'list' }));
+    this.store.dispatch(getNewDiscounts());
   }
 
-  setIsMap1(event: MatTabChangeEvent){
-    console.log(event.index);
-    this.store.dispatch(
-      setContent({ isMap: event.index === 1 ? false : true })
-    );
-  }
-
-  someMethod(): void {
-   }
+  someMethod(): void {}
 }

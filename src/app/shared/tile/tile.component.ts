@@ -2,8 +2,10 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 //import { IInputTile } from '../variables';
 import { SlicePipe } from '@angular/common';
 import { IDiscount } from '../variables';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
+import { Observable } from 'rxjs';
 
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-tile',
@@ -13,8 +15,9 @@ import { Router } from '@angular/router';
 })
 export class TileComponent implements OnInit {
 
-  @Input() discount$: IDiscount = {
+  remoteData: any;
 
+  @Input() discount$: IDiscount = {
       id: 1,
       name: 'Discount',
       vendor: 'Discount vendor',
@@ -22,18 +25,19 @@ export class TileComponent implements OnInit {
       expired: '21-11-2021',
       location: 'kharkiv',
       tag: 'tag',
-      cathegory: 'cathegory',
+      category: 'category',
       isActive: true,
       description: 'string',
       percent: 10,
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-    
+
   };
 
-  
+  // description$: Observable;
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private http: HttpClient) {
 
-  constructor(private router: Router) {
-    
   }
 
   setDotts(value:string, limit: number): string{
@@ -42,9 +46,9 @@ export class TileComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  redirectToDescription() :void{
-    this.router.navigate(['/description']);
+  redirectToDescription(descriptionId: any) :void {
+    // console.log(descriptionId);
+    // const descriptionId = '5f69268b-705e-4fb9-8147-722b4ec1d9da';
+    this.router.navigate([`home/${descriptionId}/description`]);
   }
-
-  
 }

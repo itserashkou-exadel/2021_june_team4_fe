@@ -77,5 +77,5 @@ export class CategoryComponent implements OnInit {
   }
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
- 
+
 }

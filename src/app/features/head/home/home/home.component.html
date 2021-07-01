@@ -25,37 +25,21 @@
     </mat-button-toggle-group>
   </div>
   <div class="main-row" >
-    <div class="sidebar">
-      <app-side-bar-filter></app-side-bar-filter>
-    </div>
-    <section class="main-section" *ngIf="!(isMap | async)">
-      <app-tile *ngFor="let discount of discountsData | async" [discount$]="discount"></app-tile>
-    </section>
-    <section class="map" *ngIf="isMap | async">
-      <app-map></app-map>
-    </section>
     
+      <div class="sidebar">
+        <app-side-bar-filter></app-side-bar-filter>
+      </div>    
+
+    <div class="content-area">
+      <section class="main-section" *ngIf="!(isMap | async)">
+        <app-tile *ngFor="let discount of discountsData | async" [discount$]="discount"></app-tile>
+      </section>
+      <section class="map" *ngIf="isMap | async">
+        <app-map></app-map>
+      </section>
+    </div>
     
 
-<!-- 
-    <mat-tab-group [selectedIndex]="(isMap | async) ? 0 : 1"  (selectedTabChange)="setIsMap1($event)">
-      <mat-tab label="map"> <section class="map" >
-        <ng-template mat-tab-label>
-          <mat-icon class="example-tab-icon">map</mat-icon>
-          
-        </ng-template>
-        <app-map></app-map>
-      </section> </mat-tab>
-      <mat-tab label="list" > <section class="main-section" >
-        <ng-template mat-tab-label>
-          <mat-icon class="example-tab-icon">list_alt</mat-icon>
-          
-        </ng-template>
-        <app-tile *ngFor="let discount of discountsData | async" [discount$]="discount"></app-tile>
-      </section> </mat-tab>
-      
-      
-    </mat-tab-group> -->
   </div>
 </div>
 

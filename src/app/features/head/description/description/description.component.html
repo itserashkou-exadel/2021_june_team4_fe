@@ -1,18 +1,18 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf=" descriptionData$ | async as data">
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-7">
       <div class="row header">
         <div class="col-md-8">
-          <h1>Discount name</h1>
+          <h1>{{ data.name }}</h1>
           <mat-icon placement="right" ngbTooltip="See it on the map" class="pointer" (click)="openDialogWithMap()">place</mat-icon>
-          <span> Shevchenka street, 5 </span>
+          <span>{{ data.vendorLocations }}</span>
         </div>
         <div class="col-md-4 text-align-center m-t-sm">
           <span>from</span>
-          03.05.2021
+          {{ data.startTime | date :"dd.MM.yyyy" }}
           <span>to</span>
-          31.08.2021
+          {{ data.endTime | date :"dd.MM.yyyy" }}
         </div>
       </div>
 
@@ -20,22 +20,12 @@
 
       <section class="article-title">
         <h3>Bonus program description</h3>
-        <p>What is Lorem Ipsum?
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-          Why do we use it?
-          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-        </p>
+        <p>{{ data.description }}</p>
       </section>
 
       <section class="article-title">
-        <h3>Service description</h3>
-        <p>What is Lorem Ipsum?
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-        Why do we use it?
-        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-      </p>
+        <h3>Vendor description</h3>
+        <p>{{ data.vendor}}</p>
       </section>
     </div>
 
@@ -49,7 +39,7 @@
 
         <div class="discount">
           <b>sale</b>
-          -68%
+          {{ data.percent }}
         </div>
 
         <button mat-fab color="warn" aria-label="Save in favorite">
@@ -61,7 +51,7 @@
 
           <ngb-rating [rate]="3"></ngb-rating>
 
-          <div class="vendor">Spa salon</div>
+          <div class="vendor">{{ data.vendor}}</div>
           <div class="websites">
             <a target="_blank" rel="nofollow" href="">website.com.ua</a><br>
             <a target="_blank" rel="nofollow" href="">Facebook</a><br>

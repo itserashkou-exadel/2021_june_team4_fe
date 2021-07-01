@@ -18,10 +18,10 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { LocationTreeComponent } from './head/location-tree/location-tree.component';
 import { MatTreeModule } from "@angular/material/tree";
 import { SideBarFilterComponent } from './home/home/side-bar-filter/side-bar-filter.component';
-import { CategoryComponent } from './home/home/side-bar-filter/Components/category/category.component';
-import { DateComponent } from './home/home/side-bar-filter/Components/date/date.component';
-import { RangeComponent } from './home/home/side-bar-filter/Components/range/range.component';
-import { TagsComponent } from './home/home/side-bar-filter/Components/tags/tags.component';
+import { CategoryComponent } from './home/home/side-bar-filter/category/category.component';
+import { DateComponent } from './home/home/side-bar-filter/date/date.component';
+import { RangeComponent } from './home/home/side-bar-filter/range/range.component';
+import { TagsComponent } from './home/home/side-bar-filter/tags/tags.component';
 
 @NgModule({
     declarations: [
