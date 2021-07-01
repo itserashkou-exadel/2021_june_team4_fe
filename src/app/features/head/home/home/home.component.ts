@@ -57,12 +57,14 @@ export class HomeComponent implements OnInit {
     this.discountsData = this.store.select(selectDiscounts);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.dispatch(getNewDiscounts());
+  }
 
   setIsMap(val: any): void {
     this.remoteData;
     this.store.dispatch(setContent({ isMap: val !== 'list' }));
-    this.store.dispatch(getNewDiscounts());
+    
   }
 
   sortDiscountsData(value: any): void {

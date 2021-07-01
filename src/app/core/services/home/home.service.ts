@@ -17,6 +17,7 @@ export class HomeService {
   }
 
   handleRemoteDiscount(remoteDiscount: any){
+    console.log(remoteDiscount);
     const localDiscount : IDiscount = {
       id: remoteDiscount.id,
       name: remoteDiscount.name,
