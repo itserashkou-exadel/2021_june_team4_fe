@@ -21,7 +21,7 @@ import { addDiscount } from 'src/app/core/store/actions/home.actions';
 export class VendorComponent implements OnInit {
   constructor(
     private _ngZone: NgZone,
-    private store: Store<{ head: IHomeState; uiConfig: IUiConfigState }>
+    private store: Store<IAppState>
   ) {
     // this.autosize = null;
   }
