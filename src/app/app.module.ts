@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { authInterceptorProviders } from './core/services/auth/auth.interceptor';
 
+
 import { CoreModule } from './core/core.module';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -49,7 +50,7 @@ import { HomeEffects } from './core/store/effects/home.effects';
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
-   // authInterceptorProviders,
+  // authInterceptorProviders,
     DescriptionService,
     MarkerService],
   entryComponents: [//for dynamical load components
