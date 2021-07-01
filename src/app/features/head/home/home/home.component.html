@@ -33,7 +33,6 @@
     <div class="content-area" >
  
       <section class="main-section" *ngIf="!(isMap | async)">
-        <!-- <app-tile *ngFor="let discount of discountsData | async" [discount$]="discount"></app-tile> -->
         <app-tiles-box [discountsData$]="discountsData | async"></app-tiles-box>
       </section>
       <section class="map" *ngIf="isMap | async">
