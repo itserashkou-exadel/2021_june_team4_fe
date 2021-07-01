@@ -50,7 +50,7 @@ import { HomeEffects } from './core/store/effects/home.effects';
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
-  // authInterceptorProviders,
+  authInterceptorProviders,
     DescriptionService,
     MarkerService],
   entryComponents: [//for dynamical load components
