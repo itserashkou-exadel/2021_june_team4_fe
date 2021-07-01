@@ -37,7 +37,7 @@
         <app-tiles-box [discountsData$]="discountsData | async"></app-tiles-box>
       </section>
       <section class="map" *ngIf="isMap | async">
-        <app-map></app-map>
+        <app-map [mapConfig$]="marker"></app-map>
       </section>
     </div>
 
