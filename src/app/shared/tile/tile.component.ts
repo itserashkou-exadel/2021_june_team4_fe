@@ -45,12 +45,10 @@ export class TileComponent implements OnInit {
    return value.length < limit ? '': '...'
   }
 
-  ngOnInit(): void {
-    // const descriptionId = this.route.snapshot.paramMap.get('id');
-    // this.description$ = this.service.getDescription(descriptionId);
-  }
+  ngOnInit(): void {}
 
-  redirectToDescription() :void {
+  redirectToDescription() :void {//descriptionId: any
+    // console.log(descriptionId);
     const descriptionId = '5f69268b-705e-4fb9-8147-722b4ec1d9da';
     this.router.navigate([`home/${descriptionId}/description`]);
   }

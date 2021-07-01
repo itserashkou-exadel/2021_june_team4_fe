@@ -47,7 +47,7 @@ import { DescriptionService } from "./core/store/description.service";
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
-    authInterceptorProviders,
+    // authInterceptorProviders,
     DescriptionService,
     MarkerService],
   entryComponents: [//for dynamical load components
