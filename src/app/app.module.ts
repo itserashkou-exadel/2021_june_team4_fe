@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { authInterceptorProviders } from '../app/_helpers/auth.interceptor';
+import { authInterceptorProviders } from './core/services/auth/auth.interceptor';
 
 import { CoreModule } from './core/core.module';
 
@@ -12,25 +12,27 @@ import { HttpClientModule } from "@angular/common/http";
 import { MarkerService } from "./shared/map/marker.service";
 
 import { StoreModule } from '@ngrx/store';
-import { headReducer } from './core/store/redeucers/head.reducer';
+import { headReducer } from './core/store/redeucers/home.reducer';
 
 import { DialogComponent } from "./shared/dialog/dialog/dialog.component";
 import { MapComponent } from "./shared/map/map.component";
 import { LocationTreeComponent } from "./features/head/head/location-tree/location-tree.component";
 import { uiConfigReducer } from './core/store/redeucers/ui-config.reducer';
 import { descriptionReducer } from "./core/store/redeucers/discription.reducer";
-import { DescriptionEffects } from "./core/store/description.effects";
+import { DescriptionEffects } from "./core/store/effects/description.effects";
 import { EffectsModule } from "@ngrx/effects";
-import { DescriptionService } from "./core/store/description.service";
+import { DescriptionService } from "./core/services/description/description.service";
+import { HomeEffects } from './core/store/effects/home.effects';
+
 
 @NgModule({
   imports: [
 
     StoreModule.forRoot({
-      head : headReducer,
+      home : headReducer,
       uiConfig: uiConfigReducer,
       description: descriptionReducer }),
-    EffectsModule.forRoot([DescriptionEffects]),
+    EffectsModule.forRoot([DescriptionEffects, HomeEffects]),
     // angular
     HttpClientModule,
     BrowserAnimationsModule,
@@ -42,12 +44,12 @@ import { DescriptionService } from "./core/store/description.service";
 
     // app
     AppRoutingModule,
-      NgbModule
+    NgbModule
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
-    // authInterceptorProviders,
+   // authInterceptorProviders,
     DescriptionService,
     MarkerService],
   entryComponents: [//for dynamical load components

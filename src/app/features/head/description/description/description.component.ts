@@ -4,7 +4,7 @@ import { DialogComponent } from "../../../../shared/dialog/dialog/dialog.compone
 import { MapComponent } from "../../../../shared/map/map.component";
 import { MatDialog } from "@angular/material/dialog";
 import { createSelector, Store, select} from "@ngrx/store";
-import { IAppState, IDescriptionState, IDescription, IHeadState, IUiConfigState} from "../../../../shared/variables";
+import { IAppState, IDescriptionState, IDescription, IHomeState, IUiConfigState} from "../../../../shared/variables";
 import { Observable } from "rxjs";
 import {getDescription} from "../../../../core/store/actions/description.actions";
 import {setContent} from "../../../../core/store/actions/ui-config.actions";
@@ -20,7 +20,7 @@ export class DescriptionComponent implements OnInit {
 
   constructor(config: NgbRatingConfig,
               public dialog: MatDialog,
-              private store: Store<{ head: IHeadState, uiConfig: IUiConfigState, description: IDescriptionState }>) {
+              private store: Store<{ home: IHomeState, uiConfig: IUiConfigState, description: IDescriptionState }>) {
 
     config.max = 5;
     config.readonly = true;
@@ -44,7 +44,7 @@ export class DescriptionComponent implements OnInit {
   }
 
   ngOnInit () : void {
-    let descriptionId = '5f69268b-705e-4fb9-8147-722b4ec1d9da';
+    // let descriptionId = '5f69268b-705e-4fb9-8147-722b4ec1d9da';
     this.store.dispatch(getDescription())
   }
 }

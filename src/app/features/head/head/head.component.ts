@@ -3,9 +3,10 @@ import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { IAppState } from '../../../shared/variables';
 
-import { DialogComponent } from "../../../shared/dialog/dialog/dialog.component";
-import { LocationTreeComponent } from "./location-tree/location-tree.component";
-import { MatDialog } from "@angular/material/dialog";
+import { DialogComponent } from '../../../shared/dialog/dialog/dialog.component';
+import { LocationTreeComponent } from './location-tree/location-tree.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-head',
@@ -13,12 +14,10 @@ import { MatDialog } from "@angular/material/dialog";
   styleUrls: ['./head.component.scss'],
 })
 export class HeadComponent implements OnInit {
+  activeLink: string;
 
- activeLink : string;
-
-  constructor( private store: Store<IAppState>,
-               public dialog: MatDialog) {
-    this.activeLink = 'home'
+  constructor(private store: Store<IAppState>, public dialog: MatDialog) {
+    this.activeLink = 'home';
   }
 
   openDialog() {
@@ -28,14 +27,12 @@ export class HeadComponent implements OnInit {
         component: LocationTreeComponent
       },
       width: '500px',
-      height: '300px'
-    }
-    this.dialog.open( DialogComponent, dialogConfig );
+      height: '300px',
+    };
+    this.dialog.open(DialogComponent, dialogConfig);
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   discountSearch = new FormControl('');
   profileMenu = new FormControl('');
@@ -52,14 +49,14 @@ export class HeadComponent implements OnInit {
     { link: 'home', label: 'Home' },
     { link: 'profile', label: 'Profile' },
     { link: 'vendor', label: 'Vendor' },
-    { link: 'statistic', label: 'Statistic' }
+    { link: 'statistic', label: 'Statistic' },
   ];
 
   pmClick(ev: Event) {
     console.log((ev.target as HTMLButtonElement).innerText);
   }
 
-  setActiveLink(val: string){
+  setActiveLink(val: string) {
     this.activeLink = val;
   }
 }

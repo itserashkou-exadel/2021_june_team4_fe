@@ -36,7 +36,6 @@ import { CheckboxComponent } from './checkbox/checkbox/checkbox.component';
 @NgModule({
   imports: [
     CommonModule,
-
     FormsModule,
     MatButtonModule,
     MatSelectModule,

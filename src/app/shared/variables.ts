@@ -2,6 +2,7 @@ export interface IUiConfigState {
   homeIsMap: boolean;
 }
 
+
 export interface IDescription {
   id: string;
   active: boolean;
@@ -13,16 +14,16 @@ export interface IDescription {
   startTime: string;
   percent: number;
   promo: string;
-  tags: {} ;
+  tags: any;
   vendor: {};
-  vendorLocation: {};
+  vendorLocations: any;
 }
 
 export interface IDescriptionState {
   description: IDescription;
 }
 
-export interface IHeadState {
+export interface IHomeState {
   user: string,
   discounts: IDiscount[];
 }
@@ -32,7 +33,7 @@ export interface IAppLanguage {
 }
 
 export interface IAppState {
-  head: IHeadState;
+  home: IHomeState;
   uiConfig: IUiConfigState;
   description: IDescriptionState;
 }
@@ -45,7 +46,7 @@ export interface IDiscount {
   expired: string;
   location: string;
   tag: string;
-  cathegory: string;
+  category: string;
   isActive: boolean;
   description: string;
   percent: number;
@@ -58,7 +59,7 @@ export interface IUser {
   email: string;
   isAdmin: boolean;
   subscribes: string[];
-  favorit: string[];
+  favorite: string[];
 }
 
 

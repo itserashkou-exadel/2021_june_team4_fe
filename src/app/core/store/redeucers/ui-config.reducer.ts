@@ -1,4 +1,3 @@
-import { IAppLanguage } from 'src/app/shared/variables';
 
 export const initialState: any = {
   homeIsMap: true,
