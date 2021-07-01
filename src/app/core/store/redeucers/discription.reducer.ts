@@ -7,19 +7,19 @@ export interface DescriptionState {
 
 export const initialState: DescriptionState = {
   description: {
-    id: "hjfkjdhg",
+    id: "b28349b5-0b39-45ee-bb3c-4f96c1abfe75",
     active: true,
     category: {id: 'hgdgfjrhg', name: 'jhdfgjh'},
     description: "string",
     name: "NAme",
     img: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-    endTime: "22-32-33",
-    startTime: '22-32-33',
+    endTime: "2021-06-20T12:00:00",
+    startTime: '2021-06-20T12:00:00',
     percent: 25,
     promo: 'jdfhgjh',
     tags: {id:'jhdfgjhr', name:'jdfhgj'},
     vendor: "string",
-    vendorLocation: {}
+    vendorLocations: []
   }
 };
 

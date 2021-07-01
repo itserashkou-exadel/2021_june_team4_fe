@@ -21,7 +21,7 @@ import { addDiscount } from 'src/app/core/store/actions/home.actions';
 export class VendorComponent implements OnInit {
   constructor(
     private _ngZone: NgZone,
-    private store: Store<IAppState>
+    private store: Store<{ head: IHomeState; uiConfig: IUiConfigState }>
   ) {
     // this.autosize = null;
   }
@@ -45,7 +45,7 @@ export class VendorComponent implements OnInit {
     endTime: new FormControl(''),
     discountLocation: new FormControl(''),
     discountTag: new FormControl(''),
-    cathegory: new FormControl(''),
+    category: new FormControl(''),
     discountDescription: new FormControl(''),
     discountPercent: new FormControl(''),
     discountPromo: new FormControl(''),
@@ -63,7 +63,7 @@ export class VendorComponent implements OnInit {
       expired: tr.endTime,
       location: tr.discountLocation,
       tag: tr.discountTag,
-      cathegory: tr.cathegory,
+      category: tr.category,
       isActive: true,
       description: tr.discountDescription,
       percent: tr.discountPercent,

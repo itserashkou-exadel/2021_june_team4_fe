@@ -44,7 +44,7 @@ export class DescriptionComponent implements OnInit {
   }
 
   ngOnInit () : void {
-    let descriptionId = '5f69268b-705e-4fb9-8147-722b4ec1d9da';
+    // let descriptionId = '5f69268b-705e-4fb9-8147-722b4ec1d9da';
     this.store.dispatch(getDescription())
   }
 }

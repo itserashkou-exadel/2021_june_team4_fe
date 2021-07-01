@@ -14,9 +14,9 @@ export interface IDescription {
   startTime: string;
   percent: number;
   promo: string;
-  tags: {} ;
+  tags: any;
   vendor: {};
-  vendorLocation: {};
+  vendorLocations: any;
 }
 
 export interface IDescriptionState {
@@ -46,7 +46,7 @@ export interface IDiscount {
   expired: string;
   location: string;
   tag: string;
-  cathegory: string;
+  category: string;
   isActive: boolean;
   description: string;
   percent: number;
@@ -59,7 +59,7 @@ export interface IUser {
   email: string;
   isAdmin: boolean;
   subscribes: string[];
-  favorit: string[];
+  favorite: string[];
 }
 
 

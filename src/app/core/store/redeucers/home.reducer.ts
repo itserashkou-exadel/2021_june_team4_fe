@@ -1,5 +1,5 @@
 import { IHomeState } from '../../../shared/variables';
-import { HomeService } from '../../home/home.service';
+import { HomeService } from '../../services/home/home.service';
 
 export const initialState: IHomeState = {
   user: 'UserName',
@@ -12,7 +12,7 @@ export const initialState: IHomeState = {
       expired: '21-11-2021',
       location: 'Vitebsk',
       tag: 'tag',
-      cathegory: 'cathegory',
+      category: 'category',
       isActive: true,
       description:
         'Here is a short description Here is a short description Here is a short description Here is a short description',
@@ -27,7 +27,7 @@ export const initialState: IHomeState = {
       expired: '21-11-2021',
       location: 'Kyiv',
       tag: 'tag',
-      cathegory: 'cathegory',
+      category: 'category',
       isActive: true,
       description:
         'Best_product_everBest_product_everBest_product_everBest_product_everBest_prodedsf ffffffffffffffffffffffffffffffffffffffffffffffffffuct_everBest_product_everBest_product_ever ',
@@ -42,7 +42,7 @@ export const initialState: IHomeState = {
       expired: '21-11-2021',
       location: 'Kyiv',
       tag: 'tag',
-      cathegory: 'cathegory',
+      category: 'category',
       isActive: true,
       description: 'Best product ever ',
       percent: 10,
@@ -57,7 +57,7 @@ export const initialState: IHomeState = {
       expired: '21-11-2021',
       location: 'Kyiv',
       tag: 'tag',
-      cathegory: 'cathegory',
+      category: 'category',
       isActive: true,
       description: 'Best product ever ',
       percent: 10,
@@ -72,7 +72,7 @@ export const initialState: IHomeState = {
       expired: '21-11-2021',
       location: 'Kyiv',
       tag: 'tag',
-      cathegory: 'cathegory',
+      category: 'category',
       isActive: true,
       description: 'Best product ever ',
       percent: 10,
@@ -86,7 +86,7 @@ export const initialState: IHomeState = {
       expired: '21-11-2021',
       location: 'Kyiv',
       tag: 'tag',
-      cathegory: 'cathegory',
+      category: 'category',
       isActive: true,
       description: 'Best product ever ',
       percent: 10,
@@ -101,7 +101,7 @@ export const initialState: IHomeState = {
       expired: '21-11-2021',
       location: 'Kyiv',
       tag: 'tag',
-      cathegory: 'cathegory',
+      category: 'category',
       isActive: true,
       description: 'Best product ever ',
       percent: 10,
@@ -115,7 +115,7 @@ export const initialState: IHomeState = {
       expired: '21-11-2021',
       location: 'Kyiv',
       tag: 'tag',
-      cathegory: 'cathegory',
+      category: 'category',
       isActive: true,
       description: 'Best product ever ',
       percent: 10,
