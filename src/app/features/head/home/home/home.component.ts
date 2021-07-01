@@ -12,7 +12,7 @@ import {
 import { Store } from '@ngrx/store';
 import { setContent } from 'src/app/core/store/actions/ui-config.actions';
 import { HttpClient } from '@angular/common/http';
-import { getNewDiscounts } from 'src/app/core/store/actions/home.actions';
+import { getNewDiscounts, sortDiscounts } from 'src/app/core/store/actions/home.actions';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   remoteData: any; // <<<<<<<<<<<<<<<<<<<   ТУТ
 
   arrayMap: any;
-  sortBy: string;
+ // sortBy: string;
 
   selectHead = (state: IAppState) => state.home;
   selectDiscounts = createSelector(
@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
 
 
   ) {
-    this.sortBy = 'default';
+   // this.sortBy = 'default';
 
     const selecUiConfig = (state: IAppState) => state.uiConfig;
     const selectMap = createSelector(
@@ -65,5 +65,7 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(getNewDiscounts());
   }
 
-  someMethod(): void {}
+  sortDiscountsData(value: any): void {
+    this.store.dispatch(sortDiscounts({ sortType: value}));
+  }
 }

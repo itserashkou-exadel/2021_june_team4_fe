@@ -3,10 +3,11 @@
   <div class="control-bar">
     <mat-form-field appearance="fill">
       <mat-label>Sort by</mat-label>
-      <mat-select matNativeControl>
+      <mat-select matNativeControl (selectionChange)="sortDiscountsData($event.value)">
         <mat-option value="addition">Date of addition</mat-option>
         <mat-option value="expire">Time to expire</mat-option>
-        <mat-option value="raiting">Rating</mat-option>
+        <mat-option value="percent_up">Percent up</mat-option>
+        <mat-option value="percent_down">Percent down</mat-option>
         <mat-option value="name">Default</mat-option>
       </mat-select>
     </mat-form-field>
@@ -39,7 +40,6 @@
         <app-map></app-map>
       </section>
     </div>
-    
 
   </div>
 </div>
