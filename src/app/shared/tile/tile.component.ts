@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 
-
 @Component({
   selector: 'app-tile',
   templateUrl: './tile.component.html',
@@ -15,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
   // encapsulation: ViewEncapsulation.None,
 })
 export class TileComponent implements OnInit {
+
   remoteData: any;
 
   @Input() discount$: IDiscount = {
@@ -49,6 +49,7 @@ export class TileComponent implements OnInit {
     // const descriptionId = this.route.snapshot.paramMap.get('id');
     // this.description$ = this.service.getDescription(descriptionId);
   }
+
 
   redirectToDescription() :void {
     const descriptionId = '5f69268b-705e-4fb9-8147-722b4ec1d9da';
