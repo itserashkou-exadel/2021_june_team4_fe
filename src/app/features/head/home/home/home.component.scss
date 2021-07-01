@@ -13,8 +13,9 @@
   width: 80%;
 }
 .main-row {
-  display: flex; 
-  background-color: #40bfef;
+  display: flex;
+  //background-color: #40bfef;
+  background-color: #f9f9f9;
   padding-top: 10px;
   padding-bottom: 10px;
   .sidebar {
@@ -37,7 +38,7 @@ mat-form-field {
   background-color: #0082ca;
   color: white;
 }
-.map { 
+.map {
   transition: 1s;
   margin: 0 auto;
   position: relative;
@@ -58,3 +59,7 @@ mat-tab-group {
   border: 1px solid red;
 }
 
+mat-form-field.mat-form-field {
+  font-size: 11px;
+  margin-top: 10px;
+}
