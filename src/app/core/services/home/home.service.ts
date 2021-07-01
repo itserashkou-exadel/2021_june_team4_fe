@@ -27,7 +27,7 @@ export class HomeService {
       expired: remoteDiscount.endTime,
       location: "remoteDiscount",
       tag: remoteDiscount.tags.name,
-      cathegory: remoteDiscount.category.name,
+      category: remoteDiscount.category.name,
       isActive: remoteDiscount.active,
       description:remoteDiscount.description === null? 'Default description': remoteDiscount.description,
       percent: remoteDiscount.percent,

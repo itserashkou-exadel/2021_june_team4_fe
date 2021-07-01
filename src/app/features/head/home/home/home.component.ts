@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private store: Store<IAppState>,
     private http: HttpClient
-    
+
 
   ) {
     this.sortBy = 'default';
@@ -55,12 +55,9 @@ export class HomeComponent implements OnInit {
     );
 
     this.discountsData = this.store.select(selectDiscounts);
-
-    
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   setIsMap(val: any): void {
     this.remoteData;

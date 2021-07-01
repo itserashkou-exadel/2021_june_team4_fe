@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { authInterceptorProviders } from '../app/_helpers/auth.interceptor';
+import { authInterceptorProviders } from './core/services/auth/auth.interceptor';
 
 import { CoreModule } from './core/core.module';
 
@@ -19,10 +19,10 @@ import { MapComponent } from "./shared/map/map.component";
 import { LocationTreeComponent } from "./features/head/head/location-tree/location-tree.component";
 import { uiConfigReducer } from './core/store/redeucers/ui-config.reducer';
 import { descriptionReducer } from "./core/store/redeucers/discription.reducer";
-import { DescriptionEffects } from "./core/store/description.effects";
+import { DescriptionEffects } from "./core/store/effects/description.effects";
 import { EffectsModule } from "@ngrx/effects";
-import { DescriptionService } from "./core/store/description.service";
-import { HomeEffects } from './features/head/home/home.effects';
+import { DescriptionService } from "./core/services/description/description.service";
+import { HomeEffects } from './core/store/effects/home.effects';
 
 
 @NgModule({
@@ -44,12 +44,11 @@ import { HomeEffects } from './features/head/home/home.effects';
 
     // app
     AppRoutingModule,
-      NgbModule
+    NgbModule
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
-
    // authInterceptorProviders,
     DescriptionService,
     MarkerService],

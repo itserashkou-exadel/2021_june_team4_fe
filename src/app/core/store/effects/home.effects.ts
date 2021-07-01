@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs/operators';
 import { getNewDiscounts, requestDiscounts} from 'src/app/core/store/actions/home.actions';
-import { HomeService } from 'src/app/core/home/home.service';
+import { HomeService } from 'src/app/core/services/home/home.service';
 
 
 @Injectable()
 export class HomeEffects {
-  constructor(private actions$: Actions, 
+  constructor(private actions$: Actions,
     private homeService : HomeService
     ) {}
 
@@ -16,7 +16,7 @@ export class HomeEffects {
       ofType(getNewDiscounts),
       mergeMap(()=> this.homeService.requestDiscountsData()
       .pipe(
-         map( (data: any) => { 
+         map( (data: any) => {
            const newData = data.map((el: any) => this.homeService.handleRemoteDiscount(el))
           return { type: 'requestDiscounts',data: newData};
           }))
