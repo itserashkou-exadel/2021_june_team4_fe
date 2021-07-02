@@ -31,6 +31,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { CheckboxComponent } from './checkbox/checkbox/checkbox.component';
 import { TilesBoxComponent } from './tiles-box/tiles-box.component';
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 
 @NgModule({
   imports: [
@@ -68,6 +69,7 @@ import { TilesBoxComponent } from './tiles-box/tiles-box.component';
     MatDividerModule,
     MatDialogModule,
     MatTreeModule,
+    MatAutocompleteModule,
 
     RouterModule,
   ],
@@ -98,6 +100,7 @@ import { TilesBoxComponent } from './tiles-box/tiles-box.component';
     MatRadioModule,
     MatButtonToggleModule,
     MatTreeModule,
+    MatAutocompleteModule,
 
     FooterComponent,
     TileComponent,

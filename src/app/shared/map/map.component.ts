@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, Input } from '@angular/core';
 import * as L from 'leaflet';
-import { MarkerService } from './marker.service';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -36,31 +35,28 @@ export class MapComponent implements AfterViewInit {
      zoom: 3,
   };
 
+
   private initMap(): void {
   
     this.map = L.map('map', {
       center: [50.4501, 30.5234],
       zoom: this.mapConfig$.zoom,
-      
-      
     });
-   
+  
 
-    // this.map.fitBounds(bounds)
-    const tiles = L.tileLayer(
-      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      {
-        maxZoom: 18,
-        minZoom: 3,
-        attribution:
-          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      }
-    );
+    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      id: 'mapbox/streets-v11',//satellite-v9 streets-v11
+      maxZoom: 18,
+      minZoom: 3,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    });
 
     tiles.addTo(this.map);
+    L.marker([50.4501, 30.5234]).addTo(this.map).bindPopup('A pretty CSS3 popup.<br> Easily customizable.');
   }
 
-  constructor(private markerService: MarkerService) {}
+
+  constructor() { }
 
   ngAfterViewInit(): void {
     this.initMap();

@@ -12,27 +12,28 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" #group="matButtonToggleGroup" (change)="setIsMap(group.value)">
-      <mat-button-toggle value="map" [checked]="isMap | async"
-        ><mat-icon aria-hidden="false" aria-label="Example home icon"
-          >map</mat-icon
-        ></mat-button-toggle
-      >
-      <mat-button-toggle value="list" [checked]="!(isMap | async)"
-        ><mat-icon aria-hidden="false" aria-label="Example home icon"
-          >list_alt</mat-icon
-        ></mat-button-toggle
-      >
-    </mat-button-toggle-group>
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style" #group="matButtonToggleGroup" (change)="setIsMap(group.value)">
+        <mat-button-toggle value="map" [checked]="isMap | async"
+          ><mat-icon aria-hidden="false" aria-label="Example home icon"
+            >map</mat-icon
+          ></mat-button-toggle
+        >
+        <mat-button-toggle value="list" [checked]="!(isMap | async)"
+          ><mat-icon aria-hidden="false" aria-label="Example home icon"
+            >list_alt</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div class="col-md-1"></div>
   </div>
   <div class="main-row" >
-    
+
       <div class="sidebar">
         <app-side-bar-filter></app-side-bar-filter>
-      </div>    
+      </div>
 
     <div class="content-area" >
- 
+
       <section class="main-section" *ngIf="!(isMap | async)">
         <app-tiles-box [discountsData$]="discountsData | async"></app-tiles-box>
       </section>
@@ -42,6 +43,5 @@
     </div>
 
   </div>
-</div>
 
 <app-footer></app-footer>

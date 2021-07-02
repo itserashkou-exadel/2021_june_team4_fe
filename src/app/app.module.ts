@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from "@angular/common/http";
-import { MarkerService } from "./shared/map/marker.service";
 
 import { StoreModule } from '@ngrx/store';
 import { headReducer } from './core/store/redeucers/home.reducer';
@@ -51,8 +50,7 @@ import { HomeEffects } from './core/store/effects/home.effects';
   bootstrap: [AppComponent],
   providers: [
   // authInterceptorProviders,
-    DescriptionService,
-    MarkerService],
+    DescriptionService],
   entryComponents: [//for dynamical load components
     DialogComponent,
     MapComponent,
