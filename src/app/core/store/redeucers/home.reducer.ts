@@ -96,8 +96,7 @@ const sortState = (src: IDiscount[], sortFlag: string) => {
 
     case 'name':
       const newState1 = src.slice().sort((a, b): number => {
-        console.log(a);
-        if (a.name > b.name) return -1;
+         if (a.name > b.name) return -1;
         if (a.name < b.name) return 1;
         else return 0;
       });

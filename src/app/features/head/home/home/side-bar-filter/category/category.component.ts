@@ -27,8 +27,8 @@ const TREE_DATA: FoodNode[] = [
       }, {
         name: 'Belarus',
         children: [
-          {name: 'Pumpkins'},
-          {name: 'Carrots'},
+          {name: 'Minsk'},
+          {name: 'Vitebsk'},
         ]
       },
     ]

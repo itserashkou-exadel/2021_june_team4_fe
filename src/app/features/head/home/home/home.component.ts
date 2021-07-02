@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
 
     ],
     center: [50.4501, 30.5234],
-    zoom: 4,
+    zoom: 5,
   }
    // this.sortBy = 'default';
 
