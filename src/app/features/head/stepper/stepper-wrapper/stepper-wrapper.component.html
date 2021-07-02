@@ -1,0 +1,27 @@
+<mat-stepper orientation="vertical">
+  <mat-step>
+    <ng-template matStepLabel>Information about Vendor</ng-template>
+    <ng-template matStepContent>
+      <!-- Step 1: Create vendor -->
+      <app-step-create-vendor></app-step-create-vendor>
+    </ng-template>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Information about Bonus program</ng-template>
+    <ng-template matStepContent>
+      <!-- Step 2: Create BP or Edit BP -->
+      <!-- CREATE -->
+<!--      <app-step-create-bp></app-step-create-bp>-->
+      <!-- EDIT -->
+       <app-step-edit-bp></app-step-edit-bp>
+    </ng-template>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Message</ng-template>
+    <ng-template matStepContent>
+      All information were saved successfully!
+    </ng-template>
+  </mat-step>
+</mat-stepper>
