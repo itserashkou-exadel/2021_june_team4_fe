@@ -11,15 +11,17 @@
         </mat-select> -->
         <input
           type="text"
-          placeholder="Pick one"
           aria-label="vendor name"
           matInput
           [formControl]="myControl"
           [matAutocomplete]="auto"
         />
         <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let vendor of vendors | async" [value]="vendor">
-            {{ vendor }}
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
+          >
+            {{ option }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
