@@ -44,7 +44,7 @@ export class DescriptionComponent implements OnInit {
       height: '500px',
       data: {
         title: `Title for map, description:
-         ${data.locations}`,
+         ${data}`,
         component: MapComponent,
         data: data
       }
