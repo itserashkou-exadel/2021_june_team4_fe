@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   arrayMap: any;
  // sortBy: string;
- marker: any
+ markers: any
 
   selectHead = (state: IAppState) => state.home;
   selectDiscounts = createSelector(
@@ -39,17 +39,14 @@ export class HomeComponent implements OnInit {
     private http: HttpClient
   ) {
 
-   this.marker = {
-    markers:[
-    { cords:[50.4501, 30.5234], text: 'This is Kyiv'},
-    { cords:[49.2331, 28.4682], text: 'This is Vinnytsia'},
+   this.markers =[
+    // { cords:[50.4501, 30.5234], text: 'This is Kyiv'},
+    // { cords:[49.2331, 28.4682], text: 'This is Vinnytsia'},
     { cords:[48.5079, 32.2623], text: 'This is Kropyntytskyi'},
-    { cords:[46.4825, 30.7233], text: 'This is Odessa'},
+   // { cords:[46.4825, 30.7233], text: 'This is Odessa'},
 
-    ],
-    center: [50.4501, 30.5234],
-    zoom: 5,
-  }
+    ]
+  
    // this.sortBy = 'default';
 
     const selecUiConfig = (state: IAppState) => state.uiConfig;
@@ -66,6 +63,10 @@ export class HomeComponent implements OnInit {
     );
 
     this.discountsData = this.store.select(selectDiscounts);
+
+    this.store.select(selectDiscounts).subscribe(data => 
+      {this.markers = data.map(el => ({cords: el.coordinates, text: el.description}) )    });
+    console.log(this.markers);
   }
 
   ngOnInit(): void {

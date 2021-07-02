@@ -30,6 +30,7 @@ export class HomeService {
       description:remoteDiscount.description === null? 'Default description': remoteDiscount.description,
       percent: remoteDiscount.percent,
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
+      coordinates: [40+Math.random()*5, 40+Math.random()*5]
     }
     return localDiscount;
   }

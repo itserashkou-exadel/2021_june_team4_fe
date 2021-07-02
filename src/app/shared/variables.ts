@@ -2,7 +2,10 @@ export interface IUiConfigState {
   homeIsMap: boolean;
 }
 
-
+export interface IMapMarker {
+  cords: number[],
+  text: string
+}
 export interface IDescription {
   id: string;
   active: boolean;
@@ -51,6 +54,7 @@ export interface IDiscount {
   description: string;
   percent: number;
   image: string
+  coordinates: number[]
 }
 
 export interface IUser {
