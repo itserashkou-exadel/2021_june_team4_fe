@@ -15,6 +15,7 @@ import { getDescription } from "../../../../core/store/actions/description.actio
 
 export class DescriptionComponent implements OnInit {
   descriptionData$: Observable<IDescription>;
+  marker:any;
 
   constructor(public dialog: MatDialog,
               private store: Store<{
@@ -25,17 +26,31 @@ export class DescriptionComponent implements OnInit {
     const selecDescription = (state: IAppState) => state.description;
     const selectDescription = createSelector(selecDescription, (state: IDescriptionState) => state.description)
     this.descriptionData$ = this.store.pipe(select(selectDescription));
+
+    this.marker = {
+      markers:[
+        { cords:[50.4501, 30.5234], text: 'This is Kyiv'},
+        { cords:[49.2331, 28.4682], text: 'This is Vinnytsia'},
+        // { cords:[48.5079, 32.2623], text: 'This is Kropyntytskyi'},
+        // { cords:[46.4825, 30.7233], text: 'This is Odessa'},
+
+      ],
+      center: [49.2331, 28.4682],
+      zoom: 13,
+    }
   }
 
-  openDialogWithMap(locations: any) {
+  openDialogWithMap(data: any) {//todo bp type
+
     let configDialog = {
       panelClass: 'map-wrapper',//add custom style
       width: '750px',
       height: '500px',
       data: {
         title: `Title for map, description:
-         ${locations}`,
-        component: MapComponent
+         ${data.locations}`,
+        component: MapComponent,
+        data: data
       }
     };
     this.dialog.open( DialogComponent, configDialog );
@@ -44,4 +59,5 @@ export class DescriptionComponent implements OnInit {
   ngOnInit () : void {
     this.store.dispatch(getDescription())
   }
+
 }
