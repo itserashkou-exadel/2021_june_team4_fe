@@ -21,15 +21,15 @@ export class HeadComponent implements OnInit {
   }
 
   openDialog() {
-    let dialogConfig = {
-      data: {
-        title: 'Title for tree location',
-        component: LocationTreeComponent
-      },
-      width: '500px',
-      height: '300px',
-    };
-    this.dialog.open(DialogComponent, dialogConfig);
+    // let dialogConfig = {
+    //   data: {
+    //     title: 'Title for tree location',
+    //     component: LocationTreeComponent
+    //   },
+    //   width: '500px',
+    //   height: '300px',
+    // };
+    // this.dialog.open(DialogComponent, dialogConfig);
   }
 
   ngOnInit(): void {}
