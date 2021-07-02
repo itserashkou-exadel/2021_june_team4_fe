@@ -1,0 +1,22 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 20px;
+
+  &-row {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+  }
+}
+
+.btns-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.save-btn {
+  width: 50;
+  height: 30;
+}

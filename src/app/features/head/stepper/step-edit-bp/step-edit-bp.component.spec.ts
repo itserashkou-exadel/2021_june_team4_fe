@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VendorComponent } from './vendor.component';
+import { StepEditBpComponent } from './step-edit-bp.component';
 
-describe('VendorComponent', () => {
-  let component: VendorComponent;
-  let fixture: ComponentFixture<VendorComponent>;
+describe('StepEditBpComponent', () => {
+  let component: StepEditBpComponent;
+  let fixture: ComponentFixture<StepEditBpComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VendorComponent ]
+      declarations: [ StepEditBpComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VendorComponent);
+    fixture = TestBed.createComponent(StepEditBpComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

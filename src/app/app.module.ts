@@ -3,13 +3,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { authInterceptorProviders } from './core/services/auth/auth.interceptor';
 
+
 import { CoreModule } from './core/core.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from "@angular/common/http";
-import { MarkerService } from "./shared/map/marker.service";
 
 import { StoreModule } from '@ngrx/store';
 import { headReducer } from './core/store/redeucers/home.reducer';
@@ -49,9 +49,8 @@ import { HomeEffects } from './core/store/effects/home.effects';
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
-   // authInterceptorProviders,
-    DescriptionService,
-    MarkerService],
+  // authInterceptorProviders,
+    DescriptionService],
   entryComponents: [//for dynamical load components
     DialogComponent,
     MapComponent,

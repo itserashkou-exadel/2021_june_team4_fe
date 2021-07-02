@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import { IDescription } from "../../../../../shared/variables";
 
 @Component({
   selector: 'app-carousel',
@@ -6,5 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./carousel.component.scss']
 })
 export class CarouselComponent {
-  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  @Input() images: any = {
+    img: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
+  };
+  // images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+
 }

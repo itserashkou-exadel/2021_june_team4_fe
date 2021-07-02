@@ -3,44 +3,45 @@
   <div class="control-bar">
     <mat-form-field appearance="fill">
       <mat-label>Sort by</mat-label>
-      <mat-select matNativeControl>
+      <mat-select matNativeControl (selectionChange)="sortDiscountsData($event.value)">
         <mat-option value="addition">Date of addition</mat-option>
         <mat-option value="expire">Time to expire</mat-option>
-        <mat-option value="raiting">Rating</mat-option>
+        <mat-option value="percent_up">Percent up</mat-option>
+        <mat-option value="percent_down">Percent down</mat-option>
         <mat-option value="name">Default</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" #group="matButtonToggleGroup" (change)="setIsMap(group.value)">
-      <mat-button-toggle value="map" [checked]="isMap | async"
-        ><mat-icon aria-hidden="false" aria-label="Example home icon"
-          >map</mat-icon
-        ></mat-button-toggle
-      >
-      <mat-button-toggle value="list" [checked]="!(isMap | async)"
-        ><mat-icon aria-hidden="false" aria-label="Example home icon"
-          >list_alt</mat-icon
-        ></mat-button-toggle
-      >
-    </mat-button-toggle-group>
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style" #group="matButtonToggleGroup" (change)="setIsMap(group.value)">
+        <mat-button-toggle value="map" [checked]="isMap | async"
+          ><mat-icon aria-hidden="false" aria-label="Example home icon"
+            >map</mat-icon
+          ></mat-button-toggle
+        >
+        <mat-button-toggle value="list" [checked]="!(isMap | async)"
+          ><mat-icon aria-hidden="false" aria-label="Example home icon"
+            >list_alt</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div class="col-md-1"></div>
   </div>
   <div class="main-row" >
-    
+
       <div class="sidebar">
         <app-side-bar-filter></app-side-bar-filter>
-      </div>    
+      </div>
 
-    <div class="content-area">
+    <div class="content-area" >
+
       <section class="main-section" *ngIf="!(isMap | async)">
-        <app-tile *ngFor="let discount of discountsData | async" [discount$]="discount"></app-tile>
+        <app-tiles-box [discountsData$]="discountsData | async"></app-tiles-box>
       </section>
       <section class="map" *ngIf="isMap | async">
-        <app-map></app-map>
+        <app-map [mapConfig$]="marker"></app-map>
       </section>
     </div>
-    
 
   </div>
-</div>
 
 <app-footer></app-footer>
