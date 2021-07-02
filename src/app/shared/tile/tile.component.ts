@@ -1,17 +1,12 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
-//import { IInputTile } from '../variables';
-import { SlicePipe } from '@angular/common';
+import { Component, OnInit, Input } from '@angular/core';
 import { IDiscount } from '../variables';
 import { Router, ActivatedRoute} from '@angular/router';
-import { Observable } from 'rxjs';
-
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-tile',
   templateUrl: './tile.component.html',
   styleUrls: ['./tile.component.scss'],
-  // encapsulation: ViewEncapsulation.None,
 })
 export class TileComponent implements OnInit {
 
@@ -33,7 +28,6 @@ export class TileComponent implements OnInit {
 
   };
 
-  // description$: Observable;
   constructor(private router: Router,
               private route: ActivatedRoute,
               private http: HttpClient) {
@@ -47,8 +41,6 @@ export class TileComponent implements OnInit {
   ngOnInit(): void {}
 
   redirectToDescription(descriptionId: any) :void {
-    // console.log(descriptionId);
-    // const descriptionId = '5f69268b-705e-4fb9-8147-722b4ec1d9da';
     this.router.navigate([`home/${descriptionId}/description`]);
   }
 }

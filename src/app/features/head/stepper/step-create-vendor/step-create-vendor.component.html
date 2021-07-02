@@ -1,0 +1,135 @@
+<form class="form" [formGroup]="vendorForm" (ngSubmit)="saveVendor()">
+  <div class="form-row">
+    <!-- Vendor name -->
+    <div class="form-row__item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Vendor name</mat-label>
+        <!-- <mat-select formControlName="name">
+          <mat-option *ngFor="let vendor of vendors" [value]="vendor">
+            {{ vendor }}
+          </mat-option>
+        </mat-select> -->
+        <input
+          type="text"
+          aria-label="vendor name"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button class="add-btn">
+        <mat-icon>add_box</mat-icon>
+      </button>
+    </div>
+    <!-- /Vendor name -->
+
+    <!-- Vendor category -->
+    <div class="form-row__item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Vendor category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button class="add-btn">
+        <mat-icon>add_box</mat-icon>
+      </button>
+    </div>
+    <!-- /Vendor category -->
+
+    <!-- Vendor tag -->
+    <div class="form-row__item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Vendor tag</mat-label>
+        <mat-select formControlName="tag">
+          <mat-option *ngFor="let tag of tags" [value]="tag">
+            {{ tag }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button class="add-btn">
+        <mat-icon>add_box</mat-icon>
+      </button>
+    </div>
+    <!-- /Vendor tag -->
+  </div>
+  <div class="form-row">
+    <!-- Vendor Description -->
+    <div class="form-row__item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          placeholder="Description"
+          formControlName="description"
+        ></textarea>
+      </mat-form-field>
+    </div>
+    <!-- /Vendor Description -->
+
+    <!-- Vendor logo -->
+    <div class="form-row__item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Vendor logo</mat-label>
+        <input
+          matInput
+          placeholder="Add some logo"
+          formControlName="vendorLogo"
+        />
+      </mat-form-field>
+    </div>
+    <!-- /Vendor logo -->
+
+    <!-- Vendor locations -->
+    <!-- <div class="form-row__item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Locations</mat-label>
+        <input matInput formControlName="locations" />
+      </mat-form-field>
+    </div> -->
+    <!-- /Vendor locations -->
+  </div>
+  <div class="form-row">
+    <!-- Vendor's schedule -->
+    <div class="form-row__item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Vendor's schedule</mat-label>
+        <input matInput formControlName="schedule" />
+      </mat-form-field>
+    </div>
+    <!-- /Vendor's schedule -->
+
+    <!-- Vendor contacts -->
+    <div class="form-row__item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Contacts</mat-label>
+        <input matInput formControlName="contacts" />
+      </mat-form-field>
+    </div>
+    <!-- /Vendor contacts -->
+  </div>
+  <div class="first-step__btns btns-wrapper">
+    <button class="save-btn" mat-flat-button color="warn" (click)="resetForm()">
+      Clear
+    </button>
+    <button
+      type="submit"
+      class="save-btn"
+      mat-flat-button
+      color="primary"
+      matStepperNext
+    >
+      Save
+    </button>
+  </div>
+</form>

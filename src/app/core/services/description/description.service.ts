@@ -19,7 +19,7 @@ export class DescriptionService {
       startTime: remouteData.startTime,
       endTime: remouteData.endTime,
       vendorLocations: [...remouteData.vendorLocations.map((el: any)=>{
-        return el.city.name + el.country.name;
+        return `${el.country.name}, ${el.city.name}`;
       })],
       tags: [...remouteData.tags.map((el: any)=>{
         return el.name;

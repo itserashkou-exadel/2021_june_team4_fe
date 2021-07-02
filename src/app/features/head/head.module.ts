@@ -18,33 +18,42 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { LocationTreeComponent } from './head/location-tree/location-tree.component';
 import { MatTreeModule } from "@angular/material/tree";
 import { SideBarFilterComponent } from './home/home/side-bar-filter/side-bar-filter.component';
-import { CategoryComponent } from './home/home/side-bar-filter/Components/category/category.component';
-import { DateComponent } from './home/home/side-bar-filter/Components/date/date.component';
-import { RangeComponent } from './home/home/side-bar-filter/Components/range/range.component';
-import { TagsComponent } from './home/home/side-bar-filter/Components/tags/tags.component';
+import { CategoryComponent } from './home/home/side-bar-filter/category/category.component';
+import { DateComponent } from './home/home/side-bar-filter/date/date.component';
+import { RangeComponent } from './home/home/side-bar-filter/range/range.component';
+import { TagsComponent } from './home/home/side-bar-filter/tags/tags.component';
+import {StepperWrapperComponent} from "./stepper/stepper-wrapper/stepper-wrapper.component";
+import {StepCreateVendorComponent} from "./stepper/step-create-vendor/step-create-vendor.component";
+import {StepCreateBpComponent} from "./stepper/step-create-bp/step-create-bp.component";
+import {StepEditBpComponent} from "./stepper/step-edit-bp/step-edit-bp.component";
 
 @NgModule({
-    declarations: [
-        HeadComponent,
-        HomeComponent,
-        DescriptionComponent,
-        ProfileComponent,
-        StatisticComponent,
-        VendorComponent,
-        NotFoundComponent,
-        MapComponent,
-        CarouselComponent,
-        DialogComponent,
-        LocationTreeComponent,
-        SideBarFilterComponent,
-        CategoryComponent,
-        DateComponent,
-        RangeComponent,
-        TagsComponent
-    ],
-    exports: [
-        MapComponent
-    ],
+  declarations: [
+    HeadComponent,
+    HomeComponent,
+    DescriptionComponent,
+    ProfileComponent,
+    StatisticComponent,
+    VendorComponent,
+    NotFoundComponent,
+    MapComponent,
+    CarouselComponent,
+    DialogComponent,
+    LocationTreeComponent,
+    SideBarFilterComponent,
+    CategoryComponent,
+    DateComponent,
+    RangeComponent,
+    TagsComponent,
+    StepperWrapperComponent,
+    StepCreateVendorComponent,
+    StepCreateBpComponent,
+    StepEditBpComponent
+  ],
+  exports: [
+    MapComponent,
+    StepCreateVendorComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
