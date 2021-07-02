@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Component} from '@angular/core';
 import {MatChipInputEvent} from '@angular/material/chips';
 
-
-export interface Fruit {
+export interface Tag {
   name: string;
 }
 
@@ -11,28 +11,22 @@ export interface Fruit {
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.scss']
 })
-export class TagsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class TagsComponent{
   selectable = true;
   removable = true;
   addOnBlur = true;
-  // readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: Fruit[] = [
-    {name: 'Car'},
-    {name: 'Food'},
-    {name: 'Travel'},
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  fruits: Tag[] = [
+    {name: 'Home'},
+    {name: 'Device'},
+    {name: 'kitchen'},
   ];
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
-    if (value) {
+
+    if (value && value.length <= 10) {
       this.fruits.push({name: value});
     }
 
@@ -40,12 +34,11 @@ export class TagsComponent implements OnInit {
     event.chipInput!.clear();
   }
 
-  remove(fruit: Fruit): void {
+  remove(fruit: Tag): void {
     const index = this.fruits.indexOf(fruit);
 
     if (index >= 0) {
       this.fruits.splice(index, 1);
     }
   }
-
 }
