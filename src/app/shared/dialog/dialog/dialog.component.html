@@ -1,7 +1,8 @@
 <h2 mat-dialog-title *ngIf="data.title"> {{ data.title }}</h2>
 
 <mat-dialog-content>
-  <ng-template #renderComponentHere></ng-template>
+<!--  <ng-template #renderComponentHere></ng-template>-->
+  <app-map [mapConfig$]="marker"></app-map>
 </mat-dialog-content>
 
 <mat-dialog-actions>

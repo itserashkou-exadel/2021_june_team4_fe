@@ -20,6 +20,7 @@ export class DialogComponent {
 
   componentRef!: ComponentRef<any>;
   loading = true;
+  marker:any;
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -27,6 +28,13 @@ export class DialogComponent {
     private cd: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    this.marker = {
+      markers:[
+        { cords:[50.4501, 30.5234], text: 'This is Kyiv'},
+      ],
+      center: [50.4501, 30.5234],
+      zoom: 4,
+    }
   }
 
   ngAfterViewInit() {

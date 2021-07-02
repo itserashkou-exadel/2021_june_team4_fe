@@ -30,13 +30,9 @@ export class DescriptionComponent implements OnInit {
     this.marker = {
       markers:[
         { cords:[50.4501, 30.5234], text: 'This is Kyiv'},
-        { cords:[49.2331, 28.4682], text: 'This is Vinnytsia'},
-        // { cords:[48.5079, 32.2623], text: 'This is Kropyntytskyi'},
-        // { cords:[46.4825, 30.7233], text: 'This is Odessa'},
-
       ],
-      center: [49.2331, 28.4682],
-      zoom: 13,
+      center: [50.4501, 30.5234],
+      zoom: 4,
     }
   }
 
