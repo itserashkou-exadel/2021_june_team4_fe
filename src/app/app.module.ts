@@ -49,7 +49,7 @@ import { HomeEffects } from './core/store/effects/home.effects';
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
-  // authInterceptorProviders,
+    authInterceptorProviders,
     DescriptionService],
   entryComponents: [//for dynamical load components
     DialogComponent,
