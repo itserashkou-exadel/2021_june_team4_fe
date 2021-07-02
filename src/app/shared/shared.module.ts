@@ -23,7 +23,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatStepperModule } from '@angular/material/stepper'
+import { MatStepperModule } from '@angular/material/stepper';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { RouterModule } from "@angular/router";
 import { FooterComponent } from "./footer/footer.component";
@@ -71,6 +72,7 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatDividerModule,
         RouterModule,
         MatDialogModule,
+        MatAutocompleteModule,
   ],
 
   exports: [
@@ -100,6 +102,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatButtonToggleModule,
     // MatSidenavModule,
     MatStepperModule,
+    MatAutocompleteModule,
 
     FooterComponent,
     TileComponent,

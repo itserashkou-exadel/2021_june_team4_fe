@@ -35,7 +35,7 @@ import { headReducer } from './core/store/redeucers/head.reducer';
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
-    // authInterceptorProviders, 
+    authInterceptorProviders, 
     MarkerService]
 })
 export class AppModule {}

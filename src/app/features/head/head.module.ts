@@ -16,6 +16,10 @@ import {NgbCarouselModule, NgbRatingModule, NgbTooltipModule} from "@ng-bootstra
 import { DialogComponent } from './description/description/dialog/dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { DialogContentComponent } from './description/description/dialog/dialog-content/dialog-content.component';
+import { StepperWrapperComponent } from './stepper/stepper-wrapper/stepper-wrapper.component';
+import { StepCreateVendorComponent } from './stepper/step-create-vendor/step-create-vendor.component';
+import { StepCreateBpComponent } from './stepper/step-create-bp/step-create-bp.component';
+import { StepEditBpComponent } from './stepper/step-edit-bp/step-edit-bp.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +34,10 @@ import { DialogContentComponent } from './description/description/dialog/dialog-
         CarouselComponent,
         DialogComponent,
         DialogContentComponent,
+        StepperWrapperComponent,
+        StepCreateVendorComponent,
+        StepCreateBpComponent,
+        StepEditBpComponent,
     ],
     exports: [
         MapComponent
