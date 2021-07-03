@@ -16,23 +16,27 @@ export class HomeService {
     return response;
   }
 
-  handleRemoteDiscount(remoteDiscount: any){
-    const localDiscount : IDiscount = {
+  handleRemoteDiscount(remoteDiscount: any) {
+    const localDiscount: IDiscount = {
       id: remoteDiscount.id,
       name: remoteDiscount.name,
-      vendor: remoteDiscount.vendor === null? 'Unknown': remoteDiscount.vendor ,
+      vendor:
+        remoteDiscount.vendor === null ? 'Unknown' : remoteDiscount.vendor,
       added: remoteDiscount.startTime,
       expired: remoteDiscount.endTime,
-      location: "remoteDiscount",
+      location: 'remoteDiscount',
       tag: remoteDiscount.tags.name,
       category: remoteDiscount.category.name,
       isActive: remoteDiscount.active,
-      description:remoteDiscount.description === null? 'Default description': remoteDiscount.description,
+      description:
+        remoteDiscount.description === null
+          ? 'Default description'
+          : remoteDiscount.description,
       percent: remoteDiscount.percent,
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
-      coordinates: [40+Math.random()*5, 40+Math.random()*5]
-    }
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
+      coordinates: [50 + Math.random() * 5, 20 + Math.random() * 5],
+    };
     return localDiscount;
   }
-
 }

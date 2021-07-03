@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input } from '@angular/core';
+import { Component, AfterViewInit, Input, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { IMapMarker } from '../variables';
 
@@ -25,8 +25,8 @@ L.Marker.prototype.options.icon = iconDefault;
 export class MapComponent implements AfterViewInit {
   private map: any;
 
-  @Input() markers: IMapMarker[] = [
-    { cords: [49.2331, 28.4682], text: 'This is Vinnytsia' },
+  @Input() markers: IMapMarker[] | null = [
+    { cords: [], text: 'This is Vinnytsia' },
   ];
   @Input() mapConfig$: any = {
     center: [50.4501, 30.5234],
@@ -51,18 +51,19 @@ export class MapComponent implements AfterViewInit {
     );
 
     tiles.addTo(this.map);
-    // L.marker([50.4501, 30.5234]).addTo(this.map).bindPopup('A pretty CSS3 popup.<br> Easily customizable.');
   }
 
   constructor() {}
 
   ngAfterViewInit(): void {
     this.initMap();
-    this.markers.forEach((el: any) => {
-      L.marker(el.cords).addTo(this.map).bindPopup(el.text);
-    });
-    // var bounds = new L.FeatureGroup(this.mapConfig$.markers);
-    //  this.map.fitBounds(bounds.getBounds());
-    // L.marker([53.9006, 27.5590]).addTo(this.map).bindPopup('Minsk');
+    setTimeout(() => {
+      if (this.markers)
+        this.markers.forEach((el: any) => {
+          L.marker(el.cords).addTo(this.map).bindPopup(el.text);
+        });
+      const myPins = this.markers?.map((el) => el.cords);
+      this.map.fitBounds(myPins);
+    }, 1000);
   }
 }

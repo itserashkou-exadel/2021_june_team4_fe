@@ -1,18 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { createSelector, State } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { createSelector, select, State } from '@ngrx/store';
+import { Observable, pipe } from 'rxjs';
 
 import {
   IDiscount,
   IHomeState,
   IAppState,
   IUiConfigState,
+  IMapMarker,
 } from 'src/app/shared/variables';
 
 import { Store } from '@ngrx/store';
 import { setContent } from 'src/app/core/store/actions/ui-config.actions';
 import { HttpClient } from '@angular/common/http';
-import { getNewDiscounts, sortDiscounts } from 'src/app/core/store/actions/home.actions';
+import {
+  getNewDiscounts,
+  sortDiscounts,
+} from 'src/app/core/store/actions/home.actions';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -22,11 +27,7 @@ import { getNewDiscounts, sortDiscounts } from 'src/app/core/store/actions/home.
 export class HomeComponent implements OnInit {
   isMap: Observable<boolean>;
   discountsData: Observable<IDiscount[]>;
-  remoteData: any; // <<<<<<<<<<<<<<<<<<<   ТУТ
-
-  arrayMap: any;
- // sortBy: string;
- markers: any
+  markers$: Observable<IMapMarker[]>;
 
   selectHead = (state: IAppState) => state.home;
   selectDiscounts = createSelector(
@@ -34,21 +35,7 @@ export class HomeComponent implements OnInit {
     (state: IHomeState) => state.discounts
   );
 
-  constructor(
-    private store: Store<IAppState>,
-    private http: HttpClient
-  ) {
-
-   this.markers =[
-    // { cords:[50.4501, 30.5234], text: 'This is Kyiv'},
-    // { cords:[49.2331, 28.4682], text: 'This is Vinnytsia'},
-    { cords:[48.5079, 32.2623], text: 'This is Kropyntytskyi'},
-   // { cords:[46.4825, 30.7233], text: 'This is Odessa'},
-
-    ]
-  
-   // this.sortBy = 'default';
-
+  constructor(private store: Store<IAppState>, private http: HttpClient) {
     const selecUiConfig = (state: IAppState) => state.uiConfig;
     const selectMap = createSelector(
       selecUiConfig,
@@ -64,9 +51,14 @@ export class HomeComponent implements OnInit {
 
     this.discountsData = this.store.select(selectDiscounts);
 
-    this.store.select(selectDiscounts).subscribe(data => 
-      {this.markers = data.map(el => ({cords: el.coordinates, text: el.description}) )    });
-    console.log(this.markers);
+    const selectMarkers = createSelector(this.selectHead, (state) =>
+      state.discounts.map((el) => ({
+        cords: el.coordinates,
+        text: el.description,
+      }))
+    );
+
+    this.markers$ = this.store.select(selectMarkers);
   }
 
   ngOnInit(): void {
@@ -74,12 +66,10 @@ export class HomeComponent implements OnInit {
   }
 
   setIsMap(val: any): void {
-    this.remoteData;
     this.store.dispatch(setContent({ isMap: val !== 'list' }));
-    
   }
 
   sortDiscountsData(value: any): void {
-    this.store.dispatch(sortDiscounts({ sortType: value}));
+    this.store.dispatch(sortDiscounts({ sortType: value }));
   }
 }

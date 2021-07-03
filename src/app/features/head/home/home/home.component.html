@@ -37,8 +37,8 @@
       <section class="main-section" *ngIf="!(isMap | async)">
         <app-tiles-box [discountsData$]="discountsData | async"></app-tiles-box>
       </section>
-      <section class="map" *ngIf="isMap | async">
-        <app-map [markers]="markers"></app-map>
+      <section class="map" *ngIf="isMap | async" >
+        <app-map [markers]="markers$ | async"></app-map>
       </section>
     </div>
 

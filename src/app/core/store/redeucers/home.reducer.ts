@@ -30,10 +30,10 @@ export const initialState: IHomeState = {
       category: 'category',
       isActive: true,
       description:
-        'Here is a short description Here is a short description Here is a short description Here is a short description',
+        ' Here is a short description Here is a short description',
       percent: 10,
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      coordinates: [45.094, 34.981]
+      coordinates: [46.094, 38.981]
     },
   ],
 };
