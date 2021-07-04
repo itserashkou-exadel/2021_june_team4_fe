@@ -1,4 +1,3 @@
-import { createReducer, on } from '@ngrx/store';
 import {IDescription} from "../../../shared/variables";
 
 export interface DescriptionState {
@@ -28,7 +27,6 @@ export function descriptionReducer(state: DescriptionState = initialState, actio
     case 'getDescription':
       return state;
     case 'requestDescription':
-      console.log('desc', action.data)
       return {
         ...state,
         description: action.data

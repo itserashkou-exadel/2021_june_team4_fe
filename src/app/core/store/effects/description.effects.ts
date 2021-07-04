@@ -7,7 +7,6 @@ import { map, mergeMap } from "rxjs/operators";
 
 @Injectable()
 export class DescriptionEffects {
-
   constructor(
     private actions$: Actions,
     private descriptionService: DescriptionService
@@ -17,7 +16,7 @@ export class DescriptionEffects {
     () =>
       this.actions$.pipe(
         ofType(getDescription),
-        mergeMap(() => this.descriptionService.getDescriptionRequest()
+        mergeMap((id) => this.descriptionService.getDescriptionRequest(id)
           .pipe(
             map( (data: any) => {
               const description = this.descriptionService.handleRemoteDescription(data)
