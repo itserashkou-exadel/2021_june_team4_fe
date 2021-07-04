@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { getDescription, requestDescription } from '../actions/description.actions';
-import { DescriptionService } from '../../services/description/description.service';
+import { DescriptionService } from '../../services/description.service';
 import { map, mergeMap } from "rxjs/operators";
 
 @Injectable()

@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { DialogComponent } from "../../../../shared/dialog/dialog/dialog.component";
-import { MapComponent } from "../../../../shared/map/map.component";
+import { DialogComponent } from "../../../shared/dialog/dialog/dialog.component";
+import { MapComponent } from "../../../shared/map/map.component";
 import { MatDialog } from "@angular/material/dialog";
 import { createSelector, Store, select} from "@ngrx/store";
-import { IAppState, IDescriptionState, IDescription, IHomeState, IUiConfigState} from "../../../../shared/variables";
+import { IAppState, IDescriptionState, IDescription, IHomeState, IUiConfigState} from "../../../shared/variables";
 import { Observable } from "rxjs";
-import { getDescription } from "../../../../core/store/actions/description.actions";
+import { getDescription } from "../../../core/store/actions/description.actions";
 
 @Component({
   selector: 'app-description',
@@ -52,7 +52,7 @@ export class DescriptionComponent implements OnInit {
     this.dialog.open( DialogComponent, configDialog );
   }
 
-  ngOnInit () : void {
+  ngOnInit(): void {
     this.store.dispatch(getDescription())
   }
 

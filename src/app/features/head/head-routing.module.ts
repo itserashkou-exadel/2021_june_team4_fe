@@ -5,7 +5,7 @@ import { HeadComponent } from './head/head.component';
 import { VendorComponent } from "./vendor/vendor/vendor.component";
 import { StatisticComponent } from "./statistic/statistic/statistic.component";
 import { ProfileComponent } from "./profile/profile/profile.component";
-import { DescriptionComponent } from "./description/description/description.component";
+import { DescriptionComponent } from "./description/description.component";
 import { HomeComponent } from "./home/home/home.component";
 
 const routes: Routes = [
