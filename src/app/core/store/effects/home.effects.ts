@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs/operators';
 import { getNewDiscounts, requestDiscounts} from 'src/app/core/store/actions/home.actions';
-import { HomeService } from 'src/app/core/services/home/home.service';
+import { HomeService } from 'src/app/core/services/home.service';
 
 
 @Injectable()

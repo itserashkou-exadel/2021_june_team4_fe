@@ -67,9 +67,40 @@ h1 {
   position: relative;
   outline: none;
   height: 250px;
-  width: 350px;
+  width: 100%;
 }
 
-.pointer {
-  cursor: pointer;
+//.pointer {
+//  cursor: pointer;
+//}
+mat-icon.icon {
+  color: #0082ca;
 }
+
+.overflow {
+  overflow-wrap: break-word;
+}
+
+.locations {
+  font-size: 13px;
+  mat-icon {
+    font-size: 17px;
+    height: 16px;
+    width: 16px;
+  }
+}
+
+.carousel {
+  width: 50%
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+mat-icon.favorite {
+  color: rgba(0,0,0,.26);
+}
+
