@@ -3,7 +3,7 @@ import { DialogComponent } from "../../../shared/dialog/dialog/dialog.component"
 import { MapComponent } from "../../../shared/map/map.component";
 import { MatDialog } from "@angular/material/dialog";
 import { createSelector, Store, select} from "@ngrx/store";
-import { IAppState, IDescriptionState, IDescription, IHomeState, IUiConfigState} from "../../../shared/variables";
+import { IAppState, IDescriptionState, IDescription, IHomeState, IUiConfigState} from "../../../shared/interfaces";
 import { Observable } from "rxjs";
 import { getDescription } from "../../../core/store/actions/description.actions";
 import { ActivatedRoute} from '@angular/router';

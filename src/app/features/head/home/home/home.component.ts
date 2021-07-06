@@ -8,7 +8,8 @@ import {
   IAppState,
   IUiConfigState,
   IMapMarker,
-} from 'src/app/shared/variables';
+
+} from 'src/app/shared/interfaces';
 
 import { Store } from '@ngrx/store';
 import { setContent } from 'src/app/core/store/actions/ui-config.actions';

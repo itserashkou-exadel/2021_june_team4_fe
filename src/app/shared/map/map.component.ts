@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, Input, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import { IMapMarker } from '../variables';
+import { IMapMarker } from '../interfaces';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
