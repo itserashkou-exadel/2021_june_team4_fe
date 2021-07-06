@@ -1,7 +1,27 @@
 <div class="sideBar">
-    <app-category></app-category>
+    <form [formGroup]="filterForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Select an cathegory</mat-label>
+        <mat-select  formControlName="cathegory" (selectionChange)="selectCathegory()">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let c of filterConfig.cathegories" value="{{c}}">{{c}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Favorite food</mat-label>
+        <mat-select formControlName="cities">
+          <mat-option *ngFor="let c  of filterConfig.cities"  value="{{c}}" >{{c}}
+            <!-- {{food.viewValue}} -->
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+    <!-- <app-category></app-category>
     <app-date></app-date>
     <app-range></app-range>
-    <app-tags></app-tags>
+    <app-tags></app-tags> -->
+
     <button mat-stroked-button color="primary">Apply</button>
+</form>
 </div>
