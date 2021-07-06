@@ -3,10 +3,8 @@
     <div class="col-md-1"></div>
     <div class="col-md-7">
       <div class="row header">
-        <div class="col-md-8">
+        <div class="col-md-8 overflow">
           <h1>{{ data.name }}</h1>
-          <mat-icon placement="right" ngbTooltip="See it on the map" class="pointer" (click)="openDialogWithMap(data)">place</mat-icon>
-          <span *ngFor="let location of data.vendorLocations">{{ location }}</span>
         </div>
         <div class="col-md-4 text-align-center m-t-sm">
           <span>from</span>
@@ -17,7 +15,14 @@
       </div>
 
 <!--      <app-carousel *ngFor="let img of data.img | async" [images]="data.img"></app-carousel>-->
-      <app-carousel [images]="data.img"></app-carousel>
+      <div class="carousel center-block">
+        <app-carousel  [images]="data.img"></app-carousel>
+      </div>
+
+      <section class="article-title">
+        <mat-icon class="icon">place</mat-icon>
+        <span>{{ data.vendorLocations[0]?.country.name}}</span>, <span>{{data.vendorLocations[0]?.city.name }}</span>
+      </section>
 
       <section class="article-title">
         <h3>Bonus program description</h3>
@@ -27,6 +32,17 @@
       <section class="article-title">
         <h3>Vendor description</h3>
         <p>{{ data.vendor}}</p>
+      </section>
+
+      <section class="article-title map-wrapper">
+        <app-map></app-map>
+      </section>
+
+      <section class="article-title locations">
+        <div *ngFor="let location of data.vendorLocations">
+          <mat-icon class="icon">place</mat-icon>
+          <span>{{ location.country.name}}</span>, <span>{{location.city.name }}</span>
+        </div>
       </section>
     </div>
 
@@ -43,8 +59,11 @@
           {{ data.percent }}
         </div>
 
-        <button mat-fab color="warn" aria-label="Save in favorite">
-          <mat-icon>favorite</mat-icon>
+<!--        <button mat-fab color="warn" aria-label="Save in favorite">-->
+<!--          <mat-icon>favorite</mat-icon>-->
+<!--        </button>-->
+        <button mat-fab color="basic" aria-label="Add to favorite">
+          <mat-icon class="favorite">favorite</mat-icon>
         </button>
 
         <div class="address-block" id="address">

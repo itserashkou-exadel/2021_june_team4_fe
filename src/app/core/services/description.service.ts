@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {IDescription, IDiscount} from "../../../shared/variables";
+import { IDescription } from "../../shared/variables";
 
 @Injectable()
 export class DescriptionService {
+  id:any;
   constructor(private http: HttpClient) {}
 
-  getDescriptionRequest(){
+  getDescriptionRequest(props: {id: string;}) {
     return this.http
-      .get(`http://localhost:8080/discounts/5f69268b-705e-4fb9-8147-722b4ec1d9da`)
+      .get(`http://localhost:8080/discounts/${props.id}`)
   }
 
   handleRemoteDescription(remouteData:any) {
@@ -18,17 +19,15 @@ export class DescriptionService {
       vendor: remouteData.vendor.name === null? 'Unknown': remouteData.vendor.name ,
       startTime: remouteData.startTime,
       endTime: remouteData.endTime,
-      vendorLocations: [...remouteData.vendorLocations.map((el: any)=>{
-        return `${el.country.name}, ${el.city.name}`;
-      })],
+      vendorLocations: remouteData.vendorLocations === null ? [{country: '', city: ''}] : remouteData.vendorLocations ,
       tags: [...remouteData.tags.map((el: any)=>{
         return el.name;
       })],
       category: remouteData.category.name,
       active: remouteData.active,
-      description:remouteData.description === null ? 'Default description': remouteData.description,
+      description: remouteData.description === null ? 'Default description': remouteData.description,
       percent: remouteData.percent,
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
+      img: remouteData.img ? remouteData.img : ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU'],
       promo: remouteData.promo
     }
 

@@ -9,10 +9,10 @@ export interface IMapMarker {
 export interface IDescription {
   id: string;
   active: boolean;
-  category: {};
+  category:{};
   description: string;
   name: string;
-  img: string;
+  img:[string];
   endTime: string;
   startTime: string;
   percent: number;

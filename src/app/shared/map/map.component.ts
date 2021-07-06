@@ -57,13 +57,11 @@ export class MapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initMap();
-    setTimeout(() => {
       if (this.markers)
         this.markers.forEach((el: any) => {
           L.marker(el.cords).addTo(this.map).bindPopup(el.text);
         });
       const myPins = this.markers?.map((el) => el.cords);
       this.map.fitBounds(myPins);
-    }, 1000);
   }
 }

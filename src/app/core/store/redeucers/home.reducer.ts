@@ -17,7 +17,7 @@ export const initialState: IHomeState = {
         'Here is a short description Here is a short description Here is a short description Here is a short description',
       percent: 10,
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      coordinates: [45.094, 34.981]
+      coordinates: [49.094, 28.981]
     },
     {
       id: 0,
@@ -33,7 +33,7 @@ export const initialState: IHomeState = {
         ' Here is a short description Here is a short description',
       percent: 10,
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      coordinates: [46.094, 38.981]
+      coordinates: [50.094, 26.981]
     },
   ],
 };

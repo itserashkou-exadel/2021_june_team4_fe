@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   isMap: Observable<boolean>;
   discountsData: Observable<IDiscount[]>;
   markers$: Observable<IMapMarker[]>;
+  markers: any;
 
   selectHead = (state: IAppState) => state.home;
   selectDiscounts = createSelector(
@@ -59,6 +60,12 @@ export class HomeComponent implements OnInit {
     );
 
     this.markers$ = this.store.select(selectMarkers);
+    this.markers = this.discountsData.subscribe((el :any) => {
+      //console.log(el)
+      const res = el.map((el: any)=> ({cords: el.coordinates, text: el.description}))
+      this.markers = res;
+      console.log(res)
+    } )
   }
 
   ngOnInit(): void {
@@ -72,4 +79,9 @@ export class HomeComponent implements OnInit {
   sortDiscountsData(value: any): void {
     this.store.dispatch(sortDiscounts({ sortType: value }));
   }
+
+  test(){
+    console.log('map event');
+  }
+
 }
