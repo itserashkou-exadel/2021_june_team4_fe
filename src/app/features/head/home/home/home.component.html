@@ -35,7 +35,7 @@
         <app-tile *ngFor="let discount of discountsData | async" [discount$]="discount"></app-tile>
       </section>
       <section class="map" *ngIf="isMap | async" >
-        <app-map  [markers]="markers" ></app-map>
+        <app-map *ngIf="markers$ | async as data"  [markers]="data" ></app-map>
 
       </section>
     </div>
