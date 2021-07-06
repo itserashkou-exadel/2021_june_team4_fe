@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { IAppState } from '../../../shared/variables';
+import { IAppState } from '../../../shared/interfaces';
 
 import { DialogComponent } from '../../../shared/dialog/dialog/dialog.component';
 import { LocationTreeComponent } from './location-tree/location-tree.component';

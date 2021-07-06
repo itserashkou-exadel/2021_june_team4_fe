@@ -1,4 +1,4 @@
-import {IDescription} from "../../../shared/variables";
+import {IDescription} from "../../../shared/interfaces";
 
 export interface DescriptionState {
   description: IDescription | [];
