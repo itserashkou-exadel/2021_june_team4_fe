@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IUserLogin } from 'src/app/shared/variables';
-import { AuthService } from 'src/app/_services/auth.service';
-import { TokenStorageService } from 'src/app/_services/token-storage.service';
+import { IUserLogin } from 'src/app/shared/interfaces';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { TokenStorageService } from 'src/app/core/services/auth/token-storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

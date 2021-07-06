@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { createSelector, State } from '@ngrx/store';
 import { Observable } from 'rxjs';
+
 import {
   IDiscount,
-  IHeadState,
+  IHomeState,
   IAppState,
-  // IInputTile,
-} from 'src/app/shared/variables';
+  IUiConfigState,
+} from 'src/app/shared/interfaces';
 
 import { Store } from '@ngrx/store';
+import { setContent } from 'src/app/core/store/actions/ui-config.actions';
+import { HttpClient } from '@angular/common/http';
+import { getNewDiscounts } from 'src/app/core/store/actions/home.actions';
 
 @Component({
   selector: 'app-home',
@@ -16,59 +20,50 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  // discounts: Observable<IDiscount[]>;
+  isMap: Observable<boolean>;
+  discountsData: Observable<IDiscount[]>;
+  remoteData: any; // <<<<<<<<<<<<<<<<<<<   ТУТ
 
-  discounts: any;
-  isMap: boolean;
-  discountsData: IDiscount[];
   arrayMap: any;
   sortBy: string;
 
-  selectHead = (state: IAppState) => state.head;
+  selectHead = (state: IAppState) => state.home;
   selectDiscounts = createSelector(
     this.selectHead,
-    (state: IHeadState) => state.discounts
+    (state: IHomeState) => state.discounts
   );
 
-  constructor(private store: Store<{ head: IHeadState }>) {
+  constructor(
+    private store: Store<IAppState>,
+    private http: HttpClient
+
+
+  ) {
     this.sortBy = 'default';
 
-    this.arrayMap = new Array(14);
+    const selecUiConfig = (state: IAppState) => state.uiConfig;
+    const selectMap = createSelector(
+      selecUiConfig,
+      (state: IUiConfigState) => state.homeIsMap
+    );
+    this.isMap = this.store.select(selectMap);
 
-    this.discounts = this.store.select(this.selectDiscounts);
+    const selecHead = (state: IAppState) => state.home;
+    const selectDiscounts = createSelector(
+      selecHead,
+      (state: IHomeState) => state.discounts
+    );
 
-    this.isMap = false;
-
-    this.discountsData = [
-
-      {
-        id: 0,
-        name: 'Huawei',
-        vendor: 'Discount vendor0',
-        added: '21-06-2021',
-        expired: '21-11-2021',
-        location: 'kharkiv',
-        tag: 'tag',
-        cathegory: 'cathegory',
-        isActive: true,
-        description: 'string',
-        percent: 10,
-        image:'https://material.angular.io/assets/img/examples/shiba2.jpg'
-      },
-    ];
+    this.discountsData = this.store.select(selectDiscounts);
   }
 
-  ngOnInit(): void {
-    this.store.subscribe((value) => (this.discounts = value.head.discounts));
-    this.discountsData = this.discounts;
-    console.log(this.discounts);
+  ngOnInit(): void {}
+
+  setIsMap(val: any): void {
+    this.remoteData;
+    this.store.dispatch(setContent({ isMap: val !== 'list' }));
+    this.store.dispatch(getNewDiscounts());
   }
 
-  setIsMap(): void {
-    this.isMap = !this.isMap;
-  }
-  
-  someMethod(ev:any):void {
-    console.log(ev + ' -> ');
-  }
+  someMethod(): void {}
 }

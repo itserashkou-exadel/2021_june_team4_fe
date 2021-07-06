@@ -15,7 +15,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-// import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTreeModule } from "@angular/material/tree";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDividerModule } from '@angular/material/divider';
@@ -23,20 +23,20 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatStepperModule } from '@angular/material/stepper';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { RouterModule } from "@angular/router";
 import { FooterComponent } from "./footer/footer.component";
 import { TileComponent } from './tile/tile.component';
-
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatStepperModule} from '@angular/material/stepper';
+import { CheckboxComponent } from './checkbox/checkbox/checkbox.component';
+
 
 
 @NgModule({
   imports: [
     CommonModule,
-
     FormsModule,
     MatButtonModule,
     MatSelectModule,
@@ -53,6 +53,24 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSnackBarModule,
     MatSlideToggleModule,
     MatDividerModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatSlideToggleModule,
+    MatDividerModule,
+    MatDialogModule,
+    MatTreeModule,
+    MatStepperModule,
 
 
         MatButtonModule,
@@ -73,6 +91,7 @@ import {MatDialogModule} from '@angular/material/dialog';
         RouterModule,
         MatDialogModule,
         MatAutocompleteModule,
+    RouterModule,
   ],
 
   exports: [
@@ -101,15 +120,18 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatRadioModule,
     MatButtonToggleModule,
     // MatSidenavModule,
-    MatStepperModule,
     MatAutocompleteModule,
+    MatTreeModule,
 
     FooterComponent,
     TileComponent,
+    MatStepperModule
+
   ],
   declarations: [
     FooterComponent,
-    TileComponent
+    TileComponent,
+    CheckboxComponent
   ]
 })
 export class SharedModule {

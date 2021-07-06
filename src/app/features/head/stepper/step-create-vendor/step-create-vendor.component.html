@@ -4,24 +4,19 @@
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Vendor name</mat-label>
-        <!-- <mat-select formControlName="name">
-          <mat-option *ngFor="let vendor of vendors" [value]="vendor">
-            {{ vendor }}
-          </mat-option>
-        </mat-select> -->
         <input
           type="text"
           aria-label="vendor name"
           matInput
-          [formControl]="myControl"
-          [matAutocomplete]="auto"
+          formControlName="name"
+          [matAutocomplete]="name"
         />
-        <mat-autocomplete #auto="matAutocomplete">
+        <mat-autocomplete #name="matAutocomplete">
           <mat-option
-            *ngFor="let option of filteredOptions | async"
-            [value]="option"
+            *ngFor="let vendor of filteredVendors | async"
+            [value]="vendor.name"
           >
-            {{ option }}
+            {{ vendor.name }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
@@ -35,11 +30,21 @@
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Vendor category</mat-label>
-        <mat-select formControlName="category">
-          <mat-option *ngFor="let category of categories" [value]="category">
-            {{ category }}
+        <input
+          type="text"
+          aria-label="vendor category"
+          matInput
+          formControlName="category"
+          [matAutocomplete]="category"
+        />
+        <mat-autocomplete #category="matAutocomplete">
+          <mat-option
+            *ngFor="let category of categories | async"
+            [value]="category.name"
+          >
+            {{ category.name }}
           </mat-option>
-        </mat-select>
+        </mat-autocomplete>
       </mat-form-field>
       <button class="add-btn">
         <mat-icon>add_box</mat-icon>
@@ -51,11 +56,18 @@
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Vendor tag</mat-label>
-        <mat-select formControlName="tag">
-          <mat-option *ngFor="let tag of tags" [value]="tag">
-            {{ tag }}
+        <input
+          type="text"
+          aria-label="vendor tag"
+          matInput
+          formControlName="tag"
+          [matAutocomplete]="tag"
+        />
+        <mat-autocomplete #tag="matAutocomplete">
+          <mat-option *ngFor="let tag of tags | async" [value]="tag.name">
+            {{ tag.name }}
           </mat-option>
-        </mat-select>
+        </mat-autocomplete>
       </mat-form-field>
       <button class="add-btn">
         <mat-icon>add_box</mat-icon>
@@ -89,15 +101,6 @@
       </mat-form-field>
     </div>
     <!-- /Vendor logo -->
-
-    <!-- Vendor locations -->
-    <!-- <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Locations</mat-label>
-        <input matInput formControlName="locations" />
-      </mat-form-field>
-    </div> -->
-    <!-- /Vendor locations -->
   </div>
   <div class="form-row">
     <!-- Vendor's schedule -->
@@ -108,6 +111,15 @@
       </mat-form-field>
     </div>
     <!-- /Vendor's schedule -->
+
+    <!-- Vendor locations -->
+    <div class="form-row__item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Locations</mat-label>
+        <input matInput formControlName="locations" />
+      </mat-form-field>
+    </div>
+    <!-- /Vendor locations -->
 
     <!-- Vendor contacts -->
     <div class="form-row__item">

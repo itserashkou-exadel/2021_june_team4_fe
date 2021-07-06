@@ -8,7 +8,7 @@
       <mat-icon aria-hidden="false" aria-label="Example home icon">
         location_on
       </mat-icon>
-      <span>PLUG</span>
+      <span (click)="openDialog()">PLUG</span>
     </div>
     <div class="search-container">
       <mat-form-field class="example-full-width search">
@@ -50,8 +50,9 @@
   <nav mat-tab-nav-bar class="d-none d-sm-flex">
     <a
       mat-tab-link
-      class="nav-link"
       *ngFor="let tab of tabItems"
+      (click)="activeLink = tab.link"
+      [active]="activeLink == tab.link"
       [routerLink]="tab.link"
     >
       {{ tab.label }}
