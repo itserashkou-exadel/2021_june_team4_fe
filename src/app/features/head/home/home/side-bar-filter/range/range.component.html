@@ -6,5 +6,9 @@
   step="1"
   min="0"
   max="100"
-  aria-label="units"></mat-slider>
+  aria-label="units"
+  [(ngModel)]='rangeNum'
+  (click)='rangeFunc()'
+  ></mat-slider>
+  <p class="discount" [style.height]=" (rangeNum > '1' ) ? '20px' : '0'">Selected <strong>{{rangeNum}} %</strong></p>
 

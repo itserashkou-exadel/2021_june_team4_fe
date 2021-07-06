@@ -19,7 +19,6 @@ export class StepCreateBpComponent implements OnInit {
       bpDescription: new FormControl(null, [Validators.required]),
       bpStartDate: new FormControl(null, [Validators.required]),
       bpEndDate: new FormControl(null, [Validators.required]),
-      bpLocations: new FormControl(null, [Validators.required]),
       bpSize: new FormControl(null, [Validators.required]),
       bpPrice: new FormControl(null, [Validators.required])
     });

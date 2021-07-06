@@ -1,4 +1,3 @@
-import { createReducer, on } from '@ngrx/store';
 import {IDescription} from "../../../shared/interfaces";
 
 export interface DescriptionState {
@@ -9,17 +8,17 @@ export const initialState: DescriptionState = {
   description: {
     id: "b28349b5-0b39-45ee-bb3c-4f96c1abfe75",
     active: true,
-    category: {id: 'hgdgfjrhg', name: 'jhdfgjh'},
+    category: {id: 'hgdgfjrhg', name: 'Sport'},
     description: "string",
-    name: "NAme",
-    img: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
+    name: "Default name",
+    img:['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU'],
     endTime: "2021-06-20T12:00:00",
     startTime: '2021-06-20T12:00:00',
     percent: 25,
     promo: 'jdfhgjh',
-    tags: {id:'jhdfgjhr', name:'jdfhgj'},
+    tags: [{name:'Yoga'}],
     vendor: "string",
-    vendorLocations: []
+    vendorLocations: [{country: '', city: ''}]
   }
 };
 
@@ -28,7 +27,6 @@ export function descriptionReducer(state: DescriptionState = initialState, actio
     case 'getDescription':
       return state;
     case 'requestDescription':
-      console.log('desc', action.data)
       return {
         ...state,
         description: action.data

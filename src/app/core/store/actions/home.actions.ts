@@ -5,6 +5,11 @@ interface Action {
   type: string;
 }
 
+export const sortDiscounts = createAction(
+  'sortDiscounts',
+  props<{ sortType: string}>()
+);
+
 export const getNewDiscounts = createAction('getNewDiscounts');
 
 export const requestDiscounts = createAction(

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 
@@ -27,8 +27,10 @@ const TREE_DATA: FoodNode[] = [
       }, {
         name: 'Belarus',
         children: [
-          {name: 'Pumpkins'},
-          {name: 'Carrots'},
+          {name: 'Brest'},
+          {name: 'Grodno'},
+          {name: 'Gomel'},
+          {name: 'Orsha'}
         ]
       },
     ]
@@ -51,9 +53,8 @@ interface ExampleFlatNode {
 
 export class CategoryComponent implements OnInit {
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(){}
+ 
   private _transformer = (node: FoodNode, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
@@ -75,5 +76,4 @@ export class CategoryComponent implements OnInit {
   }
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
-
 }

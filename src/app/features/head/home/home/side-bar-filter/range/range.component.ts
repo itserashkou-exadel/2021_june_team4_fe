@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-range',
   templateUrl: './range.component.html',
   styleUrls: ['./range.component.scss']
 })
-export class RangeComponent implements OnInit {
+export class RangeComponent{
 
   constructor() { }
 
-  ngOnInit(): void {
+  rangeNum: string ='';
+
+  rangeFunc() {
+    console.log(this.rangeNum)
   }
 
   formatLabel(value: number) {

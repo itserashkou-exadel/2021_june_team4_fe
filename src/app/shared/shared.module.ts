@@ -15,7 +15,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTreeModule } from "@angular/material/tree";
+import { MatTreeModule } from '@angular/material/tree';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDividerModule } from '@angular/material/divider';
@@ -25,14 +25,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
-import { RouterModule } from "@angular/router";
-import { FooterComponent } from "./footer/footer.component";
+import { RouterModule } from '@angular/router';
+import { FooterComponent } from './footer/footer.component';
 import { TileComponent } from './tile/tile.component';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper';
 import { CheckboxComponent } from './checkbox/checkbox/checkbox.component';
-
-
+import { TilesBoxComponent } from './tiles-box/tiles-box.component';
 
 @NgModule({
   imports: [
@@ -72,6 +71,7 @@ import { CheckboxComponent } from './checkbox/checkbox/checkbox.component';
     MatTreeModule,
     MatStepperModule,
 
+    MatAutocompleteModule,
 
         MatButtonModule,
         // MatSelectModule,
@@ -122,20 +122,20 @@ import { CheckboxComponent } from './checkbox/checkbox/checkbox.component';
     // MatSidenavModule,
     MatAutocompleteModule,
     MatTreeModule,
+    MatAutocompleteModule,
 
     FooterComponent,
     TileComponent,
-    MatStepperModule
-
+    MatStepperModule,
+    TilesBoxComponent
   ],
   declarations: [
     FooterComponent,
     TileComponent,
-    CheckboxComponent
-  ]
+    CheckboxComponent,
+    TilesBoxComponent,
+  ],
 })
 export class SharedModule {
-  constructor() {
-
-  }
+  constructor() {}
 }
