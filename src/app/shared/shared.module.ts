@@ -105,7 +105,8 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
     FooterComponent,
     TileComponent,
     MatStepperModule,
-    TilesBoxComponent
+    TilesBoxComponent,
+    CheckboxComponent
   ],
   declarations: [
     FooterComponent,
