@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IUserLogin } from 'src/app/shared/variables';
+import { IUserLogin } from 'src/app/shared/interfaces';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 @Component({
@@ -60,7 +60,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.aSub = this.auth.login(loginData).subscribe(
       data => {
-        console.log(data);
         this.router.navigate(['/home']);
 
         this.tokenStorage.saveToken(data);
@@ -69,10 +68,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         // this.roles = this.tokenStorage.getUser().roles;
-        console.log(sessionStorage);
       },
       err => {
-        this.errorMessage = err.error;
+        console.log(err.error.message)
+        this.errorMessage = err.error.message;
         this.isLoginFailed = true;
         this.form.enable()
       }

@@ -13,7 +13,7 @@ export class StepEditBpComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addBP(): boolean {
-    return this.visible = !this.visible;
-  }
+  // addBP(): boolean {
+  //   return this.visible = !this.visible;
+  // }
 }
