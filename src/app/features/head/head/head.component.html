@@ -46,13 +46,14 @@
           </button>
         </mat-menu>
       </div>
-      <button mat-button [matMenuTriggerFor]="langMenu">{{selectedLanguage}}</button>
+
+      <button mat-button [matMenuTriggerFor]="langMenu">{{ language$ | async | uppercase }}</button>
       <mat-menu #langMenu="matMenu" >
-        <button mat-menu-item (click)="changeLocale(language)" *ngFor="let language of languages">{{ language.title }}</button>
+        <button mat-menu-item (click)="changeLocale(language)" *ngFor="let language of languages">{{ language.toUpperCase() }}</button>
       </mat-menu>
     </div>
   </div>
-  <hr>
+  <hr />
   <div class="tabs">
   <nav mat-tab-nav-bar class="d-none d-sm-flex">
     <a mat-tab-link  *ngFor="let tab of tabItems"
@@ -67,5 +68,3 @@
   <router-outlet></router-outlet>
   <app-footer></app-footer>
 </div>
-
-

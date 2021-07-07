@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { createSelector, State } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import {
@@ -7,7 +7,7 @@ import {
   IHomeState,
   IAppState,
   IUiConfigState,
-} from 'src/app/shared/variables';
+} from 'src/app/shared/interfaces';
 
 import { Store } from '@ngrx/store';
 import { setContent } from 'src/app/core/store/actions/ui-config.actions';
@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
   setIsMap(val: any): void {
     this.remoteData;
     this.store.dispatch(setContent({ isMap: val !== 'list' }));
-    
+
   }
 
   sortDiscountsData(value: any): void {

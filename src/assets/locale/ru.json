@@ -7,7 +7,7 @@
         "dateFrom": "От",
         "dateTo": "До",
         "coupon": "Активировать куппон",
-        "sale": "Разпродажа"
+        "sale": "Скидка"
       },
       "title": {
         "bp": "Описание бонусной программы",
@@ -16,30 +16,30 @@
     },
     "Head": {
       "name": "Никита Мартынов",
-      "search": "Поиск бонусных программ"
+      "search": "Поиск"
     },
     "Home": {
       "sort": "Сортировать по",
       "date": "По дате",
-      "time": "По Времени",
-      "raiting": "По Рейтингу",
-      "default": "По Стандарту"
+      "time": "По времени",
+      "raiting": "По рейтингу",
+      "default": "По умолчанию"
     },
     "Stepper": {
       "description": "Описание",
       "eventStart": "Начало Программы",
       "eventEnd": "Конец Программы",
       "location": "Местоположение",
-      "bonusSize": "Размер Скидки",
-      "vendorName": "Имя Вендора",
-      "vendorCategory": "Вендор Категории",
-      "vendorTag": "Тег Вендора",
+      "bonusSize": "Размер скидки",
+      "vendorName": "Имя вендора",
+      "vendorCategory": "Категория",
+      "vendorTag": "Тег",
       "vendorLogo": "Логотип Вендора",
-      "vendorSchedule": "График Вендора",
-      "vendorContacts": "Контакты Вендора",
+      "vendorSchedule": "График вендора",
+      "vendorContacts": "Контакты вендора",
       "addBp": "Добавить БП",
-      "vendorInfo": "Информация об Вендоре",
-      "vendorBpInfo": "Информация об Бонусной Программе",
+      "vendorInfo": "Информация о вендоре",
+      "vendorBpInfo": "Информация о БП",
       "vendorMessage": "Сообщение",
       "finalMessage": "Вся информация была успешно сохранена!"
     },

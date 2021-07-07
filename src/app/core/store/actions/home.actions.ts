@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IDiscount } from '../../../shared/variables';
+import { IDiscount } from '../../../shared/interfaces';
 
 interface Action {
   type: string;
