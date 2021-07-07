@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 
 import { IToken, IUserLogin } from '../../shared/interfaces';
 import { TokenStorageService } from './token-storage.service';
-
-const AUTH_API = 'http://localhost:8080/authenticate/login';
+import { API_URL } from 'src/app/shared/constants';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -20,10 +19,11 @@ export class AuthService {
                private token: TokenStorageService ) { }
 
   login(user: IUserLogin): Observable<IToken> {
-    return this.http.post<IToken>(AUTH_API, user, httpOptions)
+    return this.http.post<IToken>(`${API_URL}/authenticate/login`, user, httpOptions)
   }
 
   isAuthenticated(): boolean {
     return !!this.token.getToken()
   }
 }
+

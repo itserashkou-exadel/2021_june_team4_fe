@@ -1,133 +1,68 @@
 <form class="form" [formGroup]="vendorForm" (ngSubmit)="saveVendor()">
   <div class="form-row">
     <!-- Vendor name -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor name</mat-label>
-        <input
-          type="text"
-          aria-label="vendor name"
-          matInput
-          formControlName="name"
-          [matAutocomplete]="name"
-        />
-        <mat-autocomplete #name="matAutocomplete">
-          <mat-option
-            *ngFor="let vendor of filteredVendors | async"
-            [value]="vendor.name"
-          >
-            {{ vendor.name }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <button class="add-btn">
-        <mat-icon>add_box</mat-icon>
-      </button>
-    </div>
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Vendor name</mat-label>
+      <input
+        type="text"
+        aria-label="vendor name"
+        placeholder="Add Vendor name"
+        class="form-input"
+        matInput
+        formControlName="name"
+        [matAutocomplete]="name"
+      />
+      <mat-autocomplete #name="matAutocomplete">
+        <mat-option
+          *ngFor="
+            let vendor of vendors$
+              | async
+              | filter: this.vendorForm.controls.name.value
+          "
+          [value]="vendor"
+        >
+          {{ vendor }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
     <!-- /Vendor name -->
-
-    <!-- Vendor category -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor category</mat-label>
-        <input
-          type="text"
-          aria-label="vendor category"
-          matInput
-          formControlName="category"
-          [matAutocomplete]="category"
-        />
-        <mat-autocomplete #category="matAutocomplete">
-          <mat-option
-            *ngFor="let category of categories | async"
-            [value]="category.name"
-          >
-            {{ category.name }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <button class="add-btn">
-        <mat-icon>add_box</mat-icon>
-      </button>
-    </div>
-    <!-- /Vendor category -->
-
-    <!-- Vendor tag -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor tag</mat-label>
-        <input
-          type="text"
-          aria-label="vendor tag"
-          matInput
-          formControlName="tag"
-          [matAutocomplete]="tag"
-        />
-        <mat-autocomplete #tag="matAutocomplete">
-          <mat-option *ngFor="let tag of tags | async" [value]="tag.name">
-            {{ tag.name }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <button class="add-btn">
-        <mat-icon>add_box</mat-icon>
-      </button>
-    </div>
-    <!-- /Vendor tag -->
   </div>
   <div class="form-row">
     <!-- Vendor Description -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Description</mat-label>
-        <textarea
-          matInput
-          placeholder="Description"
-          formControlName="description"
-        ></textarea>
-      </mat-form-field>
-    </div>
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        placeholder="Add description"
+        formControlName="description"
+      ></textarea>
+    </mat-form-field>
     <!-- /Vendor Description -->
+  </div>
 
+  <div class="form-row">
     <!-- Vendor logo -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor logo</mat-label>
-        <input
-          matInput
-          placeholder="Add some logo"
-          formControlName="vendorLogo"
-        />
-      </mat-form-field>
-    </div>
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Vendor logo</mat-label>
+      <input matInput placeholder="Add logo" formControlName="vendorLogo" />
+    </mat-form-field>
     <!-- /Vendor logo -->
   </div>
+
   <div class="form-row">
-    <!-- Vendor's schedule -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor's schedule</mat-label>
-        <input matInput formControlName="schedule" />
-      </mat-form-field>
-    </div>
-    <!-- /Vendor's schedule -->
-
     <!-- Vendor locations -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Locations</mat-label>
-        <input matInput formControlName="locations" />
-      </mat-form-field>
-    </div>
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Locations</mat-label>
+      <input matInput placeholder="Add locations" formControlName="locations" />
+    </mat-form-field>
     <!-- /Vendor locations -->
-
+  </div>
+  <div class="form-row">
     <!-- Vendor contacts -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Contacts</mat-label>
-        <input matInput formControlName="contacts" />
-      </mat-form-field>
-    </div>
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Contacts</mat-label>
+      <input matInput placeholder="Add contacts" formControlName="contacts" />
+    </mat-form-field>
     <!-- /Vendor contacts -->
   </div>
   <div class="first-step__btns btns-wrapper">

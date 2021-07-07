@@ -1,15 +1,33 @@
 <div class="second-step__btn-top-wrapper">
-  <button mat-flat-button color="primary">
+  <button
+    mat-flat-button
+    color="primary"
+    label="create"
+    (click)="activeComponent = 'create'"
+    *ngIf="activeComponent === 'edit'"
+  >
     <mat-icon>add_box</mat-icon>
     Add BP
   </button>
+
+  <button
+    mat-flat-button
+    color="primary"
+    label="create"
+    (click)="activeComponent = 'edit'"
+    *ngIf="activeComponent === 'create'"
+  >
+    <mat-icon>edit_box</mat-icon>
+    Edit BP
+  </button>
 </div>
-<div class="tile-wrapper" *ngIf="visible">
-  <app-tile></app-tile>
-  <app-tile></app-tile>
-  <app-tile></app-tile>
-  <app-tile></app-tile>
-  <hr />
-  <hr />
-  <app-step-create-bp></app-step-create-bp>
+<div class="tile-wrapper">
+  <div class="tiles" *ngIf="activeComponent === 'edit'">
+    <app-tile></app-tile>
+    <app-tile></app-tile>
+    <app-tile></app-tile>
+    <app-tile></app-tile>
+  </div>
+  <!-- <app-tiles-box></app-tiles-box> -->
+  <app-step-create-bp *ngIf="activeComponent === 'create'"></app-step-create-bp>
 </div>

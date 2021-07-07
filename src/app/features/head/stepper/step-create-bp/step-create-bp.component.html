@@ -1,80 +1,134 @@
 <form class="form" [formGroup]="bpForm" (ngSubmit)="saveBP()">
   <div class="form-row">
     <!-- Bonus program name -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Bonus program name</mat-label>
-        <input
-          matInput
-          placeholder="Add Bonus program"
-          formControlName="bpName"
-        />
-      </mat-form-field>
-    </div>
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Bonus program name</mat-label>
+      <input
+        matInput
+        placeholder="Add Bonus program"
+        formControlName="bpName"
+      />
+    </mat-form-field>
     <!-- /Bonus program name -->
+  </div>
 
+  <div class="form-row">
+    <!-- Bonus program category -->
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Bonus program category</mat-label>
+      <input
+        type="text"
+        aria-label="Bonus program category"
+        matInput
+        formControlName="category"
+        [matAutocomplete]="category"
+      />
+      <mat-autocomplete #category="matAutocomplete">
+        <mat-option
+          *ngFor="
+            let category of categories$
+              | async
+              | filter: this.bpForm.controls.category.value
+          "
+          [value]="category"
+        >
+          {{ category }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button class="add-btn">
+      <mat-icon>add_box</mat-icon>
+    </button>
+    <!-- /Bonus program category -->
+  </div>
+
+  <div class="form-row">
+    <!-- Bonus program tag -->
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Bonus program tag</mat-label>
+      <input
+        type="text"
+        aria-label="Bonus program tag"
+        matInput
+        formControlName="tag"
+        [matAutocomplete]="tag"
+      />
+      <mat-autocomplete #tag="matAutocomplete">
+        <mat-option
+          *ngFor="
+            let tag of tags$ | async | filter: this.bpForm.controls.tag.value
+          "
+          [value]="tag"
+        >
+          {{ tag }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button class="add-btn">
+      <mat-icon>add_box</mat-icon>
+    </button>
+    <!-- /Bonus program tag -->
+  </div>
+
+  <div class="form-row">
     <!-- Bonus program photos -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Bonus program photos</mat-label>
-        <input
-          matInput
-          placeholder="Add some photos"
-          formControlName="bpPhotos"
-        />
-      </mat-form-field>
-    </div>
-    <!-- /Bonus program photos -->
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Bonus program photos</mat-label>
+      <input
+        matInput
+        placeholder="Add some photos"
+        formControlName="bpPhotos"
+      />
+    </mat-form-field>
 
+    <!-- /Bonus program photos -->
+  </div>
+
+  <div class="form-row">
     <!-- Bonus program Description -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Description</mat-label>
-        <textarea
-          matInput
-          placeholder="Description"
-          formControlName="bpDescription"
-        ></textarea>
-      </mat-form-field>
-    </div>
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        placeholder="Description"
+        formControlName="bpDescription"
+      ></textarea>
+    </mat-form-field>
     <!-- /Bonus program Description -->
   </div>
-  <div class="form-row">
+  <!-- /////////////////////////////////////////////////////////// -->
+  <div class="form-row date-wrap">
     <!-- Bonus program event's start -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Event's start</mat-label>
-        <input matInput type="date" formControlName="bpStartDate" />
-      </mat-form-field>
-    </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Event's start</mat-label>
+      <input matInput type="date" formControlName="bpStartDate" />
+    </mat-form-field>
     <!-- /Bonus program event's start -->
 
     <!-- Bonus program event's end -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Event's end</mat-label>
-        <input matInput type="date" formControlName="bpEndDate" />
-      </mat-form-field>
-    </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Event's end</mat-label>
+      <input matInput type="date" formControlName="bpEndDate" />
+    </mat-form-field>
     <!-- /Bonus program event's end -->
   </div>
+
   <div class="form-row">
     <!-- Bonus size -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Bonus size</mat-label>
-        <input matInput formControlName="bpSize" />
-      </mat-form-field>
-    </div>
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Bonus size</mat-label>
+      <input matInput formControlName="bpSize" />
+    </mat-form-field>
     <!-- /Bonus size -->
+  </div>
 
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Price</mat-label>
-        <input matInput formControlName="bpPrice" />
-      </mat-form-field>
-    </div>
-    <!-- /Bonus size -->
+  <div class="form-row">
+    <!-- Price -->
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="bpPrice" />
+    </mat-form-field>
+    <!-- /Price -->
   </div>
   <div class="second-step__btns btns-wrapper">
     <button class="save-btn" mat-flat-button color="warn" matStepperPrevious>

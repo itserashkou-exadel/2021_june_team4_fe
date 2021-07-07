@@ -27,6 +27,7 @@ import {StepperWrapperComponent} from "./stepper/stepper-wrapper/stepper-wrapper
 import {StepCreateVendorComponent} from "./stepper/step-create-vendor/step-create-vendor.component";
 import {StepCreateBpComponent} from "./stepper/step-create-bp/step-create-bp.component";
 import {StepEditBpComponent} from "./stepper/step-edit-bp/step-edit-bp.component";
+import { FilterPipe } from 'src/app/core/pipes/filter.pipe';
 
 @NgModule({
     declarations: [
@@ -50,7 +51,8 @@ import {StepEditBpComponent} from "./stepper/step-edit-bp/step-edit-bp.component
         CategoryComponent,
         DateComponent,
         RangeComponent,
-        TagsComponent
+        TagsComponent,
+        FilterPipe
     ],
     exports: [
         MapComponent

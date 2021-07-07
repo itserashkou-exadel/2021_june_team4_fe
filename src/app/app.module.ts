@@ -23,6 +23,7 @@ import { DescriptionEffects } from "./core/store/effects/description.effects";
 import { EffectsModule } from "@ngrx/effects";
 import { DescriptionService } from "./core/services/description.service";
 import { HomeEffects } from './core/store/effects/home.effects';
+import { FilterPipe } from './core/pipes/filter.pipe';
 
 
 @NgModule({
@@ -46,7 +47,10 @@ import { HomeEffects } from './core/store/effects/home.effects';
     AppRoutingModule,
     NgbModule
   ],
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent, 
+    // FilterPipe
+  ],
   bootstrap: [AppComponent],
   providers: [
   // authInterceptorProviders,

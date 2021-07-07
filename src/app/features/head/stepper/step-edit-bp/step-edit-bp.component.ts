@@ -6,14 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./step-edit-bp.component.scss']
 })
 export class StepEditBpComponent implements OnInit {
-  visible: boolean = true;
-
+  activeComponent: string = 'edit';
+  
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  // addBP(): boolean {
-  //   return this.visible = !this.visible;
-  // }
 }

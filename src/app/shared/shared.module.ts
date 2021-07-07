@@ -134,6 +134,7 @@ import { TilesBoxComponent } from './tiles-box/tiles-box.component';
     TileComponent,
     CheckboxComponent,
     TilesBoxComponent,
+    // FilterPipe
   ],
 })
 export class SharedModule {
