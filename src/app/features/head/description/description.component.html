@@ -7,9 +7,9 @@
           <h1>{{ data.name }}</h1>
         </div>
         <div class="col-md-4 text-align-center m-t-sm">
-          <span>from</span>
+          <span><strong>{{ 'COMMON.description.rightpanel.dateFrom' | translate }}</strong></span>
           {{ data.startTime | date :"dd.MM.yyyy" }}
-          <span>to</span>
+          <span><strong>{{ 'COMMON.description.rightpanel.dateTo' | translate }}</strong></span>
           {{ data.endTime | date :"dd.MM.yyyy" }}
         </div>
       </div>
@@ -52,10 +52,12 @@
           <small>{{ 'COMMON.description.currency' | translate }}</small>
         </div>
 
-        <button mat-raised-button color="accent"><div class="activate-btn">Activate coupon </div></button>
+        <button mat-raised-button color="accent">
+          <div class="activate-btn">{{ 'COMMON.description.rightpanel.coupon' | translate }}</div>
+        </button>
 
         <div class="discount">
-          <b>sale</b>
+          <b>{{ 'COMMON.description.rightpanel.sale' | translate }}</b>
           {{ data.percent }}
         </div>
 

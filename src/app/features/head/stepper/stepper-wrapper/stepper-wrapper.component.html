@@ -1,6 +1,6 @@
 <mat-stepper orientation="vertical">
   <mat-step>
-    <ng-template matStepLabel>Information about Vendor</ng-template>
+    <ng-template matStepLabel>{{ "COMMON.Stepper.vendorInfo" | translate }}</ng-template>
     <ng-template matStepContent>
       <!-- Step 1: Create vendor -->
       <app-step-create-vendor></app-step-create-vendor>
@@ -8,7 +8,7 @@
   </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel>Information about Bonus program</ng-template>
+    <ng-template matStepLabel>{{ "COMMON.Stepper.vendorBpInfo" | translate }}</ng-template>
     <ng-template matStepContent>
       <!-- Step 2: Create BP or Edit BP -->
       <!-- CREATE -->
@@ -19,9 +19,9 @@
   </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel>Message</ng-template>
+    <ng-template matStepLabel>{{ "COMMON.Stepper.vendorMessage" | translate }}</ng-template>
     <ng-template matStepContent>
-      All information were saved successfully!
+      {{ "COMMON.Stepper.finalMessage" | translate }}
     </ng-template>
   </mat-step>
 </mat-stepper>

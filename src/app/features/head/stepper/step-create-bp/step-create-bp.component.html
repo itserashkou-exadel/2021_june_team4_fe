@@ -29,7 +29,7 @@
     <!-- Bonus program Description -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Description</mat-label>
+        <mat-label>{{ "COMMON.Stepper.description" | translate }}</mat-label>
         <textarea
           matInput
           placeholder="Description"
@@ -43,7 +43,7 @@
     <!-- Bonus program event's start -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Event's start</mat-label>
+        <mat-label>{{ "COMMON.Stepper.eventStart" | translate }}</mat-label>
         <input matInput type="date" formControlName="bpStartDate" />
       </mat-form-field>
     </div>
@@ -52,7 +52,7 @@
     <!-- Bonus program event's end -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Event's end</mat-label>
+        <mat-label>{{ "COMMON.Stepper.eventEnd" | translate }}</mat-label>
         <input matInput type="date" formControlName="bpEndDate" />
       </mat-form-field>
     </div>
@@ -62,7 +62,7 @@
     <!-- Bonus program locations -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Locations</mat-label>
+        <mat-label>{{ "COMMON.Stepper.location" | translate }}</mat-label>
         <input matInput formControlName="bpLocations" />
       </mat-form-field>
     </div>
@@ -71,7 +71,7 @@
     <!-- Bonus size -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Bonus size</mat-label>
+        <mat-label>{{ "COMMON.Stepper.bonusSize" | translate }}</mat-label>
         <input matInput formControlName="bpSize" />
       </mat-form-field>
     </div>
@@ -79,7 +79,7 @@
   </div>
   <div class="second-step__btns btns-wrapper">
     <button class="save-btn" mat-flat-button color="warn" matStepperPrevious>
-      Back
+      {{ "COMMON.Global.back" | translate }}
     </button>
     <button
       type="submit"
@@ -88,7 +88,7 @@
       color="primary"
       matStepperNext
     >
-      Save
+    {{ "COMMON.Global.save" | translate }}
     </button>
   </div>
 </form>

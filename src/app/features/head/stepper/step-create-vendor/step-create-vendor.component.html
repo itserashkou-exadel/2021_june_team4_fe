@@ -3,7 +3,7 @@
     <!-- Vendor name -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor name</mat-label>
+        <mat-label>{{ "COMMON.Stepper.vendorName" | translate }}</mat-label>
         <!-- <mat-select formControlName="name">
           <mat-option *ngFor="let vendor of vendors" [value]="vendor">
             {{ vendor }}
@@ -34,7 +34,7 @@
     <!-- Vendor category -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor category</mat-label>
+        <mat-label>{{ "COMMON.Stepper.vendorCategory" | translate }}</mat-label>
         <mat-select formControlName="category">
           <mat-option *ngFor="let category of categories" [value]="category">
             {{ category }}
@@ -50,7 +50,7 @@
     <!-- Vendor tag -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor tag</mat-label>
+        <mat-label>{{ "COMMON.Stepper.vendorTag" | translate }}</mat-label>
         <mat-select formControlName="tag">
           <mat-option *ngFor="let tag of tags" [value]="tag">
             {{ tag }}
@@ -67,7 +67,7 @@
     <!-- Vendor Description -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Description</mat-label>
+        <mat-label>{{ "COMMON.Stepper.description" | translate }}</mat-label>
         <textarea
           matInput
           placeholder="Description"
@@ -80,7 +80,7 @@
     <!-- Vendor logo -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor logo</mat-label>
+        <mat-label>{{ "COMMON.Stepper.vendorLogo" | translate }}</mat-label>
         <input
           matInput
           placeholder="Add some logo"
@@ -103,7 +103,7 @@
     <!-- Vendor's schedule -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor's schedule</mat-label>
+        <mat-label>{{ "COMMON.Stepper.vendorSchedule" | translate }}</mat-label>
         <input matInput formControlName="schedule" />
       </mat-form-field>
     </div>
@@ -112,7 +112,7 @@
     <!-- Vendor contacts -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Contacts</mat-label>
+        <mat-label>{{ "COMMON.Stepper.vendorContacts" | translate }}</mat-label>
         <input matInput formControlName="contacts" />
       </mat-form-field>
     </div>
@@ -120,7 +120,7 @@
   </div>
   <div class="first-step__btns btns-wrapper">
     <button class="save-btn" mat-flat-button color="warn" (click)="resetForm()">
-      Clear
+      {{ "COMMON.Global.clear" | translate }}
     </button>
     <button
       type="submit"
@@ -129,7 +129,7 @@
       color="primary"
       matStepperNext
     >
-      Save
+    {{ "COMMON.Global.save" | translate }}
     </button>
   </div>
 </form>

@@ -1,16 +1,53 @@
 {
-	"COMMON": {
-		"description": {
-			"currency": "uah",
+  "COMMON": {
+    "description": {
+      "currency": "UAH",
       "rightpanel": {
-        "contacts": "Contacts"
+        "contacts": "Contacts",
+        "dateFrom": "From",
+        "dateTo": "To",
+        "coupon": "Activate coupon",
+        "sale": "Sale"
       },
-			"title": {
-				"bp": "Bonus program description",
-				"vendor": "Vendor description"
-			}
-		}
-	},
+      "title": {
+        "bp": "Bonus program description",
+        "vendor": "Vendor description"
+      }
+    },
+    "Head": {
+      "name": "Nikita Martinov"
+    },
+    "Home": {
+      "sort": "Sort by",
+      "date": "by Date",
+      "time": "by Time",
+      "raiting": "by Score",
+      "default": "by default"
+    },
+    "Stepper": {
+      "description": "Description",
+      "eventStart": "Event's start",
+      "eventEnd": "Event's end",
+      "location": "Location",
+      "bonusSize": "Discount size",
+      "vendorName": "Vendor Name",
+      "vendorCategory": "Vendor category",
+      "vendorTag": "Vendor Tag",
+      "vendorLogo": "Vendor Logo",
+      "vendorSchedule": "Vendor Shedule",
+      "vendorContacts": "Vendor Contacts",
+      "addBp": "Add BP",
+      "vendorInfo": "Information about Vendor",
+      "vendorBpInfo": "Information about Bonus program",
+      "vendorMessage": "Message",
+      "finalMessage": "All information were saved successfully!"
+    },
+    "Global": {
+      "back": "Back",
+      "clear": "Clear",
+      "save": "Save"
+    }
+  },
   "LANGUAGES": {
     "EN": "EN",
     "RU": "RU"
