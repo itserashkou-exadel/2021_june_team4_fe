@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { authInterceptorProviders } from './core/services/auth/auth.interceptor';
+import { authInterceptorProviders } from './core/services/auth.interceptor';
 
 
 import { CoreModule } from './core/core.module';
@@ -21,7 +21,7 @@ import { uiConfigReducer } from './core/store/redeucers/ui-config.reducer';
 import { descriptionReducer } from "./core/store/redeucers/discription.reducer";
 import { DescriptionEffects } from "./core/store/effects/description.effects";
 import { EffectsModule } from "@ngrx/effects";
-import { DescriptionService } from "./core/services/description/description.service";
+import { DescriptionService } from "./core/services/description.service";
 import { HomeEffects } from './core/store/effects/home.effects';
 
 

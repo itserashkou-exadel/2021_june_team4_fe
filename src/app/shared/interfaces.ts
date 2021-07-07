@@ -6,10 +6,10 @@ export interface IUiConfigState {
 export interface IDescription {
   id: string;
   active: boolean;
-  category: {};
+  category:{};
   description: string;
   name: string;
-  img: string;
+  img:string[];
   endTime: string;
   startTime: string;
   percent: number;
@@ -71,6 +71,23 @@ export interface IUserLogin {
 export interface IToken {
   accessToken: string;
   refreshToken: string;
+}
+
+export interface IVendor {
+  id: string;
+  name: string;
+  description: string;
+  vendorLocations: Array<Object>;
+}
+
+export interface ICategory {
+  id: string;
+  name: string;
+}
+
+export interface ITag {
+  id: string;
+  name: string;
 }
 
 enum EAppLanguage {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IToken } from '../../../shared/variables';
+import { IToken } from '../../shared/interfaces';
 
 const TOKEN_KEY_ACCESS = 'accessToken';
 const TOKEN_KEY_REFRESH = 'refreshToken';
