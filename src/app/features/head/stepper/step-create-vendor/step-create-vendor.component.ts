@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { VendorsService } from 'src/app/core/services/vendors.service';
 import { IVendor } from 'src/app/shared/interfaces';
 
@@ -12,8 +12,6 @@ import { IVendor } from 'src/app/shared/interfaces';
 export class StepCreateVendorComponent implements OnInit {
   vendorForm!: FormGroup;
   vendors$: Observable<IVendor[]>;
-
-  aSub!: Subscription;
 
   constructor( private vendorsService: VendorsService ) 
   {
@@ -29,12 +27,6 @@ export class StepCreateVendorComponent implements OnInit {
       schedule: new FormControl(null, [Validators.required]),
       contacts: new FormControl(null, [Validators.required])
     });
-  };
-
-  ngOnDestroy(): void {
-    if (this.aSub) {
-      this.aSub.unsubscribe();
-    }
   };
 
   saveVendor(): void {

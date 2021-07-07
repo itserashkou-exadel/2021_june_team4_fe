@@ -15,6 +15,7 @@ export class StepCreateBpComponent implements OnInit {
 
   categories$: Observable<ICategory[]>;
   tags$: Observable<ITag[]>;
+  http: any;
   
   constructor( private categoriesService: CategoriesService,
                private tagsService: TagsService ) 
@@ -38,7 +39,15 @@ export class StepCreateBpComponent implements OnInit {
     });
   };
 
-  saveBP() {
+  saveBP(): void {
     localStorage.setItem('bpFormData', JSON.stringify(this.bpForm.value))
+  };
+
+  createCategory(category: string): void {
+    this.categoriesService.createCategory(category)
+  };
+
+  createTag(tag: string): void {
+    this.tagsService.createTag(tag)
   };
 }
