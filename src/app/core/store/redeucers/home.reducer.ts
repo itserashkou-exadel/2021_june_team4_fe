@@ -1,4 +1,4 @@
-import { IHomeState, IDiscount } from '../../../shared/interfaces';
+import { IDiscount, IHomeState } from '../../../shared/variables';
 
 export const initialState: IHomeState = {
   user: 'UserName',

@@ -7,7 +7,7 @@ import {
   IHomeState,
   IAppState,
   IUiConfigState,
-} from 'src/app/shared/interfaces';
+} from 'src/app/shared/variables';
 
 import { Store } from '@ngrx/store';
 import { setContent } from 'src/app/core/store/actions/ui-config.actions';

@@ -1,5 +1,5 @@
 <div class="second-step__btn-top-wrapper">
-  <button mat-flat-button color="primary">
+  <button mat-flat-button color="primary" (click)="addBP()">
     <mat-icon>add_box</mat-icon>
     {{ "COMMON.Stepper.addBp" | translate }}
   </button>
@@ -9,7 +9,6 @@
   <app-tile></app-tile>
   <app-tile></app-tile>
   <app-tile></app-tile>
-  <hr />
-  <hr />
-  <app-step-create-bp></app-step-create-bp>
+  <app-tile></app-tile>
+  <app-tile></app-tile>
 </div>

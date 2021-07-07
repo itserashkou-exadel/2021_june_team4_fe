@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IDiscount } from 'src/app/shared/interfaces';
+import { IDiscount } from 'src/app/shared/variables';
 import { map, tap } from 'rxjs/operators';
 
 @Injectable({

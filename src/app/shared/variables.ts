@@ -1,7 +1,7 @@
 export interface IUiConfigState {
   homeIsMap: boolean;
-  appLanguage: string;
 }
+
 
 export interface IDescription {
   id: string;
@@ -9,7 +9,7 @@ export interface IDescription {
   category:{};
   description: string;
   name: string;
-  img:string[];
+  img:[string];
   endTime: string;
   startTime: string;
   percent: number;
@@ -26,6 +26,10 @@ export interface IDescriptionState {
 export interface IHomeState {
   user: string,
   discounts: IDiscount[];
+}
+
+export interface IAppLanguage {
+  appLanguage : EAppLanguage;
 }
 
 export interface IAppState {
@@ -69,19 +73,6 @@ export interface IToken {
   refreshToken: string;
 }
 
-export interface IVendor {
-  id: string;
-  name: string;
-  description: string;
-  vendorLocations: Array<Object>;
-}
-
-export interface ICategory {
-  id: string;
-  name: string;
-}
-
-export interface ITag {
-  id: string;
-  name: string;
+enum EAppLanguage {
+  'EN', 'RU'
 }

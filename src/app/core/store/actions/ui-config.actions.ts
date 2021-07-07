@@ -8,7 +8,3 @@ export const setContent = createAction(
   'ToggleHomeContent',
   props<{ isMap: boolean;  }>()
 );
-export const setLanguage = createAction(
-  'ToggleLanguage',
-  props<{ language: string;  }>()
-);

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {IDescription, IDiscount} from "../../shared/interfaces";
+import { IDescription } from "../../shared/variables";
 
 @Injectable()
 export class DescriptionService {

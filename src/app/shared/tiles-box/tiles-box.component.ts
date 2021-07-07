@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IDiscount } from '../interfaces';
+import { IDiscount } from '../variables';
 
 @Component({
   selector: 'app-tiles-box',
