@@ -15,7 +15,8 @@
       }
     },
     "Head": {
-      "name": "Nikita Martinov"
+      "name": "Nikita Martinov",
+      "search": "Search for discounts"
     },
     "Home": {
       "sort": "Sort by",
