@@ -15,7 +15,7 @@
       </div>
 
 <!--      <app-carousel *ngFor="let img of data.img | async" [images]="data.img"></app-carousel>-->
-      <div class="carousel center-block">
+      <div class="carousel">
         <app-carousel  [images]="data.img"></app-carousel>
       </div>
 
@@ -25,12 +25,12 @@
       </section>
 
       <section class="article-title">
-        <h3>Bonus program description</h3>
+        <h3>{{ 'COMMON.description.title.bp' | translate }}</h3>
         <p>{{ data.description }}</p>
       </section>
 
       <section class="article-title">
-        <h3>Vendor description</h3>
+        <h3>{{ 'COMMON.description.title.vendor' | translate }}</h3>
         <p>{{ data.vendor}}</p>
       </section>
 
@@ -49,7 +49,7 @@
     <div class="col-md-3 price-container text-align-center">
       <div class="sticky-wrapper">
         <div class="price align-items-center">650
-          <small>uah</small>
+          <small>{{ 'COMMON.description.currency' | translate }}</small>
         </div>
 
         <button mat-raised-button color="accent"><div class="activate-btn">Activate coupon </div></button>
@@ -67,7 +67,7 @@
         </button>
 
         <div class="address-block" id="address">
-          <h2>Contacts</h2>
+          <h2>{{ 'COMMON.description.rightpanel.contacts' | translate }}</h2>
 
           <div class="vendor">{{ data.vendor}}</div>
           <div class="websites">

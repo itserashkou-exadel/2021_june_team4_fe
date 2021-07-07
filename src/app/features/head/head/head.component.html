@@ -41,13 +41,15 @@
           <button
             mat-menu-item
             (click)="pmClick($event)"
-            *ngFor="let it of profileMenuItems"
-          >
+            *ngFor="let it of profileMenuItems">
             {{ it }}
           </button>
         </mat-menu>
       </div>
-      <span><a href="#">EN</a> </span>
+      <button mat-button [matMenuTriggerFor]="langMenu">{{selectedLanguage}}</button>
+      <mat-menu #langMenu="matMenu" >
+        <button mat-menu-item (click)="changeLocale(language)" *ngFor="let language of languages">{{ language.title }}</button>
+      </mat-menu>
     </div>
   </div>
   <hr>

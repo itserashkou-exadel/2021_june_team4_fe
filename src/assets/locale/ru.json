@@ -1,10 +1,18 @@
 {
-  "COMMON": {
-    "HEADER": "Пример использования библиотеки Ngx Translate"
-  },
+	"COMMON": {
+		"description": {
+			"currency": "грн",
+			"rightpanel": {
+				"contacts": "Контакты"
+			},
+			"title": {
+				"bp": "Описание бонусной программы",
+				"vendor": "Описание вендора"
+			}
+		}
+	},
   "LANGUAGES": {
-    "EN": "Английский",
-    "RU": "Русский",
-    "TITLE": "Язык"
+    "EN": "EN",
+    "RU": "RU"
   }
 }

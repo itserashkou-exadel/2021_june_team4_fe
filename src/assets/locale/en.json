@@ -1,10 +1,18 @@
 {
-  "COMMON": {
-    "HEADER": "Ngx Translate Application Usage in Angular"
-  },
+	"COMMON": {
+		"description": {
+			"currency": "uah",
+      "rightpanel": {
+        "contacts": "Contacts"
+      },
+			"title": {
+				"bp": "Bonus program description",
+				"vendor": "Vendor description"
+			}
+		}
+	},
   "LANGUAGES": {
-    "EN": "English",
-    "RU": "Russian",
-    "TITLE": "Language"
+    "EN": "EN",
+    "RU": "RU"
   }
 }

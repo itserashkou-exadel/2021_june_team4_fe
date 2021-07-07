@@ -9,7 +9,7 @@ import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 
 import { StoreModule } from '@ngrx/store';
 import { headReducer } from './core/store/redeucers/home.reducer';
@@ -23,18 +23,7 @@ import { DescriptionEffects } from "./core/store/effects/description.effects";
 import { EffectsModule } from "@ngrx/effects";
 import { DescriptionService } from "./core/services/description.service";
 import { HomeEffects } from './core/store/effects/home.effects';
-import { MissingTranslationService } from "./core/services/missing-translation.service";
-import {
-  MissingTranslationHandler,
-  TranslateLoader,
-  TranslateModule
-} from "@ngx-translate/core";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {SharedModule} from "./shared/shared.module";
-
-export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
-  return new TranslateHttpLoader(http, './assets/locale/', '.json');
-}
 
 @NgModule({
   imports: [
@@ -45,15 +34,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
       description: descriptionReducer
     }),
     EffectsModule.forRoot([DescriptionEffects, HomeEffects]),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
-      missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MissingTranslationService},
-      useDefaultLang: false,
-    }),
+
     // angular
     HttpClientModule,
     BrowserAnimationsModule,
