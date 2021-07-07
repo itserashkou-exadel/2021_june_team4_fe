@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IDiscount } from '../variables';
+import { IDiscount } from '../interfaces';
 import { Router, ActivatedRoute} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import { IDescription } from "../../../../shared/variables";
+import { IDescription } from "../../../../shared/interfaces";
 
 @Component({
   selector: 'app-carousel',

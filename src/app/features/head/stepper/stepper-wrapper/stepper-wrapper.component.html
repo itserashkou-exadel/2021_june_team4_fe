@@ -1,23 +1,24 @@
 <mat-stepper orientation="vertical">
+  <!-- Step 1: Create vendor -->
   <mat-step>
     <ng-template matStepLabel>{{ "COMMON.Stepper.vendorInfo" | translate }}</ng-template>
     <ng-template matStepContent>
-      <!-- Step 1: Create vendor -->
       <app-step-create-vendor></app-step-create-vendor>
     </ng-template>
   </mat-step>
 
+  <!-- Step 2: Create BP or Edit BP -->
   <mat-step>
     <ng-template matStepLabel>{{ "COMMON.Stepper.vendorBpInfo" | translate }}</ng-template>
     <ng-template matStepContent>
-      <!-- Step 2: Create BP or Edit BP -->
       <!-- CREATE -->
-<!--      <app-step-create-bp></app-step-create-bp>-->
+      <!-- <app-step-create-bp></app-step-create-bp> -->
       <!-- EDIT -->
-       <app-step-edit-bp></app-step-edit-bp>
+      <app-step-edit-bp></app-step-edit-bp>
     </ng-template>
   </mat-step>
 
+  <!-- Step 3: Message -->
   <mat-step>
     <ng-template matStepLabel>{{ "COMMON.Stepper.vendorMessage" | translate }}</ng-template>
     <ng-template matStepContent>
