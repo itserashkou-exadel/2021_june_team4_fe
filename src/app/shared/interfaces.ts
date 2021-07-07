@@ -1,7 +1,7 @@
 export interface IUiConfigState {
   homeIsMap: boolean;
+  appLanguage: string;
 }
-
 
 export interface IDescription {
   id: string;
@@ -26,10 +26,6 @@ export interface IDescriptionState {
 export interface IHomeState {
   user: string,
   discounts: IDiscount[];
-}
-
-export interface IAppLanguage {
-  appLanguage : EAppLanguage;
 }
 
 export interface IAppState {
@@ -88,8 +84,4 @@ export interface ICategory {
 export interface ITag {
   id: string;
   name: string;
-}
-
-enum EAppLanguage {
-  'EN', 'RU'
 }

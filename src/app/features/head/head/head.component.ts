@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import {createSelector, Store, select} from '@ngrx/store';
 
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '../../../../environments/environment';
-import { IAppState } from '../../../shared/interfaces';
+import {IAppState, IUiConfigState} from '../../../shared/interfaces';
 
 import { DialogComponent } from '../../../shared/dialog/dialog/dialog.component';
 import { LocationTreeComponent } from './location-tree/location-tree.component';
 import { MatDialog } from '@angular/material/dialog';
+import {Observable} from "rxjs";
+import {setLanguage} from "../../../core/store/actions/ui-config.actions";
 
 
 @Component({
@@ -18,13 +20,25 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class HeadComponent implements OnInit {
   activeLink: string;
-  selectedLanguage!: string;
-  languages: { id: string; title: string }[] = [];
+
+  languages = ['en', 'ru'];
+  language$: Observable<any>;
 
   constructor(private store: Store<IAppState>,
               public dialog: MatDialog,
               private translateService: TranslateService) {
     this.activeLink = 'home';
+
+    const selecUiConfig = (state: IAppState) => state.uiConfig;
+    const selectSettingsLanguage = createSelector(
+      selecUiConfig,
+      (state: IUiConfigState) => state.appLanguage
+    );
+
+    this.language$ = this.store.pipe(select(selectSettingsLanguage));
+    this.language$.subscribe((lang)=>{
+      this.translateService.use(lang);
+    });
   }
 
   openDialog() {
@@ -39,26 +53,11 @@ export class HeadComponent implements OnInit {
     // this.dialog.open(DialogComponent, dialogConfig);
   }
 
-  ngOnInit(): void {
-       this.translateService.use(environment.defaultLocale);
-       this.selectedLanguage = environment.defaultLocale.toUpperCase();
+  ngOnInit(): void {}
 
-       this.translateService
-         .get(environment.locales.map((x) => `LANGUAGES.${x.toUpperCase()}`))
-         .subscribe((translations) => {
-           // init dropdown list with TRANSLATED list of languages from config
-           this.languages = environment.locales.map((x) => {
-             return {
-               id: x,
-               title: translations[`LANGUAGES.${x.toUpperCase()}`],
-             };
-           });
-         });
-  }
-
-  changeLocale(el: { id: string; title: string }) {
-    this.translateService.use(el.id);
-    this.selectedLanguage = el.title;
+  changeLocale(lang: string) {
+    this.store.dispatch(setLanguage({language:lang }));
+    this.translateService.use(lang);
   }
 
   discountSearch = new FormControl('');

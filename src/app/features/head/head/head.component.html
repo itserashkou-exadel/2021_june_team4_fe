@@ -39,9 +39,10 @@
           </button>
         </mat-menu>
       </div>
-      <button mat-button [matMenuTriggerFor]="langMenu">{{selectedLanguage}}</button>
+
+      <button mat-button [matMenuTriggerFor]="langMenu">{{ language$ | async }}</button>
       <mat-menu #langMenu="matMenu" >
-        <button mat-menu-item (click)="changeLocale(language)" *ngFor="let language of languages">{{ language.title }}</button>
+        <button mat-menu-item (click)="changeLocale(language)" *ngFor="let language of languages">{{ language.toUpperCase() }}</button>
       </mat-menu>
     </div>
   </div>
