@@ -17,11 +17,11 @@ export class HomeService {
   }
 
   handleRemoteDiscount(remoteDiscount: any) {
+    console.log(remoteDiscount);
     const localDiscount: IDiscount = {
       id: remoteDiscount.id,
       name: remoteDiscount.name,
-      vendor:
-        remoteDiscount.vendor === null ? 'Unknown' : remoteDiscount.vendor,
+      vendor: remoteDiscount.vendor.name,
       added: remoteDiscount.startTime,
       expired: remoteDiscount.endTime,
       location: 'remoteDiscount',
@@ -35,8 +35,18 @@ export class HomeService {
       percent: remoteDiscount.percent,
       image:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
-      coordinates: [50 + Math.random() * 5, 20 + Math.random() * 5],
+      coordinates: getCoordinates(remoteDiscount),
     };
     return localDiscount;
   }
+}
+
+const getCoordinates =(src : any)=>{
+  let cords = src.vendorLocations;
+  let res: any[][] = [];
+  cords.map((el: any)=>{
+    res.push([el.latitude, el.longitude])
+  })
+  return res;
+
 }

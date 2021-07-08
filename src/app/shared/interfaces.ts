@@ -2,8 +2,24 @@ export interface IUiConfigState {
   homeIsMap: boolean;
 }
 
+export interface IFilterState {
+  controlsValues: IFilterControls,
+  formValues: any,
+  chips: string [],
+}
+export interface IFilterControls {
+  locations: ILocationsGroup[],
+  cathegories: string[],
+  tags: string[],
+  vendors?: any,
+}
+export interface ILocationsGroup{
+  countryName: string,
+  cities: string[]
+}
+
 export interface IMapMarker {
-  cords: number[],
+  cords: number[][],
   text: string
 }
 export interface IDescription {
@@ -39,6 +55,7 @@ export interface IAppState {
   home: IHomeState;
   uiConfig: IUiConfigState;
   description: IDescriptionState;
+  filter: IFilterState;
 }
 
 export interface IDiscount {
@@ -54,7 +71,7 @@ export interface IDiscount {
   description: string;
   percent: number;
   image: string
-  coordinates: number[]
+  coordinates: number[][]
 }
 
 export interface IUser {

@@ -60,13 +60,7 @@ export class HomeComponent implements OnInit {
       }))
     );
 
-    this.markers$ = this.store.select(selectMarkers);
-    this.markers = this.discountsData.subscribe((el :any) => {
-      //console.log(el)
-      const res = el.map((el: any)=> ({cords: el.coordinates, text: el.description}))
-      this.markers = res;
-      console.log(res)
-    } )
+      this.markers$ = this.store.select(selectMarkers);
   }
 
   ngOnInit(): void {

@@ -25,7 +25,7 @@ export class TileComponent implements OnInit {
       description: 'string',
       percent: 10,
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      coordinates:[45.094, 34.981]
+      coordinates:[[45.094, 34.981]]
 
   };
 

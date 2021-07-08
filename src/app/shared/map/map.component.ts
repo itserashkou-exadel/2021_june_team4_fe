@@ -25,8 +25,8 @@ L.Marker.prototype.options.icon = iconDefault;
 export class MapComponent implements AfterViewInit {
   private map: any;
 
-  @Input() markers: IMapMarker[] | null = [
-    { cords: [], text: 'This is Vinnytsia' },
+  @Input() markers: IMapMarker[] = [
+    { cords: [[50.4501, 30.5234],[49.4501, 31.5234]], text: 'This is Vinnytsia' },
   ];
   @Input() mapConfig$: any = {
     center: [50.4501, 30.5234],
@@ -57,14 +57,18 @@ export class MapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initMap();
-    // setTimeout(() => {
+     setTimeout(() => {
       if (this.markers)
-        this.markers.forEach((el: any) => {
-          L.marker(el.cords).addTo(this.map).bindPopup(el.text);
+     // let newMarkers = [];
+        this.markers.forEach((discount: any) => {
+          discount.cords.forEach((point: any) => {
+            L.marker(point).addTo(this.map).bindPopup(discount.text);
+          });
+          
         });
       const myPins = this.markers?.map((el) => el.cords);
       this.map.fitBounds(myPins);
-   // }, 1000);
+   }, 1000);
   // setLatLang();
   }
 }
