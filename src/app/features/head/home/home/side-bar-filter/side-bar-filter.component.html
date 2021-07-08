@@ -1,7 +1,56 @@
 <div class="sideBar">
-    <app-category></app-category>
-    <app-date></app-date>
-    <app-range></app-range>
-    <app-tags></app-tags>
+
+
+  <form [formGroup]="filterForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Select a vendor</mat-label>
+        <mat-select  formControlName="cathegory" (selectionChange)="selectCathegory()" multiple>
+          <mat-option *ngFor="let c of vendors" [value]="c">{{c}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+        <mat-label>Select an cathegory</mat-label>
+        <mat-select  formControlName="cathegory" (selectionChange)="selectCathegory()" multiple>
+          <mat-option *ngFor="let c of cathegories |async" [value]="c">{{c}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Locations</mat-label>
+        <mat-select formControlName="cities">
+          <mat-option>-- None --</mat-option>
+          <mat-optgroup *ngFor="let country of locations | async" [label]="country.countryName"
+                        >
+            <mat-option *ngFor="let city of country.cities" [value]="city">
+              {{city}}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Select tag</mat-label>
+        <mat-select formControlName="tag"  (selectionChange)="selectTag()">
+          <mat-option *ngFor="let tag of tags | async" [value]="tag" >
+            {{tag}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-chip-list" appearance="fill">
+        <mat-label>Selected tags</mat-label>
+        <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip *ngFor="let tag of chips | async"  >
+            {{tag}}
+            <mat-icon matChipRemove (click)="removeTag(tag)">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </mat-form-field>
+      
+   
+
     <button mat-stroked-button color="primary">Apply</button>
+</form>
 </div>

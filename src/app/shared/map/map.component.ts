@@ -1,5 +1,6 @@
-import { Component, AfterViewInit, Input} from '@angular/core';
+import { Component, AfterViewInit, Input, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import { IMapMarker } from '../interfaces';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -12,54 +13,60 @@ const iconDefault = L.icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   tooltipAnchor: [16, -28],
-  shadowSize: [41, 41]
+  shadowSize: [41, 41],
 });
 L.Marker.prototype.options.icon = iconDefault;
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements AfterViewInit {
   private map: any;
 
-  @Input()  mapConfig$: any = {
-    markers:[
-    { cords:[50.4501, 30.5234], text: 'This is Kyiv'},
-    { cords:[49.2331, 28.4682], text: 'This is Vinnytsia'},
-    { cords:[48.5079, 32.2623], text: 'This is Kropyntytskyi'},
-    { cords:[46.4825, 30.7233], text: 'This is Odessa'},
-
-    ],
+  @Input() markers: IMapMarker[] = [
+    { cords: [[50.4501, 30.5234],[49.4501, 31.5234]], text: 'This is Vinnytsia' },
+  ];
+  @Input() mapConfig$: any = {
     center: [50.4501, 30.5234],
-    zoom: 1,
-  }
-
+    zoom: 5,
+  };
 
   private initMap(): void {
     this.map = L.map('map', {
       center: [50.4501, 30.5234],
-      zoom: this.mapConfig$.zoom
+      zoom: 4,
     });
 
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      id: 'mapbox/streets-v11',//satellite-v9 streets-v11
-      maxZoom: 18,
-      minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    });
+    const tiles = L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
+        id: 'mapbox/streets-v11',
+        maxZoom: 18,
+        minZoom: 3,
+        attribution:
+          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }
+    );
 
     tiles.addTo(this.map);
-    L.marker([50.4501, 30.5234]).addTo(this.map).bindPopup('A pretty CSS3 popup.<br> Easily customizable.');
   }
 
-  constructor() { }
+  constructor() {}
 
   ngAfterViewInit(): void {
     this.initMap();
-  this.mapConfig$.markers.forEach((el : any) => {
-    L.marker(el.cords).addTo(this.map).bindPopup(el.text);
-  });
+     setTimeout(() => {
+      if (this.markers)
+        this.markers.forEach((discount: any) => {
+          discount.cords.forEach((point: any) => {
+            L.marker(point).addTo(this.map).bindPopup(discount.text);
+          });
+          
+        });
+      const myPins = this.markers?.map((el) => el.cords);
+      this.map.fitBounds(myPins);
+   }, 1000);
   }
 }
