@@ -1,22 +1,52 @@
 export interface IUiConfigState {
   homeIsMap: boolean;
+  appLanguage: string;
 }
 
+export interface IFilterState {
+  controlsValues: IFilterControls,
+  formValues: any,
+  chips: string [],
+}
+export interface IFilterControls {
+  locations: ILocationsGroup[],
+  cathegories: string[],
+  tags: string[],
+  vendors?: any,
+}
+export interface ILocationsGroup{
+  countryName: string,
+  cities: string[]
+}
 
+export interface IMapMarker {
+  cords: number[][],
+  text: string
+}
 export interface IDescription {
   id: string;
   active: boolean;
+  archived: boolean;
   category:{};
   description: string;
   name: string;
-  img:string[];
+  img:[string];
   endTime: string;
   startTime: string;
   percent: number;
   promo: string;
   tags: any;
-  vendor: {};
-  vendorLocations: any;
+  vendor: {
+    name: any;
+    description: any;
+    contacts: any;
+  };
+  vendorLocations: [{
+    city: {
+      countryName: string;
+      name: string;
+    }
+  }];
 }
 
 export interface IDescriptionState {
@@ -28,14 +58,11 @@ export interface IHomeState {
   discounts: IDiscount[];
 }
 
-export interface IAppLanguage {
-  appLanguage : EAppLanguage;
-}
-
 export interface IAppState {
   home: IHomeState;
   uiConfig: IUiConfigState;
   description: IDescriptionState;
+  filter: IFilterState;
 }
 
 export interface IDiscount {
@@ -51,6 +78,7 @@ export interface IDiscount {
   description: string;
   percent: number;
   image: string
+  coordinates: number[][]
 }
 
 export interface IUser {
@@ -71,25 +99,4 @@ export interface IUserLogin {
 export interface IToken {
   accessToken: string;
   refreshToken: string;
-}
-
-export interface IVendor {
-  id: string;
-  name: string;
-  description: string;
-  vendorLocations: Array<Object>;
-}
-
-export interface ICategory {
-  id: string;
-  name: string;
-}
-
-export interface ITag {
-  id: string;
-  name: string;
-}
-
-enum EAppLanguage {
-  'EN', 'RU'
 }

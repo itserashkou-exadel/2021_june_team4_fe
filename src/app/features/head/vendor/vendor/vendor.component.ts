@@ -11,5 +11,3 @@ export class VendorComponent implements OnInit {
   };
 
 }
-
-

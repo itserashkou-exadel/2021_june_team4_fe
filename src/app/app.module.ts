@@ -23,6 +23,7 @@ import { DescriptionEffects } from "./core/store/effects/description.effects";
 import { EffectsModule } from "@ngrx/effects";
 import { DescriptionService } from "./core/services/description.service";
 import { HomeEffects } from './core/store/effects/home.effects';
+import { filterReducer } from './core/store/redeucers/filter.reducer';
 
 
 @NgModule({
@@ -31,7 +32,9 @@ import { HomeEffects } from './core/store/effects/home.effects';
     StoreModule.forRoot({
       home : headReducer,
       uiConfig: uiConfigReducer,
-      description: descriptionReducer }),
+      description: descriptionReducer,
+      filter: filterReducer,
+    }),
     EffectsModule.forRoot([DescriptionEffects, HomeEffects]),
     // angular
     HttpClientModule,
@@ -44,17 +47,17 @@ import { HomeEffects } from './core/store/effects/home.effects';
 
     // app
     AppRoutingModule,
-    NgbModule
+    NgbModule,
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
-    authInterceptorProviders,
+  authInterceptorProviders,
     DescriptionService],
   entryComponents: [//for dynamical load components
     DialogComponent,
     MapComponent,
-    LocationTreeComponent
+    LocationTreeComponent,
   ]
 })
 export class AppModule {}

@@ -1,11 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { VendorsService } from 'src/app/core/services/vendors.service';
-import { CategoriesService } from 'src/app/core/services/categories.service';
-import { TagsService } from 'src/app/core/services/tags.service';
-import { ICategory, ITag, IVendor } from 'src/app/shared/interfaces';
+
+const API_URL = 'http://localhost:8080';
+
+interface DefaultData {
+  id: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-step-create-vendor',
@@ -13,24 +17,16 @@ import { ICategory, ITag, IVendor } from 'src/app/shared/interfaces';
   styleUrls: ['./step-create-vendor.component.scss']
 })
 export class StepCreateVendorComponent implements OnInit {
-  // filteredVendors!: Observable<string[]>;
-  filteredVendors!: any;
+  myControl = new FormControl();
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions!: Observable<string[]>;
 
   vendorForm!: FormGroup;
-  vendors$: Observable<IVendor[]>;
-  categories: Observable<ICategory[]>;
-  tags: Observable<ITag[]>;
+  categories!: Array<Object>;
+  tags!: Array<Object>;
+  vendors!: Array<string>;
 
-  aSub!: Subscription;
-
-  constructor( private vendorsService: VendorsService,
-               private categoriesService: CategoriesService,
-               private tagsService: TagsService ) 
-  {
-    this.vendors$ = this.vendorsService.getVendors();
-    this.categories = this.categoriesService.getCategories();
-    this.tags = this.tagsService.getTags();
-  }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.vendorForm = new FormGroup({
@@ -44,40 +40,40 @@ export class StepCreateVendorComponent implements OnInit {
       contacts: new FormControl(null, [Validators.required])
     });
 
-
-    this.filteredVendors = this.vendorForm.controls.name.valueChanges
+    this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
       map(value => this._filter(value))
     );
+
+    // //Adding default values for dropdown Vendors from server
+    this.http.get<any>(`${API_URL}/vendors`).subscribe(data => {
+      this.vendors = data.map((value: any) => value.name)  //TODO: rework
+    });
+
+    // //Adding default values for dropdown Categories from server
+    // this.http.get<any>(`${API_URL}/categories`).subscribe(data => {
+    //   this.categories = data.map((value: any) => value.name)
+    // });
+
+    // //Adding default values for dropdown Tags from server
+    // this.http.get<any>(`${API_URL}/tags`).subscribe(data => {
+    //   this.tags = data.map((value: any) => value.name)
+    // });
   };
 
-  ngOnDestroy(): void {
-    this.aSub.unsubscribe()
-  }
-
-  saveVendor(): void {
+  saveVendor() {
     localStorage.setItem('vendorsFormData', JSON.stringify(this.vendorForm.value))
   };
 
   // Reset all form's fields after click button Clear
-  resetForm(): void {
+  resetForm() {
     this.vendorForm.reset();
   };
 
-  private _filter(value: string): any {//string[] {
+  private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    let test: string[];
-    this.aSub = this.vendors$.subscribe(
-      data => {
-        test = data.map(value => value.name);
-        // console.log(vendorsList)
-        //return test.filter((value: string) => value.toLowerCase().includes(filterValue)); 
-      },
-      err => {
-        console.error(err)
-      }
-    );
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   };
 }
 

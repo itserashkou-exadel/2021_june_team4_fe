@@ -1,4 +1,4 @@
-import { IHomeState, IDiscount } from '../../../shared/interfaces';
+import { IDiscount, IHomeState } from '../../../shared/interfaces';
 
 export const initialState: IHomeState = {
   user: 'UserName',
@@ -17,6 +17,7 @@ export const initialState: IHomeState = {
         'Here is a short description Here is a short description Here is a short description Here is a short description',
       percent: 10,
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
+      coordinates: [[49.094, 28.981]]
     },
     {
       id: 0,
@@ -29,9 +30,10 @@ export const initialState: IHomeState = {
       category: 'category',
       isActive: true,
       description:
-        'Here is a short description Here is a short description Here is a short description Here is a short description',
+        ' Here is a short description Here is a short description',
       percent: 10,
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
+      coordinates: [[50.094, 26.981]]
     },
   ],
 };
@@ -96,8 +98,7 @@ const sortState = (src: IDiscount[], sortFlag: string) => {
 
     case 'name':
       const newState1 = src.slice().sort((a, b): number => {
-        console.log(a);
-        if (a.name > b.name) return -1;
+         if (a.name > b.name) return -1;
         if (a.name < b.name) return 1;
         else return 0;
       });

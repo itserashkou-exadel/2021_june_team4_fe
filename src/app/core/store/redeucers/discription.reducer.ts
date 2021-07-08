@@ -1,24 +1,25 @@
 import {IDescription} from "../../../shared/interfaces";
 
 export interface DescriptionState {
-  description: IDescription | [];
+  description: IDescription | {};
 }
 
 export const initialState: DescriptionState = {
-  description: {
+  description:{
     id: "b28349b5-0b39-45ee-bb3c-4f96c1abfe75",
     active: true,
-    category: {id: 'hgdgfjrhg', name: 'Sport'},
-    description: "string",
-    name: "Default name",
+    category: { name: 'Sport'},
+    description: "Initial description",
+    archived: false,
+    name: "Initial name",
     img:['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU'],
     endTime: "2021-06-20T12:00:00",
     startTime: '2021-06-20T12:00:00',
     percent: 25,
-    promo: 'jdfhgjh',
+    promo: 'Some initial promo code',
     tags: [{name:'Yoga'}],
     vendor: "string",
-    vendorLocations: [{country: '', city: ''}]
+    vendorLocations: [{city: {countryName: 'Initial country', name: 'Initial city'}}]
   }
 };
 

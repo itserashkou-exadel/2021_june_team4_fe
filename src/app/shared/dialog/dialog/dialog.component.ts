@@ -28,18 +28,12 @@ export class DialogComponent {
     private cd: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.marker = {
-      markers:[
-        { cords:[50.4501, 30.5234], text: 'This is Kyiv'},
-      ],
-      center: [50.4501, 30.5234],
-      zoom: 4,
-    }
+    this.marker = [{ cords:[50.4501, 30.5234], text: 'This is Kyiv'},]
   }
 
   ngAfterViewInit() {
-    const comp = this.resolver.resolveComponentFactory(this.data.component);
-    this.componentRef = this.vcRef.createComponent(comp);
+   // const comp = this.resolver.resolveComponentFactory(this.data.component);
+    //this.componentRef = this.vcRef.createComponent(comp);
   }
 
   ngOnDestroy() {
