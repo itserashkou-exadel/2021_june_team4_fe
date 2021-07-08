@@ -10,5 +10,5 @@ export const setContent = createAction(
 );
 export const setLanguage = createAction(
   'ToggleLanguage',
-  props<{ language: string;  }>()
+  props<{ language: string; }>()
 );

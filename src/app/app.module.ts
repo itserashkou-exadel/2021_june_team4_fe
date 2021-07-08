@@ -23,7 +23,7 @@ import { DescriptionEffects } from "./core/store/effects/description.effects";
 import { EffectsModule } from "@ngrx/effects";
 import { DescriptionService } from "./core/services/description.service";
 import { HomeEffects } from './core/store/effects/home.effects';
-import {SharedModule} from "./shared/shared.module";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   imports: [
@@ -52,7 +52,7 @@ import {SharedModule} from "./shared/shared.module";
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
-  // authInterceptorProviders,
+  authInterceptorProviders,
     DescriptionService],
   entryComponents: [//for dynamical load components
     DialogComponent,

@@ -20,7 +20,7 @@ import {setLanguage} from "../../../core/store/actions/ui-config.actions";
 })
 export class HeadComponent implements OnInit {
   activeLink: string;
-
+  SETTING_KEY = 'SETTINGS';
   languages = ['en', 'ru'];
   language$: Observable<any>;
 
@@ -53,11 +53,17 @@ export class HeadComponent implements OnInit {
     // this.dialog.open(DialogComponent, dialogConfig);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let localLang = localStorage.getItem(this.SETTING_KEY);
+    if(localLang) {
+      this.store.dispatch(setLanguage({language:localLang }));
+    }
+  }
 
   changeLocale(lang: string) {
     this.store.dispatch(setLanguage({language:lang }));
     this.translateService.use(lang);
+    localStorage.setItem(this.SETTING_KEY,lang);
   }
 
   discountSearch = new FormControl('');
@@ -72,10 +78,10 @@ export class HeadComponent implements OnInit {
   ];
 
   tabItems = [
-    { link: 'home', label: 'Home' },
-    { link: 'profile', label: 'Profile' },
-    { link: 'vendor', label: 'Vendor' },
-    { link: 'statistic', label: 'Statistic' },
+    { link: 'home', label: 'COMMON.Head.home'},
+    { link: 'profile', label: 'COMMON.Head.profile' },
+    { link: 'vendor', label: 'COMMON.Head.vendor' },
+    { link: 'statistic', label: 'COMMON.Head.statistic' },
   ];
 
 

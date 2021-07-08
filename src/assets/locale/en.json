@@ -16,7 +16,11 @@
     },
     "Head": {
       "name": "Nikita Martinov",
-      "search": "Search for discounts"
+      "search": "Search",
+      "home": "Home",
+      "profile": "Profile",
+      "vendor": "Vendor",
+      "statistic": "Statistic"
     },
     "Home": {
       "sort": "Sort by",

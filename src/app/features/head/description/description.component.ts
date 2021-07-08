@@ -21,10 +21,7 @@ export class DescriptionComponent implements OnInit {
 
   constructor(private activateRoute: ActivatedRoute,
               public dialog: MatDialog,
-              private store: Store<{
-                home: IHomeState,
-                uiConfig: IUiConfigState,
-                description: IDescriptionState }>) {
+              private store: Store<IAppState>) {
     this.id = activateRoute.snapshot.params['id'];
 
     const selecDescription = (state: IAppState) => state.description;
