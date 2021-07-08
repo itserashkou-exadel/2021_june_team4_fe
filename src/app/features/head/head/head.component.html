@@ -4,13 +4,20 @@
       <div>
         <img src="../../../../assets/logo.png" alt="App logo" height="50" />
       </div>
+
       <div class="location-block">
-        <mat-icon aria-hidden="false" aria-label="Home">location_on</mat-icon>
-        <span (click)="openDialog()">PLUG</span>
+        <mat-icon aria-hidden="false" aria-label="Home"
+        >location_on</mat-icon
+        >
+        <span (click)="openDialog()"> PLUG</span>
       </div>
       <div class="search-container">
         <mat-form-field class="example-full-width search">
-          <input matInput placeholder="Search for discount" type="text" />
+          <input
+            matInput
+            placeholder="{{ 'COMMON.Head.search' | translate }}"
+            type="text"
+          />
         </mat-form-field>
         <mat-icon matPrefix>search</mat-icon>
       </div>
@@ -18,45 +25,46 @@
 
     <div class="right-block">
       <div class="notifications">
-        <mat-icon aria-hidden="false" aria-label="Example home icon">
-          favorite_border
-        </mat-icon>
-        <mat-icon aria-hidden="false" aria-label="Example home icon">
-          notifications_none
-        </mat-icon>
+        <mat-icon aria-hidden="false" aria-label="Example home icon"
+        >favorite_border</mat-icon
+        >
+        <mat-icon aria-hidden="false" aria-label="Example home icon"
+        >notifications_none</mat-icon
+        >
       </div>
       <div class="user-block">
-        <mat-icon aria-hidden="false" aria-label="Example home icon">
-          person_outline
-        </mat-icon>
-        <button mat-button [matMenuTriggerFor]="menu">Nikita Martinov</button>
+        <mat-icon aria-hidden="false" aria-label="Example home icon"
+        >person_outline</mat-icon
+        >
+        <button mat-button [matMenuTriggerFor]="menu">{{ 'COMMON.Head.name' | translate }}</button>
         <mat-menu #menu="matMenu">
           <button
             mat-menu-item
             (click)="pmClick($event)"
-            *ngFor="let it of profileMenuItems"
-          >
+            *ngFor="let it of profileMenuItems">
             {{ it }}
           </button>
         </mat-menu>
       </div>
-      <span><a href="#">EN</a></span>
+
+      <button mat-button [matMenuTriggerFor]="langMenu">{{ language$ | async | uppercase }}</button>
+      <mat-menu #langMenu="matMenu" >
+        <button mat-menu-item (click)="changeLocale(language)" *ngFor="let language of languages">{{ language.toUpperCase() }}</button>
+      </mat-menu>
     </div>
   </div>
   <hr />
   <div class="tabs">
-    <nav mat-tab-nav-bar class="d-none d-sm-flex">
-      <a
-        mat-tab-link
-        *ngFor="let tab of tabItems"
-        (click)="activeLink = tab.link"
-        [active]="activeLink == tab.link"
-        [routerLink]="tab.link"
-      >
-        {{ tab.label }}
-      </a>
-    </nav>
-  </div>
+  <nav mat-tab-nav-bar class="d-none d-sm-flex">
+    <a mat-tab-link  *ngFor="let tab of tabItems"
+    (click)="activeLink = tab.link"
+    [active]="activeLink == tab.link"
+
+       [routerLink]="tab.link">
+      {{tab.label | translate}}
+    </a>
+  </nav>
+</div>
   <router-outlet></router-outlet>
   <app-footer></app-footer>
 </div>

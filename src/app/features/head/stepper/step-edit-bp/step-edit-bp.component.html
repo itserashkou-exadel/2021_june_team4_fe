@@ -1,7 +1,7 @@
 <div class="second-step__btn-top-wrapper">
-  <button mat-flat-button color="primary">
+  <button mat-flat-button color="primary" (click)="addBP()">
     <mat-icon>add_box</mat-icon>
-    Add BP
+    {{ "COMMON.Stepper.addBp" | translate }}
   </button>
 </div>
 <div class="tile-wrapper" *ngIf="visible">
@@ -9,7 +9,6 @@
   <app-tile></app-tile>
   <app-tile></app-tile>
   <app-tile></app-tile>
-  <hr />
-  <hr />
-  <app-step-create-bp></app-step-create-bp>
+  <app-tile></app-tile>
+  <app-tile></app-tile>
 </div>

@@ -3,20 +3,25 @@
     <!-- Vendor name -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor name</mat-label>
+        <mat-label>{{ "COMMON.Stepper.vendorName" | translate }}</mat-label>
+        <!-- <mat-select formControlName="name">
+          <mat-option *ngFor="let vendor of vendors" [value]="vendor">
+            {{ vendor }}
+          </mat-option>
+        </mat-select> -->
         <input
           type="text"
           aria-label="vendor name"
           matInput
-          formControlName="name"
-          [matAutocomplete]="name"
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
         />
-        <mat-autocomplete #name="matAutocomplete">
+        <mat-autocomplete #auto="matAutocomplete">
           <mat-option
-            *ngFor="let vendor of filteredVendors | async"
-            [value]="vendor.name"
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
           >
-            {{ vendor.name }}
+            {{ option }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
@@ -29,22 +34,12 @@
     <!-- Vendor category -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor category</mat-label>
-        <input
-          type="text"
-          aria-label="vendor category"
-          matInput
-          formControlName="category"
-          [matAutocomplete]="category"
-        />
-        <mat-autocomplete #category="matAutocomplete">
-          <mat-option
-            *ngFor="let category of categories | async"
-            [value]="category.name"
-          >
-            {{ category.name }}
+        <mat-label>{{ "COMMON.Stepper.vendorCategory" | translate }}</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category }}
           </mat-option>
-        </mat-autocomplete>
+        </mat-select>
       </mat-form-field>
       <button class="add-btn">
         <mat-icon>add_box</mat-icon>
@@ -55,19 +50,12 @@
     <!-- Vendor tag -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor tag</mat-label>
-        <input
-          type="text"
-          aria-label="vendor tag"
-          matInput
-          formControlName="tag"
-          [matAutocomplete]="tag"
-        />
-        <mat-autocomplete #tag="matAutocomplete">
-          <mat-option *ngFor="let tag of tags | async" [value]="tag.name">
-            {{ tag.name }}
+        <mat-label>{{ "COMMON.Stepper.vendorTag" | translate }}</mat-label>
+        <mat-select formControlName="tag">
+          <mat-option *ngFor="let tag of tags" [value]="tag">
+            {{ tag }}
           </mat-option>
-        </mat-autocomplete>
+        </mat-select>
       </mat-form-field>
       <button class="add-btn">
         <mat-icon>add_box</mat-icon>
@@ -79,7 +67,7 @@
     <!-- Vendor Description -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Description</mat-label>
+        <mat-label>{{ "COMMON.Stepper.description" | translate }}</mat-label>
         <textarea
           matInput
           placeholder="Description"
@@ -92,7 +80,7 @@
     <!-- Vendor logo -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor logo</mat-label>
+        <mat-label>{{ "COMMON.Stepper.vendorLogo" | translate }}</mat-label>
         <input
           matInput
           placeholder="Add some logo"
@@ -101,30 +89,30 @@
       </mat-form-field>
     </div>
     <!-- /Vendor logo -->
+
+    <!-- Vendor locations -->
+    <!-- <div class="form-row__item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Locations</mat-label>
+        <input matInput formControlName="locations" />
+      </mat-form-field>
+    </div> -->
+    <!-- /Vendor locations -->
   </div>
   <div class="form-row">
     <!-- Vendor's schedule -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Vendor's schedule</mat-label>
+        <mat-label>{{ "COMMON.Stepper.vendorSchedule" | translate }}</mat-label>
         <input matInput formControlName="schedule" />
       </mat-form-field>
     </div>
     <!-- /Vendor's schedule -->
 
-    <!-- Vendor locations -->
-    <div class="form-row__item">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Locations</mat-label>
-        <input matInput formControlName="locations" />
-      </mat-form-field>
-    </div>
-    <!-- /Vendor locations -->
-
     <!-- Vendor contacts -->
     <div class="form-row__item">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Contacts</mat-label>
+        <mat-label>{{ "COMMON.Stepper.vendorContacts" | translate }}</mat-label>
         <input matInput formControlName="contacts" />
       </mat-form-field>
     </div>
@@ -132,7 +120,7 @@
   </div>
   <div class="first-step__btns btns-wrapper">
     <button class="save-btn" mat-flat-button color="warn" (click)="resetForm()">
-      Clear
+      {{ "COMMON.Global.clear" | translate }}
     </button>
     <button
       type="submit"
@@ -141,7 +129,7 @@
       color="primary"
       matStepperNext
     >
-      Save
+    {{ "COMMON.Global.save" | translate }}
     </button>
   </div>
 </form>
