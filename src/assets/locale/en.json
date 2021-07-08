@@ -26,8 +26,15 @@
       "sort": "Sort by",
       "date": "by Date",
       "time": "by Time",
-      "raiting": "by Score",
+      "rating": "by Score",
       "default": "by default"
+    },
+    "Tile": {
+      "info": "More info",
+      "want": "Want",
+      "discount": "Discount",
+      "vendor": "Vendor",
+      "expired": "Expired"
     },
     "Stepper": {
       "description": "Description",

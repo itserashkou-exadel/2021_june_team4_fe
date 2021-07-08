@@ -28,13 +28,9 @@ export class DescriptionComponent implements OnInit {
     const selectDescription = createSelector(selecDescription, (state: IDescriptionState) => state.description)
     this.descriptionData$ = this.store.pipe(select(selectDescription));
 
-    this.marker = {
-      markers:[
-        { cords:[50.4501, 30.5234], text: 'This is Kyiv'},
-      ],
-      center: [50.4501, 30.5234],
-      zoom: 4,
-    }
+    this.marker = [
+      { cords:[50.4501, 30.5234], text: 'This is Kyiv'},
+    ]
   }
 
   // openDialogWithMap(data: any) {//todo bp type

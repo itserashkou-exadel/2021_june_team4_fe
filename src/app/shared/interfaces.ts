@@ -3,10 +3,30 @@ export interface IUiConfigState {
   appLanguage: string;
 }
 
+export interface IFilterState {
+  controlsValues: IFilterControls,
+  formValues: any,
+  chips: string [],
+}
+export interface IFilterControls {
+  locations: ILocationsGroup[],
+  cathegories: string[],
+  tags: string[],
+  vendors?: any,
+}
+export interface ILocationsGroup{
+  countryName: string,
+  cities: string[]
+}
 
+export interface IMapMarker {
+  cords: number[][],
+  text: string
+}
 export interface IDescription {
   id: string;
   active: boolean;
+  archived: boolean;
   category:{};
   description: string;
   name: string;
@@ -16,8 +36,17 @@ export interface IDescription {
   percent: number;
   promo: string;
   tags: any;
-  vendor: {};
-  vendorLocations: any;
+  vendor: {
+    name: any;
+    description: any;
+    contacts: any;
+  };
+  vendorLocations: [{
+    city: {
+      countryName: string;
+      name: string;
+    }
+  }];
 }
 
 export interface IDescriptionState {
@@ -33,6 +62,7 @@ export interface IAppState {
   home: IHomeState;
   uiConfig: IUiConfigState;
   description: IDescriptionState;
+  filter: IFilterState;
 }
 
 export interface IDiscount {
@@ -48,6 +78,7 @@ export interface IDiscount {
   description: string;
   percent: number;
   image: string
+  coordinates: number[][]
 }
 
 export interface IUser {

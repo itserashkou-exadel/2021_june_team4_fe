@@ -5,17 +5,12 @@
       <mat-select matNativeControl>
         <mat-option value="addition">{{ "COMMON.Home.date" | translate }}</mat-option>
         <mat-option value="expire">{{ "COMMON.Home.time" | translate }}</mat-option>
-        <mat-option value="raiting">{{ "COMMON.Home.raiting" | translate }}</mat-option>
+        <mat-option value="raiting">{{ "COMMON.Home.rating" | translate }}</mat-option>
         <mat-option value="name">{{ "COMMON.Home.default" | translate }}</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-button-toggle-group
-      name="fontStyle"
-      aria-label="Font Style"
-      #group="matButtonToggleGroup"
-      (change)="setIsMap(group.value)"
-    >
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" #group="matButtonToggleGroup" (change)="setIsMap(group.value)">
       <mat-button-toggle value="map" [checked]="isMap | async"
         ><mat-icon aria-hidden="false" aria-label="Example home icon"
           >map</mat-icon
@@ -28,21 +23,22 @@
       >
     </mat-button-toggle-group>
   </div>
-  <div class="main-row">
-    <div class="sidebar">
-      <app-side-bar-filter></app-side-bar-filter>
-    </div>
+  <div class="main-row" >
+
+      <div class="sidebar">
+        <app-side-bar-filter></app-side-bar-filter>
+      </div>
 
     <div class="content-area">
       <section class="main-section" *ngIf="!(isMap | async)">
-        <app-tile
-          *ngFor="let discount of discountsData | async"
-          [discount$]="discount"
-        ></app-tile>
+        <app-tiles-box [discountsData$]="discountsData | async"></app-tiles-box>
       </section>
-      <section class="map" *ngIf="isMap | async">
-        <app-map></app-map>
+      <section class="map" *ngIf="isMap | async" >
+        <app-map *ngIf="markers$ | async as data"  [markers]="data" ></app-map>
+
       </section>
     </div>
+
+
   </div>
 </div>

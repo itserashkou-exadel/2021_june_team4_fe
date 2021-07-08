@@ -9,7 +9,7 @@ import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 
 import { StoreModule } from '@ngrx/store';
 import { headReducer } from './core/store/redeucers/home.reducer';
@@ -23,18 +23,19 @@ import { DescriptionEffects } from "./core/store/effects/description.effects";
 import { EffectsModule } from "@ngrx/effects";
 import { DescriptionService } from "./core/services/description.service";
 import { HomeEffects } from './core/store/effects/home.effects';
-import { SharedModule } from "./shared/shared.module";
+import { filterReducer } from './core/store/redeucers/filter.reducer';
+
 
 @NgModule({
   imports: [
 
     StoreModule.forRoot({
-      home: headReducer,
+      home : headReducer,
       uiConfig: uiConfigReducer,
-      description: descriptionReducer
+      description: descriptionReducer,
+      filter: filterReducer,
     }),
     EffectsModule.forRoot([DescriptionEffects, HomeEffects]),
-
     // angular
     HttpClientModule,
     BrowserAnimationsModule,
@@ -47,7 +48,6 @@ import { SharedModule } from "./shared/shared.module";
     // app
     AppRoutingModule,
     NgbModule,
-    SharedModule
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
@@ -57,7 +57,7 @@ import { SharedModule } from "./shared/shared.module";
   entryComponents: [//for dynamical load components
     DialogComponent,
     MapComponent,
-    LocationTreeComponent
+    LocationTreeComponent,
   ]
 })
 export class AppModule {}

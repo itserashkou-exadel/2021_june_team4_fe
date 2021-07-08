@@ -21,7 +21,7 @@
 
       <section class="article-title">
         <mat-icon class="icon">place</mat-icon>
-        <span>{{ data.vendorLocations[0]?.country.name}}</span>, <span>{{data.vendorLocations[0]?.city.name }}</span>
+        <span>{{ data.vendorLocations[0].city.countryName}}</span>, <span>{{data.vendorLocations[0].city.name }}</span>
       </section>
 
       <section class="article-title">
@@ -31,7 +31,7 @@
 
       <section class="article-title">
         <h3>{{ 'COMMON.description.title.vendor' | translate }}</h3>
-        <p>{{ data.vendor}}</p>
+        <p>{{ data.vendor.description }}</p>
       </section>
 
       <section class="article-title map-wrapper">
@@ -41,7 +41,7 @@
       <section class="article-title locations">
         <div *ngFor="let location of data.vendorLocations">
           <mat-icon class="icon">place</mat-icon>
-          <span>{{ location.country.name}}</span>, <span>{{location.city.name }}</span>
+          <span>{{ location.city.countryName}}</span>, <span>{{location.city.name }}</span>
         </div>
       </section>
     </div>
@@ -71,7 +71,7 @@
         <div class="address-block" id="address">
           <h2>{{ 'COMMON.description.rightpanel.contacts' | translate }}</h2>
 
-          <div class="vendor">{{ data.vendor}}</div>
+          <div class="vendor">{{ data.vendor.name}}</div>
           <div class="websites">
             <a target="_blank" rel="nofollow" href="">website.com.ua</a><br>
             <a target="_blank" rel="nofollow" href="">Facebook</a><br>
@@ -79,7 +79,7 @@
           </div>
 
           <div class="phones">
-            <b>+38 (093) 607-87-72</b>
+            <b>{{ data.vendor.contacts }}</b>
           </div>
         </div>
       </div>
