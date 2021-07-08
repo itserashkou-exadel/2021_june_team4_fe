@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
 import { IToken, IUserLogin } from '../../shared/interfaces';
 import { TokenStorageService } from './token-storage.service';
 

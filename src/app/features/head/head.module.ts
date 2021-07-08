@@ -15,7 +15,6 @@ import { CarouselComponent } from './description/carousel/carousel.component';
 import { NgbCarouselModule, NgbRatingModule, NgbTooltipModule } from "@ng-bootstrap/ng-bootstrap";
 import { DialogComponent } from '../../shared/dialog/dialog/dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
-// import { DialogContentComponent } from './description/description/dialog/dialog-content/dialog-content.component';
 import { LocationTreeComponent } from './head/location-tree/location-tree.component';
 import { MatTreeModule } from "@angular/material/tree";
 import { SideBarFilterComponent } from './home/home/side-bar-filter/side-bar-filter.component';
@@ -23,38 +22,52 @@ import { CategoryComponent } from './home/home/side-bar-filter/category/category
 import { DateComponent } from './home/home/side-bar-filter/date/date.component';
 import { RangeComponent } from './home/home/side-bar-filter/range/range.component';
 import { TagsComponent } from './home/home/side-bar-filter/tags/tags.component';
-import {StepperWrapperComponent} from "./stepper/stepper-wrapper/stepper-wrapper.component";
-import {StepCreateVendorComponent} from "./stepper/step-create-vendor/step-create-vendor.component";
-import {StepCreateBpComponent} from "./stepper/step-create-bp/step-create-bp.component";
-import {StepEditBpComponent} from "./stepper/step-edit-bp/step-edit-bp.component";
+import { StepperWrapperComponent } from "./stepper/stepper-wrapper/stepper-wrapper.component";
+import { StepCreateVendorComponent } from "./stepper/step-create-vendor/step-create-vendor.component";
+import { StepCreateBpComponent } from "./stepper/step-create-bp/step-create-bp.component";
+import { StepEditBpComponent } from "./stepper/step-edit-bp/step-edit-bp.component";
+
+import { MissingTranslationService } from '../../core/services/missing-translation.service';
+import { HttpClient } from "@angular/common/http";
+import {
+  MissingTranslationHandler,
+  TranslateLoader,
+  TranslateModule
+} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
+  return new TranslateHttpLoader(http, './assets/locale/', '.json');
+}
 
 @NgModule({
-    declarations: [
-        HeadComponent,
-        HomeComponent,
-        DescriptionComponent,
-        ProfileComponent,
-        StatisticComponent,
-        VendorComponent,
-        NotFoundComponent,
-        MapComponent,
-        CarouselComponent,
-        DialogComponent,
-        // DialogContentComponent,
-        StepperWrapperComponent,
-        StepCreateVendorComponent,
-        StepCreateBpComponent,
-        StepEditBpComponent,
-        LocationTreeComponent,
-        SideBarFilterComponent,
-        CategoryComponent,
-        DateComponent,
-        RangeComponent,
-        TagsComponent
-    ],
-    exports: [
-        MapComponent
-    ],
+  declarations: [
+    HeadComponent,
+    HomeComponent,
+    DescriptionComponent,
+    ProfileComponent,
+    StatisticComponent,
+    VendorComponent,
+    NotFoundComponent,
+    MapComponent,
+    CarouselComponent,
+    DialogComponent,
+    LocationTreeComponent,
+    SideBarFilterComponent,
+    CategoryComponent,
+    DateComponent,
+    RangeComponent,
+    TagsComponent,
+    StepperWrapperComponent,
+    StepCreateVendorComponent,
+    StepCreateBpComponent,
+    StepEditBpComponent
+  ],
+  exports: [
+    MapComponent,
+    StepCreateVendorComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -65,6 +78,15 @@ import {StepEditBpComponent} from "./stepper/step-edit-bp/step-edit-bp.component
     MatDialogModule,
     NgbTooltipModule,
     MatTreeModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MissingTranslationService},
+      useDefaultLang: false,
+    }),
   ],
 })
 export class HeadModule { }

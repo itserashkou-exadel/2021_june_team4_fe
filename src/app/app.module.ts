@@ -33,7 +33,7 @@ import { filterReducer } from './core/store/redeucers/filter.reducer';
       home : headReducer,
       uiConfig: uiConfigReducer,
       description: descriptionReducer,
-      filter: filterReducer
+      filter: filterReducer,
     }),
     EffectsModule.forRoot([DescriptionEffects, HomeEffects]),
     // angular
@@ -47,7 +47,7 @@ import { filterReducer } from './core/store/redeucers/filter.reducer';
 
     // app
     AppRoutingModule,
-    NgbModule
+    NgbModule,
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
@@ -57,7 +57,7 @@ import { filterReducer } from './core/store/redeucers/filter.reducer';
   entryComponents: [//for dynamical load components
     DialogComponent,
     MapComponent,
-    LocationTreeComponent
+    LocationTreeComponent,
   ]
 })
 export class AppModule {}

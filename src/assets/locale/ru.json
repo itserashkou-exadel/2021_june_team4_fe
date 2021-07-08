@@ -1,0 +1,67 @@
+{
+  "COMMON": {
+    "description": {
+      "currency": "грн",
+      "rightpanel": {
+        "contacts": "Контакты",
+        "dateFrom": "От",
+        "dateTo": "До",
+        "coupon": "Активировать куппон",
+        "sale": "Скидка"
+      },
+      "title": {
+        "bp": "Описание бонусной программы",
+        "vendor": "Описание вендора"
+      }
+    },
+    "Head": {
+      "name": "Никита Мартынов",
+      "search": "Поиск",
+      "home": "Домашняя",
+      "profile": "Профиль",
+      "vendor": "Вендор",
+      "statistic": "Статистика"
+    },
+    "Home": {
+      "sort": "Сортировать по",
+      "date": "По дате",
+      "time": "По времени",
+      "rating": "По рейтингу",
+      "default": "По умолчанию"
+    },
+    "Tile": {
+      "info": "Подробнее",
+      "want": "Хочу",
+      "discount": "Скидка",
+      "vendor": "Вендор",
+      "expired": "Срок действия"
+    },
+    "Stepper": {
+      "description": "Описание",
+      "eventStart": "Начало Программы",
+      "eventEnd": "Конец Программы",
+      "location": "Местоположение",
+      "bonusSize": "Размер скидки",
+      "vendorName": "Имя вендора",
+      "vendorCategory": "Категория",
+      "vendorTag": "Тег",
+      "vendorLogo": "Логотип Вендора",
+      "vendorSchedule": "График вендора",
+      "vendorContacts": "Контакты вендора",
+      "addBp": "Добавить БП",
+      "vendorInfo": "Информация о вендоре",
+      "vendorBpInfo": "Информация о БП",
+      "vendorMessage": "Сообщение",
+      "finalMessage": "Вся информация была успешно сохранена!"
+    },
+    "Global": {
+      "back": "Назад",
+      "clear": "Очистить",
+      "save": "Сохранить"
+    }
+  },
+  "LANGUAGES": {
+    "EN": "EN",
+    "RU": "RU"
+  }
+}
