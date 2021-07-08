@@ -1,11 +1,10 @@
 <div class="sideBar">
 
-
   <form [formGroup]="filterForm">
     <mat-form-field appearance="fill">
         <mat-label>Select a vendor</mat-label>
         <mat-select  formControlName="cathegory" (selectionChange)="selectCathegory()" multiple>
-          <mat-option *ngFor="let c of vendors" [value]="c">{{c}}</mat-option>
+          <mat-option *ngFor="let c of vendors | async" [value]="c">{{c}}</mat-option>
         </mat-select>
       </mat-form-field>
   
@@ -29,7 +28,6 @@
         </mat-select>
       </mat-form-field>
 
-
       <mat-form-field appearance="fill">
         <mat-label>Select tag</mat-label>
         <mat-select formControlName="tag"  (selectionChange)="selectTag()">
@@ -49,8 +47,6 @@
         </mat-chip-list>
       </mat-form-field>
       
-   
-
     <button mat-stroked-button color="primary">Apply</button>
 </form>
 </div>

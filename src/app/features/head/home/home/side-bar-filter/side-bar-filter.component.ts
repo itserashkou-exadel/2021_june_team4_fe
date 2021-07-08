@@ -7,7 +7,8 @@ import {
   removeChips,
 } from 'src/app/core/store/actions/filter.actions';
 //import { stat } from 'fs';
-import { IAppState, IFilterControls, IFilterState, ILocationsGroup } from 'src/app/shared/interfaces';
+import { IAppState, IFilterControls, IFilterState, ILocationsGroup, } from 'src/app/shared/interfaces';
+import { selectFilter,selectChips,selectControlsLocations,selectControlsCathegories,selectControlsTags ,selectControlsVendors} from '../../home.selectors';
 
 @Component({
   selector: 'app-side-bar-filter',
@@ -16,47 +17,27 @@ import { IAppState, IFilterControls, IFilterState, ILocationsGroup } from 'src/a
 })
 export class SideBarFilterComponent implements OnInit {
   filterForm: FormGroup;
-  //filterConfig: any;
 
   chips: Observable<string[]>;
   tags: Observable<string[]>;
   cathegories: Observable<string[]>;
   locations: Observable<ILocationsGroup[]>;
-  vendors: string[];
+  vendors: Observable<string[]>;
 
   constructor(private store: Store<IAppState>) {
-    const selectFilterConfig = (state: IAppState) => state.filter;
 
-    const selectChips = createSelector(
-      selectFilterConfig,
-      (state: IFilterState) => state.chips
-    );
-    const selectDropdownsValues = createSelector(
-      selectFilterConfig,
-      (state: IFilterState) => state.controlsValues
-    );
-    const selectTags = createSelector(
-      selectDropdownsValues,
-      (state: IFilterControls) => state.tags
-    );
-    const selectCathegories = createSelector(
-      selectDropdownsValues,
-      (state: IFilterControls) => state.cathegories
-    );
-    const selectLocations = createSelector(selectDropdownsValues, (state: IFilterControls) => state.locations)
-
-    this.locations = this.store.select(selectLocations);
-    this.cathegories = this.store.select(selectCathegories);
-    this.tags = this.store.select(selectTags);
+    this.locations = this.store.select(selectControlsLocations);
+    this.cathegories = this.store.select(selectControlsCathegories);
+    this.tags = this.store.select(selectControlsTags);
     this.chips = this.store.select(selectChips);
+    this.vendors = this.store.select(selectControlsVendors);
 
     this.filterForm = new FormGroup({
       cathegory: new FormControl(['Fashion']),
       cities: new FormControl(''),
       tag: new FormControl(''),
     });
-    
-  this.vendors = ['Rozetka', 'Pizzas without borders', 'Fitness assembly'];
+
   }
 
   ngOnInit(): void {}

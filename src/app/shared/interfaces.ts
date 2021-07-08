@@ -11,7 +11,7 @@ export interface IFilterControls {
   locations: ILocationsGroup[],
   cathegories: string[],
   tags: string[],
-  vendors?: any,
+  vendors: string[],
 }
 export interface ILocationsGroup{
   countryName: string,

@@ -8,7 +8,7 @@ export const initialState: IFilterState = {
         countryName: 'Belarus',
         cities: ['Minsk', 'Mogilev', 'Grodno', 'Gomel'],
       },
-      { countryName: 'Ukraine', cities: ['Kyiv', 'Vinnytsia', 'Odesa'] },
+      { countryName: 'Ukraine', cities: ['Kyiv', 'Vinnytsia', 'Odesa','Kharkiv'] },
     ],
     cathegories: ['Food', 'Fashion', 'Gadgets', 'Health '],
     tags: [
@@ -22,12 +22,14 @@ export const initialState: IFilterState = {
       'Sushi',
       'Pizza',
     ],
+    vendors: ['Vylka', 'Pizzas without borders', 'Fitness assembly','Stara poshta'],
   },
+  
   formValues: {
     cathegory: ['Fashion'],
     cities: '',
     tags: '',
-    vendors: new FormControl(),
+    
   },
   chips: ['Yoga'],
 };
