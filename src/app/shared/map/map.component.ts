@@ -42,7 +42,7 @@ export class MapComponent implements AfterViewInit {
     const tiles = L.tileLayer(
       'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       {
-        id: 'mapbox/streets-v11', //satellite-v9 streets-v11
+        id: 'mapbox/streets-v11',
         maxZoom: 18,
         minZoom: 3,
         attribution:
@@ -59,7 +59,6 @@ export class MapComponent implements AfterViewInit {
     this.initMap();
      setTimeout(() => {
       if (this.markers)
-     // let newMarkers = [];
         this.markers.forEach((discount: any) => {
           discount.cords.forEach((point: any) => {
             L.marker(point).addTo(this.map).bindPopup(discount.text);
@@ -69,6 +68,5 @@ export class MapComponent implements AfterViewInit {
       const myPins = this.markers?.map((el) => el.cords);
       this.map.fitBounds(myPins);
    }, 1000);
-  // setLatLang();
   }
 }

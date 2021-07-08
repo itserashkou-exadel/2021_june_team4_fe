@@ -55,12 +55,7 @@ export class SideBarFilterComponent implements OnInit {
       cities: new FormControl(''),
       tag: new FormControl(''),
     });
-
-    // this.filterConfig = {
-    //   cathegories: ['Food', 'Fashion', 'Gadgets'],
-    //   tags: ['Apple', 'Samsung', 'Manicure', 'Vocation', 'Cinema'],
-    // };
-    //const cathegories=
+    
   this.vendors = ['Rozetka', 'Pizzas without borders', 'Fitness assembly'];
   }
 

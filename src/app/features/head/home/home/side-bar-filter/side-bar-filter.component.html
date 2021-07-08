@@ -5,7 +5,6 @@
     <mat-form-field appearance="fill">
         <mat-label>Select a vendor</mat-label>
         <mat-select  formControlName="cathegory" (selectionChange)="selectCathegory()" multiple>
-          <!-- <mat-option>None</mat-option> -->
           <mat-option *ngFor="let c of vendors" [value]="c">{{c}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -13,19 +12,9 @@
     <mat-form-field appearance="fill">
         <mat-label>Select an cathegory</mat-label>
         <mat-select  formControlName="cathegory" (selectionChange)="selectCathegory()" multiple>
-          <!-- <mat-option>None</mat-option> -->
           <mat-option *ngFor="let c of cathegories |async" [value]="c">{{c}}</mat-option>
         </mat-select>
       </mat-form-field>
-
-      <!-- <mat-form-field appearance="fill">
-        <mat-label>Favorite food</mat-label>
-        <mat-select formControlName="cities"  (selectionChange)="selectCity()">
-          <mat-option *ngFor="let c  of filterConfig.cities"  value="{{c}}" >{{c}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field> -->
-
 
       <mat-form-field appearance="fill">
         <mat-label>Locations</mat-label>
@@ -60,12 +49,8 @@
         </mat-chip-list>
       </mat-form-field>
       
-    <!-- <app-category></app-category>
-    <app-date></app-date>
-    <app-range></app-range>
-    <app-tags></app-tags> -->
+   
 
     <button mat-stroked-button color="primary">Apply</button>
-    <a href="http://localhost:8080/swagger-ui/">Swagger</a>
 </form>
 </div>
