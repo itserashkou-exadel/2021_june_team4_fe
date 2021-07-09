@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input, OnInit } from '@angular/core';
+import { Component, AfterViewInit, Input, OnInit, OnDestroy } from '@angular/core';
 import * as L from 'leaflet';
 import { IMapMarker } from '../interfaces';
 
@@ -22,7 +22,7 @@ L.Marker.prototype.options.icon = iconDefault;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements AfterViewInit, OnDestroy {
   private map: any;
 
   @Input() markers: IMapMarker[] = [
@@ -54,6 +54,9 @@ export class MapComponent implements AfterViewInit {
   }
 
   constructor() {}
+  ngOnDestroy(): void {
+    this.map.remove();
+  }
 
   ngAfterViewInit(): void {
     this.initMap();

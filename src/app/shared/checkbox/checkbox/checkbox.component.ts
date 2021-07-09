@@ -1,47 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import {ThemePalette} from '@angular/material/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-
-export interface Task {
-  name: string;
-  selected: boolean;
-  color: ThemePalette;
-}
+// interface Category {
+//   name: string;
+//   id: number;
+//   selected: false;
+// }
 
 @Component({
   selector: 'app-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
 })
-export class CheckboxComponent implements OnInit{
- 
-  ngOnInit(){}
 
-  task: Task[] = [
-    {
-      name: 'Home',
-      selected: false,
-      color: 'primary',
-    },
-    {
-      name: 'Food',
-      selected: false,
-      color: 'primary',
-    },
-    {
-      name: 'Clothes',
-      selected: false,
-      color: 'primary',
-    },
-    {
-      name: 'Travel',
-      selected: false,
-      color: 'primary',
-    },
-    {
-      name: 'Devices',
-      selected: false,
-      color: 'primary',
-    },
-  ];
+export class CheckboxComponent implements OnInit {
+  
+  constructor(private http: HttpClient) {}
+  
+  categories: any;
+
+  ngOnInit() {
+      this.http.get<any>('http://localhost:8080/categories').subscribe((data) => {
+        this.categories = data;
+      });
+  }
 }

@@ -7,7 +7,22 @@ import {
   removeChips,
 } from 'src/app/core/store/actions/filter.actions';
 //import { stat } from 'fs';
-import { IAppState, IFilterControls, IFilterState, ILocationsGroup } from 'src/app/shared/interfaces';
+import {
+  IAppState,
+  IFilterControls,
+  IFilterState,
+  ILocationsGroup,
+} from 'src/app/shared/interfaces';
+import {
+  selectFilter,
+  selectChips,
+  selectControlsLocations,
+  selectControlsCathegories,
+  selectControlsTags,
+  selectControlsVendors,
+} from '../../home.selectors';
+import { FilterService } from 'src/app/core/services/filter.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-side-bar-filter',
@@ -16,53 +31,63 @@ import { IAppState, IFilterControls, IFilterState, ILocationsGroup } from 'src/a
 })
 export class SideBarFilterComponent implements OnInit {
   filterForm: FormGroup;
-  //filterConfig: any;
 
   chips: Observable<string[]>;
   tags: Observable<string[]>;
-  cathegories: Observable<string[]>;
+  categories: Observable<string[]>;
   locations: Observable<ILocationsGroup[]>;
-  vendors: string[];
+  vendors: Observable<string[]>;
 
-  constructor(private store: Store<IAppState>) {
-    const selectFilterConfig = (state: IAppState) => state.filter;
+  constructor(
+    private store: Store<IAppState>,
+    private filterService: FilterService
+  ) {
+    let remotCategories = this.filterService.requestCategories();
+    this.categories = remotCategories.pipe(
+      map((el) => el.map((val: { name: any }) => val.name))
+    );
+    //cc.pipe(map(el => el.name)).subscribe(el => console.log(el));
 
-    const selectChips = createSelector(
-      selectFilterConfig,
-      (state: IFilterState) => state.chips
+    const remoteVendors = this.filterService.requestVendors();
+    this.vendors = remoteVendors.pipe(
+      map((el) => el.map((val: { name: any }) => val.name))
     );
-    const selectDropdownsValues = createSelector(
-      selectFilterConfig,
-      (state: IFilterState) => state.controlsValues
-    );
-    const selectTags = createSelector(
-      selectDropdownsValues,
-      (state: IFilterControls) => state.tags
-    );
-    const selectCathegories = createSelector(
-      selectDropdownsValues,
-      (state: IFilterControls) => state.cathegories
-    );
-    const selectLocations = createSelector(selectDropdownsValues, (state: IFilterControls) => state.locations)
+    remoteVendors.subscribe((d) => console.log(d));
 
-    this.locations = this.store.select(selectLocations);
-    this.cathegories = this.store.select(selectCathegories);
-    this.tags = this.store.select(selectTags);
+    const remoteTags = this.filterService.requestTags();
+    this.tags = remoteTags.pipe(
+      map((el) => el.map((val: { name: any }) => val.name))
+    );
+
+    const remoteCities = this.filterService.requestCities();
+    remoteCities.subscribe((data) => console.log(data));
+    let rms = remoteCities.pipe(
+      map((el) =>
+        el.map((val: any) => ({
+          countryName: val.name,
+          cities: val.cities.map((c: { name: any }) => c.name)
+        }))
+      )
+    );
+this.locations = rms;
+
+    //this.locations = this.store.select(selectControlsLocations);
+    //this.categories = this.store.select(selectControlsCathegories);
+    // this.tags = this.store.select(selectControlsTags);
     this.chips = this.store.select(selectChips);
+    // this.vendors = this.store.select(selectControlsVendors);
 
     this.filterForm = new FormGroup({
-      cathegory: new FormControl(['Fashion']),
+      category: new FormControl(['Fashion']),
       cities: new FormControl(''),
       tag: new FormControl(''),
     });
-    
-  this.vendors = ['Rozetka', 'Pizzas without borders', 'Fitness assembly'];
   }
 
   ngOnInit(): void {}
 
   selectCathegory() {
-    const cathegoryValue = this.filterForm.get('cathegory')?.value;
+    const cathegoryValue = this.filterForm.get('category')?.value;
     console.log(cathegoryValue);
   }
 
@@ -78,13 +103,6 @@ export class SideBarFilterComponent implements OnInit {
 
   selectTag() {
     const tag = this.filterForm.get('tag')?.value;
-    let isPresent;
-    this.chips.subscribe((el) => {
-      isPresent = el.includes(tag);
-      console.log(tag);
-    });
-    if (!isPresent) {
-      this.store.dispatch(addChips({ tag }));
-    }
+    this.store.dispatch(addChips({ tag }));
   }
 }

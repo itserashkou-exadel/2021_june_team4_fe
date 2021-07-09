@@ -107,7 +107,8 @@ import {TranslateModule} from "@ngx-translate/core";
     FooterComponent,
     TileComponent,
     MatStepperModule,
-    TilesBoxComponent
+    TilesBoxComponent,
+    CheckboxComponent
   ],
   declarations: [
     FooterComponent,

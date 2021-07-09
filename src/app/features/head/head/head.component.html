@@ -1,5 +1,6 @@
-<div>
-  <div class="header-container">
+<div class="cover">
+  <div class="header">
+    <div class="header-container">   
     <div class="left-block">
       <div>
         <img src="../../../../assets/logo.png" alt="App logo" height="50" />
@@ -9,7 +10,7 @@
         <mat-icon aria-hidden="false" aria-label="Home"
         >location_on</mat-icon
         >
-        <span (click)="openDialog()"> PLUG</span>
+        <span (click)="openDialog()"> City</span>
       </div>
       <div class="search-container">
         <mat-form-field class="example-full-width search">
@@ -65,6 +66,8 @@
     </a>
   </nav>
 </div>
-  <router-outlet></router-outlet>
-  <app-footer></app-footer>
+<router-outlet></router-outlet>
+</div>
+
+<app-footer></app-footer>
 </div>
