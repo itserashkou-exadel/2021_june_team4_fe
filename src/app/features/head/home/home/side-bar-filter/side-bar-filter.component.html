@@ -3,21 +3,21 @@
 
   <form [formGroup]="filterForm">
     <mat-form-field appearance="fill">
-        <mat-label>Select a vendor</mat-label>
+        <mat-label>{{ "COMMON.Home.filter.vendor" | translate }}</mat-label>
         <mat-select  formControlName="cathegory" (selectionChange)="selectCathegory()" multiple>
           <mat-option *ngFor="let c of vendors" [value]="c">{{c}}</mat-option>
         </mat-select>
       </mat-form-field>
-  
+
     <mat-form-field appearance="fill">
-        <mat-label>Select an cathegory</mat-label>
+        <mat-label>{{ "COMMON.Home.filter.category" | translate }}</mat-label>
         <mat-select  formControlName="cathegory" (selectionChange)="selectCathegory()" multiple>
           <mat-option *ngFor="let c of cathegories |async" [value]="c">{{c}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Locations</mat-label>
+        <mat-label>{{ "COMMON.Home.filter.locations" | translate }}</mat-label>
         <mat-select formControlName="cities">
           <mat-option>-- None --</mat-option>
           <mat-optgroup *ngFor="let country of locations | async" [label]="country.countryName"
@@ -31,7 +31,7 @@
 
 
       <mat-form-field appearance="fill">
-        <mat-label>Select tag</mat-label>
+        <mat-label>{{ "COMMON.Home.filter.tag" | translate }}</mat-label>
         <mat-select formControlName="tag"  (selectionChange)="selectTag()">
           <mat-option *ngFor="let tag of tags | async" [value]="tag" >
             {{tag}}
@@ -40,7 +40,7 @@
       </mat-form-field>
 
       <mat-form-field class="example-chip-list" appearance="fill">
-        <mat-label>Selected tags</mat-label>
+        <mat-label>{{ "COMMON.Home.filter.tags" | translate }}</mat-label>
         <mat-chip-list #chipList aria-label="Fruit selection">
           <mat-chip *ngFor="let tag of chips | async"  >
             {{tag}}
@@ -48,9 +48,9 @@
           </mat-chip>
         </mat-chip-list>
       </mat-form-field>
-      
-   
 
-    <button mat-stroked-button color="primary">Apply</button>
+
+
+    <button mat-stroked-button color="primary">{{ "COMMON.Home.filter.apply" | translate }}</button>
 </form>
 </div>

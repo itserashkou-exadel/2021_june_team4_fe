@@ -42,10 +42,13 @@ export interface IDescription {
     contacts: any;
   };
   vendorLocations: [{
+    vendorLocations: any;
     city: {
       countryName: string;
       name: string;
-    }
+    },
+    latitude: number;
+    longitude: number;
   }];
 }
 

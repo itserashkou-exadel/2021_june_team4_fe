@@ -13,14 +13,14 @@ export class DescriptionService {
   }
 
   handleRemoteDescription(remouteData:any) {
-    console.log('remouteData', remouteData)
+    console.log(remouteData.vendorLocations)
     const localDescription: IDescription = {
       id: remouteData.id,
       name: remouteData.name,
       vendor: remouteData.vendor,
       startTime: remouteData.startTime,
       endTime: remouteData.endTime,
-      vendorLocations: remouteData.vendorLocations === null ? [{city:{countryName: '', name: ''}}] : remouteData.vendorLocations ,
+      vendorLocations: remouteData.vendorLocations === null ? [{city:{countryName: '', name: ''},latitude:0, longitude:0}] : remouteData.vendorLocations ,
       tags: [...remouteData.tags.map((el: any)=>{
         return el.name;
       })],

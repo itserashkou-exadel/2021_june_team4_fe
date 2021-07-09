@@ -19,7 +19,7 @@ export const initialState: DescriptionState = {
     promo: 'Some initial promo code',
     tags: [{name:'Yoga'}],
     vendor: "string",
-    vendorLocations: [{city: {countryName: 'Initial country', name: 'Initial city'}}]
+    vendorLocations: [{city: {countryName: 'Initial country', name: 'Initial city'}, latitude:0 ,longitude:0 }]
   }
 };
 

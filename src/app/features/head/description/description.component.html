@@ -61,10 +61,7 @@
           {{ data.percent }}
         </div>
 
-<!--        <button mat-fab color="warn" aria-label="Save in favorite">-->
-<!--          <mat-icon>favorite</mat-icon>-->
-<!--        </button>-->
-        <button mat-fab color="basic" aria-label="Add to favorite">
+        <button mat-fab [color]="isFavorite ? 'warn' : 'basic'" aria-label="Add to favorite" (click)="addToFavorite()">
           <mat-icon class="favorite">favorite</mat-icon>
         </button>
 
