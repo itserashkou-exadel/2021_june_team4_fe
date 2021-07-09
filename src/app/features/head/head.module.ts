@@ -14,6 +14,9 @@ import { MapComponent } from '../../shared/map/map.component';
 import { CarouselComponent } from './description/carousel/carousel.component';
 import { NgbCarouselModule, NgbRatingModule, NgbTooltipModule } from "@ng-bootstrap/ng-bootstrap";
 import { DialogComponent } from '../../shared/dialog/dialog/dialog.component';
+
+import { FooterComponent } from 'src/app/shared/footer/footer.component';
+
 import { MatDialogModule } from "@angular/material/dialog";
 // import { DialogContentComponent } from './description/description/dialog/dialog-content/dialog-content.component';
 import { LocationTreeComponent } from './head/location-tree/location-tree.component';
@@ -51,6 +54,7 @@ import {StepEditBpComponent} from "./stepper/step-edit-bp/step-edit-bp.component
         DateComponent,
         RangeComponent,
         TagsComponent
+        
     ],
     exports: [
         MapComponent
@@ -64,7 +68,7 @@ import {StepEditBpComponent} from "./stepper/step-edit-bp/step-edit-bp.component
     NgbRatingModule,
     MatDialogModule,
     NgbTooltipModule,
-    MatTreeModule,
+    MatTreeModule
   ],
 })
 export class HeadModule { }

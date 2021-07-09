@@ -16,6 +16,9 @@ import { headReducer } from './core/store/redeucers/home.reducer';
 
 import { DialogComponent } from "./shared/dialog/dialog/dialog.component";
 import { MapComponent } from "./shared/map/map.component";
+
+import { FooterComponent } from './shared/footer/footer.component';
+
 import { LocationTreeComponent } from "./features/head/head/location-tree/location-tree.component";
 import { uiConfigReducer } from './core/store/redeucers/ui-config.reducer';
 import { descriptionReducer } from "./core/store/redeucers/discription.reducer";
