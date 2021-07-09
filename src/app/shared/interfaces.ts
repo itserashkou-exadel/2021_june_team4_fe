@@ -10,9 +10,9 @@ export interface IFilterState {
 }
 export interface IFilterControls {
   locations: ILocationsGroup[],
-  cathegories: string[],
+  categories: string[],
   tags: string[],
-  vendors?: any,
+  vendors: string[],
 }
 export interface ILocationsGroup{
   countryName: string,

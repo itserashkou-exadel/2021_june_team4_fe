@@ -29,7 +29,7 @@ export class DescriptionComponent implements OnInit {
     this.descriptionData$ = this.store.pipe(select(selectDescription));
 
     this.marker = [
-      { cords:[50.4501, 30.5234], text: 'This is Kyiv'},
+      { cords:[[50.4501, 30.5234]], text: 'This is Kyiv'},
     ]
   }
 

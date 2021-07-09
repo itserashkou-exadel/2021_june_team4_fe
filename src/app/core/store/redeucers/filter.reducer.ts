@@ -8,10 +8,11 @@ export const initialState: IFilterState = {
         countryName: 'Belarus',
         cities: ['Minsk', 'Mogilev', 'Grodno', 'Gomel'],
       },
-      { countryName: 'Ukraine', cities: ['Kyiv', 'Vinnytsia', 'Odesa'] },
+      { countryName: 'Ukraine', cities: ['Kyiv', 'Vinnytsia', 'Odesa','Kharkiv'] },
     ],
-    cathegories: ['Food', 'Fashion', 'Gadgets', 'Health '],
+    categories: ['Food', 'Fashion', 'Gadgets', 'Health '],
     tags: [
+      'None',
       'Apple',
       'Samsung',
       'Manicure',
@@ -22,12 +23,14 @@ export const initialState: IFilterState = {
       'Sushi',
       'Pizza',
     ],
+    vendors: ['Vylka', 'Pizzas without borders', 'Fitness assembly','Stara poshta'],
   },
+  
   formValues: {
-    cathegory: ['Fashion'],
+    category: ['Fashion'],
     cities: '',
     tags: '',
-    vendors: new FormControl(),
+    
   },
   chips: ['Yoga'],
 };
@@ -35,6 +38,10 @@ export const initialState: IFilterState = {
 export function filterReducer(state: IFilterState = initialState, action: any) {
   switch (action.type) {
     case 'addTag':
+      if (state.chips.includes(action.tag) || action.tag === 'None'){
+        return state;
+      }
+     
       return { ...state, chips: [...state.chips, action.tag] };
     case 'removeTag':
       return {

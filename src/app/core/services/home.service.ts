@@ -17,7 +17,7 @@ export class HomeService {
   }
 
   handleRemoteDiscount(remoteDiscount: any) {
-    console.log(remoteDiscount);
+    // console.log(remoteDiscount);
     const localDiscount: IDiscount = {
       id: remoteDiscount.id,
       name: remoteDiscount.name,
@@ -41,12 +41,11 @@ export class HomeService {
   }
 }
 
-const getCoordinates =(src : any)=>{
+const getCoordinates = (src: any) => {
   let cords = src.vendorLocations;
   let res: any[][] = [];
-  cords.map((el: any)=>{
-    res.push([el.latitude, el.longitude])
-  })
+  cords.map((el: any) => {
+    res.push([el.latitude, el.longitude]);
+  });
   return res;
-
-}
+};
