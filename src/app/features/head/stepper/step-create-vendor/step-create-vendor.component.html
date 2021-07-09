@@ -24,6 +24,16 @@
           {{ vendor }}
         </mat-option>
       </mat-autocomplete>
+      <mat-error
+        *ngIf="
+          vendorForm.controls['name'].invalid &&
+          vendorForm.controls['name'].touched
+        "
+      >
+        <span *ngIf="vendorForm.controls.name.errors?.required">
+          Vendor name can't be empty
+        </span>
+      </mat-error>
     </mat-form-field>
     <!-- /Vendor name -->
   </div>
@@ -36,6 +46,16 @@
         placeholder="Add description"
         formControlName="description"
       ></textarea>
+      <mat-error
+        *ngIf="
+          vendorForm.controls['description'].invalid &&
+          vendorForm.controls['description'].touched
+        "
+      >
+        <span *ngIf="vendorForm.controls.description.errors?.required">
+          Description can't be empty
+        </span>
+      </mat-error>
     </mat-form-field>
     <!-- /Vendor Description -->
   </div>
@@ -45,6 +65,16 @@
     <mat-form-field class="example-full-width form-field" appearance="fill">
       <mat-label>Vendor logo</mat-label>
       <input matInput placeholder="Add logo" formControlName="vendorLogo" />
+      <mat-error
+        *ngIf="
+          vendorForm.controls['vendorLogo'].invalid &&
+          vendorForm.controls['vendorLogo'].touched
+        "
+      >
+        <span *ngIf="vendorForm.controls.vendorLogo.errors?.required">
+          Vendor logo can't be empty
+        </span>
+      </mat-error>
     </mat-form-field>
     <!-- /Vendor logo -->
   </div>
@@ -54,6 +84,16 @@
     <mat-form-field class="example-full-width form-field" appearance="fill">
       <mat-label>Locations</mat-label>
       <input matInput placeholder="Add locations" formControlName="locations" />
+      <mat-error
+        *ngIf="
+          vendorForm.controls['locations'].invalid &&
+          vendorForm.controls['locations'].touched
+        "
+      >
+        <span *ngIf="vendorForm.controls.locations.errors?.required">
+          Locations can't be empty
+        </span>
+      </mat-error>
     </mat-form-field>
     <!-- /Vendor locations -->
   </div>
@@ -62,6 +102,16 @@
     <mat-form-field class="example-full-width form-field" appearance="fill">
       <mat-label>Contacts</mat-label>
       <input matInput placeholder="Add contacts" formControlName="contacts" />
+      <mat-error
+        *ngIf="
+          vendorForm.controls['contacts'].invalid &&
+          vendorForm.controls['contacts'].touched
+        "
+      >
+        <span *ngIf="vendorForm.controls.contacts.errors?.required">
+          Contacts can't be empty
+        </span>
+      </mat-error>
     </mat-form-field>
     <!-- /Vendor contacts -->
   </div>
@@ -69,13 +119,7 @@
     <button class="save-btn" mat-flat-button color="warn" (click)="resetForm()">
       Clear
     </button>
-    <button
-      type="submit"
-      class="save-btn"
-      mat-flat-button
-      color="primary"
-      matStepperNext
-    >
+    <button type="submit" class="save-btn" mat-flat-button color="primary">
       Save
     </button>
   </div>

@@ -19,8 +19,8 @@ export class CategoriesService {
     return this.http.get<ICategory[]>(`${API_URL}/categories`);
   };
 
-  // createCategory(): Observable<string> { 
-  //   return this.http.post<string>(`${API_URL}/categories`, httpOptions)
+  // createCategory(category: string): Observable<string> { 
+  //   return this.http.post<string>(`${API_URL}/categories`, category, httpOptions)
   // };
 
   createCategory(category: string): void { 

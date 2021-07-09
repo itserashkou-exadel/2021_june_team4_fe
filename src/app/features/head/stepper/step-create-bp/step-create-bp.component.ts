@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CategoriesService } from 'src/app/core/services/categories.service';
+import { DiscountService } from 'src/app/core/services/discount.service';
 import { TagsService } from 'src/app/core/services/tags.service';
 import { ICategory, ITag } from 'src/app/shared/interfaces';
 
@@ -10,15 +11,16 @@ import { ICategory, ITag } from 'src/app/shared/interfaces';
   templateUrl: './step-create-bp.component.html',
   styleUrls: ['./step-create-bp.component.scss']
 })
-export class StepCreateBpComponent implements OnInit {
+export class StepCreateBpComponent implements OnInit, OnDestroy {
   bpForm!: FormGroup;
+  aSub!: Subscription;
 
   categories$: Observable<ICategory[]>;
   tags$: Observable<ITag[]>;
-  http: any;
   
   constructor( private categoriesService: CategoriesService,
-               private tagsService: TagsService ) 
+               private tagsService: TagsService,
+               private discountService: DiscountService ) 
   { 
     this.categories$ = this.categoriesService.getCategories();
     this.tags$ = this.tagsService.getTags();
@@ -26,21 +28,38 @@ export class StepCreateBpComponent implements OnInit {
 
   ngOnInit(): void {
     this.bpForm = new FormGroup({
-      bonusProgram: new FormControl(null, [Validators.required]),
+      name: new FormControl(null, [Validators.required]),
       category: new FormControl(null, [Validators.required]),
       tag: new FormControl(null, [Validators.required]),
-      bpName: new FormControl(null, [Validators.required]),
       bpPhotos: new FormControl(null, [Validators.required]),
-      bpDescription: new FormControl(null, [Validators.required]),
-      bpStartDate: new FormControl(null, [Validators.required]),
-      bpEndDate: new FormControl(null, [Validators.required]),
-      bpSize: new FormControl(null, [Validators.required]),
-      bpPrice: new FormControl(null, [Validators.required])
+      description: new FormControl(null, [Validators.required]),
+      startTime: new FormControl(null, [Validators.required]),
+      endTime: new FormControl(null, [Validators.required]),
+      percent: new FormControl(null, [Validators.required])
     });
   };
 
+  ngOnDestroy(): void {
+    if (this.aSub) {
+      this.aSub.unsubscribe();
+    };
+  };
+
   saveBP(): void {
-    localStorage.setItem('bpFormData', JSON.stringify(this.bpForm.value))
+    this.bpForm.disable();
+
+    const bpFormData = this.bpForm.value;
+    this.aSub = this.discountService.createDiscount(bpFormData).subscribe(
+      () => {},
+      err => {        
+        console.error(err);
+        this.bpForm.enable();
+      },
+      () => {
+        console.log('All data were saved successfully');
+        this.bpForm.enable();
+      }
+    )
   };
 
   createCategory(category: string): void {

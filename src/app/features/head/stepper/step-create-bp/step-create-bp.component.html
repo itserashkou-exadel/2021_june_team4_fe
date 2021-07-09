@@ -3,11 +3,7 @@
     <!-- Bonus program name -->
     <mat-form-field class="example-full-width form-field" appearance="fill">
       <mat-label>Bonus program name</mat-label>
-      <input
-        matInput
-        placeholder="Add Bonus program"
-        formControlName="bpName"
-      />
+      <input matInput placeholder="Add Bonus program" formControlName="name" />
     </mat-form-field>
     <!-- /Bonus program name -->
   </div>
@@ -94,45 +90,37 @@
       <textarea
         matInput
         placeholder="Description"
-        formControlName="bpDescription"
+        formControlName="description"
       ></textarea>
     </mat-form-field>
     <!-- /Bonus program Description -->
   </div>
-  <!-- /////////////////////////////////////////////////////////// -->
+
   <div class="form-row date-wrap">
     <!-- Bonus program event's start -->
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Event's start</mat-label>
-      <input matInput type="date" formControlName="bpStartDate" />
+      <input matInput type="date" formControlName="startTime" />
     </mat-form-field>
     <!-- /Bonus program event's start -->
 
     <!-- Bonus program event's end -->
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Event's end</mat-label>
-      <input matInput type="date" formControlName="bpEndDate" />
+      <input matInput type="date" formControlName="endTime" />
     </mat-form-field>
     <!-- /Bonus program event's end -->
   </div>
 
   <div class="form-row">
-    <!-- Bonus size -->
+    <!-- Percent -->
     <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>Bonus size</mat-label>
-      <input matInput formControlName="bpSize" />
+      <mat-label>Percent</mat-label>
+      <input matInput formControlName="percent" />
     </mat-form-field>
-    <!-- /Bonus size -->
+    <!-- /Percent -->
   </div>
 
-  <div class="form-row">
-    <!-- Price -->
-    <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>Price</mat-label>
-      <input matInput formControlName="bpPrice" />
-    </mat-form-field>
-    <!-- /Price -->
-  </div>
   <div class="second-step__btns btns-wrapper">
     <button class="save-btn" mat-flat-button color="warn" matStepperPrevious>
       Back
