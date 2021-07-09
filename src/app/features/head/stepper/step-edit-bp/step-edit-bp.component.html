@@ -1,14 +1,32 @@
 <div class="second-step__btn-top-wrapper">
-  <button mat-flat-button color="primary" (click)="addBP()">
+  <button
+    mat-flat-button
+    color="primary"
+    label="create"
+    (click)="activeComponent = 'create'"
+    *ngIf="activeComponent === 'edit'"
+  >
     <mat-icon>add_box</mat-icon>
-    {{ "COMMON.Stepper.addBp" | translate }}
+    {{ 'COMMON.Stepper.addBp' | translate }}
+  </button>
+
+  <button
+    mat-flat-button
+    color="primary"
+    label="create"
+    (click)="activeComponent = 'edit'"
+    *ngIf="activeComponent === 'create'"
+  >
+    <mat-icon>edit_box</mat-icon>
+    Edit BP
   </button>
 </div>
-<div class="tile-wrapper" *ngIf="visible">
-  <app-tile></app-tile>
-  <app-tile></app-tile>
-  <app-tile></app-tile>
-  <app-tile></app-tile>
-  <app-tile></app-tile>
-  <app-tile></app-tile>
+<div class="tile-wrapper">
+  <div class="tiles" *ngIf="activeComponent === 'edit'">
+    <app-tile *ngFor="let discount of discounts$ | async">
+      {{ discount }}
+    </app-tile>
+    <!-- <app-tiles-box></app-tiles-box> -->
+  </div>
+  <app-step-create-bp *ngIf="activeComponent === 'create'"></app-step-create-bp>
 </div>

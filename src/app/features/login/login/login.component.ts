@@ -70,8 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         // this.roles = this.tokenStorage.getUser().roles;
       },
       err => {
-        console.log(err.message)
-        this.errorMessage = err.message;
+        this.errorMessage = err.error.message;
         this.isLoginFailed = true;
         this.form.enable()
       }

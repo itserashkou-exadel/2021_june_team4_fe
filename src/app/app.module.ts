@@ -49,10 +49,13 @@ import { filterReducer } from './core/store/redeucers/filter.reducer';
     AppRoutingModule,
     NgbModule,
   ],
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent, 
+    // FilterPipe
+  ],
   bootstrap: [AppComponent],
   providers: [
-  authInterceptorProviders,
+    authInterceptorProviders,
     DescriptionService],
   entryComponents: [//for dynamical load components
     DialogComponent,

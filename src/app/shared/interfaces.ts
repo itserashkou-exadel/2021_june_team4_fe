@@ -100,3 +100,20 @@ export interface IToken {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface IVendor {
+  id: string;
+  name: string;
+  description: string;
+  vendorLocations: Array<Object>;
+}
+
+export interface ICategory {
+  id: string;
+  name: string;
+}
+
+export interface ITag {
+  id: string;
+  name: string;
+}

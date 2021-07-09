@@ -26,6 +26,7 @@ import { StepperWrapperComponent } from "./stepper/stepper-wrapper/stepper-wrapp
 import { StepCreateVendorComponent } from "./stepper/step-create-vendor/step-create-vendor.component";
 import { StepCreateBpComponent } from "./stepper/step-create-bp/step-create-bp.component";
 import { StepEditBpComponent } from "./stepper/step-edit-bp/step-edit-bp.component";
+import { FilterPipe } from 'src/app/core/pipes/filter.pipe';
 
 import { MissingTranslationService } from '../../core/services/missing-translation.service';
 import { HttpClient } from "@angular/common/http";
@@ -62,7 +63,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     StepperWrapperComponent,
     StepCreateVendorComponent,
     StepCreateBpComponent,
-    StepEditBpComponent
+    StepEditBpComponent,
+    FilterPipe
   ],
   exports: [
     MapComponent,
