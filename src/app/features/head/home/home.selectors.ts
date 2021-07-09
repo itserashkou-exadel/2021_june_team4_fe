@@ -22,7 +22,7 @@ export const selectControlsLocations = createSelector(
 );
 export const selectControlsCathegories = createSelector(
   selectControls,
-  (state: IFilterControls) => state.cathegories
+  (state: IFilterControls) => state.categories
 );
 export const selectControlsTags = createSelector(
   selectControls,

@@ -3,15 +3,15 @@
   <form [formGroup]="filterForm">
     <mat-form-field appearance="fill">
         <mat-label>Select a vendor</mat-label>
-        <mat-select  formControlName="cathegory" (selectionChange)="selectCathegory()" multiple>
+        <mat-select  formControlName="category" (selectionChange)="selectCathegory()" multiple>
           <mat-option *ngFor="let c of vendors | async" [value]="c">{{c}}</mat-option>
         </mat-select>
       </mat-form-field>
   
     <mat-form-field appearance="fill">
         <mat-label>Select an cathegory</mat-label>
-        <mat-select  formControlName="cathegory" (selectionChange)="selectCathegory()" multiple>
-          <mat-option *ngFor="let c of cathegories |async" [value]="c">{{c}}</mat-option>
+        <mat-select  formControlName="category" (selectionChange)="selectCathegory()" multiple>
+          <mat-option *ngFor="let c of categories |async" [value]="c">{{c}}</mat-option>
         </mat-select>
       </mat-form-field>
 

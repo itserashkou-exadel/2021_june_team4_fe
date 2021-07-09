@@ -10,7 +10,7 @@ export const initialState: IFilterState = {
       },
       { countryName: 'Ukraine', cities: ['Kyiv', 'Vinnytsia', 'Odesa','Kharkiv'] },
     ],
-    cathegories: ['Food', 'Fashion', 'Gadgets', 'Health '],
+    categories: ['Food', 'Fashion', 'Gadgets', 'Health '],
     tags: [
       'None',
       'Apple',
@@ -27,7 +27,7 @@ export const initialState: IFilterState = {
   },
   
   formValues: {
-    cathegory: ['Fashion'],
+    category: ['Fashion'],
     cities: '',
     tags: '',
     

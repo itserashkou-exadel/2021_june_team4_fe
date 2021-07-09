@@ -10,7 +10,7 @@ export interface IFilterState {
 }
 export interface IFilterControls {
   locations: ILocationsGroup[],
-  cathegories: string[],
+  categories: string[],
   tags: string[],
   vendors: string[],
 }
