@@ -2,11 +2,12 @@
   <div class="control-bar">
     <mat-form-field appearance="fill">
       <mat-label>{{ "COMMON.Home.sort" | translate }}</mat-label>
-      <mat-select matNativeControl>
-        <mat-option value="addition">{{ "COMMON.Home.date" | translate }}</mat-option>
-        <mat-option value="expire">{{ "COMMON.Home.time" | translate }}</mat-option>
-        <mat-option value="raiting">{{ "COMMON.Home.rating" | translate }}</mat-option>
-        <mat-option value="name">{{ "COMMON.Home.default" | translate }}</mat-option>
+      <mat-select matNativeControl (selectionChange)="sortDiscountsData($event.value)">
+        <mat-option value="startTime">{{ "COMMON.Home.date" | translate }}</mat-option>
+        <mat-option value="endTime">{{ "COMMON.Home.time" | translate }}</mat-option>
+        <!-- <mat-option value="raiting">{{ "COMMON.Home.rating" | translate }}</mat-option> -->
+        <mat-option value="name">{{ "COMMON.Home.Name" | translate }}</mat-option>
+        <mat-option value="default">{{ "COMMON.Home.default" | translate }}</mat-option>
       </mat-select>
     </mat-form-field>
 

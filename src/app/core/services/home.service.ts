@@ -11,13 +11,20 @@ import { map, tap } from 'rxjs/operators';
 export class HomeService {
   constructor(private http: HttpClient) {}
 
-  requestDiscountsData(): Observable<any> {
-    let response = this.http.get('http://localhost:8080/discounts');
+  requestDiscountsData(param: string): Observable<any> {
+    let response = this.http.get(
+      `http://localhost:8080/discounts?sortBy=${param}`
+    );
     return response;
   }
 
+  // requestDiscountsData(): Observable<any> {
+  //   let response = this.http.get('http://localhost:8080/discounts');
+  //   return response;
+  // }
+
   handleRemoteDiscount(remoteDiscount: any) {
-    // console.log(remoteDiscount);
+    console.log(remoteDiscount);
     const localDiscount: IDiscount = {
       id: remoteDiscount.id,
       name: remoteDiscount.name,

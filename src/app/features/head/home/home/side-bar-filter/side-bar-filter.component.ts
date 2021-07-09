@@ -23,6 +23,11 @@ import {
 } from '../../home.selectors';
 import { FilterService } from 'src/app/core/services/filter.service';
 import { map } from 'rxjs/operators';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+
+export interface Fruit {
+  name: string;
+}
 
 @Component({
   selector: 'app-side-bar-filter',
@@ -37,6 +42,15 @@ export class SideBarFilterComponent implements OnInit {
   categories: Observable<string[]>;
   locations: Observable<ILocationsGroup[]>;
   vendors: Observable<string[]>;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  fruits: Fruit[] = [
+    {name: 'Lemon'},
+    {name: 'Lime'},
+    {name: 'Apple'},
+  ];
 
   constructor(
     private store: Store<IAppState>,
@@ -105,4 +119,5 @@ this.locations = rms;
     const tag = this.filterForm.get('tag')?.value;
     this.store.dispatch(addChips({ tag }));
   }
+  
 }
