@@ -32,6 +32,7 @@ export class SideBarFilterComponent implements OnInit {
     this.chips = this.store.select(selectChips);
     this.vendors = this.store.select(selectControlsVendors);
 
+
     this.filterForm = new FormGroup({
       cathegory: new FormControl(['Fashion']),
       cities: new FormControl(''),
@@ -59,13 +60,6 @@ export class SideBarFilterComponent implements OnInit {
 
   selectTag() {
     const tag = this.filterForm.get('tag')?.value;
-    let isPresent;
-    this.chips.subscribe((el) => {
-      isPresent = el.includes(tag);
-      console.log(tag);
-    });
-    if (!isPresent) {
       this.store.dispatch(addChips({ tag }));
-    }
   }
 }

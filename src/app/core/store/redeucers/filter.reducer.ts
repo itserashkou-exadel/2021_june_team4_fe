@@ -12,6 +12,7 @@ export const initialState: IFilterState = {
     ],
     cathegories: ['Food', 'Fashion', 'Gadgets', 'Health '],
     tags: [
+      'None',
       'Apple',
       'Samsung',
       'Manicure',
@@ -37,6 +38,10 @@ export const initialState: IFilterState = {
 export function filterReducer(state: IFilterState = initialState, action: any) {
   switch (action.type) {
     case 'addTag':
+      if (state.chips.includes(action.tag) || action.tag === 'None'){
+        return state;
+      }
+     
       return { ...state, chips: [...state.chips, action.tag] };
     case 'removeTag':
       return {
