@@ -11,7 +11,7 @@
   <div class="form-row">
     <!-- Bonus program category -->
     <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>Bonus program category</mat-label>
+      <mat-label>{{ 'COMMON.Stepper.vendorCategory' | translate }}</mat-label>
       <input
         type="text"
         aria-label="Bonus program category"
@@ -44,7 +44,7 @@
   <div class="form-row">
     <!-- Bonus program tag -->
     <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>Bonus program tag</mat-label>
+      <mat-label>{{ 'COMMON.Stepper.vendorTag' | translate }}</mat-label>
       <input
         type="text"
         aria-label="Bonus program tag"
@@ -86,7 +86,7 @@
   <div class="form-row">
     <!-- Bonus program Description -->
     <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>Description</mat-label>
+      <mat-label>{{ 'COMMON.Stepper.description' | translate }}</mat-label>
       <textarea
         matInput
         placeholder="Description"
@@ -99,14 +99,14 @@
   <div class="form-row date-wrap">
     <!-- Bonus program event's start -->
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Event's start</mat-label>
+      <mat-label>{{ 'COMMON.Stepper.eventStart' | translate }}</mat-label>
       <input matInput type="date" formControlName="startTime" />
     </mat-form-field>
     <!-- /Bonus program event's start -->
 
     <!-- Bonus program event's end -->
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Event's end</mat-label>
+      <mat-label>{{ 'COMMON.Stepper.eventEnd' | translate }}</mat-label>
       <input matInput type="date" formControlName="endTime" />
     </mat-form-field>
     <!-- /Bonus program event's end -->
@@ -115,7 +115,7 @@
   <div class="form-row">
     <!-- Percent -->
     <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>Percent</mat-label>
+      <mat-label>{{ 'COMMON.Stepper.bonusSize' | translate }}</mat-label>
       <input matInput formControlName="percent" />
     </mat-form-field>
     <!-- /Percent -->
@@ -123,7 +123,7 @@
 
   <div class="second-step__btns btns-wrapper">
     <button class="save-btn" mat-flat-button color="warn" matStepperPrevious>
-      Back
+      {{ 'COMMON.Global.back' | translate }}
     </button>
     <button
       type="submit"
@@ -132,7 +132,7 @@
       color="primary"
       matStepperNext
     >
-      Save
+      {{ 'COMMON.Global.save' | translate }}
     </button>
   </div>
 </form>

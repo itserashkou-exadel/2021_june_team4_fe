@@ -4,7 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { CategoriesService } from 'src/app/core/services/categories.service';
 import { DiscountService } from 'src/app/core/services/discount.service';
 import { TagsService } from 'src/app/core/services/tags.service';
-import { ICategory, ITag } from 'src/app/shared/interfaces';
+import { ICategory, ITag } from '../../../../shared/interfaces';
 
 @Component({
   selector: 'app-step-create-bp',

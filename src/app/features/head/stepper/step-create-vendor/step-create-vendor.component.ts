@@ -57,7 +57,7 @@ export class StepCreateVendorComponent implements OnInit, OnDestroy {
   };
 
   // Reset all form's fields after click button Clear
-  resetForm(): void {
+  resetForm() {
     this.vendorForm.reset();
   };
 

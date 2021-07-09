@@ -23,7 +23,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
@@ -32,49 +31,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { CheckboxComponent } from './checkbox/checkbox/checkbox.component';
 import { TilesBoxComponent } from './tiles-box/tiles-box.component';
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatTabsModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatChipsModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatListModule,
-    MatMenuModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSnackBarModule,
-    MatSlideToggleModule,
-    MatDividerModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatTabsModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatChipsModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatListModule,
-    MatMenuModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSnackBarModule,
-    MatSlideToggleModule,
-    MatDividerModule,
-    MatDialogModule,
-    MatTreeModule,
-    MatStepperModule,
-
-    MatAutocompleteModule,
-
+    imports: [
+        CommonModule,
+        FormsModule,
         MatButtonModule,
-        // MatSelectModule,
+        MatSelectModule,
         MatTabsModule,
         MatInputModule,
         MatProgressSpinnerModule,
@@ -88,11 +53,28 @@ import { TilesBoxComponent } from './tiles-box/tiles-box.component';
         MatSnackBarModule,
         MatSlideToggleModule,
         MatDividerModule,
-        RouterModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatTabsModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        MatChipsModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatListModule,
+        MatMenuModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSnackBarModule,
+        MatSlideToggleModule,
+        MatDividerModule,
         MatDialogModule,
+        MatTreeModule,
         MatAutocompleteModule,
-    RouterModule,
-  ],
+
+        RouterModule,
+        TranslateModule,
+    ],
 
   exports: [
     CommonModule,
@@ -119,15 +101,14 @@ import { TilesBoxComponent } from './tiles-box/tiles-box.component';
     MatNativeDateModule,
     MatRadioModule,
     MatButtonToggleModule,
-    // MatSidenavModule,
-    MatAutocompleteModule,
     MatTreeModule,
     MatAutocompleteModule,
 
     FooterComponent,
     TileComponent,
     MatStepperModule,
-    TilesBoxComponent
+    TilesBoxComponent,
+    CheckboxComponent
   ],
   declarations: [
     FooterComponent,

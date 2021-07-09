@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
 import { IToken, IUserLogin } from '../../shared/interfaces';
 import { TokenStorageService } from './token-storage.service';
-import { API_URL } from 'src/app/shared/constants';
+import { API_URL } from '../../shared/constants';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})

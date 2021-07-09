@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IDiscount } from 'src/app/shared/interfaces';
-import { API_URL } from 'src/app/shared/constants';
+import { API_URL } from '../../shared/constants';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})

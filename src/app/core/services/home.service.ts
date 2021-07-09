@@ -16,23 +16,36 @@ export class HomeService {
     return response;
   }
 
-  handleRemoteDiscount(remoteDiscount: any){
+  handleRemoteDiscount(remoteDiscount: any) {
     // console.log(remoteDiscount);
-    const localDiscount : IDiscount = {
+    const localDiscount: IDiscount = {
       id: remoteDiscount.id,
       name: remoteDiscount.name,
-      vendor: remoteDiscount.vendor === null? 'Unknown': remoteDiscount.vendor ,
+      vendor: remoteDiscount.vendor.name,
       added: remoteDiscount.startTime,
       expired: remoteDiscount.endTime,
-      location: "remoteDiscount",
+      location: 'remoteDiscount',
       tag: remoteDiscount.tags.name,
       category: remoteDiscount.category.name,
       isActive: remoteDiscount.active,
-      description:remoteDiscount.description === null? 'Default description': remoteDiscount.description,
+      description:
+        remoteDiscount.description === null
+          ? 'Default description'
+          : remoteDiscount.description,
       percent: remoteDiscount.percent,
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
-    }
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
+      coordinates: getCoordinates(remoteDiscount),
+    };
     return localDiscount;
   }
-
 }
+
+const getCoordinates = (src: any) => {
+  let cords = src.vendorLocations;
+  let res: any[][] = [];
+  cords.map((el: any) => {
+    res.push([el.latitude, el.longitude]);
+  });
+  return res;
+};

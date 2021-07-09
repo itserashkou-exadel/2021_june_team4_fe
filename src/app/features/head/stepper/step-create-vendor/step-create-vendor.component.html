@@ -2,7 +2,7 @@
   <div class="form-row">
     <!-- Vendor name -->
     <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>Vendor name</mat-label>
+      <mat-label>{{ 'COMMON.Stepper.vendorName' | translate }}</mat-label>
       <input
         type="text"
         aria-label="vendor name"
@@ -40,7 +40,7 @@
   <div class="form-row">
     <!-- Vendor Description -->
     <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>Description</mat-label>
+      <mat-label>{{ 'COMMON.Stepper.description' | translate }}</mat-label>
       <textarea
         matInput
         placeholder="Add description"
@@ -63,7 +63,7 @@
   <div class="form-row">
     <!-- Vendor logo -->
     <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>Vendor logo</mat-label>
+      <mat-label>{{ 'COMMON.Stepper.vendorLogo' | translate }}</mat-label>
       <input matInput placeholder="Add logo" formControlName="vendorLogo" />
       <mat-error
         *ngIf="
@@ -82,7 +82,7 @@
   <div class="form-row">
     <!-- Vendor locations -->
     <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>Locations</mat-label>
+      <mat-label>{{ 'COMMON.Stepper.location' | translate }}</mat-label>
       <input matInput placeholder="Add locations" formControlName="locations" />
       <mat-error
         *ngIf="
@@ -100,7 +100,7 @@
   <div class="form-row">
     <!-- Vendor contacts -->
     <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>Contacts</mat-label>
+      <mat-label>{{ 'COMMON.Stepper.vendorContacts' | translate }}</mat-label>
       <input matInput placeholder="Add contacts" formControlName="contacts" />
       <mat-error
         *ngIf="
@@ -117,10 +117,10 @@
   </div>
   <div class="first-step__btns btns-wrapper">
     <button class="save-btn" mat-flat-button color="warn" (click)="resetForm()">
-      Clear
+      {{ 'COMMON.Global.clear' | translate }}
     </button>
     <button type="submit" class="save-btn" mat-flat-button color="primary">
-      Save
+      {{ 'COMMON.Global.save' | translate }}
     </button>
   </div>
 </form>

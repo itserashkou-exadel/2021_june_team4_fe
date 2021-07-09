@@ -9,14 +9,14 @@
             {{discount$.description | slice: 0: 80}}{{setDotts(discount$.description, 80)}}
         </p>
         <span></span>
-        <div class="info-box"><b>Discount :</b><b>{{discount$.percent}}% </b></div>
+        <div class="info-box"><b>{{ "COMMON.Tile.discount" | translate }}</b><b>{{discount$.percent}}% </b></div>
         <!-- <div class="info-box"><b>Location :</b>{{discount$.location | slice: 0:10}}</div> -->
-        <div class="info-box"><b>Vendor :</b>{{discount$.vendor | slice: 0:30}}{{setDotts(discount$.vendor, 10)}} </div>
-        <div class="info-box"> <b>Expire :</b> {{discount$.expired}}</div>
+        <div class="info-box"><b>{{ "COMMON.Tile.vendor" | translate }}</b>{{discount$.vendor | slice: 0:30}}{{setDotts(discount$.vendor, 10)}} </div>
+        <div class="info-box"> <b>{{ "COMMON.Tile.expired" | translate }}</b> {{discount$.expired}}</div>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button>WANT</button>
-        <button mat-button (click)="redirectToDescription(discount$.id)">More info</button>
+        <button mat-button>{{ "COMMON.Tile.want" | translate }}</button>
+        <button mat-button (click)="redirectToDescription(discount$.id)">{{ "COMMON.Tile.info" | translate }}</button>
 
         <mat-icon aria-hidden="false" aria-label="Example home icon">favorite</mat-icon>
 
