@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IDiscount } from 'src/app/shared/interfaces';
 import { map, tap } from 'rxjs/operators';
+import { API_URL } from 'src/app/shared/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,8 @@ export class HomeService {
   constructor(private http: HttpClient) {}
 
   requestDiscountsData(param: string): Observable<any> {
-    let response = this.http.get(
-      `http://localhost:8080/discounts?sortBy=${param}`
+    const response = this.http.get(
+      `${API_URL}/discounts?sortBy=${param}`
     );
     return response;
   }

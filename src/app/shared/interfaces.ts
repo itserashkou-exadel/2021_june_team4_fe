@@ -4,33 +4,39 @@ export interface IUiConfigState {
 }
 
 export interface IFilterState {
-  controlsValues: IFilterControls,
-  formValues: any,
-  chips: string [],
+  controlsValues: IFilterControls;
+  formValues: any;
+  chips: string[];
+}
+
+export interface IFilterFormsValues {
+  categories: string[];
+  city: '';
+  vendors: string[];
 }
 export interface IFilterControls {
-  locations: ILocationsGroup[],
-  categories: string[],
-  tags: string[],
-  vendors: string[],
+  locations: ILocationsGroup[];
+  categories: string[];
+  tags: string[];
+  vendors: string[];
 }
-export interface ILocationsGroup{
-  countryName: string,
-  cities: string[]
+export interface ILocationsGroup {
+  countryName: string;
+  cities: string[];
 }
 
 export interface IMapMarker {
-  cords: number[][],
-  text: string
+  cords: number[][];
+  text: string;
 }
 export interface IDescription {
   id: string;
   active: boolean;
   archived: boolean;
-  category:{};
+  category: {};
   description: string;
   name: string;
-  img:[string];
+  img: [string];
   endTime: string;
   startTime: string;
   percent: number;
@@ -41,12 +47,14 @@ export interface IDescription {
     description: any;
     contacts: any;
   };
-  vendorLocations: [{
-    city: {
-      countryName: string;
-      name: string;
+  vendorLocations: [
+    {
+      city: {
+        countryName: string;
+        name: string;
+      };
     }
-  }];
+  ];
 }
 
 export interface IDescriptionState {
@@ -54,7 +62,7 @@ export interface IDescriptionState {
 }
 
 export interface IHomeState {
-  user: string,
+  user: string;
   discounts: IDiscount[];
 }
 
@@ -77,8 +85,8 @@ export interface IDiscount {
   isActive: boolean;
   description: string;
   percent: number;
-  image: string
-  coordinates: number[][]
+  image: string;
+  coordinates: number[][];
 }
 
 export interface IUser {
@@ -89,7 +97,6 @@ export interface IUser {
   subscribes: string[];
   favorite: string[];
 }
-
 
 export interface IUserLogin {
   username: string;
