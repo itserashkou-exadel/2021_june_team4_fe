@@ -12,7 +12,6 @@ export const initialState: IFilterState = {
     ],
     categories: ['Food', 'Fashion', 'Gadgets', 'Health '],
     tags: [
-      'None',
       'Apple',
       'Samsung',
       'Manicure',
