@@ -1,26 +1,34 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Pipe,
+  PipeTransform,
+  OnDestroy,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { createSelector, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import {
   addChips,
   getControlsValues,
   removeChips,
+  saveFormsValues,
 } from 'src/app/core/store/actions/filter.actions';
 //import { stat } from 'fs';
 import {
   IAppState,
   IFilterControls,
+  IFilterFormsValues,
   IFilterState,
   ILocationsGroup,
 } from 'src/app/shared/interfaces';
 import {
-  selectFilter,
   selectChips,
   selectControlsLocations,
   selectControlsCathegories,
   selectControlsTags,
   selectControlsVendors,
+  selectFormValues,
 } from '../../home.selectors';
 import { FilterService } from 'src/app/core/services/filter.service';
 import { map } from 'rxjs/operators';
@@ -30,90 +38,76 @@ export interface Fruit {
   name: string;
 }
 
-@Pipe({ name: 'exponentialStrength' })
-export class FilterPipe implements PipeTransform {
-  transform(value: [], target: string): [] {
-    return [];
-  }
-}
-
 @Component({
   selector: 'app-side-bar-filter',
   templateUrl: './side-bar-filter.component.html',
   styleUrls: ['./side-bar-filter.component.scss'],
 })
-export class SideBarFilterComponent implements OnInit {
+export class SideBarFilterComponent implements OnInit, OnDestroy {
   filterForm: FormGroup;
-  //chipsFormControl: FormControl;
   chips: Observable<string[]>;
   tags: Observable<string[]>;
   categories: Observable<string[]>;
   locations: Observable<ILocationsGroup[]>;
   vendors: Observable<string[]>;
+  storedFormValues: Observable<IFilterFormsValues>;
 
-  inputsAutocomplets: Observable<string[]>;
+  subscribedFormValues: Subscription;
+  formValues : any;
 
   constructor(
     private store: Store<IAppState>,
     private filterService: FilterService
   ) {
-    // let remotCategories = this.filterService.requestCategories();
-    // this.categories = remotCategories.pipe(
-    //   map((el) => el.map((val: { name: any }) => val.name))
-    // );
-    //cc.pipe(map(el => el.name)).subscribe(el => console.log(el));
-
-    // const remoteVendors = this.filterService.requestVendors();
-    // this.vendors = remoteVendors.pipe(
-    //   map((el) => el.map((val: { name: any }) => val.name))
-    // );
-    // remoteVendors.subscribe((d) => console.log(d));
-
-    // const remoteTags = this.filterService.requestTags();
-    // this.tags = remoteTags.pipe(
-    //   map((el) => el.map((val: { name: any }) => val.name))
-    // );
-
-    // const remoteCities = this.filterService.requestCities();
-    // remoteCities.subscribe((data) => console.log(data));
-    // let rms = remoteCities.pipe(
-    //   map((el) =>
-    //     el.map((val: any) => ({
-    //       countryName: val.name,
-    //       cities: val.cities.map((c: { name: any }) => c.name),
-    //     }))
-    //   )
-    // );
-    // this.locations = rms;
-
     this.locations = this.store.select(selectControlsLocations);
     this.categories = this.store.select(selectControlsCathegories);
     this.tags = this.store.select(selectControlsTags);
-    this.chips = this.store.select(selectChips); // === SELECTED TAGS 
+    this.chips = this.store.select(selectChips); // === SELECTED TAGS
     this.vendors = this.store.select(selectControlsVendors);
+    this.storedFormValues = this.store.select(selectFormValues);
 
+    this.subscribedFormValues = this.storedFormValues.subscribe(data => this.formValues = data)
+  //  console.log( this.formValues)
+
+  //  this.storedFormValues.subscribe((data) => console.log(data));
     this.filterForm = new FormGroup({
-      category: new FormControl(['Fashion']),
-      cities: new FormControl(''),
-      vendor: new FormControl(''),
+      category: new FormControl(this.formValues.categories),
+      city: new FormControl(this.formValues.city),
+      vendor: new FormControl(this.formValues.vendors),
       chipsFormControl: new FormControl(''),
     });
-    // this.chipsFormControl = new FormControl('');
-    //this.inputsAutocomplets = this.tags.pipe(map(el=> el.filter(el=> el !==)))
-    this.inputsAutocomplets = this.tags;
-  }
+
+    
+  //  this.inputsAutocomplets = this.tags;
+  } // END OF CONSTRUCTOR
 
   ngOnInit(): void {
     this.store.dispatch(getControlsValues());
+    //this.filterForm.patchValue({category: this.formValues.category})
   }
 
-  // inputEvent(ev: any){
-  //   console.log(this.chipsFormControl.value)
-  //   console.log(ev.target.value);
-  //   this.inputsAutocomplets = this.tags.pipe(map(el=> el.filter(el=> el !== ev.target.value)))
+  ngOnDestroy(): void {
+    
+    const configControls = {
+      values: {
+        vendors: this.filterForm.get('vendor')?.value,
+        city: this.filterForm.get('city')?.value,
+        categories: this.filterForm.get('category')?.value,
+      },
+    };
+    console.log(configControls);
+    this.store.dispatch(saveFormsValues({ values: configControls.values }));
+    this.subscribedFormValues.unsubscribe();
+  }
 
-  //   console.log(this.inputsAutocomplets);
-  // }
+  resetDiscounts(){
+    //this.store
+  }
+
+  resetForm(){
+    this.filterForm.reset();
+    this.store.dispatch(addChips({ tag: "resetSelectedTags" }));
+  }
 
   selectCathegory() {
     const cathegoryValue = this.filterForm.get('category')?.value;

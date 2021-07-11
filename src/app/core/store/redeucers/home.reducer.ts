@@ -40,9 +40,6 @@ export const initialState: IHomeState = {
 
 export function headReducer(state: IHomeState = initialState, action: any) {
   switch (action.type) {
-    // case 'sortDiscounts':
-    //   const newState1 = sortState(state.discounts, action.sortType);
-    //   return { ...state, discounts: newState1 };
     case 'requestDiscounts':
       return { ...state, discounts: action.data };
     case 'getNewDiscounts':
@@ -57,54 +54,3 @@ export function headReducer(state: IHomeState = initialState, action: any) {
       return state;
   }
 }
-
-// const sortState = (src: IDiscount[], sortFlag: string) => {
-//   switch (sortFlag) {
-//     case 'percent_down':
-//       const newState5 = src.slice().sort((a, b): number => {
-//         if (a.percent > b.percent) return -1;
-//         if (a.percent < b.percent) return 1;
-//         else return 0;
-//       });
-//       return newState5;
-
-//     case 'percent_up':
-//       const newState4 = src.slice().sort((a, b): number => {
-//         if (a.percent > b.percent) return 1;
-//         if (a.percent < b.percent) return -1;
-//         else return 0;
-//       });
-//       return newState4;
-
-//     case 'expire':
-//       const newState3 = src.slice().sort((a, b): number => {
-//         const endA = new Date(a.expired);
-//         const endB = new Date(b.expired);
-//         if (endA > endB) return -1;
-//         if (endA < endB) return 1;
-//         else return 0;
-//       });
-//       return newState3;
-
-//     case 'addition':
-//       const newState2 = src.slice().sort((a, b): number => {
-//         const endA = new Date(a.added);
-//         const endB = new Date(b.added);
-//         if (endA > endB) return -1;
-//         if (endA < endB) return 1;
-//         else return 0;
-//       });
-//       return newState2;
-
-//     case 'name':
-//       const newState1 = src.slice().sort((a, b): number => {
-//          if (a.name > b.name) return -1;
-//         if (a.name < b.name) return 1;
-//         else return 0;
-//       });
-//       return newState1;
-
-//     default:
-//       return src;
-//   }
-// };

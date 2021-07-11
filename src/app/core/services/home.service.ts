@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IDiscount } from 'src/app/shared/interfaces';
-import { map, tap } from 'rxjs/operators';
 import { API_URL } from 'src/app/shared/constants';
 
 @Injectable({
@@ -18,11 +16,6 @@ export class HomeService {
     );
     return response;
   }
-
-  // requestDiscountsData(): Observable<any> {
-  //   let response = this.http.get('http://localhost:8080/discounts');
-  //   return response;
-  // }
 
   handleRemoteDiscount(remoteDiscount: any) {
     //console.log(remoteDiscount);

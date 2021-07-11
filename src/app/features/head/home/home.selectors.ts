@@ -33,6 +33,11 @@ export const selectChips = createSelector(
   (state: IFilterState) => state.chips
 );
 
+export const selectFormValues = createSelector(
+  selectFilter,
+  (state: IFilterState) => state.formValues
+);
+
 export const selectControls = createSelector(
   selectFilter,
   (state: IFilterState) => state.controlsValues

@@ -34,25 +34,31 @@ export const initialState: IFilterState = {
   },
 
   formValues: {
-    categories: ['Fashion'],
-    city: '',
-    vendors: ['Stara poshta'],
+    categories: ['Sport'],
+    city: 'Minsk',
+    vendors: ['Flow'],
   },
   chips: ['Yoga'],
 };
 
 export function filterReducer(state: IFilterState = initialState, action: any) {
   switch (action.type) {
+    case 'saveControls':
+     // console.log(action.values);
+      return { ...state, formValues: action.values };
+
     case 'requestControlsValues':
-      console.log;
-      
-      return {...state, controlsValues : action.data};
+      return { ...state, controlsValues: action.data };
 
     case 'getControls':
       return state;
+
     case 'addTag':
       if (state.chips.includes(action.tag) || action.tag === 'None') {
         return state;
+      }
+      if(action.tag === 'resetSelectedTags'){
+        return { ...state, chips: [] };
       }
 
       return { ...state, chips: [...state.chips, action.tag] };

@@ -11,13 +11,15 @@ export class FilterEffects {
     private filterService: FilterService
   ) {}
 
-  newDiscounts$ = createEffect(() =>
+  //requestFilteredDiscounts$ = createEffect
+
+  newControlsValues$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getControlsValues),
       mergeMap(() =>
         this.filterService.requestRawData().pipe(
           map((data: any) => {
-            console.log(data);
+           // console.log(data);
             const processedData = {
               locations: this.filterService.handleCountries(data[0]),
               categories: this.filterService.handleCategories(data[1]),
