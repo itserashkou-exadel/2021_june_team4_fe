@@ -33,12 +33,12 @@ export class FilterEffects {
       mergeMap(() =>
         this.filterService.requestRawData().pipe(
           map((data: any) => {
-           // console.log(data);
+            console.log(data);
             const processedData = {
-              locations: this.filterService.handleCountries(data[0]),
-              categories: this.filterService.handleCategories(data[1]),
-              tags: this.filterService.handleTags(data[2]),
-              vendors: this.filterService.handleVendors(data[3]),
+              locations: data[0],
+              categories: data[1],
+              tags: data[2],
+              vendors: data[3],
             };
             return { type: 'requestControlsValues', data: processedData };
           })

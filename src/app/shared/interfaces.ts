@@ -8,21 +8,25 @@ export interface IFilterState {
   formValues: IFilterFormsValues;
 }
 
+export interface ISimpleVar {
+  id: string;
+  name: string;
+}
 export interface IFilterFormsValues {
-  categories: string[];
-  city: string;
-  vendors: string[];
-  chips: string[]
+  categories: ISimpleVar[];
+  city: ILocationCountry;
+  vendors: ISimpleVar[];
+  chips: ISimpleVar[];
 }
 export interface IFilterControls {
-  locations: ILocationsGroup[];
-  categories: string[];
-  tags: string[];
-  vendors: string[];
+  locations: ILocationCountry[];
+  categories: { id: string; name: string }[];
+  tags: { id: string; name: string }[];
+  vendors: { id: string; name: string }[];
 }
-export interface ILocationsGroup {
-  countryName: string;
-  cities: string[];
+export interface ILocationCountry {
+   id: string; name: string; 
+   cities: { id: string; name: string }[] ;
 }
 
 export interface IMapMarker {

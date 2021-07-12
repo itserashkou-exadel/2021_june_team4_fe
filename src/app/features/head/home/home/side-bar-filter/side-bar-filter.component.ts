@@ -12,7 +12,8 @@ import {
 import {
   IAppState,
   IFilterFormsValues,
-  ILocationsGroup,
+  ILocationCountry,
+  ISimpleVar,
 } from 'src/app/shared/interfaces';
 import {
   selectChips,
@@ -35,11 +36,11 @@ export interface Fruit {
 })
 export class SideBarFilterComponent implements OnInit, OnDestroy {
   filterForm: FormGroup;
-  chips: Observable<string[]>;
-  tags: Observable<string[]>;
-  categories: Observable<string[]>;
-  locations: Observable<ILocationsGroup[]>;
-  vendors: Observable<string[]>;
+  chips$: Observable<ISimpleVar[]>;
+  tags$: Observable<ISimpleVar[]>;
+  categories$: Observable<ISimpleVar[]>;
+  locations$: Observable<ILocationCountry[]>;
+  vendors$: Observable<ISimpleVar[]>;
 
   storedFormValues: Observable<IFilterFormsValues>;
   subscribedFormValues: Subscription;
@@ -47,20 +48,23 @@ export class SideBarFilterComponent implements OnInit, OnDestroy {
   formValues: any;
   selectedChips: any;
 
+  inputControl: FormControl;
+
   constructor(private store: Store<IAppState>) {
-    this.locations = this.store.select(selectControlsLocations);
-    this.categories = this.store.select(selectControlsCathegories);
-    this.tags = this.store.select(selectControlsTags);
-    this.chips = this.store.select(selectChips); // === SELECTED TAGS
-    this.vendors = this.store.select(selectControlsVendors);
+    this.locations$ = this.store.select(selectControlsLocations);
+    this.categories$ = this.store.select(selectControlsCathegories);
+    this.tags$ = this.store.select(selectControlsTags);
+    this.chips$ = this.store.select(selectChips); // === SELECTED TAGS
+    this.vendors$ = this.store.select(selectControlsVendors);
     this.storedFormValues = this.store.select(selectFormValues);
 
    // this.storedFormValues.subscribe((data) => console.log(data));
+ // this.locations$.subscribe(d => console.log(d))
 
     this.subscribedFormValues = this.storedFormValues.subscribe(
       (data) => (this.formValues = data)
     );
-    this.subscribedChips = this.chips.subscribe(
+    this.subscribedChips = this.chips$.subscribe(
       (data) => (this.selectedChips = data)
     );
 
@@ -68,8 +72,9 @@ export class SideBarFilterComponent implements OnInit, OnDestroy {
       category: new FormControl(this.formValues.categories  ),
       city: new FormControl(this.formValues.city),
       vendor: new FormControl(this.formValues.vendors),
-      chipsFormControl: new FormControl(),
+      chips: new FormControl(),
     });
+    this.inputControl = new FormControl();
   // END OF CONSTRUCTOR
   } 
 
@@ -93,9 +98,9 @@ export class SideBarFilterComponent implements OnInit, OnDestroy {
     this.subscribedFormValues.unsubscribe();
     this.subscribedChips.unsubscribe();
   }
-
   filterDiscounts() {
     const configControls = {
+
       values: {
         vendors: (this.filterForm.get('vendor')?.value) ? (this.filterForm.get('vendor')?.value) :[],
         city: this.filterForm.get('city')?.value || '',
@@ -108,7 +113,7 @@ export class SideBarFilterComponent implements OnInit, OnDestroy {
 
   resetForm() {
     this.filterForm.reset();
-    this.store.dispatch(addChips({ tag: 'resetSelectedTags' }));
+    this.store.dispatch(addChips({ tag: {id: 'a', name: 'resetSelectedTags' }}));
   }
 
   selectCathegory() {
@@ -121,17 +126,20 @@ export class SideBarFilterComponent implements OnInit, OnDestroy {
     //console.log(theCity);
   }
 
-  removeTag(tag: string) {
-    this.store.dispatch(removeChips({ tag }));
+  // add(ev: any){
+  //   console.log(ev);
+  // }
+  removeChips(chip: ISimpleVar) {
+    this.store.dispatch(removeChips({ tag: chip }));
   }
 
-  selectTag(slectedTag: any) {
-    console.log(this.chips);
-    let targetTag = slectedTag.option.value;
-    if (targetTag !== 'none') {
-      this.store.dispatch(addChips({ tag: targetTag }));
+  addChip(slectedTag: any) {
+   // console.log(this.filterForm.get('chips')?.value);
+    this.filterForm.patchValue({chips: ''});
+    if (slectedTag.name !== 'none') {
+      this.store.dispatch(addChips({ tag: slectedTag }));
     } else {
-      this.filterForm.get('chipsFormControl')?.reset();
+      this.filterForm.get('chips')?.reset();
     }
   }
 }

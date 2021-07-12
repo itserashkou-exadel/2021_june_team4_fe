@@ -1,15 +1,17 @@
-<div class="sideBar"  *ngIf="storedFormValues | async as formData">
+<div class="sideBar" *ngIf="storedFormValues | async as formData">
   <form [formGroup]="filterForm">
     <mat-form-field appearance="fill">
       <mat-label>Select a vendor</mat-label>
-      <mat-select 
+      <mat-select
         formControlName="vendor"
         (selectionChange)="selectCathegory()"
         multiple
       >
-        <mat-option *ngFor="let c of vendors | async" [value]="c">{{
-          c
-        }}</mat-option>
+        <mat-option
+          *ngFor="let vendor of vendors$ | async"
+          [value]="vendor.id"
+          >{{ vendor.name }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
 
@@ -20,55 +22,61 @@
         (selectionChange)="selectCathegory()"
         multiple
       >
-        <mat-option *ngFor="let c of categories | async" [value]="c">{{
-          c
-        }}</mat-option>
+        <mat-option
+          *ngFor="let category of categories$ | async"
+          [value]="category.id"
+          >{{ category.name }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Locations</mat-label>
-      <mat-select formControlName="city" >
+      <mat-select formControlName="city">
         <mat-option>-- None --</mat-option>
         <mat-optgroup
-          *ngFor="let country of locations | async"
-          [label]="country.countryName"
+          *ngFor="let country of locations$ | async"
+          [label]="country.name"
         >
-          <mat-option *ngFor="let city of country.cities" [value]="city">
-            {{ city }}
+          <mat-option *ngFor="let city of country.cities" [value]="city.id">
+            {{ city.name }}
           </mat-option>
         </mat-optgroup>
       </mat-select>
     </mat-form-field>
 
-    <mat-chip-list #chipList aria-label="Color selection">
-      <mat-chip *ngFor="let chip of chips | async" [removable]="true">
-        {{ chip }}
-        <mat-icon matChipRemove (click)="removeTag(chip)">cancel</mat-icon>
+    <mat-chip-list #chipList aria-label="Color selection" >
+      <mat-chip *ngFor="let chip of chips$ | async" [removable]="true">
+        {{ chip.name }}
+        <mat-icon matChipRemove (click)="removeChips(chip)">cancel</mat-icon>
       </mat-chip>
       <input
         type="text"
         placeholder="Pick tag"
         aria-label="Number"
         matInput
-        formControlName="chipsFormControl"
+        formControlName="chips"
         [matChipInputFor]="chipList"
         [matAutocomplete]="auto"
       />
       <mat-autocomplete
         #auto="matAutocomplete"
-        (optionSelected)="selectTag($event)"
+        (optionSelected)="addChip($event.option.value)"
       >
-      <mat-option [value]="'none'">None</mat-option>
-        <mat-option *ngFor="let option of tags | async" [value]="option">
-          {{ option }}
+        <mat-option [value]="{ id: '9', name: 'none' }">None</mat-option>
+        <mat-option *ngFor="let tag of tags$ | async" [value]="tag">
+          {{ tag.name }}
         </mat-option>
       </mat-autocomplete>
     </mat-chip-list>
+
     <div class="buttons-container">
-      <button mat-stroked-button color="primary" (click)="filterDiscounts()">Apply</button>
-      <button mat-stroked-button color="warn" (click)="resetForm()">Reset</button>
+      <button mat-stroked-button color="primary" (click)="filterDiscounts()">
+        Apply
+      </button>
+      <button mat-stroked-button color="warn" (click)="resetForm()">
+        Reset
+      </button>
     </div>
-    
   </form>
 </div>
