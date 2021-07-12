@@ -1,7 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { DialogComponent } from "../../../shared/dialog/dialog/dialog.component";
-import { MapComponent } from "../../../shared/map/map.component";
-import { MatDialog } from "@angular/material/dialog";
 import { createSelector, Store, select} from "@ngrx/store";
 import {
   IAppState,
@@ -12,7 +9,7 @@ import {
   IMapMarker
 } from "../../../shared/interfaces";
 import { Observable } from "rxjs";
-import { getDescription } from "../../../core/store/actions/description.actions";
+import {getDescription, toggleFavourite} from "../../../core/store/actions/description.actions";
 import { ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -25,11 +22,9 @@ export class DescriptionComponent implements OnInit {
   descriptionData$: Observable<IDescription>;
   markers$:any;
   id:string;
-  isFavorite = false;
   markers: any;
 
   constructor(private activateRoute: ActivatedRoute,
-              public dialog: MatDialog,
               private store: Store<IAppState>) {
     this.id = activateRoute.snapshot.params['id'];
 
@@ -49,28 +44,14 @@ export class DescriptionComponent implements OnInit {
     ]
   }
 
-  // openDialogWithMap(data: any) {//todo bp type
-  //
-  //   let configDialog = {
-  //     panelClass: 'map-wrapper',//add custom style
-  //     width: '750px',
-  //     height: '500px',
-  //     data: {
-  //       title: `Title for map, description:
-  //        ${data}`,
-  //       component: MapComponent,
-  //       data: data
-  //     }
-  //   };
-  //   this.dialog.open( DialogComponent, configDialog );
-  // }
-
   ngOnInit(): void {
     this.store.dispatch(getDescription({id: this.id}))
   }
 
-  addToFavorite() {
-    this.isFavorite = !this.isFavorite;
+  addToFavorite(data:IDescription) {
+    let userId = 'e1deda2f-d976-4022-9fee-ec9cae0b1cf4';//todo get live id
+    console.log('favorite', userId, data.id);
+    this.store.dispatch(toggleFavourite({userId: userId, discountId: data.id}))
   }
 
 }

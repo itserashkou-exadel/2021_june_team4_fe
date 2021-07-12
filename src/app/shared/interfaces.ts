@@ -23,8 +23,10 @@ export interface IMapMarker {
   cords: number[][],
   text: string
 }
+
 export interface IDescription {
   id: string;
+  favorite: boolean;
   active: boolean;
   archived: boolean;
   category:{};
@@ -92,7 +94,6 @@ export interface IUser {
   subscribes: string[];
   favorite: string[];
 }
-
 
 export interface IUserLogin {
   username: string;

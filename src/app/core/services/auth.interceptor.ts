@@ -14,11 +14,15 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private token: TokenStorageService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
+
     let authReq = req;
     const token = this.token.getToken();
-
     if (token != null) {
       authReq = req.clone({headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token)})
+      if (authReq.url.endsWith('/authenticate/refresh')) {//header for refresh access token
+        const refreshToken = window.sessionStorage.getItem('refreshToken');
+        authReq = req.clone({headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + refreshToken)})
+      }
     }
     return next.handle(authReq)
   }

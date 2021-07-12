@@ -1,4 +1,5 @@
 import {IDescription} from "../../../shared/interfaces";
+import {toggleFavourite} from "../actions/description.actions";
 
 export interface DescriptionState {
   description: IDescription | {};
@@ -8,6 +9,7 @@ export const initialState: DescriptionState = {
   description:{
     id: "b28349b5-0b39-45ee-bb3c-4f96c1abfe75",
     active: true,
+    favorite: false,
     category: { name: 'Sport'},
     description: "Initial description",
     archived: false,
@@ -28,6 +30,11 @@ export function descriptionReducer(state: DescriptionState = initialState, actio
     case 'getDescription':
       return state;
     case 'requestDescription':
+      return {
+        ...state,
+        description: action.data
+      };
+    case 'toggleFavourite':
       return {
         ...state,
         description: action.data
