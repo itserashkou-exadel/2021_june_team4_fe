@@ -63,8 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.router.navigate(['/home']);
 
         this.tokenStorage.saveToken(data);
-        // this.tokenStorage.saveUser(data);
-
+        this.auth.startRefreshTokenTimer();
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         // this.roles = this.tokenStorage.getUser().roles;
