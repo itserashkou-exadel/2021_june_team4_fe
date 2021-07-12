@@ -2,7 +2,7 @@
   <form [formGroup]="filterForm">
     <mat-form-field appearance="fill">
       <mat-label>Select a vendor</mat-label>
-      <mat-select 
+      <mat-select
         formControlName="vendor"
         (selectionChange)="selectCathegory()"
         multiple
@@ -69,6 +69,6 @@
       <button mat-stroked-button color="primary" (click)="filterDiscounts()">Apply</button>
       <button mat-stroked-button color="warn" (click)="resetForm()">Reset</button>
     </div>
-    
+
   </form>
 </div>
