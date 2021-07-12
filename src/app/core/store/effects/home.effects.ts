@@ -14,7 +14,7 @@ export class HomeEffects {
   newDiscounts$ = createEffect(
     ()=> this.actions$.pipe(
       ofType(getNewDiscounts),
-      mergeMap(()=> this.homeService.requestDiscountsData()
+      mergeMap((action)=> this.homeService.requestDiscountsData(action.sortParam)
       .pipe(
          map( (data: any) => {
            const newData = data.map((el: any) => this.homeService.handleRemoteDiscount(el))
