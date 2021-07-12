@@ -3,15 +3,16 @@ import { IFilterState } from 'src/app/shared/interfaces';
 export const initialState: IFilterState = {
   controlsValues: {
     locations: [
-      
-         { id: '0', name: 'Belarus', cities: [
+      {
+        id: '0',
+        name: 'Belarus',
+        cities: [
           { id: '0', name: 'Minsk' },
           { id: '1', name: 'Mogilev' },
           { id: '2', name: 'Grodno' },
           { id: '3', name: 'Gomel' },
-        ], 
+        ],
       },
-       
     ],
     categories: [
       { id: '0', name: 'Food' },
@@ -33,10 +34,7 @@ export const initialState: IFilterState = {
 
   formValues: {
     categories: [],
-    city: 
-       { id: '0', name: 'Belarus', cities: [{ id: '0', name: 'Minsk' }] },
-     
-    
+    city: null,
     vendors: [],
     chips: [],
   },
@@ -63,9 +61,7 @@ export function filterReducer(state: IFilterState = initialState, action: any) {
       if (action.tag.name === 'resetSelectedTags') {
         return { ...state, formValues: { ...state.formValues, chips: [] } };
       }
-      if (
-        state.formValues.chips.includes(action.tag) 
-      ) {
+      if (state.formValues.chips.includes(action.tag)) {
         return state;
       }
       return {

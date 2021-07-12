@@ -14,7 +14,7 @@ export interface ISimpleVar {
 }
 export interface IFilterFormsValues {
   categories: ISimpleVar[];
-  city: ILocationCountry;
+  city: ILocationCountry | null;
   vendors: ISimpleVar[];
   chips: ISimpleVar[];
 }
