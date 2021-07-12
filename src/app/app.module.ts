@@ -24,6 +24,7 @@ import { EffectsModule } from "@ngrx/effects";
 import { DescriptionService } from "./core/services/description.service";
 import { HomeEffects } from './core/store/effects/home.effects';
 import { filterReducer } from './core/store/redeucers/filter.reducer';
+import { FilterEffects } from './core/store/effects/filter.effects';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { filterReducer } from './core/store/redeucers/filter.reducer';
       description: descriptionReducer,
       filter: filterReducer,
     }),
-    EffectsModule.forRoot([DescriptionEffects, HomeEffects]),
+    EffectsModule.forRoot([DescriptionEffects, HomeEffects, FilterEffects]),
     // angular
     HttpClientModule,
     BrowserAnimationsModule,
@@ -49,10 +50,13 @@ import { filterReducer } from './core/store/redeucers/filter.reducer';
     AppRoutingModule,
     NgbModule,
   ],
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent, 
+    // FilterPipe
+  ],
   bootstrap: [AppComponent],
   providers: [
-  authInterceptorProviders,
+    authInterceptorProviders,
     DescriptionService],
   entryComponents: [//for dynamical load components
     DialogComponent,

@@ -115,6 +115,7 @@ import {TranslateModule} from "@ngx-translate/core";
     TileComponent,
     CheckboxComponent,
     TilesBoxComponent,
+    // FilterPipe
   ],
 })
 export class SharedModule {

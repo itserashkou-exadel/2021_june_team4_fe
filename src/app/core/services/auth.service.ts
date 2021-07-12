@@ -5,8 +5,7 @@ import { IToken, IUserLogin } from '../../shared/interfaces';
 import { TokenStorageService } from './token-storage.service';
 import { map } from "rxjs/operators";
 
-const AUTH_API = 'http://localhost:8080/authenticate/login';
-const REFRESH_API = 'http://localhost:8080/authenticate/refresh';
+import { API_URL, REFRESH_URL } from '../../shared/constants';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -23,7 +22,7 @@ export class AuthService {
                private tokenStorage: TokenStorageService) { }
 
   login(user: IUserLogin): Observable<IToken> {
-    return this.http.post<IToken>(AUTH_API, user, httpOptions)
+    return this.http.post<IToken>(`${API_URL}/authenticate/login`, user, httpOptions)
   }
 
   logout() {//todo logout
@@ -37,7 +36,7 @@ export class AuthService {
   }
 
   updateAccessToken() {
-    return this.http.post<IToken>(REFRESH_API, null)
+    return this.http.post<IToken>(REFRESH_URL, null)
       .pipe(map((data) => {
 
         let jwtToken: any = {
@@ -46,7 +45,7 @@ export class AuthService {
         }
         this.tokenStorage.saveToken(jwtToken);
         this.stopRefreshTokenTimer();
-        this.startRefreshTokenTimer();//todo update token
+        this.startRefreshTokenTimer();
         return jwtToken;
       }));
   }
@@ -70,3 +69,4 @@ export class AuthService {
     clearTimeout(this.refreshTokenTimeout);
   }
 }
+
