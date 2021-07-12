@@ -5,7 +5,7 @@ interface Action {
   type: string;
 }
 
-export const getFilteredData = createAction('getFilteredData');
+export const getFilteredData = createAction('getFilteredData', props<{data: any}>());
 
 export const requestFilteredData = createAction(
   'requestFilteredData',

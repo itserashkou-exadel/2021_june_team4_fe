@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs/operators';
 import { FilterService } from '../../services/filter.service';
-import { getControlsValues } from '../actions/filter.actions';
+import { getControlsValues, getFilteredData } from '../actions/filter.actions';
 
 @Injectable()
 export class FilterEffects {
@@ -12,6 +12,20 @@ export class FilterEffects {
   ) {}
 
   //requestFilteredDiscounts$ = createEffect
+  requestFilteredDiscounts$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getFilteredData),
+      mergeMap((action) =>
+        this.filterService.requestFilteredData(action.data).pipe(
+          map((data: any) => {
+           // console.log(data);
+            
+            return { type: 'requestFilteredData', data: data };
+          })
+        )
+      )
+    )
+  );
 
   newControlsValues$ = createEffect(() =>
     this.actions$.pipe(

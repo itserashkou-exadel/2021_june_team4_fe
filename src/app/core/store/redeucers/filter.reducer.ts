@@ -1,4 +1,3 @@
-import { FormControl } from '@angular/forms';
 import { IFilterState } from 'src/app/shared/interfaces';
 
 export const initialState: IFilterState = {
@@ -34,17 +33,23 @@ export const initialState: IFilterState = {
   },
 
   formValues: {
-    categories: ['Sport'],
-    city: 'Minsk',
-    vendors: ['Flow'],
+    categories: [],
+    city: '',
+    vendors: [],
+    chips: [],
   },
-  chips: ['Yoga'],
 };
 
 export function filterReducer(state: IFilterState = initialState, action: any) {
   switch (action.type) {
+    case 'requestFilteredData':
+      // console.log(action.data);
+      return state;
+
+    case 'getFilteredData':
+      return state;
+
     case 'saveControls':
-     // console.log(action.values);
       return { ...state, formValues: action.values };
 
     case 'requestControlsValues':
@@ -54,18 +59,33 @@ export function filterReducer(state: IFilterState = initialState, action: any) {
       return state;
 
     case 'addTag':
-      if (state.chips.includes(action.tag) || action.tag === 'None') {
+      if(!state.formValues.chips)return;
+      if (
+        state.formValues.chips.includes(action.tag) ||
+        action.tag === 'none'
+      ) {
         return state;
       }
-      if(action.tag === 'resetSelectedTags'){
-        return { ...state, chips: [] };
+      if (action.tag === 'resetSelectedTags') {
+        return { ...state, formValues: { ...state.formValues, chips: [] } };
       }
 
-      return { ...state, chips: [...state.chips, action.tag] };
+      return {
+        ...state,
+        formValues: {
+          ...state.formValues,
+          chips: [...state.formValues.chips, action.tag],
+        },
+      };
     case 'removeTag':
       return {
         ...state,
-        chips: [...state.chips.filter((el: string) => el !== action.tag)],
+        formValues: {
+          ...state.formValues,
+          chips: [
+            ...state.formValues.chips.filter((el: string) => el !== action.tag),
+          ],
+        },
       };
     default:
       return state;

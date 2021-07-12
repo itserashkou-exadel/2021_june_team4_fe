@@ -1,7 +1,7 @@
 import { IDiscount, IHomeState } from '../../../shared/interfaces';
 
 export const initialState: IHomeState = {
-  user: 'UserName',
+  sortValue: '',
   discounts: [
     {
       id: 0,
@@ -17,7 +17,7 @@ export const initialState: IHomeState = {
         'Here is a short description Here is a short description Here is a short description Here is a short description',
       percent: 10,
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      coordinates: [[49.094, 28.981]]
+      coordinates: [[49.094, 28.981]],
     },
     {
       id: 0,
@@ -29,17 +29,18 @@ export const initialState: IHomeState = {
       tag: 'tag',
       category: 'category',
       isActive: true,
-      description:
-        ' Here is a short description Here is a short description',
+      description: ' Here is a short description Here is a short description',
       percent: 10,
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      coordinates: [[50.094, 26.981]]
+      coordinates: [[50.094, 26.981]],
     },
   ],
 };
 
 export function headReducer(state: IHomeState = initialState, action: any) {
   switch (action.type) {
+    case 'setSortValue':
+      return { ...state, sortValue: action.value };
     case 'requestDiscounts':
       return { ...state, discounts: action.data };
     case 'getNewDiscounts':

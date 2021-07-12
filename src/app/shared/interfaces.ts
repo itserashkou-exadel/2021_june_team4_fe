@@ -5,14 +5,14 @@ export interface IUiConfigState {
 
 export interface IFilterState {
   controlsValues: IFilterControls;
-  formValues: any;
-  chips: string[];
+  formValues: IFilterFormsValues;
 }
 
 export interface IFilterFormsValues {
   categories: string[];
-  city: '';
+  city: string;
   vendors: string[];
+  chips: string[]
 }
 export interface IFilterControls {
   locations: ILocationsGroup[];
@@ -62,7 +62,7 @@ export interface IDescriptionState {
 }
 
 export interface IHomeState {
-  user: string;
+  sortValue: string;
   discounts: IDiscount[];
 }
 

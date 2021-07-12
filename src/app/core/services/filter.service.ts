@@ -1,3 +1,4 @@
+import { E } from '@angular/cdk/keycodes';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin } from 'rxjs';
@@ -11,18 +12,30 @@ import { IFilterControls, ILocationsGroup } from 'src/app/shared/interfaces';
 export class FilterService {
   constructor(private http: HttpClient) {}
 
-  requestFilteredData = (param: any) =>{
-    const response = this.http.get(`${API_URL}/discounts?${param}`);
-    return response;
-  }
+  requestFilteredData = (param: any) => {
+  //   let ids: [] = [];
+  //  const theCity = param.city;
+  //  // const getIds =  () => {      this.requestRawData();    };
+     const id  = this.http.get(`${API_URL}/countries`)
+  //  // console.log(id)
+  //   id.subscribe(d => {
+  //     console.log(d)
+  //     let src = d as Array<any>;
+  //    let r = src.find(e=> e.cities.find((c:  any)=> c.name === theCity))
+  //    console.log(r);
+  //    let cid = r.cities.find((ct: any) => ct.name === theCity)
+  //    console.log(cid.id)
+  //     })
 
-  test = () => {
-    const param = 'categoryId=c7737489-01a2-46c3-928c-c4ddc73de7ef';   //Beauty
-    const param2 = 'tagId=46868e13-ea9d-42d1-8811-29413b1d1763';    // 
-                            //"db19d31a-67d9-4ab7-9fd5-79ae594ff4e3"
-    const response = this.http.get(`${API_URL}/discounts?${param}&${param2}`);
-    return response;
+  //  // identificators.subscribe((data) => (ids = data));
+
+  //   const citiId = console.log(ids);
+
+  //   const response = this.http.get(`${API_URL}/discounts?${param}`);
+     return id;
   };
+
+  makeParams() {}
 
   handleCountries = (rawData: any): ILocationsGroup => {
     const newLocations = rawData.map((location: any) => ({
