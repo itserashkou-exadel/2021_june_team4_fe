@@ -7,6 +7,7 @@ import { IAppState, IDescriptionState, IDescription, IHomeState, IUiConfigState}
 import { Observable } from "rxjs";
 import { getDescription } from "../../../core/store/actions/description.actions";
 import { ActivatedRoute} from '@angular/router';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-description',
@@ -53,4 +54,7 @@ export class DescriptionComponent implements OnInit {
     this.store.dispatch(getDescription({id: this.id}))
   }
 
+  addFavorite() {
+    
+  }
 }

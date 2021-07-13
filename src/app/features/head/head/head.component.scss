@@ -18,35 +18,38 @@
   flex-wrap: wrap;
   width: 100%;
   margin: 0;
-  padding-top: 20px;
+  border-bottom: 1px solid rgba(0,0,0,.12);
+
+  mat-icon{
+    transition: color 0.2s;
+    cursor: pointer;
+    &:hover{
+      color: gold;
+    }
+  }
+
   div {
     display: flex;
     align-items: center;
   }
   .left-block {
-    min-width: 49%;
+    //min-width: 49%;
     display: flex;
-    justify-content: space-between;
+    //justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
   }
   .right-block {
-    min-width: 49%;
+    //min-width: 49%;
     display: flex;
-    justify-content: space-around;
-    .notifications {
-      min-width: 15%;
-      display: flex;
-      justify-content: space-around;
-    }
+    justify-content: flex-end;
+    // .notifications {
+    //   display: flex;
+    //   justify-content: space-between;
+    // }
   }
 }
 
-.notifications {
-  * {
-    cursor: pointer;
-  }
-}
 
 a {
   text-decoration: none;
@@ -58,3 +61,8 @@ a {
   }
 }
 
+.langButton{
+  &:hover{
+    color: gold;
+  }
+}
