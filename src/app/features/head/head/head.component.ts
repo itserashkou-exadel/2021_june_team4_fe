@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {createSelector, Store, select} from '@ngrx/store';
+import { createSelector, Store, select } from '@ngrx/store';
 
 import { TranslateService } from '@ngx-translate/core';
-import { environment } from '../../../../environments/environment';
-import {IAppState, IUiConfigState} from '../../../shared/interfaces';
+import { IAppState, IUiConfigState } from '../../../shared/interfaces';
 
-import { DialogComponent } from '../../../shared/dialog/dialog/dialog.component';
-import { LocationTreeComponent } from './location-tree/location-tree.component';
 import { MatDialog } from '@angular/material/dialog';
-import {Observable} from "rxjs";
-import {setLanguage} from "../../../core/store/actions/ui-config.actions";
+import { Observable } from "rxjs";
+import { setLanguage } from "../../../core/store/actions/ui-config.actions";
 
 
 @Component({
@@ -56,12 +53,12 @@ export class HeadComponent implements OnInit {
   ngOnInit(): void {
     let localLang = localStorage.getItem(this.SETTING_KEY);
     if(localLang) {
-      this.store.dispatch(setLanguage({language:localLang }));
+      this.store.dispatch(setLanguage({ language:localLang }));
     }
   }
 
   changeLocale(lang: string) {
-    this.store.dispatch(setLanguage({language:lang }));
+    this.store.dispatch(setLanguage({ language:lang }));
     this.translateService.use(lang);
     localStorage.setItem(this.SETTING_KEY,lang);
   }
