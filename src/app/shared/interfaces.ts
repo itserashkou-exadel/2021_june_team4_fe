@@ -77,8 +77,8 @@ export interface IDiscount {
   isActive: boolean;
   description: string;
   percent: number;
-  image: string
-  coordinates: number[][]
+  image: string;
+  coordinates: number[][];
 }
 
 export interface IUser {
@@ -116,4 +116,20 @@ export interface ICategory {
 export interface ITag {
   id: string;
   name: string;
+}
+
+export interface IDiscountTest {
+  id: number;
+  name: string;
+  vendor: IVendor;
+  added: string;
+  expired: string;
+  location: string;
+  tag: string;
+  category: string;
+  isActive: boolean;
+  description: string;
+  percent: number;
+  image: string;
+  coordinates: number[][];
 }

@@ -34,14 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      // this.roles = this.tokenStorage.getUser().roles
     }
-
-    this.route.queryParams.subscribe(( params: Params) => {
-      if (params['accessDenied']) {
-        alert("You can't get this page. Login at first")
-      }
-    })
   }
 
   ngOnDestroy(): void {
@@ -63,11 +56,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.router.navigate(['/home']);
 
         this.tokenStorage.saveToken(data);
-        // this.tokenStorage.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        // this.roles = this.tokenStorage.getUser().roles;
       },
       err => {
         this.errorMessage = err.error.message;

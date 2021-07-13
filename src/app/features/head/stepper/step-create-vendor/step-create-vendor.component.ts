@@ -27,6 +27,8 @@ export class StepCreateVendorComponent implements OnInit, OnDestroy {
       locations: new FormControl(null, [Validators.required]),
       contacts: new FormControl(null, [Validators.required])
     });
+
+    
   };
 
   ngOnDestroy(): void {
@@ -51,6 +53,7 @@ export class StepCreateVendorComponent implements OnInit, OnDestroy {
         this.vendorForm.enable();
       }
     );
+    // console.log(this.vendorsService.getAllDiscounts())
 
     // Function for delete vendors from BD!!!!!!!!!! Warning!!!!!
     // this.vendorsService._deleteVendor();
@@ -60,6 +63,10 @@ export class StepCreateVendorComponent implements OnInit, OnDestroy {
   resetForm() {
     this.vendorForm.reset();
   };
+
+  addNewLocation(location: string) {
+
+  }
 
 }
 

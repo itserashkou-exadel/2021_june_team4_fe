@@ -33,6 +33,7 @@
       </mat-autocomplete>
     </mat-form-field>
     <button
+      type="button"
       class="add-btn"
       (click)="createCategory(this.bpForm.controls.category.value)"
     >
@@ -63,7 +64,11 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-    <button class="add-btn" (click)="createTag(this.bpForm.controls.tag.value)">
+    <button
+      type="button"
+      class="add-btn"
+      (click)="createTag(this.bpForm.controls.tag.value)"
+    >
       <mat-icon>add_box</mat-icon>
     </button>
     <!-- /Bonus program tag -->
@@ -113,12 +118,25 @@
   </div>
 
   <div class="form-row">
-    <!-- Percent -->
+    <!-- Discount's type -->
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Discount's type</mat-label>
+      <select matNativeControl>
+        <option *ngFor="let type of DiscountsTypes" value="type.value">
+          {{ type.viewValue }}
+        </option>
+      </select>
+    </mat-form-field>
+    <!-- /Discount's type -->
+  </div>
+
+  <div class="form-row">
+    <!-- Bonus size -->
     <mat-form-field class="example-full-width form-field" appearance="fill">
       <mat-label>{{ 'COMMON.Stepper.bonusSize' | translate }}</mat-label>
-      <input matInput formControlName="percent" />
+      <input type="number" matInput formControlName="value" />
     </mat-form-field>
-    <!-- /Percent -->
+    <!-- /Bonus size -->
   </div>
 
   <div class="second-step__btns btns-wrapper">

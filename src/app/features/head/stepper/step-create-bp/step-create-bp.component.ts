@@ -6,6 +6,11 @@ import { DiscountService } from 'src/app/core/services/discount.service';
 import { TagsService } from 'src/app/core/services/tags.service';
 import { ICategory, ITag } from '../../../../shared/interfaces';
 
+interface DiscountType {
+  value: string,
+  viewValue: string
+}
+
 @Component({
   selector: 'app-step-create-bp',
   templateUrl: './step-create-bp.component.html',
@@ -17,6 +22,11 @@ export class StepCreateBpComponent implements OnInit, OnDestroy {
 
   categories$: Observable<ICategory[]>;
   tags$: Observable<ITag[]>;
+
+  DiscountsTypes: DiscountType[] = [
+    {value: 'PERCENT', viewValue: 'Percent'}, 
+    {value: 'PRICE', viewValue: 'Price'},
+  ];
   
   constructor( private categoriesService: CategoriesService,
                private tagsService: TagsService,
@@ -35,7 +45,8 @@ export class StepCreateBpComponent implements OnInit, OnDestroy {
       description: new FormControl(null, [Validators.required]),
       startTime: new FormControl(null, [Validators.required]),
       endTime: new FormControl(null, [Validators.required]),
-      percent: new FormControl(null, [Validators.required])
+      discountType: new FormControl(null, [Validators.required]),
+      value: new FormControl(null, [Validators.required])
     });
   };
 
@@ -63,10 +74,10 @@ export class StepCreateBpComponent implements OnInit, OnDestroy {
   };
 
   createCategory(category: string): void {
-    this.categoriesService.createCategory(category)
+    this.categoriesService.createCategory(JSON.stringify({ 'name': category }))
   };
 
   createTag(tag: string): void {
-    this.tagsService.createTag(tag)
+    this.tagsService.createTag(JSON.stringify({ 'name': tag }))
   };
 }
