@@ -4,8 +4,10 @@ import { Observable } from 'rxjs';
 import { IToken, IUserLogin } from '../../shared/interfaces';
 import { TokenStorageService } from './token-storage.service';
 import { map } from "rxjs/operators";
+import { NotificationService } from "./notification.service";
 
-import { API_URL, REFRESH_URL } from '../../shared/constants';
+import {LOGIN_URL, REFRESH_URL} from '../../shared/constants';
+import {Router} from "@angular/router";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -19,16 +21,18 @@ export class AuthService {
   private refreshTokenTimeout: any;
 
   constructor( private http: HttpClient,
-               private tokenStorage: TokenStorageService) { }
+               private tokenStorage: TokenStorageService,
+               private router: Router,
+               private notification: NotificationService) { }
 
   login(user: IUserLogin): Observable<IToken> {
-    return this.http.post<IToken>(`${API_URL}/authenticate/login`, user, httpOptions)
+    return this.http.post<IToken>(`${LOGIN_URL}`, user, httpOptions)
   }
 
   logout() {//todo logout
-    // this.stopRefreshTokenTimer();
+    this.stopRefreshTokenTimer();
     // this.userSubject.next(null);
-    // this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 
   isAuthenticated(): boolean {
@@ -36,17 +40,23 @@ export class AuthService {
   }
 
   updateAccessToken() {
-    return this.http.post<IToken>(REFRESH_URL, null)
-      .pipe(map((data) => {
+    return this.http.post(REFRESH_URL, null)
+      .pipe(map((data: any) => {
 
-        let jwtToken: any = {
-          accessToken: data.accessToken,
-          refreshToken: window.sessionStorage.getItem('refreshToken')
-        }
-        this.tokenStorage.saveToken(jwtToken);
         this.stopRefreshTokenTimer();
-        this.startRefreshTokenTimer();
-        return jwtToken;
+
+        if(data.accessToken) {
+          let jwtToken: any = {
+            accessToken: data.accessToken,
+            refreshToken: window.sessionStorage.getItem('refreshToken')
+          }
+          this.tokenStorage.saveToken(jwtToken);
+          this.startRefreshTokenTimer();
+          this.notification.success('Token was updated! TEST REFRESH');
+        } else {
+          this.notification.error(data.message);
+          this.logout()
+        }
       }));
   }
 
