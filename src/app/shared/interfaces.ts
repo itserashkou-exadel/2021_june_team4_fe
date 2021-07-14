@@ -1,6 +1,11 @@
 export interface IUiConfigState {
   homeIsMap: boolean;
   appLanguage: string;
+  requestConfig: {
+    fiterRequestParams:string;
+    sortValue: string;
+  }
+  
 }
 
 export interface IFilterState {
@@ -91,7 +96,7 @@ export interface IDiscount {
   category: string;
   isActive: boolean;
   description: string;
-  percent: number;
+  percent: string;
   image: string;
   coordinates: number[][];
 }

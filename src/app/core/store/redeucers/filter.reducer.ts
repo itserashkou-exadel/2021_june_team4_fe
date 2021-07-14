@@ -43,6 +43,7 @@ export const initialState: IFilterState = {
 export function filterReducer(state: IFilterState = initialState, action: any) {
   switch (action.type) {
     case 'requestFilteredData':
+      console.log(action.data);
       return state;
 
     case 'getFilteredData':

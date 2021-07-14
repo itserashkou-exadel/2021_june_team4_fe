@@ -12,20 +12,20 @@ export class FilterEffects {
   ) {}
 
   //requestFilteredDiscounts$ = createEffect
-  requestFilteredDiscounts$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(getFilteredData),
-      mergeMap((action) =>
-        this.filterService.requestFilteredData(action.data).pipe(
-          map((data: any) => {
-           // console.log(data);
+  // requestFilteredDiscounts$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(getFilteredData),
+  //     mergeMap((action) =>
+  //       this.filterService.requestFilteredData(action.data).pipe(
+  //         map((data: any) => {
+  //          // console.log(data);
             
-            return { type: 'requestFilteredData', data: data };
-          })
-        )
-      )
-    )
-  );
+  //           return { type: 'requestFilteredData', data: data };
+  //         })
+  //       )
+  //     )
+  //   )
+  // );
 
   newControlsValues$ = createEffect(() =>
     this.actions$.pipe(
@@ -33,7 +33,7 @@ export class FilterEffects {
       mergeMap(() =>
         this.filterService.requestRawData().pipe(
           map((data: any) => {
-            console.log(data);
+           // console.log(data);
             const processedData = {
               locations: data[0],
               categories: data[1],

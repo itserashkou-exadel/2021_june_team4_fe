@@ -1,12 +1,29 @@
-import {IUiConfigState} from "../../../shared/interfaces";
+import { IUiConfigState } from '../../../shared/interfaces';
 
 export const initialState: IUiConfigState = {
   homeIsMap: true,
   appLanguage: 'en',
+  requestConfig: {
+    fiterRequestParams: '',
+    sortValue: '',
+  },
 };
 
 export function uiConfigReducer(state: any = initialState, action: any) {
   switch (action.type) {
+    case 'setSortValue':
+      return {
+        ...state,
+        requestConfig: { ...state.requestConfig, sortValue: action.param },
+      };
+    case 'setFilterConfigRequestParam':
+      return {
+        ...state,
+        requestConfig: {
+          ...state.requestConfig,
+          fiterRequestParams: action.param,
+        },
+      };
     case 'ToggleHomeContent': //ToggleHomeContent
       return { ...state, homeIsMap: action.isMap };
     case 'ToggleLanguage':
