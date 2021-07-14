@@ -12,7 +12,8 @@ import {
 import {
   IAppState,
   IFilterFormsValues,
-  ILocationsGroup,
+  ILocationCountry,
+  ISimpleVar,
 } from 'src/app/shared/interfaces';
 import {
   selectChips,
@@ -23,6 +24,7 @@ import {
   selectFormValues,
 } from '../../home.selectors';
 import { FilterService } from 'src/app/core/services/filter.service';
+import { setFilterConfigReqest } from 'src/app/core/store/actions/ui-config.actions';
 
 export interface Fruit {
   name: string;
@@ -35,11 +37,11 @@ export interface Fruit {
 })
 export class SideBarFilterComponent implements OnInit, OnDestroy {
   filterForm: FormGroup;
-  chips: Observable<string[]>;
-  tags: Observable<string[]>;
-  categories: Observable<string[]>;
-  locations: Observable<ILocationsGroup[]>;
-  vendors: Observable<string[]>;
+  chips$: Observable<ISimpleVar[]>;
+  tags$: Observable<ISimpleVar[]>;
+  categories$: Observable<ISimpleVar[]>;
+  locations$: Observable<ILocationCountry[]>;
+  vendors$: Observable<ISimpleVar[]>;
 
   storedFormValues: Observable<IFilterFormsValues>;
   subscribedFormValues: Subscription;
@@ -47,91 +49,104 @@ export class SideBarFilterComponent implements OnInit, OnDestroy {
   formValues: any;
   selectedChips: any;
 
-  constructor(private store: Store<IAppState>) {
-    this.locations = this.store.select(selectControlsLocations);
-    this.categories = this.store.select(selectControlsCathegories);
-    this.tags = this.store.select(selectControlsTags);
-    this.chips = this.store.select(selectChips); // === SELECTED TAGS
-    this.vendors = this.store.select(selectControlsVendors);
+  inputControl: FormControl;
+
+  constructor(
+    private store: Store<IAppState>,
+    private filterServices: FilterService
+  ) {
+    this.locations$ = this.store.select(selectControlsLocations);
+    this.categories$ = this.store.select(selectControlsCathegories);
+    this.tags$ = this.store.select(selectControlsTags);
+    this.chips$ = this.store.select(selectChips); // === SELECTED TAGS
+    this.vendors$ = this.store.select(selectControlsVendors);
     this.storedFormValues = this.store.select(selectFormValues);
 
-   // this.storedFormValues.subscribe((data) => console.log(data));
+    // this.storedFormValues.subscribe((data) => console.log(data));
+    // this.locations$.subscribe(d => console.log(d))
 
     this.subscribedFormValues = this.storedFormValues.subscribe(
       (data) => (this.formValues = data)
     );
-    this.subscribedChips = this.chips.subscribe(
+    this.subscribedChips = this.chips$.subscribe(
       (data) => (this.selectedChips = data)
     );
 
     this.filterForm = new FormGroup({
-      category: new FormControl(this.formValues.categories  ),
+      category: new FormControl(this.formValues.categories),
       city: new FormControl(this.formValues.city),
       vendor: new FormControl(this.formValues.vendors),
-      chipsFormControl: new FormControl(),
+      chips: new FormControl(),
     });
-  // END OF CONSTRUCTOR
-  } 
+    this.inputControl = new FormControl();
+    // END OF CONSTRUCTOR
+  }
 
   ngOnInit(): void {
     this.store.dispatch(getControlsValues());
   }
 
   ngOnDestroy(): void {
-    //console.log()
-  
+
     const configControls = {
       values: {
-        vendors: (this.filterForm.get('vendor')?.value) ? (this.filterForm.get('vendor')?.value) :[],
+        vendors: this.filterForm.get('vendor')?.value
+          ? this.filterForm.get('vendor')?.value
+          : [],
         city: this.filterForm.get('city')?.value || '',
         categories: this.filterForm.get('category')?.value || [],
         chips: this.selectedChips,
       },
     };
-   // console.log(configControls.values)
     this.store.dispatch(saveFormsValues({ values: configControls.values }));
     this.subscribedFormValues.unsubscribe();
     this.subscribedChips.unsubscribe();
   }
-
+  
   filterDiscounts() {
     const configControls = {
       values: {
-        vendors: (this.filterForm.get('vendor')?.value) ? (this.filterForm.get('vendor')?.value) :[],
-        city: this.filterForm.get('city')?.value || '',
+        vendors: this.filterForm.get('vendor')?.value
+          ? this.filterForm.get('vendor')?.value
+          : [],
+        city: this.filterForm.get('city')?.value || null,
         categories: this.filterForm.get('category')?.value || [],
         chips: this.selectedChips,
       },
     };
+
+    const src = this.filterServices.requestFilteredData(configControls.values);
+    this.store.dispatch(setFilterConfigReqest({ param: src }));
     this.store.dispatch(getFilteredData({ data: configControls.values }));
   }
 
+
   resetForm() {
     this.filterForm.reset();
-    this.store.dispatch(addChips({ tag: 'resetSelectedTags' }));
+    this.store.dispatch(
+      addChips({ tag: { id: 'a', name: 'resetSelectedTags' } })
+    );
+    this.store.dispatch(setFilterConfigReqest({ param: '' }));
   }
 
   selectCathegory() {
     const cathegoryValue = this.filterForm.get('category')?.value;
-    // console.log(cathegoryValue);
   }
 
   selectCity() {
     const theCity = this.filterForm.get('cities')?.value;
-    //console.log(theCity);
   }
 
-  removeTag(tag: string) {
-    this.store.dispatch(removeChips({ tag }));
+  removeChips(chip: ISimpleVar) {
+    this.store.dispatch(removeChips({ tag: chip }));
   }
 
-  selectTag(slectedTag: any) {
-    console.log(this.chips);
-    let targetTag = slectedTag.option.value;
-    if (targetTag !== 'none') {
-      this.store.dispatch(addChips({ tag: targetTag }));
+  addChip(slectedTag: any) {
+    this.filterForm.patchValue({ chips: '' });
+    if (slectedTag.name !== 'none') {
+      this.store.dispatch(addChips({ tag: slectedTag }));
     } else {
-      this.filterForm.get('chipsFormControl')?.reset();
+      this.filterForm.get('chips')?.reset();
     }
   }
 }

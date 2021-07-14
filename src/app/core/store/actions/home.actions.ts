@@ -5,10 +5,10 @@ interface Action {
   type: string;
 }
 
-export const setSortValue = createAction(
-  'setSortValue',
-  props<{ value: string }>()
-);
+// export const setSortValue = createAction(
+//   'setSortValue',
+//   props<{ value: string }>()
+// );
 
 export const getNewDiscounts = createAction(
   'getNewDiscounts',

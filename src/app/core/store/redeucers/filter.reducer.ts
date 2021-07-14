@@ -4,37 +4,37 @@ export const initialState: IFilterState = {
   controlsValues: {
     locations: [
       {
-        countryName: 'Belarus',
-        cities: ['Minsk', 'Mogilev', 'Grodno', 'Gomel'],
-      },
-      {
-        countryName: 'Ukraine',
-        cities: ['Kyiv', 'Vinnytsia', 'Odesa', 'Kharkiv'],
+        id: '0',
+        name: 'Belarus',
+        cities: [
+          { id: '0', name: 'Minsk' },
+          { id: '1', name: 'Mogilev' },
+          { id: '2', name: 'Grodno' },
+          { id: '3', name: 'Gomel' },
+        ],
       },
     ],
-    categories: ['Food', 'Fashion', 'Gadgets', 'Health '],
+    categories: [
+      { id: '0', name: 'Food' },
+      { id: '1', name: 'Gadzhets' },
+    ],
     tags: [
-      'Apple',
-      'Samsung',
-      'Manicure',
-      'Vocation',
-      'Cinema',
-      'Yoga',
-      'Fitness',
-      'Sushi',
-      'Pizza',
+      { id: '0', name: 'Apple' },
+      { id: '1', name: 'Samsung' },
+      { id: '2', name: 'Manicure' },
+      { id: '3', name: 'Vocation' },
+      { id: '4', name: 'Cinema' },
+      { id: '5', name: 'Yoga' },
     ],
     vendors: [
-      'Vylka',
-      'Pizzas without borders',
-      'Fitness assembly',
-      'Stara poshta',
+      { id: '0', name: 'Vylka' },
+      { id: '1', name: 'Stara poshta' },
     ],
   },
 
   formValues: {
     categories: [],
-    city: '',
+    city: null,
     vendors: [],
     chips: [],
   },
@@ -43,7 +43,7 @@ export const initialState: IFilterState = {
 export function filterReducer(state: IFilterState = initialState, action: any) {
   switch (action.type) {
     case 'requestFilteredData':
-      // console.log(action.data);
+      console.log(action.data);
       return state;
 
     case 'getFilteredData':
@@ -58,18 +58,13 @@ export function filterReducer(state: IFilterState = initialState, action: any) {
     case 'getControls':
       return state;
 
-    case 'addTag':
-      if(!state.formValues.chips)return;
-      if (
-        state.formValues.chips.includes(action.tag) ||
-        action.tag === 'none'
-      ) {
-        return state;
-      }
-      if (action.tag === 'resetSelectedTags') {
+    case 'addChip':
+      if (action.tag.name === 'resetSelectedTags') {
         return { ...state, formValues: { ...state.formValues, chips: [] } };
       }
-
+      if (state.formValues.chips.includes(action.tag)) {
+        return state;
+      }
       return {
         ...state,
         formValues: {
@@ -77,13 +72,14 @@ export function filterReducer(state: IFilterState = initialState, action: any) {
           chips: [...state.formValues.chips, action.tag],
         },
       };
-    case 'removeTag':
+
+    case 'removeChip':
       return {
         ...state,
         formValues: {
           ...state.formValues,
           chips: [
-            ...state.formValues.chips.filter((el: string) => el !== action.tag),
+            ...state.formValues.chips.filter((el: any) => el !== action.tag),
           ],
         },
       };

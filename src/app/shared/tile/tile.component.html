@@ -9,7 +9,7 @@
             {{discount$.description | slice: 0: 80}}{{setDotts(discount$.description, 80)}}
         </p>
         <span></span>
-        <div class="info-box"><b>{{ "COMMON.Tile.discount" | translate }}</b><b>{{discount$.percent}}% </b></div>
+        <div class="info-box"><b>{{ "COMMON.Tile.discount" | translate }}</b><b>{{discount$.percent}} </b></div>
         <!-- <div class="info-box"><b>Location :</b>{{discount$.location | slice: 0:10}}</div> -->
         <div class="info-box"><b>{{ "COMMON.Tile.vendor" | translate }}</b>{{discount$.vendor | slice: 0:30}}{{setDotts(discount$.vendor, 10)}} </div>
         <div class="info-box"> <b>{{ "COMMON.Tile.expired" | translate }}</b> {{discount$.expired}}</div>
