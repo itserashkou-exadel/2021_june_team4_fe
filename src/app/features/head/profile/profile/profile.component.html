@@ -1,34 +1,100 @@
-<!-- <p>profile works!</p>
-<button (click)='inc()'>add</button>
-<button (click)='dec()'>dec</button>
-<button (click)='res()'>res</button>
-<p>{{count$ | async}}</p> -->
+
 <div class="profile pt-5 h-100">
-    <div class="row d-flex justify-content-between text-center m-0">
+    <div class="d-flex flex-wrap justify-content-between text-center m-0">
         <div class="col-3">You are loginded as: User</div>
         <div class="col-4">User@gmai.com</div>
         <div class="col-3">You are here: Kyiv</div>
         <div class="col-2">
-            <button>Logout</button>
+            <button mat-raised-button color="warn">Logout</button>
         </div>
     </div>
 
     <mat-tab-group color='accent' class="">
         <mat-tab label="Subscriptions" class="">
             <p class="text-center mt-4">Here you specify what cathegory discount would you like get notification!</p>
-            <div class="d-flex justify-content-between w-50 mx-auto mt-4 border border-warning rounded p-2">
-                <span>Category</span>
-                <button>Subscribe</button>
+            <!--*ngFor надо,  классы можно оставить-->
+            <div class="d-flex justify-content-between w-50 mx-auto mt-4 border border-warning rounded p-2 green">
+                <span class="category">Category</span>
+                <button mat-raised-button>Subscribe</button>
             </div>
+            <div class="d-flex justify-content-between w-50 mx-auto mt-4 border border-warning rounded p-2 green">
+                <span class="category">Category</span>
+                <button mat-raised-button>Subscribe</button>
+            </div>
+            <div class="d-flex justify-content-between w-50 mx-auto mt-4 border border-warning rounded p-2 red">
+                <span class="category">Category</span>
+                <button mat-raised-button>Delete</button>
+            </div>
+            <div class="d-flex justify-content-between w-50 mx-auto mt-4 border border-warning rounded p-2 green">
+                <span class="category">Category</span>
+                <button mat-raised-button>Subscribe</button>
+            </div>
+            
         </mat-tab>
         <mat-tab label="Favorit" class="">
-            <div class="w-25 h-25 border rounded">adad</div>
+            <div class="d-flex flex-wrap mt-4">
+
+                <!--*ngFor надо,  классы можно оставить-->
+                <div class="d-flex flex-column col-3 border rounded bg-light">
+                    <p>Discount name</p>
+                    <p>Short description</p>
+                    <button mat-raised-button class="w-50 align-self-end">View</button>
+                </div>
+
+            </div>
         </mat-tab>
         <mat-tab label="History" class="">
-            affa
+                <div class="history">
+                    <!--*ngFor надо,  классы можно оставить-->
+                    <div class="history-item">       
+                        <p>Discount name</p>
+                        <p>Short description</p>
+                        <p>Date of use</p>
+                    </div>
+                    <div class="history-item">
+                        <p>Discount name</p>
+                        <p>Short description</p>
+                        <p>Date of use</p>
+                    </div>
+                    <div class="history-item">
+                        <p>Discount name</p>
+                        <p>Short description</p>
+                        <p>Date of use</p>
+                    </div>
+                    <div class="history-item">
+                        <p>Discount name</p>
+                        <p>Short description</p>
+                        <p>Date of use</p>
+                    </div>
+                    <div class="history-item">
+                        <p>Discount name</p>
+                        <p>Short description</p>
+                        <p>Date of use</p>
+                    </div>
+                    <div class="history-item">
+                        <p>Discount name</p>
+                        <p>Short description</p>
+                        <p>Date of use</p>
+                    </div>
+                    <div class="history-item">
+                        <p>Discount name</p>
+                        <p>Short description</p>
+                        <p>Date of use</p>
+                    </div>
+                    <div class="history-item">
+                        <p>Discount name</p>
+                        <p>Short description</p>
+                        <p>Date of use</p>
+                    </div>
+                    <div class="history-item">
+                        <p>Discount name</p>
+                        <p>Short description</p>
+                        <p>Date of use</p>
+                    </div>
+                </div>
         </mat-tab>
         <mat-tab label="Active discounts" class="">
-            gfdhh
+            discounts
         </mat-tab>
       </mat-tab-group>
 
