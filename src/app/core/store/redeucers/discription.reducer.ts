@@ -1,5 +1,5 @@
-import {IDescription} from "../../../shared/interfaces";
-import {toggleFavourite} from "../actions/description.actions";
+import { IDescription } from "../../../shared/interfaces";
+import { addToFavourite } from "../actions/description.actions";
 
 export interface DescriptionState {
   description: IDescription | {};
@@ -34,7 +34,12 @@ export function descriptionReducer(state: DescriptionState = initialState, actio
         ...state,
         description: action.data
       };
-    case 'toggleFavourite':
+    case 'addToFavourite':
+      return {
+        ...state,
+        description: action.data
+      };
+    case 'removeFromFavourite':
       return {
         ...state,
         description: action.data
