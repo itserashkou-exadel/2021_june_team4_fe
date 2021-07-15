@@ -1,18 +1,18 @@
 <div class="cover">
   <div class="header">
     <div class="header-container">   
-    <div class="left-block">
+    <div class="left-block d-flex justify-content-between">
       <div>
         <img src="../../../../assets/logo.png" alt="App logo" height="50" />
       </div>
 
       <div class="location-block mr-4">
         <mat-icon aria-hidden="false" aria-label="Home"
-        >location_on</mat-icon
-        >
+        >location_on</mat-icon>
         <span (click)="openDialog()"> City</span>
       </div>
-      <div class="search-container w-100 px-5 col-sm-5">
+
+      <div class="search-container w-100 px-4 col-sm-5">
         <mat-form-field class="example-full-width search w-100">
           <input
             matInput
@@ -22,16 +22,15 @@
         </mat-form-field>
         <mat-icon matPrefix>search</mat-icon>
       </div>
+      
     </div>
 
     <div class="right-block ml-auto">
       <div class="notifications">
         <mat-icon class="mr-sm-5 mr-3" aria-hidden="false" aria-label="Example home icon"
-        >favorite_border</mat-icon
-        >
+        >favorite_border</mat-icon>
         <mat-icon class="mr-sm-5 mr-3" aria-hidden="false" aria-label="Example home icon"
-        >notifications_none</mat-icon
-        >
+        >notifications_none</mat-icon>
       </div>
       <div class="user-block">
         <mat-icon aria-hidden="false" aria-label="Example home icon"
@@ -57,7 +56,7 @@
   <!-- <hr /> -->
   <div class="tabs">
   <nav mat-tab-nav-bar>
-    <a mat-tab-link  *ngFor="let tab of tabItems" class="col-3 col-sm-2"
+    <a mat-tab-link  *ngFor="let tab of tabItems" class="pl-3 p-0"
       (click)="activeLink = tab.link"
       [active]="activeLink == tab.link"
       [routerLink]="tab.link">
