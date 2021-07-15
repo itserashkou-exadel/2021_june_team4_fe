@@ -1,0 +1,31 @@
+// .profile{
+//     // border: 1px solid rgba(255, 0, 0, 0.375);
+// }
+.history{
+    width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: space-between;
+    padding: 0 20px;
+
+    &-item{
+        width: 100%;
+        max-width: 20%;
+        margin: 10px;
+        background-color: #fff;
+        border: 1px solid #888;
+        border-radius: 10px;
+        padding: 10px;
+    }
+}
+.category{
+    font-size: 18px;
+    line-height: 30px;
+}
+.green{
+    background-color: rgb(183, 255, 183);
+}
+.red{
+    background-color: rgb(255, 183, 183);
+}
