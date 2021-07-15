@@ -32,7 +32,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { CheckboxComponent } from './checkbox/checkbox/checkbox.component';
 import { TilesBoxComponent } from './tiles-box/tiles-box.component';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
-import {TranslateModule} from "@ngx-translate/core";
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
     imports: [

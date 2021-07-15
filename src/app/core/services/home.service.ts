@@ -11,33 +11,39 @@ export class HomeService {
   constructor(private http: HttpClient) {}
 
   requestDiscountsData(param: string): Observable<any> {
-    const response = this.http.get(
-      `${API_URL}/discounts?sortBy=${param}`
-    );
+    const response = this.http.get(`${API_URL}/discounts${param}`);
     return response;
   }
 
   handleRemoteDiscount(remoteDiscount: any) {
-    //console.log(remoteDiscount);
+  // console.log(remoteDiscount);
+
+    let tags = '';
+    remoteDiscount.tags.forEach((el: any) => {
+      tags += el.name + ' ';
+    });
     const localDiscount: IDiscount = {
       id: remoteDiscount.id,
       name: remoteDiscount.name,
-      vendor: remoteDiscount.vendor.name,
       added: remoteDiscount.startTime,
+      vendor: remoteDiscount.vendor.name,
       expired: remoteDiscount.endTime,
       location: 'remoteDiscount',
-      tag: remoteDiscount.tags.name,
+      tag: tags,
+
       category: remoteDiscount.category.name,
       isActive: remoteDiscount.active,
       description:
         remoteDiscount.description === null
           ? 'Default description'
           : remoteDiscount.description,
-      percent: remoteDiscount.percent,
+      percent: (remoteDiscount.value +=
+        remoteDiscount.discountType === 'PRICE' ? '%' : ''),
       image:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
       coordinates: getCoordinates(remoteDiscount),
     };
+    //console.log(localDiscount);
     return localDiscount;
   }
 }

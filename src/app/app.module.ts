@@ -26,7 +26,6 @@ import { HomeEffects } from './core/store/effects/home.effects';
 import { filterReducer } from './core/store/redeucers/filter.reducer';
 import { FilterEffects } from './core/store/effects/filter.effects';
 
-
 @NgModule({
   imports: [
 
@@ -51,7 +50,7 @@ import { FilterEffects } from './core/store/effects/filter.effects';
     NgbModule,
   ],
   declarations: [
-    AppComponent, 
+    AppComponent,
     // FilterPipe
   ],
   bootstrap: [AppComponent],
