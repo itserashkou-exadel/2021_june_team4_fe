@@ -27,6 +27,9 @@ export const initialState: DescriptionState = {
 
 export function descriptionReducer(state: DescriptionState = initialState, action: any) {
   switch (action.type) {
+    case 'GetPromo':
+      console.log('GetPromo')
+      return state;
     case 'getDescription':
       return state;
     case 'requestDescription':

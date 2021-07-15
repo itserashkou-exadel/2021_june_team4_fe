@@ -9,7 +9,7 @@ import {
   IMapMarker
 } from "../../../shared/interfaces";
 import { Observable } from "rxjs";
-import {getDescription, toggleFavourite} from "../../../core/store/actions/description.actions";
+import {getDescription, getPromo, toggleFavourite} from "../../../core/store/actions/description.actions";
 import { ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -52,6 +52,11 @@ export class DescriptionComponent implements OnInit {
     let userId = 'e1deda2f-d976-4022-9fee-ec9cae0b1cf4';//todo get live id
     console.log('favorite', userId, data.id);
     this.store.dispatch(toggleFavourite({userId: userId, discountId: data.id}))
+  }
+
+  activateCoupon(){
+    this.store.dispatch(getPromo({id: 'ad_12dslv'}))
+    console.log('activate')
   }
 
 }

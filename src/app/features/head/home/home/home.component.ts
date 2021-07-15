@@ -73,8 +73,9 @@ export class HomeComponent implements OnInit, OnDestroy {
             : sortParam
             ? `sortBy=${sortParam}`
             : '';
+            console.log(fullParamRequest);
         this.store.dispatch(getNewDiscounts({ sortParam: fullParamRequest }));
-       
+
         return (this.filterRequestParam = data);
       }
     );
@@ -82,18 +83,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:3000/promo').subscribe(data => {
+    this.http.get('http://localhost:3000/promo').subscribe((data) => {
       let res = Object.entries(data);
-    
-      console.log(res)
-      console.log(res[1][1])
-  })
-    let c = this.http.get('http://localhost:3000/favorits');
-    c.subscribe(data =>  {
-      let res = Object.entries(data);
+      console.log(data);
+
+      console.log(res);
       console.log(res[1][1]);
-    
-    })
+    });
+    let c = this.http.get('http://localhost:3000/favorits');
+    c.subscribe((data) => {
+      let res = Object.entries(data);
+      console.log(data);
+      // console.log(res[1][1]);
+    });
     this.store.dispatch(getNewDiscounts({ sortParam: '' }));
   }
   ngOnDestroy(): void {
