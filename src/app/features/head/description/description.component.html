@@ -1,27 +1,18 @@
 <div class="container-fluid" *ngIf=" descriptionData$ | async as data">
   <div class="row">
     <div class="col-md-1"></div>
-    <div class="col-md-7">
-      <div class="row header">
-        <div class="col-md-8 overflow">
-          <h1>{{ data.name }}</h1>
-        </div>
-        <div class="col-md-4 text-align-center m-t-sm">
-          <span><strong>{{ 'COMMON.description.rightpanel.dateFrom' | translate }}</strong></span>
-          {{ data.startTime | date :"dd.MM.yyyy" }}
-          <span><strong>{{ 'COMMON.description.rightpanel.dateTo' | translate }}</strong></span>
-          {{ data.endTime | date :"dd.MM.yyyy" }}
-        </div>
-      </div>
+    <div class="col-md-7 pt-5">
+        <h1 class="vendorName">{{ data.name }}</h1>   
 
 <!--      <app-carousel *ngFor="let img of data.img | async" [images]="data.img"></app-carousel>-->
-      <div class="carousel">
-        <app-carousel  [images]="data.img"></app-carousel>
-      </div>
 
       <section class="article-title">
         <mat-icon class="icon">place</mat-icon>
         <span>{{ data.vendorLocations[0].city.countryName}}</span>, <span>{{data.vendorLocations[0].city.name }}</span>
+      </section>
+
+      <section class="article-title map-wrapper pb-4 pt-2">
+        <app-map></app-map>
       </section>
 
       <section class="article-title">
@@ -34,9 +25,6 @@
         <p>{{ data.vendor.description }}</p>
       </section>
 
-      <section class="article-title map-wrapper">
-        <app-map></app-map>
-      </section>
 
       <section class="article-title locations">
         <div *ngFor="let location of data.vendorLocations">
@@ -46,31 +34,44 @@
       </section>
     </div>
 
-    <div class="col-md-3 price-container text-align-center">
+    <div class="col-md-3 pt-5">
       <div class="sticky-wrapper">
         <div class="price align-items-center">650
           <small>{{ 'COMMON.description.currency' | translate }}</small>
         </div>
 
         <button mat-raised-button color="accent" (click)="activateCoupon()">
+        
+        <div class="discount mb-3 ">
+          <span>{{ 'COMMON.description.rightpanel.sale' | translate }}</span>
+          <span class="discount-num">- {{ data.percent }} %</span>
+        </div>
+        
+        <button mat-raised-button color="accent">
           <div class="activate-btn">{{ 'COMMON.description.rightpanel.coupon' | translate }}</div>
         </button>
-
-        <div class="discount">
-          <b>{{ 'COMMON.description.rightpanel.sale' | translate }}</b>
-          {{ data.percent }}
+        
+        <div class="bpDate my-2">
+          <span><strong>{{ 'COMMON.description.rightpanel.dateFrom' | translate }}</strong></span>
+          {{ data.startTime | date :"dd.MM.yyyy" }}
+          <span><strong>{{ 'COMMON.description.rightpanel.dateTo' | translate }}</strong></span>
+          {{ data.endTime | date :"dd.MM.yyyy" }}
         </div>
 
         <button mat-fab [color]="data.favorite ? 'warn' : 'basic'" aria-label="Add to favorite" (click)="addToFavorite(data)">
           <mat-icon class="favorite">favorite</mat-icon>
         </button>
 
+        <div class="carousel my-5">
+          <app-carousel  [images]="data.img"></app-carousel>
+        </div>
+
         <div class="address-block" id="address">
           <h2>{{ 'COMMON.description.rightpanel.contacts' | translate }}</h2>
 
           <div class="vendor">{{ data.vendor.name}}</div>
           <div class="websites">
-            <a target="_blank" rel="nofollow" href="">website.com.ua</a><br>
+            <a target="_blank" rel="nofollow" href="">Website.com.ua</a><br>
             <a target="_blank" rel="nofollow" href="">Facebook</a><br>
             <a target="_blank" rel="nofollow" href="">Instagram</a>
           </div>
@@ -78,9 +79,6 @@
           <div class="phones">
             <b>{{ data.vendor.contacts }}</b>
           </div>
-        </div>
-      </div>
-    </div>
+
     <div class="col-md-1"></div>
   </div>
-</div>
