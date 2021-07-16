@@ -83,6 +83,7 @@ export interface IAppState {
   uiConfig: IUiConfigState;
   description: IDescriptionState;
   filter: IFilterState;
+  vendor: any;
 }
 
 export interface IDiscount {
@@ -136,3 +137,4 @@ export interface ITag {
   id: string;
   name: string;
 }
+
