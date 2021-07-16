@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { IUserLogin } from 'src/app/shared/interfaces';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
+import {NotificationService} from "../../../core/services/notification.service";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor ( private auth: AuthService,
                 private tokenStorage: TokenStorageService,
                 private router: Router,
-                private route: ActivatedRoute ) { }
+                private route: ActivatedRoute,
+                private notification: NotificationService) { }
 
   path = '/home'
 
@@ -35,6 +37,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
     }
+
+    this.route.queryParams.subscribe(( params: Params) => {
+      if (params['accessDenied']) {
+        this.notification.warn('You can\'t get this page. Login at first');
+      }
+    })
   }
 
   ngOnDestroy(): void {
@@ -63,6 +71,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       },
       err => {
         this.errorMessage = err.error.message;
+        this.notification.error(this.errorMessage);
         this.isLoginFailed = true;
         this.form.enable()
       }

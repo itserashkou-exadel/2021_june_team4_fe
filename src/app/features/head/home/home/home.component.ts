@@ -4,18 +4,18 @@ import { Observable, Subscription } from 'rxjs';
 import { IDiscount, IAppState, IMapMarker } from 'src/app/shared/interfaces';
 
 import { Store } from '@ngrx/store';
-import { setContent } from 'src/app/core/store/actions/ui-config.actions';
-import { HttpClient } from '@angular/common/http';
 import {
-  getNewDiscounts,
+  setContent,
   setSortValue,
-} from 'src/app/core/store/actions/home.actions';
+} from 'src/app/core/store/actions/ui-config.actions';
+import { HttpClient } from '@angular/common/http';
+import { getNewDiscounts } from 'src/app/core/store/actions/home.actions';
 import { HomeService } from 'src/app/core/services/home.service';
 import {
   selectDiscounts,
   selectMarkers,
   selectMap,
-  selectSortValue,
+  selectRequestConfig,
 } from '../home.selectors';
 import { FormControl } from '@angular/forms';
 
@@ -28,12 +28,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   isMap: Observable<boolean>;
   discountsData: Observable<IDiscount[]>;
   markers$: Observable<IMapMarker[]>;
-  markers: any;
+  //markers: any;
 
   sortControl: FormControl;
-  observableSortValue: Observable<string>;
-  subscribedSortValue: Subscription;
+  observableRequestConfig: Observable<any>;
+  subscribedRequestConfig: Subscription;
   sortValuesSet: any;
+
+  // observableFilterParam: Observable<any>;
+  // subscribedFilterParam: Subscription;
+
+  filterRequestParam: string | undefined;
 
   currentSortValue: any;
 
@@ -43,7 +48,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private filterService: HomeService
   ) {
     this.sortValuesSet = [
-      { value: 'default', uiValue: 'None' },
+      { value: 'id', uiValue: 'Default' },
       { value: 'startTime', uiValue: 'Start time' },
       { value: 'endTime', uiValue: 'Time to expire' },
       { value: 'name', uiValue: 'Name' },
@@ -57,31 +62,77 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.sortControl = new FormControl();
 
-    this.observableSortValue = this.store.select(selectSortValue);
+    this.observableRequestConfig = this.store.select(selectRequestConfig);
 
-    this.subscribedSortValue = this.observableSortValue.subscribe((data) => {
-      this.sortControl.setValue(data);
-      this.currentSortValue = data;
-    });
+    // this.subscribedRequestConfig = this.observableRequestConfig.subscribe((data) => {
+    //   this.sortControl.setValue(data);
+    //   this.currentSortValue = data;
+    // });
+
+    //  this.observableFilterParam = this.store.select(selectFilterParamString);
+    this.subscribedRequestConfig = this.observableRequestConfig.subscribe(
+      (data) => {
+        console.log(data);
+        const sortParam = data.sortValue;
+        const filterParam = data.fiterRequestParams;
+        let fullParamRequest = '';
+        fullParamRequest += sortParam || filterParam ? '?' : '';
+        fullParamRequest += filterParam;
+        fullParamRequest +=
+          filterParam && sortParam
+            ? `&sortBy=${sortParam}`
+            : sortParam
+            ? `sortBy=${sortParam}`
+            : '';
+
+        //sortParam
+       // const data2 = this.sortControl.value;
+         console.log(fullParamRequest);
+        // console.log(data2);
+        //   const sortRequestParam  = data2? `sortBy=${data2}`: '';
+        //  //
+        //   fullParamRequest += data || data2 ? '?': '';
+        //   fullParamRequest += data;
+        //   fullParamRequest += data  ? `&${sortRequestParam}`: `${sortRequestParam}`;
+        // console.log(fullParamRequest);
+        // console.log('daaasdfsdf')
+        this.store.dispatch(getNewDiscounts({ sortParam: fullParamRequest }));
+        //console.log( this.sortControl.value)
+        //console.log(data);
+       // this.markers$ = this.store.select(selectMarkers);
+        return (this.filterRequestParam = data);
+      }
+    );
+    // END OF CONSTRUCTOR
   }
 
   ngOnInit(): void {
     this.store.dispatch(getNewDiscounts({ sortParam: '' }));
+    // this.store
   }
   ngOnDestroy(): void {
-    this.subscribedSortValue.unsubscribe();
+    this.subscribedRequestConfig.unsubscribe();
+    //  this.subscribedFilterParam.unsubscribe();
   }
   setIsMap(val: any): void {
     this.store.dispatch(setContent({ isMap: val !== 'list' }));
   }
 
   sortDiscountsData(value: string): void {
-    let newValue = value.toLowerCase() === 'default' ? '': value;
-      this.store.dispatch(setSortValue({ value : newValue}));
-      this.store.dispatch(getNewDiscounts({ sortParam: newValue }));
+    // const data = this.filterRequestParam;
+    // const data2 = this.sortControl.value;
+    // let  fullParamRequest = '';
+    // fullParamRequest += data || data2 ? '?': '';
+    // fullParamRequest += data;
+    // fullParamRequest += data && data2 ? `&sortBy=${data2}`: ``;
+    // const newValue = value.toLowerCase() === 'default' ? '' : value;
+    // this.store.dispatch(setSortValue({ value: newValue }));
+
+    // this.store.dispatch(getNewDiscounts({ sortParam: fullParamRequest}));
+    this.store.dispatch(setSortValue({ param: value }));
   }
 
-  test() {
-    console.log('map event');
-  }
+  // test() {
+  //   console.log('map event');
+  // }
 }

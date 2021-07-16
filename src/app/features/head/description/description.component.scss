@@ -1,22 +1,16 @@
-.price-container {
-  position: relative;
-}
+// .price-container {
+//   position: relative;
+// }
 
 .sticky-wrapper {
-  position: sticky;
-  top: 20px;
+  // position: sticky;
+  // top: 20px;
+  text-align: center;
 }
-
-.header, .address-block, .article-title{
-  margin: 20px;
-  text-align: start;
-}
-
 
 h1 {
   margin: 0 !important;
 }
-
 
 .header {
   span {
@@ -25,40 +19,46 @@ h1 {
 }
 
 .article-title {
-  h3 {
-    font-size: 21px;
-    font-weight: 500;
-    margin: 20px 0;
-  }
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+
+    span{
+      &:hover{
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+    h3{
+      font-size: 24px;
+    }
 }
 
 .price {
-  margin: 20px;
-  height: 60px;
   font-size: 40px;
-  padding-top: 20px;
+  height: 50px;
+  line-height: 60px;
+  //padding-top: 20px;
 }
 
 .activate-btn {
-  border-style: dotted;
-  width: auto;
-  height: 45px;
-  margin: 5px;
-  padding: 0 5px;
+  padding: 0 20px;
 }
 
 .discount {
-  margin: 20px;
   font-size: large;
+  color: rgba(0,0,0,.26);
+
+  &-num{
+    color:red;
+    font-weight: bold;
+  }
 }
 
-.text-align-center {
-  text-align: center;
-}
-
-.m-t-sm {
-  margin-top: 40px;
-}
+// .text-align-center {
+//   text-align: center;
+// }
 
 .filled {
   color: #ffd740;
@@ -92,7 +92,9 @@ mat-icon.icon {
 }
 
 .carousel {
-  width: 50%
+  width: 100%;
+  opacity: 0.2;
+  //margin-bottom: 40px;
 }
 
 .center-block {
@@ -101,7 +103,36 @@ mat-icon.icon {
   margin-right: auto;
 }
 
-mat-icon.favorite {
+.favorite {
   color: rgba(0,0,0,.26);
+  background-color: #fff;
+
+  animation-name: favorite;
+  animation-duration: 4s;
+  animation-iteration-count: 3;
+  animation-timing-function: linear;
+}
+
+@keyframes favorite {
+  0% {transform: rotate(0deg);}
+  25% {transform: rotate(30deg);}
+  30% {transform: scale(0.7);}
+  50% {transform: rotate(-30deg);}
+  75% {transform: rotate(0deg);}
+  100% {transform: rotate(0deg);}
+}
+
+.bpDate{
+  opacity: 0.5;
+}
+
+.address-block{
+  border: 1px solid rgba(0,0,0,.26);
+  padding: 10px;
+  border-radius: 5px;
+  .websites{
+    text-align: start;
+    
+  }
 }
 

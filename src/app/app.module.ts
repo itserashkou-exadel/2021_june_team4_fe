@@ -27,7 +27,6 @@ import { filterReducer } from './core/store/redeucers/filter.reducer';
 import { FilterEffects } from './core/store/effects/filter.effects';
 import { vendorReducer } from './core/store/redeucers/vendor.reducer';
 
-
 @NgModule({
   imports: [
 
@@ -53,7 +52,7 @@ import { vendorReducer } from './core/store/redeucers/vendor.reducer';
     NgbModule,
   ],
   declarations: [
-    AppComponent, 
+    AppComponent,
     // FilterPipe
   ],
   bootstrap: [AppComponent],
