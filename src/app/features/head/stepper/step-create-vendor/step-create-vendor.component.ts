@@ -1,8 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { VendorsService } from 'src/app/core/services/vendors.service';
-import { IVendor } from 'src/app/shared/interfaces';
+import { SaveVendorId } from 'src/app/core/store/actions/vendor.action';
+import { IAppState, IVendor } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-step-create-vendor',
@@ -12,11 +15,21 @@ import { IVendor } from 'src/app/shared/interfaces';
 export class StepCreateVendorComponent implements OnInit, OnDestroy {
   vendorForm!: FormGroup;
   vendors$: Observable<IVendor[]>;
-  aSub!: Subscription;
+  vSub!: Subscription;
+  svSub!: Subscription;
+  vendorId$: Observable<any>;
 
-  constructor( private vendorsService: VendorsService ) 
+  constructor( private vendorsService: VendorsService,
+               private store: Store<IAppState> ) 
   {
     this.vendors$ = this.vendorsService.getVendors();
+
+    const selectVendor = (state: IAppState) => state.vendor;
+    this.vendorId$ = this.store.select(selectVendor);
+
+    this.vSub = this.vendorId$.subscribe(
+      data => console.log(data)
+    )
   }
 
   ngOnInit(): void {
@@ -27,13 +40,15 @@ export class StepCreateVendorComponent implements OnInit, OnDestroy {
       locations: new FormControl(null, [Validators.required]),
       contacts: new FormControl(null, [Validators.required])
     });
-
-    
   };
 
   ngOnDestroy(): void {
-    if (this.aSub) {
-      this.aSub.unsubscribe();
+    if (this.vSub) {
+      this.vSub.unsubscribe();
+    };
+
+    if (this.svSub) {
+      this.svSub.unsubscribe();
     };
   };
 
@@ -41,7 +56,7 @@ export class StepCreateVendorComponent implements OnInit, OnDestroy {
     this.vendorForm.disable();
 
     const vendorFormData = this.vendorForm.value;
-    this.aSub = this.vendorsService.createVendor(vendorFormData).subscribe(
+    this.svSub = this.vendorsService.createVendor(vendorFormData).subscribe(
       () => {},
       err => { 
         console.error(err);
@@ -52,11 +67,12 @@ export class StepCreateVendorComponent implements OnInit, OnDestroy {
         this.resetForm();
         this.vendorForm.enable();
       }
-    );
-    // console.log(this.vendorsService.getAllDiscounts())
+    )
 
     // Function for delete vendors from BD!!!!!!!!!! Warning!!!!!
     // this.vendorsService._deleteVendor();
+
+    // this.store.dispatch(SaveVendorId({id: }))
   };
 
   // Reset all form's fields after click button Clear
@@ -66,8 +82,7 @@ export class StepCreateVendorComponent implements OnInit, OnDestroy {
 
   addNewLocation(location: string) {
 
-  }
-
+  };
 }
 
 

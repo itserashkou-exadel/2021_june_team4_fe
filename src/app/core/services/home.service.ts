@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IDiscount } from 'src/app/shared/interfaces';
-import { map, tap } from 'rxjs/operators';
+import { API_URL } from 'src/app/shared/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -11,13 +10,15 @@ import { map, tap } from 'rxjs/operators';
 export class HomeService {
   constructor(private http: HttpClient) {}
 
-  requestDiscountsData(): Observable<any> {
-    let response = this.http.get('http://localhost:8080/discounts');
+  requestDiscountsData(param: string): Observable<any> {
+    const response = this.http.get(
+      `${API_URL}/discounts?sortBy=${param}`
+    );
     return response;
   }
 
   handleRemoteDiscount(remoteDiscount: any) {
-    // console.log(remoteDiscount);
+    //console.log(remoteDiscount);
     const localDiscount: IDiscount = {
       id: remoteDiscount.id,
       name: remoteDiscount.name,

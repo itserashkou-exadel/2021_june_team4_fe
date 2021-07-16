@@ -4,33 +4,41 @@ export interface IUiConfigState {
 }
 
 export interface IFilterState {
-  controlsValues: IFilterControls,
-  formValues: any,
-  chips: string [],
+  controlsValues: IFilterControls;
+  formValues: IFilterFormsValues;
+}
+
+export interface IFilterFormsValues {
+  categories: string[];
+  city: string;
+  vendors: string[];
+  chips: string[]
 }
 export interface IFilterControls {
-  locations: ILocationsGroup[],
-  categories: string[],
-  tags: string[],
-  vendors: string[],
+  locations: ILocationsGroup[];
+  categories: string[];
+  tags: string[];
+  vendors: string[];
 }
-export interface ILocationsGroup{
-  countryName: string,
-  cities: string[]
+export interface ILocationsGroup {
+  countryName: string;
+  cities: string[];
 }
 
 export interface IMapMarker {
-  cords: number[][],
-  text: string
+  cords: number[][];
+  text: string;
 }
+
 export interface IDescription {
   id: string;
+  favorite: boolean;
   active: boolean;
   archived: boolean;
-  category:{};
+  category: {};
   description: string;
   name: string;
-  img:[string];
+  img: [string];
   endTime: string;
   startTime: string;
   percent: number;
@@ -42,10 +50,13 @@ export interface IDescription {
     contacts: any;
   };
   vendorLocations: [{
+    vendorLocations: any;
     city: {
       countryName: string;
       name: string;
-    }
+    },
+    latitude: number;
+    longitude: number;
   }];
 }
 
@@ -54,7 +65,7 @@ export interface IDescriptionState {
 }
 
 export interface IHomeState {
-  user: string,
+  sortValue: string;
   discounts: IDiscount[];
 }
 
@@ -63,12 +74,13 @@ export interface IAppState {
   uiConfig: IUiConfigState;
   description: IDescriptionState;
   filter: IFilterState;
+  vendor: any;
 }
 
 export interface IDiscount {
   id: number;
   name: string;
-  vendor: string;
+  vendor: {name : string};
   added: string;
   expired: string;
   location: string;
@@ -89,7 +101,6 @@ export interface IUser {
   subscribes: string[];
   favorite: string[];
 }
-
 
 export interface IUserLogin {
   username: string;
@@ -118,18 +129,3 @@ export interface ITag {
   name: string;
 }
 
-export interface IDiscountTest {
-  id: number;
-  name: string;
-  vendor: IVendor;
-  added: string;
-  expired: string;
-  location: string;
-  tag: string;
-  category: string;
-  isActive: boolean;
-  description: string;
-  percent: number;
-  image: string;
-  coordinates: number[][];
-}

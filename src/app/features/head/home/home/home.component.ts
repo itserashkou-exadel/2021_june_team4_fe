@@ -1,82 +1,87 @@
-import { Component, OnInit } from '@angular/core';
-import { createSelector, select, State } from '@ngrx/store';
-import { Observable, pipe } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 
-import {
-  IDiscount,
-  IHomeState,
-  IAppState,
-  IUiConfigState,
-  IMapMarker,
-
-} from 'src/app/shared/interfaces';
+import { IDiscount, IAppState, IMapMarker } from 'src/app/shared/interfaces';
 
 import { Store } from '@ngrx/store';
 import { setContent } from 'src/app/core/store/actions/ui-config.actions';
 import { HttpClient } from '@angular/common/http';
 import {
   getNewDiscounts,
-  sortDiscounts,
+  setSortValue,
 } from 'src/app/core/store/actions/home.actions';
-import { filter } from 'rxjs/operators';
+import { HomeService } from 'src/app/core/services/home.service';
+import {
+  selectDiscounts,
+  selectMarkers,
+  selectMap,
+  selectSortValue,
+} from '../home.selectors';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   isMap: Observable<boolean>;
   discountsData: Observable<IDiscount[]>;
   markers$: Observable<IMapMarker[]>;
   markers: any;
 
-  selectHead = (state: IAppState) => state.home;
-  selectDiscounts = createSelector(
-    this.selectHead,
-    (state: IHomeState) => state.discounts
-  );
+  sortControl: FormControl;
+  observableSortValue: Observable<string>;
+  subscribedSortValue: Subscription;
+  sortValuesSet: any;
 
-  constructor(private store: Store<IAppState>, private http: HttpClient) {
-    const selecUiConfig = (state: IAppState) => state.uiConfig;
-    const selectMap = createSelector(
-      selecUiConfig,
-      (state: IUiConfigState) => state.homeIsMap
-    );
+  currentSortValue: any;
+
+  constructor(
+    private store: Store<IAppState>,
+    private http: HttpClient,
+    private filterService: HomeService
+  ) {
+    this.sortValuesSet = [
+      { value: 'default', uiValue: 'None' },
+      { value: 'startTime', uiValue: 'Start time' },
+      { value: 'endTime', uiValue: 'Time to expire' },
+      { value: 'name', uiValue: 'Name' },
+    ];
+
     this.isMap = this.store.select(selectMap);
-
-    const selecHead = (state: IAppState) => state.home;
-    const selectDiscounts = createSelector(
-      selecHead,
-      (state: IHomeState) => state.discounts
-    );
 
     this.discountsData = this.store.select(selectDiscounts);
 
-    const selectMarkers = createSelector(this.selectHead, (state) =>
-      state.discounts.map((el) => ({
-        cords: el.coordinates,
-        text: el.description,
-      }))
-    );
+    this.markers$ = this.store.select(selectMarkers);
 
-      this.markers$ = this.store.select(selectMarkers);
+    this.sortControl = new FormControl();
+
+    this.observableSortValue = this.store.select(selectSortValue);
+
+    this.subscribedSortValue = this.observableSortValue.subscribe((data) => {
+      this.sortControl.setValue(data);
+      this.currentSortValue = data;
+    });
   }
 
   ngOnInit(): void {
-    this.store.dispatch(getNewDiscounts());
+    this.store.dispatch(getNewDiscounts({ sortParam: '' }));
   }
-
+  ngOnDestroy(): void {
+    this.subscribedSortValue.unsubscribe();
+  }
   setIsMap(val: any): void {
     this.store.dispatch(setContent({ isMap: val !== 'list' }));
   }
 
-  sortDiscountsData(value: any): void {
-    this.store.dispatch(sortDiscounts({ sortType: value }));
+  sortDiscountsData(value: string): void {
+    let newValue = value.toLowerCase() === 'default' ? '': value;
+      this.store.dispatch(setSortValue({ value : newValue}));
+      this.store.dispatch(getNewDiscounts({ sortParam: newValue }));
   }
 
-  test(){
+  test() {
     console.log('map event');
   }
-
 }

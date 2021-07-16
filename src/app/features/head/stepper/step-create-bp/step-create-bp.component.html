@@ -121,11 +121,11 @@
     <!-- Discount's type -->
     <mat-form-field class="example-full-width form-field" appearance="fill">
       <mat-label>Discount's type</mat-label>
-      <select matNativeControl>
-        <option *ngFor="let type of DiscountsTypes" value="type.value">
+      <mat-select matNativeControl>
+        <mat-option *ngFor="let type of DiscountsTypes" value="type.value">
           {{ type.viewValue }}
-        </option>
-      </select>
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <!-- /Discount's type -->
   </div>
@@ -137,6 +137,15 @@
       <input type="number" matInput formControlName="value" />
     </mat-form-field>
     <!-- /Bonus size -->
+  </div>
+
+  <div class="form-row">
+    <!-- Promo -->
+    <mat-form-field class="example-full-width form-field" appearance="fill">
+      <mat-label>Promo</mat-label>
+      <input matInput formControlName="promo" />
+    </mat-form-field>
+    <!-- /Promo -->
   </div>
 
   <div class="second-step__btns btns-wrapper">

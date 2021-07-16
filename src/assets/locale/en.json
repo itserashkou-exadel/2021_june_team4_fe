@@ -27,7 +27,15 @@
       "date": "by Date",
       "time": "by Time",
       "rating": "by Score",
-      "default": "by default"
+      "default": "by default",
+      "filter": {
+        "vendor": "Select a vendor",
+        "category": "Select an category",
+        "locations": "Locations",
+        "tag": "Select tag",
+        "tags": "Selected tags",
+        "apply": "Apply"
+      }
     },
     "Tile": {
       "info": "More info",

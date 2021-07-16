@@ -46,7 +46,8 @@ export class StepCreateBpComponent implements OnInit, OnDestroy {
       startTime: new FormControl(null, [Validators.required]),
       endTime: new FormControl(null, [Validators.required]),
       discountType: new FormControl(null, [Validators.required]),
-      value: new FormControl(null, [Validators.required])
+      value: new FormControl(null, [Validators.required]),
+      promo: new FormControl(null, [Validators.required])
     });
   };
 

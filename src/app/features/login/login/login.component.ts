@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         this.tokenStorage.saveToken(data);
 
+        this.auth.startRefreshTokenTimer();
         this.isLoginFailed = false;
         this.isLoggedIn = true;
       },

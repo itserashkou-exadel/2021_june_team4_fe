@@ -21,5 +21,5 @@ export class DiscountService {
 
   createDiscount(discount: IDiscount): Observable<any> {
     return this.http.post<IDiscount>(`${API_URL}/discounts`, discount, httpOptions);
-  }
+  };
 }
