@@ -25,6 +25,8 @@ import { DescriptionService } from "./core/services/description.service";
 import { HomeEffects } from './core/store/effects/home.effects';
 import { filterReducer } from './core/store/redeucers/filter.reducer';
 import { FilterEffects } from './core/store/effects/filter.effects';
+import { notificationsReducer } from './core/store/redeucers/notifications.reducer';
+import { NotificationsEffects } from './core/store/effects/notifications.effects';
 
 @NgModule({
   imports: [
@@ -34,8 +36,9 @@ import { FilterEffects } from './core/store/effects/filter.effects';
       uiConfig: uiConfigReducer,
       description: descriptionReducer,
       filter: filterReducer,
+      notifications: notificationsReducer,
     }),
-    EffectsModule.forRoot([DescriptionEffects, HomeEffects, FilterEffects]),
+    EffectsModule.forRoot([DescriptionEffects, HomeEffects, FilterEffects, NotificationsEffects]),
     // angular
     HttpClientModule,
     BrowserAnimationsModule,

@@ -7,7 +7,7 @@ const requestHandler = (request, response) => {
   console.log(request);
 
   if (request.url === "/promo") {
-    response.write('{ id: "001", value: "summer_2021" }');
+    response.write(JSON.stringify({ id: "001", value: "summer_2021" }));
   } else if (request.url === "/favorits") {
     response.write(JSON.stringify(favorits));
   } else {

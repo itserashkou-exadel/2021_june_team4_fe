@@ -4,10 +4,6 @@ interface Action {
   type: string;
 }
 
-export const getPromo = createAction(
-  'GetPromo',
-  props<{ id: string }>()
-);
 
 export const getDescription = createAction(
   'getDescription',
