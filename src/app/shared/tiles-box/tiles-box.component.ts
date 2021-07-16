@@ -17,9 +17,7 @@ export class TilesBoxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.discountService.getDiscounts().subscribe(
-      data => this.discountsData$ = data.filter((value: IDiscount) => value.vendor.name === 'SportLife')
-    )
+
   }
 
 }

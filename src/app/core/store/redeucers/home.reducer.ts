@@ -6,7 +6,7 @@ export const initialState: IHomeState = {
     {
       id: 0,
       name: 'Very long discount name very long discount name',
-      vendor: {name: 'Discount vendor0'},
+      vendor: 'Discount vendor0',
       added: '2021-06-20T12:00:00',
       expired: '2021-07-20T12:00:00',
       location: 'Vitebsk',
@@ -22,7 +22,7 @@ export const initialState: IHomeState = {
     {
       id: 0,
       name: 'Very long discount name very long discount name',
-      vendor: {name: 'Discount vendor0'},
+      vendor: 'Discount vendor0',
       added: '2021-06-20T12:00:00',
       expired: '2021-07-20T12:00:00',
       location: 'Vitebsk',
