@@ -95,6 +95,13 @@
         </span>
       </mat-error>
     </mat-form-field>
+    <button
+      type="button"
+      class="add-btn"
+      (click)="addNewLocation(this.vendorForm.controls.locations.value)"
+    >
+      <mat-icon>add_box</mat-icon>
+    </button>
     <!-- /Vendor locations -->
   </div>
   <div class="form-row">

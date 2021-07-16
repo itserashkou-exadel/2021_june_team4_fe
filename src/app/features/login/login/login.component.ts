@@ -36,13 +36,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      // this.roles = this.tokenStorage.getUser().roles
     }
 
     this.route.queryParams.subscribe(( params: Params) => {
       if (params['accessDenied']) {
         this.notification.warn('You can\'t get this page. Login at first');
-        // alert("You can't get this page. Login at first")
       }
     })
   }
@@ -66,10 +64,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.router.navigate(['/home']);
 
         this.tokenStorage.saveToken(data);
+
         this.auth.startRefreshTokenTimer();
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        // this.roles = this.tokenStorage.getUser().roles;
       },
       err => {
         this.errorMessage = err.error.message;

@@ -27,6 +27,7 @@ import { filterReducer } from './core/store/redeucers/filter.reducer';
 import { FilterEffects } from './core/store/effects/filter.effects';
 import { notificationsReducer } from './core/store/redeucers/notifications.reducer';
 import { NotificationsEffects } from './core/store/effects/notifications.effects';
+import { vendorReducer } from './core/store/redeucers/vendor.reducer';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { NotificationsEffects } from './core/store/effects/notifications.effects
       description: descriptionReducer,
       filter: filterReducer,
       notifications: notificationsReducer,
+      vendor: vendorReducer,
     }),
     EffectsModule.forRoot([DescriptionEffects, HomeEffects, FilterEffects, NotificationsEffects]),
     // angular

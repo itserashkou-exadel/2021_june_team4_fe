@@ -84,6 +84,7 @@ export interface IAppState {
   description: IDescriptionState;
   filter: IFilterState;
   notifications: any
+  vendor: any;
 }
 
 export interface IDiscount {
@@ -137,3 +138,4 @@ export interface ITag {
   id: string;
   name: string;
 }
+
