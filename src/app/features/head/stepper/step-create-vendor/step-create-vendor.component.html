@@ -1,3 +1,4 @@
+<div class="container">
 <form class="form" [formGroup]="vendorForm" (ngSubmit)="saveVendor()">
   <div class="form-row">
     <!-- Vendor name -->
@@ -131,3 +132,59 @@
     </button>
   </div>
 </form>
+
+<div class="form-location">
+
+  <form class="add-city">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Number</mat-label>
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="Number"
+             matInput
+             [formControl]="cityControl"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button type="submit" class="save-btn" mat-flat-button color="primary">
+      Add country 
+    </button>
+  </form>
+<form action="" >
+  <h3>Add location</h3>
+  <button
+      type="button"
+      class="add-btn"
+      (click)="addNewLocation(this.vendorForm.controls.locations.value)"
+    >
+      <mat-icon>add_box</mat-icon>
+    </button>
+  <mat-form-field   appearance="fill">
+    <mat-label>Latitude</mat-label>
+    <input type="number" matInput>
+    
+  </mat-form-field>
+  
+  <mat-form-field   appearance="fill">
+    <mat-label>Longtitude</mat-label>
+    <input type="number" matInput>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option value="one">First option</mat-option>
+      <mat-option value="two">Second option</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Textarea</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+
+</form>
+</div>
+</div>

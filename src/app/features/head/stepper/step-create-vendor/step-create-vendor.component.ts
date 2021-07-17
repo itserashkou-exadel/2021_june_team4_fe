@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { VendorsService } from 'src/app/core/services/vendors.service';
 import { SaveVendorId } from 'src/app/core/store/actions/vendor.action';
 import { IAppState, IVendor } from 'src/app/shared/interfaces';
@@ -18,6 +18,10 @@ export class StepCreateVendorComponent implements OnInit, OnDestroy {
   vSub!: Subscription;
   svSub!: Subscription;
   vendorId$: Observable<any>;
+
+  cityControl = new FormControl();
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions: Observable<string[]> | undefined;
 
   constructor( private vendorsService: VendorsService,
                private store: Store<IAppState> ) 
@@ -40,6 +44,11 @@ export class StepCreateVendorComponent implements OnInit, OnDestroy {
       locations: new FormControl(null, [Validators.required]),
       contacts: new FormControl(null, [Validators.required])
     });
+
+    this.filteredOptions = this.cityControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
   };
 
   ngOnDestroy(): void {
@@ -52,12 +61,18 @@ export class StepCreateVendorComponent implements OnInit, OnDestroy {
     };
   };
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
   saveVendor(): void {
     this.vendorForm.disable();
 
     const vendorFormData = this.vendorForm.value;
     this.svSub = this.vendorsService.createVendor(vendorFormData).subscribe(
-      () => {},
+      (data) => { console.log(data)},
       err => { 
         console.error(err);
         this.vendorForm.enable();

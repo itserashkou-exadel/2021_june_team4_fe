@@ -59,7 +59,6 @@ export class HeadComponent implements OnInit, OnDestroy {
 
   clearNotifications(){
     this.store.dispatch(clearNotifications())
-    console.log('asdf');
   }
 
   openDialog() { }
