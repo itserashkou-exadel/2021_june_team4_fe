@@ -1,190 +1,253 @@
 <div class="container">
-<form class="form" [formGroup]="vendorForm" (ngSubmit)="saveVendor()">
-  <div class="form-row">
-    <!-- Vendor name -->
-    <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>{{ 'COMMON.Stepper.vendorName' | translate }}</mat-label>
-      <input
-        type="text"
-        aria-label="vendor name"
-        placeholder="Add Vendor name"
-        class="form-input"
-        matInput
-        formControlName="name"
-        [matAutocomplete]="name"
-      />
-      <mat-autocomplete #name="matAutocomplete">
-        <mat-option
-          *ngFor="
-            let vendor of vendors$
-              | async
-              | filter: this.vendorForm.controls.name.value
+  <form class="form" [formGroup]="vendorForm" (ngSubmit)="saveVendor()">
+    <div class="form-row">
+      <!-- Vendor name -->
+      <mat-form-field class="example-full-width form-field" appearance="fill">
+        <mat-label>{{ "COMMON.Stepper.vendorName" | translate }}</mat-label>
+        <input
+          type="text"
+          aria-label="vendor name"
+          placeholder="Add Vendor name"
+          class="form-input"
+          matInput
+          formControlName="name"
+          [matAutocomplete]="name"
+        />
+        <mat-autocomplete #name="matAutocomplete">
+          <mat-option
+            *ngFor="
+              let vendor of vendors$
+                | async
+                | filter: this.vendorForm.controls.name.value
+            "
+            [value]="vendor"
+          >
+            {{ vendor }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error
+          *ngIf="
+            vendorForm.controls['name'].invalid &&
+            vendorForm.controls['name'].touched
           "
-          [value]="vendor"
         >
-          {{ vendor }}
-        </mat-option>
-      </mat-autocomplete>
-      <mat-error
-        *ngIf="
-          vendorForm.controls['name'].invalid &&
-          vendorForm.controls['name'].touched
-        "
-      >
-        <span *ngIf="vendorForm.controls.name.errors?.required">
-          Vendor name can't be empty
-        </span>
-      </mat-error>
-    </mat-form-field>
-    <!-- /Vendor name -->
-  </div>
-  <div class="form-row">
-    <!-- Vendor Description -->
-    <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>{{ 'COMMON.Stepper.description' | translate }}</mat-label>
-      <textarea
-        matInput
-        placeholder="Add description"
-        formControlName="description"
-      ></textarea>
-      <mat-error
-        *ngIf="
-          vendorForm.controls['description'].invalid &&
-          vendorForm.controls['description'].touched
-        "
-      >
-        <span *ngIf="vendorForm.controls.description.errors?.required">
-          Description can't be empty
-        </span>
-      </mat-error>
-    </mat-form-field>
-    <!-- /Vendor Description -->
-  </div>
+          <span *ngIf="vendorForm.controls.name.errors?.required">
+            Vendor name can't be empty
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <!-- /Vendor name -->
+    </div>
+    <div class="form-row">
+      <!-- Vendor Description -->
+      <mat-form-field class="example-full-width form-field" appearance="fill">
+        <mat-label>{{ "COMMON.Stepper.description" | translate }}</mat-label>
+        <textarea
+          matInput
+          placeholder="Add description"
+          formControlName="description"
+        ></textarea>
+        <mat-error
+          *ngIf="
+            vendorForm.controls['description'].invalid &&
+            vendorForm.controls['description'].touched
+          "
+        >
+          <span *ngIf="vendorForm.controls.description.errors?.required">
+            Description can't be empty
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <!-- /Vendor Description -->
+    </div>
 
-  <div class="form-row">
-    <!-- Vendor logo -->
-    <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>{{ 'COMMON.Stepper.vendorLogo' | translate }}</mat-label>
-      <input matInput placeholder="Add logo" formControlName="vendorLogo" />
-      <mat-error
-        *ngIf="
-          vendorForm.controls['vendorLogo'].invalid &&
-          vendorForm.controls['vendorLogo'].touched
-        "
-      >
-        <span *ngIf="vendorForm.controls.vendorLogo.errors?.required">
-          Vendor logo can't be empty
-        </span>
-      </mat-error>
-    </mat-form-field>
-    <!-- /Vendor logo -->
-  </div>
+    <!-- <div class="form-row">
+      <mat-form-field class="example-full-width form-field" appearance="fill">
+        <mat-label>{{ "COMMON.Stepper.vendorLogo" | translate }}</mat-label>
+        <input matInput placeholder="Add logo" formControlName="vendorLogo" />
+        <mat-error
+          *ngIf="
+            vendorForm.controls['vendorLogo'].invalid &&
+            vendorForm.controls['vendorLogo'].touched
+          "
+        >
+          <span *ngIf="vendorForm.controls.vendorLogo.errors?.required">
+            Vendor logo can't be empty
+          </span>
+        </mat-error>
+      </mat-form-field>
+    </div> -->
 
-  <div class="form-row">
-    <!-- Vendor locations -->
-    <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>{{ 'COMMON.Stepper.location' | translate }}</mat-label>
-      <input matInput placeholder="Add locations" formControlName="locations" />
-      <mat-error
-        *ngIf="
-          vendorForm.controls['locations'].invalid &&
-          vendorForm.controls['locations'].touched
-        "
+    <!-- <div class="form-row">
+      <mat-form-field class="example-full-width form-field" appearance="fill">
+        <mat-label>{{ "COMMON.Stepper.location" | translate }}</mat-label>
+        <input
+          matInput
+          placeholder="Add locations"
+          formControlName="locations"
+        />
+        <mat-error
+          *ngIf="
+            vendorForm.controls['locations'].invalid &&
+            vendorForm.controls['locations'].touched
+          "
+        >
+          <span *ngIf="vendorForm.controls.locations.errors?.required">
+            Locations can't be empty
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <button
+        type="button"
+        class="add-btn"
+        (click)="addNewLocation(this.vendorForm.controls.locations.value)"
       >
-        <span *ngIf="vendorForm.controls.locations.errors?.required">
-          Locations can't be empty
-        </span>
-      </mat-error>
-    </mat-form-field>
-    <button
-      type="button"
-      class="add-btn"
-      (click)="addNewLocation(this.vendorForm.controls.locations.value)"
-    >
-      <mat-icon>add_box</mat-icon>
-    </button>
-    <!-- /Vendor locations -->
-  </div>
-  <div class="form-row">
-    <!-- Vendor contacts -->
-    <mat-form-field class="example-full-width form-field" appearance="fill">
-      <mat-label>{{ 'COMMON.Stepper.vendorContacts' | translate }}</mat-label>
-      <input matInput placeholder="Add contacts" formControlName="contacts" />
-      <mat-error
-        *ngIf="
-          vendorForm.controls['contacts'].invalid &&
-          vendorForm.controls['contacts'].touched
-        "
+        <mat-icon>add_box</mat-icon>
+      </button>
+    </div> -->
+    <div class="form-row">
+      <!-- Vendor contacts -->
+      <mat-form-field class="example-full-width form-field" appearance="fill">
+        <mat-label>{{ "COMMON.Stepper.vendorContacts" | translate }}</mat-label>
+        <input matInput placeholder="Add contacts" formControlName="contacts" />
+        <mat-error
+          *ngIf="
+            vendorForm.controls['contacts'].invalid &&
+            vendorForm.controls['contacts'].touched
+          "
+        >
+          <span *ngIf="vendorForm.controls.contacts.errors?.required">
+            Contacts can't be empty
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <!-- /Vendor contacts -->
+    </div>
+    <div class="first-step__btns btns-wrapper">
+      <button
+        class="save-btn"
+        mat-flat-button
+        color="warn"
+        (click)="resetForm()"
       >
-        <span *ngIf="vendorForm.controls.contacts.errors?.required">
-          Contacts can't be empty
-        </span>
-      </mat-error>
-    </mat-form-field>
-    <!-- /Vendor contacts -->
-  </div>
-  <div class="first-step__btns btns-wrapper">
-    <button class="save-btn" mat-flat-button color="warn" (click)="resetForm()">
-      {{ 'COMMON.Global.clear' | translate }}
-    </button>
-    <button type="submit" class="save-btn" mat-flat-button color="primary">
-      {{ 'COMMON.Global.save' | translate }}
-    </button>
-  </div>
-</form>
-
-<div class="form-location">
-
-  <form class="add-city">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Number</mat-label>
-      <input type="text"
-             placeholder="Pick one"
-             aria-label="Number"
-             matInput
-             [formControl]="cityControl"
-             [matAutocomplete]="auto">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <button type="submit" class="save-btn" mat-flat-button color="primary">
-      Add country 
-    </button>
+        {{ "COMMON.Global.clear" | translate }}
+      </button>
+      <button type="submit" class="save-btn" mat-flat-button color="primary">
+        {{ "COMMON.Global.save" | translate }}
+      </button>
+    </div>
   </form>
-<form action="" >
-  <h3>Add location</h3>
-  <button
-      type="button"
-      class="add-btn"
-      (click)="addNewLocation(this.vendorForm.controls.locations.value)"
-    >
-      <mat-icon>add_box</mat-icon>
-    </button>
-  <mat-form-field   appearance="fill">
-    <mat-label>Latitude</mat-label>
-    <input type="number" matInput>
-    
-  </mat-form-field>
-  
-  <mat-form-field   appearance="fill">
-    <mat-label>Longtitude</mat-label>
-    <input type="number" matInput>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Select</mat-label>
-    <mat-select>
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Textarea</mat-label>
-    <textarea matInput></textarea>
-  </mat-form-field>
 
-</form>
-</div>
+  <div class="form-location">
+
+    <h3>Select or add country</h3>
+    <form class="add-city">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Country</mat-label>
+        <input
+          type="text"
+          (focus)="focusOncountry()"
+          placeholder="Pick one"
+          aria-label="Number"
+          matInput
+          [formControl]="countryControl"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let country of filteredCountry | async"
+            [value]="country.id"
+            (onSelectionChange)="selectCountry(country.id)"
+          >
+            {{ country.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button
+        type="submit"
+        class="save-btn"
+        mat-flat-button
+        color="primary"
+        (click)="addCountry()"
+      >
+        Add
+      </button>
+      <button
+      type="submit"
+      class="save-btn"
+      mat-flat-button
+      color="warn"
+      (click)="removeCountry()"
+    >
+      Remove
+    </button>
+    </form>
+    <h3>Select or add city</h3>
+    <form class="add-city">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>City</mat-label>
+        <input
+          type="text"
+          (focus)="focusOncountry()"
+          placeholder="Pick one"
+          aria-label="Number"
+          matInput
+          [formControl]="cityControl"
+          [matAutocomplete]="autoC"
+        />
+        <mat-autocomplete autoActiveFirstOption #autoC="matAutocomplete">
+          <mat-option
+            *ngFor="let city of filteredCities | async"
+            [value]="city.id" 
+            (onSelectionChange)="selectCity(city.id)"
+          >
+            {{ city.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button
+        type="submit"
+        class="save-btn"
+        mat-flat-button
+        color="primary"
+        (click)="addCity()"
+      >
+        Add
+      </button>
+      <button
+      type="submit"
+      class="save-btn"
+      mat-flat-button
+      color="warn"
+      (click)="removeCountry()"
+    >
+      Remove
+    </button>
+    </form>
+<h3>Add coordinates</h3>
+    <form action="" class="input-cords"> 
+      
+     <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Latitude</mat-label>
+        <input type="number" matInput   [formControl]="latControl"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Longtitude</mat-label>
+        <input type="number" matInput   [formControl]="longControl"/>
+      </mat-form-field>
+     </div>
+      
+     <button
+     type="submit"
+     class="save-btn"
+     mat-flat-button
+     color="primary"
+     (click)="addCoordinates()"
+   >
+     Add
+   </button>
+    </form>
+  </div>
 </div>
