@@ -1,49 +1,65 @@
 <div class="cover">
   <div class="header">
-    <div class="header-container">   
-    <div class="left-block">
-      <div>
-        <img src="../../../../assets/logo.png" alt="App logo" height="50" />
-      </div>
+    <div class="header-container">
+      <div class="left-block d-flex justify-content-between">
+        <div>
+          <img src="../../../../assets/logo.png" alt="App logo" height="50" />
+        </div>
 
-      <div class="location-block">
-        <mat-icon aria-hidden="false" aria-label="Home"
-        >location_on</mat-icon
-        >
-        <span (click)="openDialog()"> City</span>
-      </div>
-      <div class="search-container">
-        <mat-form-field class="example-full-width search">
-          <input
-            matInput
-            placeholder="{{ 'COMMON.Head.search' | translate }}"
-            type="text"
-          />
-        </mat-form-field>
+        <div class="location-block mr-4">
+          <mat-icon aria-hidden="false" aria-label="Home"
+          >location_on</mat-icon>
+          <span (click)="openDialog()"> City</span>
+        </div>
+
+      <div class="search-container w-100 px-4 col-sm-5">
+        <form>
+          <mat-form-field class="search w-100" appearance="legacy">
+            <mat-label>{{ 'COMMON.Head.search' | translate }}</mat-label>
+              <input
+                matInput
+                type="text"
+                name="filter"
+                [(ngModel)]="form.filter"
+                (ngModelChange)="applyFilter()"
+                placeholder="{{ 'COMMON.Head.search' | translate }}"
+                autofocus
+                [matAutocomplete]="auto"
+                class="filter"
+              />
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let match of matches" class="match" [value]="match.value.name">
+                	<span
+                    *ngFor="let segment of match.segments"
+                    class="match__segment"
+                    [class.match__segment--on]="segment.isMatch">
+                    {{ segment.value }}
+                  </span>
+                </mat-option>
+              </mat-autocomplete>
+           </mat-form-field>
+          </form>
         <mat-icon matPrefix>search</mat-icon>
       </div>
     </div>
 
-    <div class="right-block">
+    <div class="right-block ml-auto">
       <div class="notifications">
         <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"
-      
+
         >favorite_border</mat-icon
         > -->
-        <mat-icon [matBadge]="iSnotifications$" matBadgeColor="warn" matBadgeSize="small" 
-        [matBadgeHidden]="iSnotifications$==0" (click)="controlListNotes()"
+        <mat-icon [matBadge]="iSnotifications$" matBadgeColor="warn" matBadgeSize="small" class="mr-sm-5 mr-3"
+                  [matBadgeHidden]="iSnotifications$==0" (click)="controlListNotes()"
         >notifications_none
         <mat-list *ngIf="listIsVisibleOfUnreadNotes" (click)="clearNotifications()">
           <mat-list-item *ngFor="let note of unreadNotifications"> <span>{{note.nType}} <b>{{note.nPromo}}</b> for  {{note.nName}}</span></mat-list-item>
-         
+
          </mat-list>
-        </mat-icon
-        >
+        </mat-icon>
       </div>
       <div class="user-block">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" 
-        >person_outline</mat-icon
-        >
+        <mat-icon aria-hidden="false" class="mr-sm-5 mr-3"  aria-label="Example home icon">person_outline</mat-icon>
         <button mat-button [matMenuTriggerFor]="menu">{{ 'COMMON.Head.name' | translate }}</button>
         <mat-menu #menu="matMenu">
           <button
@@ -61,10 +77,9 @@
       </mat-menu>
     </div>
   </div>
-  <hr />
   <div class="tabs">
   <nav mat-tab-nav-bar class="d-none d-sm-flex">
-    <a mat-tab-link  *ngFor="let tab of tabItems"
+    <a mat-tab-link  *ngFor="let tab of tabItems" class="pl-3 p-0"
     (click)="activeLink = tab.link"
     [active]="activeLink == tab.link"
 

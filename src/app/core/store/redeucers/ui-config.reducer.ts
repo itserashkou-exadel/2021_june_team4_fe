@@ -1,13 +1,14 @@
 import { IUiConfigState } from '../../../shared/interfaces';
 
 export const initialState: IUiConfigState = {
+  searchIsActive: false,
   homeIsMap: true,
   appLanguage: 'en',
   requestConfig: {
-    fiterRequestParams: '',
+    filterRequestParams: '',
     sortValue: '',
   },
-};
+}
 
 export function uiConfigReducer(state: any = initialState, action: any) {
   switch (action.type) {
@@ -21,7 +22,7 @@ export function uiConfigReducer(state: any = initialState, action: any) {
         ...state,
         requestConfig: {
           ...state.requestConfig,
-          fiterRequestParams: action.param,
+          filterRequestParams: action.param,
         },
       };
     case 'ToggleHomeContent': //ToggleHomeContent

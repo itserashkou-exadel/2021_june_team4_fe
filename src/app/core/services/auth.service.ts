@@ -29,8 +29,9 @@ export class AuthService {
     return this.http.post<IToken>(`${LOGIN_URL}`, user, httpOptions)
   }
 
-  logout() {//todo logout
+  logout() {//todo logout clear user data from storage
     this.stopRefreshTokenTimer();
+    this.tokenStorage.clearSession();
     // this.userSubject.next(null);
     this.router.navigate(['/login']);
   }
@@ -55,7 +56,7 @@ export class AuthService {
           this.notification.success('Token was updated! TEST REFRESH');
         } else {
           this.notification.error(data.message);
-          this.logout()
+          this.logout();
         }
       }));
   }

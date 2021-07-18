@@ -9,9 +9,11 @@ import {
   IMapMarker
 } from "../../../shared/interfaces";
 import { Observable } from "rxjs";
-import {getDescription,  toggleFavourite} from "../../../core/store/actions/description.actions";
+import { getDescription, addToFavourite, removeFromFavourite } from "../../../core/store/actions/description.actions";
 import { ActivatedRoute} from '@angular/router';
+import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { getPromo } from 'src/app/core/store/actions/notifications.actions';
+
 
 @Component({
   selector: 'app-description',
@@ -22,12 +24,11 @@ import { getPromo } from 'src/app/core/store/actions/notifications.actions';
 export class DescriptionComponent implements OnInit {
   descriptionData$: Observable<IDescription>;
   markers$:any;
-  id:string;
-  markers: any;
+  discountId:string;
 
-  constructor(private activateRoute: ActivatedRoute,
+  constructor(private activateRoute: ActivatedRoute,private http: HttpClient,
               private store: Store<IAppState>) {
-    this.id = activateRoute.snapshot.params['id'];
+    this.discountId = activateRoute.snapshot.params['id'];
 
     const selecDescription = (state: IAppState) => state.description;
     const selectDescription = createSelector(selecDescription, (state: any) => state.description)
@@ -46,17 +47,19 @@ export class DescriptionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(getDescription({id: this.id}))
+    this.store.dispatch(getDescription({id: this.discountId}))
   }
 
   addToFavorite(data:IDescription) {
-    let userId = 'e1deda2f-d976-4022-9fee-ec9cae0b1cf4';//todo get live id
-    console.log('favorite', userId, data.id);
-    this.store.dispatch(toggleFavourite({userId: userId, discountId: data.id}))
+    if (data.favorite) {
+      this.store.dispatch(removeFromFavourite({discountId: data.id}))
+    } else {
+      this.store.dispatch(addToFavourite({discountId: data.id}))
+    }
   }
 
   activateCoupon(){
-    this.store.dispatch(getPromo({id: this.id}))
+    this.store.dispatch(getPromo({id: this.discountId}))
   }
 
 }

@@ -12,19 +12,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from "@angular/common/http";
 
 import { StoreModule } from '@ngrx/store';
-import { headReducer } from './core/store/redeucers/home.reducer';
-
 import { DialogComponent } from "./shared/dialog/dialog/dialog.component";
+
+import { DescriptionService } from "./core/services/description.service";
 import { MapComponent } from "./shared/map/map.component";
 import { LocationTreeComponent } from "./features/head/head/location-tree/location-tree.component";
-import { uiConfigReducer } from './core/store/redeucers/ui-config.reducer';
-import { descriptionReducer } from "./core/store/redeucers/discription.reducer";
 import { DescriptionEffects } from "./core/store/effects/description.effects";
 import { EffectsModule } from "@ngrx/effects";
-import { DescriptionService } from "./core/services/description.service";
 import { HomeEffects } from './core/store/effects/home.effects';
-import { filterReducer } from './core/store/redeucers/filter.reducer';
 import { FilterEffects } from './core/store/effects/filter.effects';
+import { homeReducer } from './core/store/redeucers/home.reducer';
+import { uiConfigReducer } from './core/store/redeucers/ui-config.reducer';
+import { descriptionReducer } from "./core/store/redeucers/discription.reducer";
+import { filterReducer } from './core/store/redeucers/filter.reducer';
+import { headReducer } from "./core/store/redeucers/head.reducer";
+
 import { notificationsReducer } from './core/store/redeucers/notifications.reducer';
 import { NotificationsEffects } from './core/store/effects/notifications.effects';
 import { vendorReducer } from './core/store/redeucers/vendor.reducer';
@@ -33,7 +35,8 @@ import { vendorReducer } from './core/store/redeucers/vendor.reducer';
   imports: [
 
     StoreModule.forRoot({
-      home : headReducer,
+      head: headReducer,
+      home: homeReducer,
       uiConfig: uiConfigReducer,
       description: descriptionReducer,
       filter: filterReducer,

@@ -1,25 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { IDescription } from "../../shared/interfaces";
+import { DISCOUNT_URL, FAVORITE_URL, NOT_FAVORITE_URL} from "../../shared/constants";
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 @Injectable()
 export class DescriptionService {
   id: any;
-  URL_API = 'http://localhost:8080';
-  httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-  };
 
   constructor(private http: HttpClient) {}
 
   getDescriptionRequest(props: {id: string}) {
     return this.http
-      .get(`${this.URL_API}/discounts/${props.id}`)
+      .get(`${DISCOUNT_URL}${props.id}`)
   }
 
-  toggleFavoriteRequest(props: {userId: string, discountId: string}) {
+  addToFavoriteRequest(props: { discountId: any }) {
     return this.http
-      .post(`${this.URL_API}/favorites`, props, this.httpOptions)
+      .post(`${FAVORITE_URL}?discountId=${props.discountId}`, httpOptions)
+  }
+
+  removeFromFavoriteRequest(props: { discountId: any }) {
+    return this.http
+      .delete(`${NOT_FAVORITE_URL}${props.discountId}`, httpOptions)
   }
 
   handleRemoteDescription(remoteData:any) {
@@ -27,7 +33,7 @@ export class DescriptionService {
     const localDescription: IDescription = {
       id: remoteData.id,
       name: remoteData.name,
-      favorite: remoteData.favorite ? remoteData.favorite : true,
+      favorite: remoteData.favorite ? remoteData.favorite : false,
       vendor: remoteData.vendor,
       startTime: remoteData.startTime,
       endTime: remoteData.endTime,
