@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Event } from '@angular/router';
 import { createSelector, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -81,6 +82,7 @@ export class StepCreateVendorComponent
     this.longControl.disable();
     this.initCities();
     this.initCountries();
+    this.countryControl.disable();
 
     this.vendorForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
@@ -89,7 +91,7 @@ export class StepCreateVendorComponent
     });
 
     // this.selectedVendor$.subscribe((data) => {
-      
+
     // });
   }
 
@@ -136,6 +138,20 @@ export class StepCreateVendorComponent
   // isCity(){
   //   return this.currentCityId.length >0? true: false;
   // }
+
+  removeVendor() {
+    //ev.prevent;
+    this.selectedVendor$.subscribe((data) => {
+      const vendorId = data.id;
+      console.log(data);
+      this.http
+        .delete<any>(`${API_URL}/vendors/${vendorId}`)
+        .subscribe((resp) => console.log(resp));
+    });
+
+    console.log('delete');
+  }
+
   addCoordinates() {
     let vendorid = '';
     this.subVendorId = this.selectedVendor$.subscribe(
@@ -193,25 +209,27 @@ export class StepCreateVendorComponent
   }
 
   selectVendor(vendor: any) {
-     console.log('selectVendor -> ' + vendor.id);
+    console.log('selectVendor -> ' + vendor.id);
     //let target = null;
     this.subFindVendor = this.vendors$.subscribe((data) => {
-     const  target = data.find((el) => el.id === vendor.id);
-      if (target ) {
+      const target = data.find((el) => el.id === vendor.id);
+      if (target) {
+        console.log(target);
         const newSelectedVendor = {
-          id: target.id ,
+          id: target.id,
           name: target.name,
           description: target.description,
           contacts: target.contacts,
         };
         console.log(newSelectedVendor);
         this.store.dispatch(saveVendorData(newSelectedVendor));
-        this.vendorForm.setValue({
+        this.vendorForm.patchValue({
           name: target.name,
           description: target.description,
           contacts: target.contacts,
         });
-     }
+        this.countryControl.enable();
+      }
     });
   }
 

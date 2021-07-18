@@ -13,15 +13,11 @@
           formControlName="name"
           [matAutocomplete]="name"
         />
-        <mat-autocomplete #name="matAutocomplete" >
+        <mat-autocomplete #name="matAutocomplete">
           <mat-option
-            *ngFor="
-              let vendor of vendors$
-                | async
-                
-            "
+            *ngFor="let vendor of vendors$ | async"
             [value]="vendor.id"
-            (onSelectionChange)="selectVendor(vendor)"
+            (click)="selectVendor(vendor)"
           >
             {{ vendor.name }}
           </mat-option>
@@ -129,19 +125,20 @@
         class="save-btn"
         mat-flat-button
         color="warn"
-        (click)="resetForm()"
+        (click)="resetForm();$event.preventDefault()"
       >
         {{ "COMMON.Global.clear" | translate }}
       </button>
       <button type="submit" class="save-btn" mat-flat-button color="primary">
         {{ "COMMON.Global.save" | translate }}
       </button>
+      <button class="save-btn" mat-flat-button color="warn" (click)="removeVendor();$event.preventDefault()">
+        Delete
+      </button>
     </div>
   </form>
-  
 
   <div class="form-location">
-
     <h3>Select or add country</h3>
     <form class="add-city">
       <mat-form-field class="example-full-width" appearance="fill">
@@ -175,14 +172,14 @@
         Add
       </button>
       <button
-      type="submit"
-      class="save-btn"
-      mat-flat-button
-      color="warn"
-      (click)="removeCountry()"
-    >
-      Remove
-    </button>
+        type="submit"
+        class="save-btn"
+        mat-flat-button
+        color="warn"
+        (click)="removeCountry()"
+      >
+        Remove
+      </button>
     </form>
     <h3>Select or add city</h3>
     <form class="add-city">
@@ -200,7 +197,7 @@
         <mat-autocomplete autoActiveFirstOption #autoC="matAutocomplete">
           <mat-option
             *ngFor="let city of filteredCities | async"
-            [value]="city.id" 
+            [value]="city.id"
             (onSelectionChange)="selectCity(city.id)"
           >
             {{ city.name }}
@@ -217,39 +214,38 @@
         Add
       </button>
       <button
-      type="submit"
-      class="save-btn"
-      mat-flat-button
-      color="warn"
-      (click)="removeCountry()"
-    >
-      Remove
-    </button>
+        type="submit"
+        class="save-btn"
+        mat-flat-button
+        color="warn"
+        (click)="removeCountry()"
+      >
+        Remove
+      </button>
     </form>
-<h3>Add coordinates</h3>
-    <form action="" class="input-cords"> 
-      
-     <div>
-      <mat-form-field appearance="fill">
-        <mat-label>Latitude</mat-label>
-        <input type="number" matInput   [formControl]="latControl"/>
-      </mat-form-field>
+    <h3>Add coordinates</h3>
+    <form action="" class="input-cords">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Latitude</mat-label>
+          <input type="number" matInput [formControl]="latControl" />
+        </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Longtitude</mat-label>
-        <input type="number" matInput   [formControl]="longControl"/>
-      </mat-form-field>
-     </div>
-      
-     <button
-     type="submit"
-     class="save-btn"
-     mat-flat-button
-     color="primary"
-     (click)="addCoordinates()"
-   >
-     Add
-   </button>
+        <mat-form-field appearance="fill">
+          <mat-label>Longtitude</mat-label>
+          <input type="number" matInput [formControl]="longControl" />
+        </mat-form-field>
+      </div>
+
+      <button
+        type="submit"
+        class="save-btn"
+        mat-flat-button
+        color="primary"
+        (click)="addCoordinates()"
+      >
+        Add
+      </button>
     </form>
   </div>
 </div>
