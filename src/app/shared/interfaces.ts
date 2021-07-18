@@ -3,10 +3,9 @@ export interface IUiConfigState {
   homeIsMap: boolean;
   appLanguage: string;
   requestConfig: {
-    fiterRequestParams:string;
+    filterRequestParams:string;
     sortValue: string;
   }
-
 }
 
 export interface IFilterState {
@@ -18,18 +17,21 @@ export interface ISimpleVar {
   id: string;
   name: string;
 }
+
 export interface IFilterFormsValues {
   categories: ISimpleVar[];
   city: ILocationCountry | null;
   vendors: ISimpleVar[];
   chips: ISimpleVar[];
 }
+
 export interface IFilterControls {
   locations: ILocationCountry[];
   categories: { id: string; name: string }[];
   tags: { id: string; name: string }[];
   vendors: { id: string; name: string }[];
 }
+
 export interface ILocationCountry {
    id: string; name: string;
    cities: { id: string; name: string }[] ;
@@ -84,6 +86,7 @@ export interface IAppState {
   uiConfig: IUiConfigState;
   description: IDescriptionState;
   filter: IFilterState;
+  vendor: any;
 }
 
 export interface IDiscount {
@@ -102,14 +105,14 @@ export interface IDiscount {
   coordinates: number[][];
 }
 
-export interface IUser {
-  id: number;
-  name: string;
-  email: string;
-  isAdmin: boolean;
-  subscribes: string[];
-  favorite: string[];
-}
+// export interface IUser {
+//   id: number;
+//   name: string;
+//   email: string;
+//   isAdmin: boolean;
+//   subscribes: string[];
+//   favorite: string[];
+// }
 
 export interface IUserLogin {
   username: string;

@@ -20,7 +20,7 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./features/head/head.module').then((m) => m.HeadModule),
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: '**',

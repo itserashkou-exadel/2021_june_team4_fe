@@ -27,16 +27,18 @@ import { descriptionReducer } from "./core/store/redeucers/discription.reducer";
 import { filterReducer } from './core/store/redeucers/filter.reducer';
 import { headReducer } from "./core/store/redeucers/head.reducer";
 
+import { vendorReducer } from './core/store/redeucers/vendor.reducer';
 
 @NgModule({
   imports: [
 
     StoreModule.forRoot({
-      head:headReducer,
-      home : homeReducer,
+      head: headReducer,
+      home: homeReducer,
       uiConfig: uiConfigReducer,
       description: descriptionReducer,
       filter: filterReducer,
+      vendor: vendorReducer,
     }),
     EffectsModule.forRoot([DescriptionEffects, HomeEffects, FilterEffects]),
     // angular

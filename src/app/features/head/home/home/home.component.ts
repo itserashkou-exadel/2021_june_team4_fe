@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       (data) => {
         console.log(data);
         const sortParam = data.sortValue;
-        const filterParam = data.fiterRequestParams;
+        const filterParam = data.filterRequestParams;
         let fullParamRequest = '';
         fullParamRequest += sortParam || filterParam ? '?' : '';
         fullParamRequest += filterParam;

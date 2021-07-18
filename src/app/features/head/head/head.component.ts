@@ -45,7 +45,7 @@ export class HeadComponent implements OnInit, OnDestroy {
   constructor(private store: Store<IAppState>,
               public dialog: MatDialog,
               private http: HttpClient,
-              public homeServise: HomeService,
+              public homeService: HomeService,
               fuzzyMatcher: FuzzyMatcher,
               private translateService: TranslateService) {
     this.activeLink = 'home';
@@ -89,9 +89,9 @@ export class HeadComponent implements OnInit, OnDestroy {
   discountSearch = new FormControl('');
   profileMenu = new FormControl('');
   profileMenuItems = [
-    'Select cathegory',
+    'Select category',
     'History',
-    'Favorit',
+    'Favorite',
     'Active discounts',
     'Logout',
     'Close',
@@ -132,7 +132,7 @@ export class HeadComponent implements OnInit, OnDestroy {
         (data: any)=>{
           if(data) {
             let searchData = data.map((discount:any)=>{
-              return this.homeServise.handleRemoteDiscount(discount);
+              return this.homeService.handleRemoteDiscount(discount);
             })
             this.store.dispatch(requestDiscounts({data: searchData}))
           } else {
