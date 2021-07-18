@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DiscountService } from 'src/app/core/services/discount.service';
 import { IDiscount } from '../interfaces';
 
 @Component({
@@ -10,9 +11,13 @@ export class TilesBoxComponent implements OnInit {
 
   @Input() discountsData$ : IDiscount[] | null = [];
 
-  constructor() { }
+  constructor( private discountService: DiscountService ) 
+  {
+   
+  }
 
   ngOnInit(): void {
+
   }
 
 }

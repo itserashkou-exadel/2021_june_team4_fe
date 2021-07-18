@@ -16,7 +16,7 @@ export class HomeService {
   }
 
   handleRemoteDiscount(remoteDiscount: any) {
-  // console.log(remoteDiscount);
+ // console.log(remoteDiscount);
 
     let tags = '';
     remoteDiscount.tags.forEach((el: any) => {
@@ -41,7 +41,7 @@ export class HomeService {
         remoteDiscount.discountType === 'PRICE' ? '%' : ''),
       image:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
-      coordinates: getCoordinates(remoteDiscount),
+      coordinates: remoteDiscount.vendorLocations ? getCoordinates(remoteDiscount) : [[50.094, 26.981]],
     };
     //console.log(localDiscount);
     return localDiscount;
