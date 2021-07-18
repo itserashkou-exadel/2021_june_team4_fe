@@ -1,6 +1,6 @@
 <div class="cover">
   <div class="header">
-    <div class="header-container">   
+    <div class="header-container">
     <div class="left-block">
       <div>
         <img src="../../../../assets/logo.png" alt="App logo" height="50" />
@@ -10,7 +10,7 @@
         <mat-icon aria-hidden="false" aria-label="Home"
         >location_on</mat-icon
         >
-        <span (click)="openDialog()"> City</span>
+        <span> City</span>
       </div>
       <div class="search-container">
         <mat-form-field class="example-full-width search">
@@ -27,21 +27,21 @@
     <div class="right-block">
       <div class="notifications">
         <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"
-      
+
         >favorite_border</mat-icon
         > -->
-        <mat-icon [matBadge]="iSnotifications$" matBadgeColor="warn" matBadgeSize="small" 
+        <mat-icon [matBadge]="iSnotifications$" matBadgeColor="warn" matBadgeSize="small"
         [matBadgeHidden]="iSnotifications$==0" (click)="controlListNotes()"
         >notifications_none
         <mat-list *ngIf="listIsVisibleOfUnreadNotes" (click)="clearNotifications()">
           <mat-list-item *ngFor="let note of unreadNotifications"> <span>{{note.nType}} <b>{{note.nPromo}}</b> for  {{note.nName}}</span></mat-list-item>
-         
+
          </mat-list>
         </mat-icon
         >
       </div>
       <div class="user-block">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" 
+        <mat-icon aria-hidden="false" aria-label="Example home icon"
         >person_outline</mat-icon
         >
         <button mat-button [matMenuTriggerFor]="menu">{{ 'COMMON.Head.name' | translate }}</button>

@@ -64,7 +64,7 @@ export class HeadComponent implements OnInit, OnDestroy {
 
   openDialog() { }
 
-  
+
   ngOnInit(): void {
     let localLang = localStorage.getItem(this.SETTING_KEY);
     if (localLang) {
@@ -104,7 +104,7 @@ export class HeadComponent implements OnInit, OnDestroy {
     this.activeLink = val;
   }
   controlListNotes(){
-this.listIsVisibleOfUnreadNotes = !this.listIsVisibleOfUnreadNotes;
+    this.listIsVisibleOfUnreadNotes = !this.listIsVisibleOfUnreadNotes;
   };
-  
+
 }
