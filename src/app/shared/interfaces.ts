@@ -84,7 +84,11 @@ export interface IAppState {
   description: IDescriptionState;
   filter: IFilterState;
   notifications: any
-  vendor: any;
+  vendor: IVendorState;
+}
+
+export interface IVendorState{
+  selectedVendor: {id: string, name: string, description: string, contacts: string};
 }
 
 export interface IDiscount {
@@ -123,6 +127,7 @@ export interface IToken {
 }
 
 export interface IVendor {
+  [x: string]: any;
   id: string;
   name: string;
   description: string;

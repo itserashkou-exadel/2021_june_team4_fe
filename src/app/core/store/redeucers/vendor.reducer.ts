@@ -1,12 +1,25 @@
 const initialState = {
-  vendor: {vendorId: 'string'},
+  selectedVendor: {
+    id: 'string',
+    name: 'Vendor',
+    description: 'description',
+    contacts: 'action.contacts ',
+  },
 };
 
 export function vendorReducer(state: any = initialState, action: any) {
   switch (action.type) {
-    case 'saveVendorId': 
-      return { ...state, vendor: {vendorId: action.id} };
+    case 'SaveVendorData':
+      console.log(action);
+      return {
+        selectedVendor: {
+          id: action.id,
+          name: action.name,
+          description: action.secription,
+          contacts: action.contacts,
+        },
+      };
     default:
       return state;
   }
-};
+}

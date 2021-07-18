@@ -13,16 +13,17 @@
           formControlName="name"
           [matAutocomplete]="name"
         />
-        <mat-autocomplete #name="matAutocomplete">
+        <mat-autocomplete #name="matAutocomplete" >
           <mat-option
             *ngFor="
               let vendor of vendors$
                 | async
-                | filter: this.vendorForm.controls.name.value
+                
             "
-            [value]="vendor"
+            [value]="vendor.id"
+            (onSelectionChange)="selectVendor(vendor)"
           >
-            {{ vendor }}
+            {{ vendor.name }}
           </mat-option>
         </mat-autocomplete>
         <mat-error
@@ -137,6 +138,7 @@
       </button>
     </div>
   </form>
+  
 
   <div class="form-location">
 

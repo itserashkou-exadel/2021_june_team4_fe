@@ -1,13 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { createSelector, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { VendorsService } from 'src/app/core/services/vendors.service';
-import { SaveVendorId } from 'src/app/core/store/actions/vendor.action';
+import { saveVendorData } from 'src/app/core/store/actions/vendor.action';
 import { API_URL } from 'src/app/shared/constants';
-import { IAppState, ISimpleVar, IVendor } from 'src/app/shared/interfaces';
+import {
+  IAppState,
+  ISimpleVar,
+  IVendor,
+  IVendorState,
+} from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-step-create-vendor',
@@ -19,11 +24,16 @@ export class StepCreateVendorComponent
 {
   vendorForm!: FormGroup;
   vendors$: Observable<IVendor[]>;
+  selectedVendor$: Observable<any>;
+
   vSub!: Subscription;
   svSub!: Subscription;
   subVendorId!: Subscription;
-  vendorId$: Observable<any>;
   subAddCountry!: Subscription;
+  subAddCity!: Subscription;
+  subFindVendor!: Subscription;
+  subInitCountries!: Subscription;
+  subInitCities!: Subscription;
 
   latControl = new FormControl();
   longControl = new FormControl();
@@ -44,8 +54,6 @@ export class StepCreateVendorComponent
   filteredCities: Observable<{ id: string; name: string }[]> | undefined;
   currentCityId: string = '';
   isCity: boolean = false;
-  
-  
 
   constructor(
     private vendorsService: VendorsService,
@@ -54,10 +62,16 @@ export class StepCreateVendorComponent
   ) {
     this.vendors$ = this.vendorsService.getVendors();
 
-    const selectVendor = (state: IAppState) => state.vendor;
-    this.vendorId$ = this.store.select(selectVendor);
+    // this.vendors$.subscribe((data) => console.log(data));
 
-    this.vSub = this.vendorId$.subscribe((data) => console.log(data));
+    const selectVendorState = (state: IAppState) => state.vendor;
+    const selectVendorData = createSelector(
+      selectVendorState,
+      (state: IVendorState) => state.selectedVendor
+    );
+    this.selectedVendor$ = this.store.select(selectVendorData);
+
+    //b  this.vSub = this.selectedVendor$.subscribe((data) => console.log(data));
   }
   ngAfterViewInit(): void {}
 
@@ -71,22 +85,39 @@ export class StepCreateVendorComponent
     this.vendorForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       description: new FormControl(null, [Validators.required]),
-      vendorLogo: new FormControl(null, [Validators.required]),
-      locations: new FormControl(null, [Validators.required]),
       contacts: new FormControl(null, [Validators.required]),
     });
+
+    // this.selectedVendor$.subscribe((data) => {
+      
+    // });
   }
 
   ngOnDestroy(): void {
     if (this.vSub) {
       this.vSub.unsubscribe();
     }
-
     if (this.svSub) {
       this.svSub.unsubscribe();
     }
-    if (this.subVendorId){this.subVendorId.unsubscribe()}
-    if( this.subAddCountry){ this.subAddCountry.unsubscribe()}
+    if (this.subVendorId) {
+      this.subVendorId.unsubscribe();
+    }
+    if (this.subAddCountry) {
+      this.subAddCountry.unsubscribe();
+    }
+    if (this.subAddCity) {
+      this.subAddCity.unsubscribe();
+    }
+    if (this.subFindVendor) {
+      this.subFindVendor.unsubscribe();
+    }
+    if (this.subInitCountries) {
+      this.subInitCountries.unsubscribe();
+    }
+    if (this.subInitCities) {
+      this.subInitCities.unsubscribe();
+    }
   }
 
   selectCity(cityId: string) {
@@ -102,21 +133,24 @@ export class StepCreateVendorComponent
     this.initCities();
   }
 
-// isCity(){
-//   return this.currentCityId.length >0? true: false;
-// }
-addCoordinates(){
-  let vendorid ='';
-  this.subVendorId =  this.vendorId$.subscribe(id => vendorid = id.vendor.vendorid)
-  const req = {
-    "cityId": this.currentCityId,
-    "latitude": this.latControl.value,
-    "longitude": this.longControl.value,
-    "vendorId": vendorid
+  // isCity(){
+  //   return this.currentCityId.length >0? true: false;
+  // }
+  addCoordinates() {
+    let vendorid = '';
+    this.subVendorId = this.selectedVendor$.subscribe(
+      (selectedVendor) => (vendorid = selectedVendor.id)
+    );
+    const req = {
+      cityId: this.currentCityId,
+      latitude: this.latControl.value,
+      longitude: this.longControl.value,
+      vendorId: vendorid,
+    };
+    this.http
+      .post<any>(`${API_URL}/locations`, req)
+      .subscribe((resp) => console.log(resp));
   }
-  this.http.post<any>(`${API_URL}/locations`, req).subscribe(resp => console.log(resp));
-
-}
   addCountry() {
     const newCountry = this.countryControl.value;
     this.subAddCountry = this.http
@@ -132,18 +166,14 @@ addCoordinates(){
 
   addCity() {
     const newCity = this.cityControl.value;
-    this.http
+    this.subAddCity = this.http
       .post<any>(`${API_URL}/countries/${this.currentCountryId}/cities`, {
         name: newCity,
       })
       .subscribe((data) => this.initCities());
   }
 
-  reformatCity(country: any) {
-    return { id: country.id, name: country.name };
-  }
-
-  reformatCountry(country: any) {
+  reformatLocation(country: any) {
     return { id: country.id, name: country.name };
   }
 
@@ -162,12 +192,42 @@ addCoordinates(){
     );
   }
 
-  saveVendor(): void {  
+  selectVendor(vendor: any) {
+     console.log('selectVendor -> ' + vendor.id);
+    //let target = null;
+    this.subFindVendor = this.vendors$.subscribe((data) => {
+     const  target = data.find((el) => el.id === vendor.id);
+      if (target ) {
+        const newSelectedVendor = {
+          id: target.id ,
+          name: target.name,
+          description: target.description,
+          contacts: target.contacts,
+        };
+        console.log(newSelectedVendor);
+        this.store.dispatch(saveVendorData(newSelectedVendor));
+        this.vendorForm.setValue({
+          name: target.name,
+          description: target.description,
+          contacts: target.contacts,
+        });
+     }
+    });
+  }
+
+  saveVendor(): void {
     this.vendorForm.disable();
 
     const vendorFormData = this.vendorForm.value;
     this.svSub = this.vendorsService.createVendor(vendorFormData).subscribe(
       (data) => {
+        const vendorData = {
+          id: data.id,
+          name: data.name,
+          description: data.description,
+          contacts: data.contacts,
+        };
+        this.store.dispatch(saveVendorData(vendorData));
         console.log(data);
       },
       (err) => {
@@ -190,26 +250,28 @@ addCoordinates(){
   focusOncountry() {}
 
   initCountries() {
-    this.http.get(API_URL + '/countries').subscribe((data: any) => {
-      this.countryOptions = data.map((el: any) => {
-        return this.reformatCountry(el);
+    this.subInitCountries = this.http
+      .get(API_URL + '/countries')
+      .subscribe((data: any) => {
+        this.countryOptions = data.map((el: any) => {
+          return this.reformatLocation(el);
+        });
+        this.filteredCountry = this.countryControl.valueChanges.pipe(
+          startWith(''),
+          map((value) => {
+            return this._filter(value);
+          })
+        );
       });
-      this.filteredCountry = this.countryControl.valueChanges.pipe(
-        startWith(''),
-        map((value) => {
-          return this._filter(value);
-        })
-      );
-    });
   }
 
   initCities() {
     if (!this.currentCountryId) return;
-    this.http
+    this.subInitCities = this.http
       .get(API_URL + '/countries/' + this.currentCountryId)
       .subscribe((data: any) => {
         this.cityOptions = data.cities.map((el: any) => {
-          return this.reformatCountry(el);
+          return this.reformatLocation(el);
         });
         this.filteredCities = this.cityControl.valueChanges.pipe(
           startWith(''),
