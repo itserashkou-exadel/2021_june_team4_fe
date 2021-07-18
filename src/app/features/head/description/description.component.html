@@ -39,6 +39,8 @@
         <div class="price align-items-center">650
           <small>{{ 'COMMON.description.currency' | translate }}</small>
         </div>
+
+        <button mat-raised-button color="accent" (click)="activateCoupon()">
         
         <div class="discount mb-3 ">
           <span>{{ 'COMMON.description.rightpanel.sale' | translate }}</span>
@@ -78,9 +80,5 @@
             <b>{{ data.vendor.contacts }}</b>
           </div>
 
-        </div>
-      </div>
-    </div>
     <div class="col-md-1"></div>
   </div>
-</div>

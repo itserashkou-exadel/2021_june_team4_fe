@@ -11,7 +11,9 @@ import {
 import { Observable } from "rxjs";
 import { getDescription, addToFavourite, removeFromFavourite } from "../../../core/store/actions/description.actions";
 import { ActivatedRoute} from '@angular/router';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders} from "@angular/common/http";
+import { getPromo } from 'src/app/core/store/actions/notifications.actions';
+
 
 @Component({
   selector: 'app-description',
@@ -54,6 +56,10 @@ export class DescriptionComponent implements OnInit {
     } else {
       this.store.dispatch(addToFavourite({discountId: data.id}))
     }
+  }
+
+  activateCoupon(){
+    this.store.dispatch(getPromo({id: this.discountId}))
   }
 
 }

@@ -27,6 +27,8 @@ import { descriptionReducer } from "./core/store/redeucers/discription.reducer";
 import { filterReducer } from './core/store/redeucers/filter.reducer';
 import { headReducer } from "./core/store/redeucers/head.reducer";
 
+import { notificationsReducer } from './core/store/redeucers/notifications.reducer';
+import { NotificationsEffects } from './core/store/effects/notifications.effects';
 import { vendorReducer } from './core/store/redeucers/vendor.reducer';
 
 @NgModule({
@@ -38,9 +40,10 @@ import { vendorReducer } from './core/store/redeucers/vendor.reducer';
       uiConfig: uiConfigReducer,
       description: descriptionReducer,
       filter: filterReducer,
+      notifications: notificationsReducer,
       vendor: vendorReducer,
     }),
-    EffectsModule.forRoot([DescriptionEffects, HomeEffects, FilterEffects]),
+    EffectsModule.forRoot([DescriptionEffects, HomeEffects, FilterEffects, NotificationsEffects]),
     // angular
     HttpClientModule,
     BrowserAnimationsModule,

@@ -1,4 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
 import { FormControl } from '@angular/forms';
 import { createSelector, Store, select } from '@ngrx/store';
 
@@ -6,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import {IAppState, IDescription, IUiConfigState} from '../../../shared/interfaces';
 
 import { MatDialog } from '@angular/material/dialog';
+
 import {Observable, Subscription} from "rxjs";
 import { setLanguage } from "../../../core/store/actions/ui-config.actions";
 
@@ -22,6 +24,10 @@ interface FilterMatch {
   value: Species;
   segments: FuzzySegment[];
 }
+
+import { state } from '@angular/animations';
+import { clearNotifications } from 'src/app/core/store/actions/notifications.actions';
+
 
 @Component({
   selector: 'app-head',
@@ -41,6 +47,10 @@ export class HeadComponent implements OnInit, OnDestroy {
   public matches: FilterMatch[];
 
   private fuzzyMatcher: FuzzyMatcher;
+  iSnotifications$: number | undefined;
+  unreadNotifications: any[] | undefined;
+  aSub: Subscription;
+  listIsVisibleOfUnreadNotes: boolean;
 
   constructor(private store: Store<IAppState>,
               public dialog: MatDialog,
@@ -48,6 +58,15 @@ export class HeadComponent implements OnInit, OnDestroy {
               public homeService: HomeService,
               fuzzyMatcher: FuzzyMatcher,
               private translateService: TranslateService) {
+
+    const selectNotifications = (state: IAppState) => state.notifications;
+    const soreNotifications = this.store.select(selectNotifications);
+    this.aSub = soreNotifications.subscribe((data) => {
+      this.iSnotifications$ = data.notificationsUnread.length;
+        this.unreadNotifications = data.notificationsUnread;
+    });
+    this.listIsVisibleOfUnreadNotes = false;
+
     this.activeLink = 'home';
 
     const selecUiConfig = (state: IAppState) => state.uiConfig;
@@ -57,7 +76,7 @@ export class HeadComponent implements OnInit, OnDestroy {
     );
 
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
-    this.language$.subscribe((lang)=>{
+    this.language$.subscribe((lang) => {
       this.translateService.use(lang);
     });
 
@@ -68,22 +87,31 @@ export class HeadComponent implements OnInit, OnDestroy {
     };
     this.matches = [];
   }
-
   ngOnDestroy(): void {
+    this.aSub.unsubscribe();
     this.dataBySearch.unsubscribe();
+   // throw new Error('Method not implemented.');
   }
+
+  clearNotifications(){
+    this.store.dispatch(clearNotifications())
+    console.log('asdf');
+  }
+
+  openDialog() { }
+
 
   ngOnInit(): void {
     let localLang = localStorage.getItem(this.SETTING_KEY);
-    if(localLang) {
-      this.store.dispatch(setLanguage({ language:localLang }));
+    if (localLang) {
+      this.store.dispatch(setLanguage({ language: localLang }));
     }
   }
 
   changeLocale(lang: string) {
-    this.store.dispatch(setLanguage({ language:lang }));
+    this.store.dispatch(setLanguage({ language: lang }));
     this.translateService.use(lang);
-    localStorage.setItem(this.SETTING_KEY,lang);
+    localStorage.setItem(this.SETTING_KEY, lang);
   }
 
   discountSearch = new FormControl('');
@@ -98,12 +126,11 @@ export class HeadComponent implements OnInit, OnDestroy {
   ];
 
   tabItems = [
-    { link: 'home', label: 'COMMON.Head.home'},
+    { link: 'home', label: 'COMMON.Head.home' },
     { link: 'profile', label: 'COMMON.Head.profile' },
     { link: 'vendor', label: 'COMMON.Head.vendor' },
     { link: 'statistic', label: 'COMMON.Head.statistic' },
   ];
-
 
   pmClick(ev: Event) {
     console.log((ev.target as HTMLButtonElement).innerText);
@@ -188,4 +215,8 @@ export class HeadComponent implements OnInit, OnDestroy {
       // );
 
   }
+
+  controlListNotes(){
+    this.listIsVisibleOfUnreadNotes = !this.listIsVisibleOfUnreadNotes;
+  };
 }

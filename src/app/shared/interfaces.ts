@@ -86,6 +86,7 @@ export interface IAppState {
   uiConfig: IUiConfigState;
   description: IDescriptionState;
   filter: IFilterState;
+  notifications: any
   vendor: any;
 }
 
