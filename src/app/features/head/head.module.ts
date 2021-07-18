@@ -35,7 +35,7 @@ import {
   TranslateLoader,
   TranslateModule
 } from "@ngx-translate/core";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
@@ -64,31 +64,31 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     StepCreateVendorComponent,
     StepCreateBpComponent,
     StepEditBpComponent,
-    FilterPipe
+    FilterPipe,
   ],
   exports: [
     MapComponent,
     StepCreateVendorComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule,
-    HeadRoutingModule,
-    NgbCarouselModule,
-    NgbRatingModule,
-    MatDialogModule,
-    NgbTooltipModule,
-    MatTreeModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
-      missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MissingTranslationService},
-      useDefaultLang: false,
-    }),
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule,
+        HeadRoutingModule,
+        NgbCarouselModule,
+        NgbRatingModule,
+        MatDialogModule,
+        NgbTooltipModule,
+        MatTreeModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient],
+            },
+            missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MissingTranslationService},
+            useDefaultLang: false,
+        }),
+    ],
 })
 export class HeadModule { }

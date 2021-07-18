@@ -1,4 +1,4 @@
-import { IDiscount, IHomeState } from '../../../shared/interfaces';
+import { IHomeState } from '../../../shared/interfaces';
 
 export const initialState: IHomeState = {
   sortValue: '',
@@ -37,7 +37,7 @@ export const initialState: IHomeState = {
   ],
 };
 
-export function headReducer(state: IHomeState = initialState, action: any) {
+export function homeReducer(state: IHomeState = initialState, action: any) {
   switch (action.type) {
     case 'setSortValue':
       return { ...state, sortValue: action.value };

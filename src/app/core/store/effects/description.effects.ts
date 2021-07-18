@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import {getDescription, requestDescription, toggleFavourite} from '../actions/description.actions';
+import {getDescription, requestDescription, addToFavourite, removeFromFavourite} from '../actions/description.actions';
 import { DescriptionService } from '../../services/description.service';
 import { map, mergeMap } from "rxjs/operators";
 
@@ -26,18 +26,32 @@ export class DescriptionEffects {
       ))
     )
 
-  toggleFavorite$ = createEffect(
+  addToFavorite$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(toggleFavourite),
-        mergeMap((props) => this.descriptionService.toggleFavoriteRequest({
-          userId: props.userId,
-          discountId: props.discountId})
+        ofType(addToFavourite),
+        mergeMap((props) => this.descriptionService.addToFavoriteRequest({discountId: props.discountId})
           .pipe(
             map( (data: any) => {
               console.log('FAVORITEdata', data)//todo check request and update data in store
               // const description = this.descriptionService.handleRemoteDescription(data)
-              return { type: 'requestDescription', data: data};
+              const description = this.descriptionService.handleRemoteDescription(data)
+              return { type: 'requestDescription', data: description};
+            })
+          )
+        ))
+  )
+
+  removeFromFavorite$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(removeFromFavourite),
+        mergeMap((props) => this.descriptionService.removeFromFavoriteRequest({discountId: props.discountId})
+          .pipe(
+            map( (data: any) => {
+              console.log('not favorite', data)//todo check request and update data in store
+              const description = this.descriptionService.handleRemoteDescription(data)
+              return { type: 'requestDescription', data: description};
             })
           )
         ))

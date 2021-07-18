@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { IUserLogin } from 'src/app/shared/interfaces';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
-import {NotificationService} from "../../../core/services/notification.service";
+import { NotificationService } from "../../../core/services/notification.service";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.isLoggedIn = true;
       },
       err => {
-        this.errorMessage = err.error.message;
+        this.errorMessage = err;
         this.notification.error(this.errorMessage);
         this.isLoginFailed = true;
         this.form.enable()
