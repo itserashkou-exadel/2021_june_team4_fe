@@ -8,7 +8,7 @@ import { TokenStorageService } from './token-storage.service';
 import { NotificationService } from "./notification.service";
 import {AuthService} from "./auth.service";
 
-const TOKEN_HEADER_KEY = 'Authorization';       // for Spring Boot back-end
+const TOKEN_HEADER_KEY = 'Authorization'; // for Spring Boot back-end
 
 @Injectable()
 // Function for adding token to http request
@@ -21,11 +21,16 @@ export class AuthInterceptor implements HttpInterceptor {
 
     let authReq = req;
     const token = this.token.getToken();
-    if (token != null) {
-      authReq = req.clone({headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token)})
-      if (authReq.url.endsWith('/authenticate/refresh')) {//header for refresh access token
+    if (token != null && !authReq.url.includes('localhost:3000')) {
+      authReq = req.clone({
+        headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token),
+      });
+      if (authReq.url.endsWith('/authenticate/refresh')) {
+        //header for refresh access token
         const refreshToken = window.sessionStorage.getItem('refreshToken');
-        authReq = req.clone({headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + refreshToken)})
+        authReq = req.clone({
+          headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + refreshToken),
+        });
       }
     }
     return next.handle(authReq).pipe(
@@ -44,5 +49,5 @@ export class AuthInterceptor implements HttpInterceptor {
 }
 
 export const authInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-]
+  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+];

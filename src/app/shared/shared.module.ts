@@ -33,6 +33,7 @@ import { CheckboxComponent } from './checkbox/checkbox/checkbox.component';
 import { TilesBoxComponent } from './tiles-box/tiles-box.component';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { TranslateModule } from "@ngx-translate/core";
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
     imports: [
@@ -71,14 +72,16 @@ import { TranslateModule } from "@ngx-translate/core";
         MatDialogModule,
         MatTreeModule,
         MatAutocompleteModule,
+        MatBadgeModule,
 
         RouterModule,
         TranslateModule,
+
     ],
 
   exports: [
     CommonModule,
-
+MatBadgeModule,
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
