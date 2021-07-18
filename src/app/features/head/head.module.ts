@@ -17,6 +17,7 @@ import { DialogComponent } from '../../shared/dialog/dialog/dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { LocationTreeComponent } from './head/location-tree/location-tree.component';
 import { MatTreeModule } from "@angular/material/tree";
+import {MatTableModule} from '@angular/material/table';
 import { SideBarFilterComponent } from './home/home/side-bar-filter/side-bar-filter.component';
 import { CategoryComponent } from './home/home/side-bar-filter/category/category.component';
 import { DateComponent } from './home/home/side-bar-filter/date/date.component';
@@ -80,6 +81,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     MatDialogModule,
     NgbTooltipModule,
     MatTreeModule,
+    MatTableModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

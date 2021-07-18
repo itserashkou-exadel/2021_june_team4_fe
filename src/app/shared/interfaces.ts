@@ -2,10 +2,9 @@ export interface IUiConfigState {
   homeIsMap: boolean;
   appLanguage: string;
   requestConfig: {
-    fiterRequestParams:string;
+    fiterRequestParams: string;
     sortValue: string;
-  }
-  
+  };
 }
 
 export interface IFilterState {
@@ -30,8 +29,9 @@ export interface IFilterControls {
   vendors: { id: string; name: string }[];
 }
 export interface ILocationCountry {
-   id: string; name: string; 
-   cities: { id: string; name: string }[] ;
+  id: string;
+  name: string;
+  cities: { id: string; name: string }[];
 }
 
 export interface IMapMarker {
@@ -58,15 +58,17 @@ export interface IDescription {
     description: any;
     contacts: any;
   };
-  vendorLocations: [{
-    vendorLocations: any;
-    city: {
-      countryName: string;
-      name: string;
-    },
-    latitude: number;
-    longitude: number;
-  }];
+  vendorLocations: [
+    {
+      vendorLocations: any;
+      city: {
+        countryName: string;
+        name: string;
+      };
+      latitude: number;
+      longitude: number;
+    }
+  ];
 }
 
 export interface IDescriptionState {
@@ -101,13 +103,28 @@ export interface IDiscount {
   coordinates: number[][];
 }
 
+// export interface IUser {
+//   id: number;
+//   name: string;
+//   email: string;
+//   isAdmin: boolean;
+//   subscribes: string[];
+//   favorite: string[];
+// }
+
 export interface IUser {
-  id: number;
-  name: string;
+  id: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
   email: string;
-  isAdmin: boolean;
-  subscribes: string[];
-  favorite: string[];
+  role: string;
+  city: {
+    id: string;
+    name: string;
+    countryId: string;
+    countryName: string;
+  };
 }
 
 export interface IUserLogin {
@@ -136,3 +153,5 @@ export interface ITag {
   id: string;
   name: string;
 }
+
+

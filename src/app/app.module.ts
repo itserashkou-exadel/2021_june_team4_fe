@@ -25,6 +25,8 @@ import { DescriptionService } from "./core/services/description.service";
 import { HomeEffects } from './core/store/effects/home.effects';
 import { filterReducer } from './core/store/redeucers/filter.reducer';
 import { FilterEffects } from './core/store/effects/filter.effects';
+import { profileReducers } from './core/store/redeucers/profile.reducer';
+
 
 @NgModule({
   imports: [
@@ -34,6 +36,7 @@ import { FilterEffects } from './core/store/effects/filter.effects';
       uiConfig: uiConfigReducer,
       description: descriptionReducer,
       filter: filterReducer,
+      profile: profileReducers
     }),
     EffectsModule.forRoot([DescriptionEffects, HomeEffects, FilterEffects]),
     // angular
