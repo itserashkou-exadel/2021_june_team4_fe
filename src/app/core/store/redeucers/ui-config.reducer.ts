@@ -1,6 +1,7 @@
 import { IUiConfigState } from '../../../shared/interfaces';
 
 export const initialState: IUiConfigState = {
+  searchIsActive: false,
   homeIsMap: true,
   appLanguage: 'en',
   requestConfig: {

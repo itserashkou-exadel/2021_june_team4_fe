@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { IDescription } from "../../shared/interfaces";
 import { DISCOUNT_URL, FAVORITE_URL, NOT_FAVORITE_URL} from "../../shared/constants";
 
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
+
 @Injectable()
 export class DescriptionService {
   id: any;
-  httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-  };
 
   constructor(private http: HttpClient) {}
 
@@ -19,12 +20,12 @@ export class DescriptionService {
 
   addToFavoriteRequest(props: { discountId: any }) {
     return this.http
-      .post(`${FAVORITE_URL}`, props, this.httpOptions)
+      .post(`${FAVORITE_URL}?discountId=${props.discountId}`, httpOptions)
   }
 
   removeFromFavoriteRequest(props: { discountId: any }) {
     return this.http
-      .delete(`${NOT_FAVORITE_URL}${props.discountId}`, this.httpOptions)
+      .delete(`${NOT_FAVORITE_URL}${props.discountId}`, httpOptions)
   }
 
   handleRemoteDescription(remoteData:any) {
@@ -32,7 +33,7 @@ export class DescriptionService {
     const localDescription: IDescription = {
       id: remoteData.id,
       name: remoteData.name,
-      favorite: remoteData.favorite ? remoteData.favorite : true,
+      favorite: remoteData.favorite ? remoteData.favorite : false,
       vendor: remoteData.vendor,
       startTime: remoteData.startTime,
       endTime: remoteData.endTime,

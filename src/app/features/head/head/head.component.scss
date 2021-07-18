@@ -52,9 +52,19 @@ a {
   text-decoration: none;
 }
 .tabs {
-  
+
   *{
     color: #0082ca;
   }
 }
 
+.match {
+  font-size: 18px ;
+  &__segment {
+    color: #454545 ;
+    &--on {
+      color: #000000 ;
+      font-weight: 800 ;
+    }
+  }
+}

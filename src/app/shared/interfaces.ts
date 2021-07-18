@@ -1,11 +1,12 @@
 export interface IUiConfigState {
+  searchIsActive: boolean;
   homeIsMap: boolean;
   appLanguage: string;
   requestConfig: {
     fiterRequestParams:string;
     sortValue: string;
   }
-  
+
 }
 
 export interface IFilterState {
@@ -30,7 +31,7 @@ export interface IFilterControls {
   vendors: { id: string; name: string }[];
 }
 export interface ILocationCountry {
-   id: string; name: string; 
+   id: string; name: string;
    cities: { id: string; name: string }[] ;
 }
 

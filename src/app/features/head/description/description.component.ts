@@ -11,6 +11,7 @@ import {
 import { Observable } from "rxjs";
 import { getDescription, addToFavourite, removeFromFavourite } from "../../../core/store/actions/description.actions";
 import { ActivatedRoute} from '@angular/router';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'app-description',
@@ -23,7 +24,7 @@ export class DescriptionComponent implements OnInit {
   markers$:any;
   discountId:string;
 
-  constructor(private activateRoute: ActivatedRoute,
+  constructor(private activateRoute: ActivatedRoute,private http: HttpClient,
               private store: Store<IAppState>) {
     this.discountId = activateRoute.snapshot.params['id'];
 
@@ -53,7 +54,6 @@ export class DescriptionComponent implements OnInit {
     } else {
       this.store.dispatch(addToFavourite({discountId: data.id}))
     }
-
   }
 
 }

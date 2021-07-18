@@ -35,7 +35,8 @@ export class DescriptionEffects {
             map( (data: any) => {
               console.log('FAVORITEdata', data)//todo check request and update data in store
               // const description = this.descriptionService.handleRemoteDescription(data)
-              return { type: 'requestDescription', data: data};
+              const description = this.descriptionService.handleRemoteDescription(data)
+              return { type: 'requestDescription', data: description};
             })
           )
         ))
@@ -49,8 +50,8 @@ export class DescriptionEffects {
           .pipe(
             map( (data: any) => {
               console.log('not favorite', data)//todo check request and update data in store
-              // const description = this.descriptionService.handleRemoteDescription(data)
-              return { type: 'requestDescription', data: data};
+              const description = this.descriptionService.handleRemoteDescription(data)
+              return { type: 'requestDescription', data: description};
             })
           )
         ))
