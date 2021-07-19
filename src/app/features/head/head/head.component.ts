@@ -4,20 +4,19 @@ import { FormControl } from '@angular/forms';
 import { createSelector, Store, select } from '@ngrx/store';
 
 import { TranslateService } from '@ngx-translate/core';
-import {IAppState, IDescription, IUiConfigState} from '../../../shared/interfaces';
+import { IAppState, IUiConfigState } from '../../../shared/interfaces';
 
 import { MatDialog } from '@angular/material/dialog';
 
-import {Observable, Subscription} from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { setLanguage } from "../../../core/store/actions/ui-config.actions";
 
-// Import the application components and services.
 import { FuzzySegment, FuzzyMatcher } from "../../../core/services/fuzzy-matcher.service";
 import { Species, primates } from "../../../shared/primates";
-import {SEARCH_URL} from "../../../shared/constants";
-import {HttpClient} from "@angular/common/http";
-import {getNewDiscounts, requestDiscounts} from "../../../core/store/actions/home.actions";
-import {HomeService} from "../../../core/services/home.service";
+import { SEARCH_URL } from "../../../shared/constants";
+import { HttpClient } from "@angular/common/http";
+import { getNewDiscounts, requestDiscounts } from "../../../core/store/actions/home.actions";
+import { HomeService } from "../../../core/services/home.service";
 
 interface FilterMatch {
   score: number;
@@ -27,6 +26,7 @@ interface FilterMatch {
 
 import { state } from '@angular/animations';
 import { clearNotifications } from 'src/app/core/store/actions/notifications.actions';
+import { SpinnerService } from "../../../core/services/spinner.service";
 
 
 @Component({
@@ -40,6 +40,7 @@ export class HeadComponent implements OnInit, OnDestroy {
   languages = ['en', 'ru'];
   language$: Observable<any>;
   dataBySearch!:Subscription;
+  isLoaded: boolean = false; //spinner
 
   public form: {
     filter: string;
@@ -57,8 +58,8 @@ export class HeadComponent implements OnInit, OnDestroy {
               private http: HttpClient,
               public homeService: HomeService,
               fuzzyMatcher: FuzzyMatcher,
+              private spinner: SpinnerService,
               private translateService: TranslateService) {
-
     const selectNotifications = (state: IAppState) => state.notifications;
     const soreNotifications = this.store.select(selectNotifications);
     this.aSub = soreNotifications.subscribe((data) => {
@@ -68,6 +69,7 @@ export class HeadComponent implements OnInit, OnDestroy {
     this.listIsVisibleOfUnreadNotes = false;
 
     this.activeLink = 'home';
+
 
     const selecUiConfig = (state: IAppState) => state.uiConfig;
     const selectSettingsLanguage = createSelector(
@@ -88,20 +90,28 @@ export class HeadComponent implements OnInit, OnDestroy {
     this.matches = [];
   }
   ngOnDestroy(): void {
-    this.aSub.unsubscribe();
-    this.dataBySearch.unsubscribe();
-   // throw new Error('Method not implemented.');
+    if(this.aSub) {
+      this.aSub.unsubscribe();
+    }
+
+    if(this.dataBySearch) {
+      this.dataBySearch.unsubscribe();
+    }
   }
 
   clearNotifications(){
     this.store.dispatch(clearNotifications())
-    console.log('asdf');
   }
 
   openDialog() { }
 
 
   ngOnInit(): void {
+    this.spinner.returnAsObservable().subscribe(
+      subs =>{
+        this.isLoaded = subs;
+      })
+
     let localLang = localStorage.getItem(this.SETTING_KEY);
     if (localLang) {
       this.store.dispatch(setLanguage({ language: localLang }));

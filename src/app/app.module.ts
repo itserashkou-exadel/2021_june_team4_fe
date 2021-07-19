@@ -30,10 +30,10 @@ import { headReducer } from "./core/store/redeucers/head.reducer";
 import { notificationsReducer } from './core/store/redeucers/notifications.reducer';
 import { NotificationsEffects } from './core/store/effects/notifications.effects';
 import { vendorReducer } from './core/store/redeucers/vendor.reducer';
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   imports: [
-
     StoreModule.forRoot({
       head: headReducer,
       home: homeReducer,
@@ -56,6 +56,7 @@ import { vendorReducer } from './core/store/redeucers/vendor.reducer';
     // app
     AppRoutingModule,
     NgbModule,
+    SharedModule,
   ],
   declarations: [
     AppComponent,

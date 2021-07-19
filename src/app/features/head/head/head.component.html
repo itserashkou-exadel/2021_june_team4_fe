@@ -88,8 +88,15 @@
     </a>
   </nav>
 </div>
+    <div class="overlay" *ngIf='isLoaded'>
+      <div class="center">
+        <mat-progress-spinner diameter=50
+                              mode="indeterminate">
+        </mat-progress-spinner>
+<!--        <mat-progress-bar mode='query'></mat-progress-bar>-->
+      </div>
+    </div>
 <router-outlet></router-outlet>
 </div>
-
 <app-footer></app-footer>
 </div>

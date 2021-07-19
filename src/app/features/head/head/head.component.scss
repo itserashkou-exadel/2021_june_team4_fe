@@ -101,3 +101,44 @@ mat-list {
     color: gold;
   }
 }
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.overlay {
+  height:100vh;
+  width:100%;
+  background-color:rgba(255,255,255, 0.5);
+  z-index:    1001;// for overlay map
+  top:        0;
+  left:       0;
+  position:   fixed;
+}
+
+.mat-progress-spinner::ng-deep circle{
+  stroke: #2A79FF!important;
+}
+
+//.mat-progress-bar {
+//  display: block;
+//  height: 5px;
+//  overflow: hidden;
+//  position: relative;
+//  transition: opacity 250ms linear;
+//  width: 400px;
+//}
+
+//::ng-deep {
+//  .mat-progress-bar-fill {
+//    &::after {
+//      background-color: #2A79FF;
+//    }
+//  }
+//}
+
