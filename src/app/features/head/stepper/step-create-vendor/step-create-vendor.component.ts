@@ -130,6 +130,7 @@ export class StepCreateVendorComponent
     this.longControl.enable();
   }
   selectCountry(countryId: string) {
+    //console.log(countryId)
     this.currentCountryId = countryId;
     this.cityControl.enable();
     this.initCities();
@@ -143,13 +144,13 @@ export class StepCreateVendorComponent
     //ev.prevent;
     this.selectedVendor$.subscribe((data) => {
       const vendorId = data.id;
-      console.log(data);
+     // console.log(data);
       this.http
         .delete<any>(`${API_URL}/vendors/${vendorId}`)
         .subscribe((resp) => console.log(resp));
     });
 
-    console.log('delete');
+  //  console.log('delete');
   }
 
   addCoordinates() {
@@ -209,19 +210,19 @@ export class StepCreateVendorComponent
   }
 
   selectVendor(vendor: any) {
-    console.log('selectVendor -> ' + vendor.id);
+    //console.log('selectVendor -> ' + vendor.id);
     //let target = null;
     this.subFindVendor = this.vendors$.subscribe((data) => {
       const target = data.find((el) => el.id === vendor.id);
       if (target) {
-        console.log(target);
+        //console.log(target);
         const newSelectedVendor = {
           id: target.id,
           name: target.name,
           description: target.description,
           contacts: target.contacts,
         };
-        console.log(newSelectedVendor);
+       // console.log(newSelectedVendor);
         this.store.dispatch(saveVendorData(newSelectedVendor));
         this.vendorForm.patchValue({
           name: target.name,
@@ -246,7 +247,7 @@ export class StepCreateVendorComponent
           contacts: data.contacts,
         };
         this.store.dispatch(saveVendorData(vendorData));
-        console.log(data);
+       // console.log(data);
       },
       (err) => {
         console.error(err);

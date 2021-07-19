@@ -23,7 +23,8 @@
 </div>
 <div class="tile-wrapper">
   <div class="tiles" *ngIf="activeComponent === 'edit'">
-    <app-tiles-box></app-tiles-box>
+    <!-- <app-tiles-box ></app-tiles-box> -->
+    <app-tiles-box  [discountsData$]="vendorDiscounts"></app-tiles-box>
   </div>
   <app-step-create-bp *ngIf="activeComponent === 'create'"></app-step-create-bp>
 </div>

@@ -15,7 +15,7 @@ export function vendorReducer(state: any = initialState, action: any) {
         selectedVendor: {
           id: action.id,
           name: action.name,
-          description: action.secription,
+          description: action.description,
           contacts: action.contacts,
         },
       };

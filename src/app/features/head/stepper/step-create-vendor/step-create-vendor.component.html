@@ -155,8 +155,8 @@
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
           <mat-option
             *ngFor="let country of filteredCountry | async"
-            [value]="country.id"
-            (onSelectionChange)="selectCountry(country.id)"
+            [value]="country.name"
+            (click)="selectCountry(country.id)"
           >
             {{ country.name }}
           </mat-option>
@@ -197,7 +197,7 @@
         <mat-autocomplete autoActiveFirstOption #autoC="matAutocomplete">
           <mat-option
             *ngFor="let city of filteredCities | async"
-            [value]="city.id"
+            [value]="city.name"
             (onSelectionChange)="selectCity(city.id)"
           >
             {{ city.name }}
