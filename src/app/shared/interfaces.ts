@@ -3,9 +3,9 @@ export interface IUiConfigState {
   homeIsMap: boolean;
   appLanguage: string;
   requestConfig: {
-    filterRequestParams:string;
+    filterRequestParams: string;
     sortValue: string;
-  }
+  };
 }
 
 export interface IFilterState {
@@ -33,8 +33,9 @@ export interface IFilterControls {
 }
 
 export interface ILocationCountry {
-   id: string; name: string;
-   cities: { id: string; name: string }[] ;
+  id: string;
+  name: string;
+  cities: { id: string; name: string }[];
 }
 
 export interface IMapMarker {
@@ -50,7 +51,7 @@ export interface IDescription {
   category: {};
   description: string;
   name: string;
-  img: [string];
+  img: string[];
   endTime: string;
   startTime: string;
   percent: number;
@@ -61,15 +62,17 @@ export interface IDescription {
     description: any;
     contacts: any;
   };
-  vendorLocations: [{
-    vendorLocations: any;
-    city: {
-      countryName: string;
-      name: string;
-    },
-    latitude: number;
-    longitude: number;
-  }];
+  vendorLocations: [
+    {
+      vendorLocations: any;
+      city: {
+        countryName: string;
+        name: string;
+      };
+      latitude: number;
+      longitude: number;
+    }
+  ];
 }
 
 export interface IDescriptionState {
@@ -86,12 +89,17 @@ export interface IAppState {
   uiConfig: IUiConfigState;
   description: IDescriptionState;
   filter: IFilterState;
-  notifications: any
+  notifications: any;
   vendor: IVendorState;
 }
 
-export interface IVendorState{
-  selectedVendor: {id: string, name: string, description: string, contacts: string};
+export interface IVendorState {
+  selectedVendor: {
+    id: string;
+    name: string;
+    description: string;
+    contacts: string;
+  };
 }
 
 export interface IDiscount {
