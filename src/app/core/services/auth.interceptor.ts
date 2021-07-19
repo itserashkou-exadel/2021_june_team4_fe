@@ -34,11 +34,13 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     return next.handle(authReq).pipe(tap(
       event => {
+        if(event instanceof HttpResponse) {
           this.spinner.hideSpinner();
+        }
       }),
       catchError((error: HttpErrorResponse) => {
-        let errorMessage = `Error: ${error.error.message}`;
         this.spinner.hideSpinner();
+        let errorMessage = `Error: ${error.error.message}`;
         this.notification.error(errorMessage);
         if(error.status === 403) {//todo maybe 401/403 status code?
           this.auth.logout();

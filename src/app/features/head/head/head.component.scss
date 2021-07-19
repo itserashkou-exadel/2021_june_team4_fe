@@ -12,6 +12,7 @@
 }
 
 .header-container {
+  height: 58px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,17 +61,6 @@ a {
     color: #0082ca;
   }
 }
-
-//.match {
-//  font-size: 18px ;
-//  &__segment {
-//    color: #454545 ;
-//    &--on {
-//      color: #000000 ;
-//      font-weight: 800 ;
-//    }
-//  }
-//}
 
 mat-list {
   z-index: 999;
@@ -124,21 +114,4 @@ mat-list {
 .mat-progress-spinner::ng-deep circle{
   stroke: #2A79FF!important;
 }
-
-//.mat-progress-bar {
-//  display: block;
-//  height: 5px;
-//  overflow: hidden;
-//  position: relative;
-//  transition: opacity 250ms linear;
-//  width: 400px;
-//}
-
-//::ng-deep {
-//  .mat-progress-bar-fill {
-//    &::after {
-//      background-color: #2A79FF;
-//    }
-//  }
-//}
 

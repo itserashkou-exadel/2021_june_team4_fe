@@ -16,7 +16,6 @@ import { DialogComponent } from "./shared/dialog/dialog/dialog.component";
 
 import { DescriptionService } from "./core/services/description.service";
 import { MapComponent } from "./shared/map/map.component";
-import { LocationTreeComponent } from "./features/head/head/location-tree/location-tree.component";
 import { DescriptionEffects } from "./core/store/effects/description.effects";
 import { EffectsModule } from "@ngrx/effects";
 import { HomeEffects } from './core/store/effects/home.effects';
@@ -69,7 +68,6 @@ import { SharedModule } from "./shared/shared.module";
   entryComponents: [//for dynamical load components
     DialogComponent,
     MapComponent,
-    LocationTreeComponent,
   ]
 })
 export class AppModule {}

@@ -12,31 +12,20 @@
           <span (click)="openDialog()"> City</span>
         </div>
 
-      <div class="search-container w-100 px-4 col-sm-5">
+      <div class="search-container w-100 px-4 col-sm-5" [hidden]="!isHomeTile">
         <form>
           <mat-form-field class="search w-100" appearance="legacy">
             <mat-label>{{ 'COMMON.Head.search' | translate }}</mat-label>
               <input
+                (focus)="onFocusEvent($event)"
+                #discountSearchInput
+                autocomplete="off"
                 matInput
                 type="text"
                 name="filter"
-                [(ngModel)]="form.filter"
-                (ngModelChange)="applyFilter()"
                 placeholder="{{ 'COMMON.Head.search' | translate }}"
-                autofocus
-                [matAutocomplete]="auto"
                 class="filter"
               />
-              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let match of matches" class="match" [value]="match.value.name">
-                	<span
-                    *ngFor="let segment of match.segments"
-                    class="match__segment"
-                    [class.match__segment--on]="segment.isMatch">
-                    {{ segment.value }}
-                  </span>
-                </mat-option>
-              </mat-autocomplete>
            </mat-form-field>
           </form>
         <mat-icon matPrefix>search</mat-icon>
