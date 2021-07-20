@@ -37,6 +37,7 @@ export class StepCreateBpComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     this.bpForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       category: new FormControl(null, [Validators.required]),
