@@ -1,8 +1,9 @@
 export interface IUiConfigState {
+  searchIsActive: boolean,
   homeIsMap: boolean;
   appLanguage: string;
   requestConfig: {
-    fiterRequestParams: string;
+    filterRequestParams: string;
     sortValue: string;
   };
 }
@@ -85,6 +86,8 @@ export interface IAppState {
   uiConfig: IUiConfigState;
   description: IDescriptionState;
   filter: IFilterState;
+  notifications: any;
+  vendor: any;
 }
 
 export interface IDiscount {
@@ -102,15 +105,6 @@ export interface IDiscount {
   image: string;
   coordinates: number[][];
 }
-
-// export interface IUser {
-//   id: number;
-//   name: string;
-//   email: string;
-//   isAdmin: boolean;
-//   subscribes: string[];
-//   favorite: string[];
-// }
 
 export interface IUser {
   id: string;

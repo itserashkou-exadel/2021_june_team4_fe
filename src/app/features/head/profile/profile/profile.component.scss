@@ -1,6 +1,7 @@
-// .profile{
-//     // border: 1px solid rgba(255, 0, 0, 0.375);
-// }
+
+.profile{
+  color: hsl(0, 0%, 40%)
+}
 .Subscriptions {
   width: 100%;
 }
@@ -9,12 +10,11 @@
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  justify-content: space-between;
-  padding: 0 20px;
+  justify-content: center;
 
   &-item {
     width: 100%;
-    max-width: 20%;
+    max-width: 30%;
     margin: 10px;
     background-color: #fff;
     border: 1px solid #888;
@@ -52,4 +52,85 @@
 
 .demo-row-is-clicked {
   font-weight: bold;
+}
+
+
+// categories
+
+table {
+  width: 100%;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+
+// tabs
+:host {
+  > .container {
+    max-width: 1264px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    background: none;
+  }
+  ::ng-deep {
+    .mat-tab-group {
+      flex-direction: row;
+    }
+    .mat-tab-header {
+      border-bottom: none;
+    }
+    .mat-tab-header-pagination {
+      display: none !important;
+    }
+    .mat-tab-labels {
+      flex-direction: column;
+    }
+    .mat-ink-bar {
+      height: 100%;
+      left: 98% !important;
+    }
+    .mat-tab-body-wrapper {
+      flex: 1 1 auto;
+    }
+  }
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  flex: 1 0 auto;
+  margin: 0 auto;
+  text-align: left;
+}
+
+#content {
+  box-sizing: content-box;
+  margin: 0 auto;
+  padding: 15px;
+  width: 1264px;
+  background-color: #ffffff;
+}
+
+#content {
+  max-width: 1100px;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+#content,
+#main-content {
+  &::before,
+  &::after {
+    content: "";
+    display: table;
+  }
+  &::after {
+    clear: both;
+  }
 }

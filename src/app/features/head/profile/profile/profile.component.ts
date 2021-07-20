@@ -11,25 +11,25 @@ import { ICategory } from 'src/app/shared/interfaces';
 import { IUser } from 'src/app/shared/interfaces';
 import { IDiscount } from 'src/app/shared/interfaces';
 import { ProfileService } from 'src/app/core/services/profile.service';
-import { DiscountService } from 'src/app/core/services/discount.service';
+import { DescriptionService } from 'src/app/core/services/description.service';
+import { IDescription } from "../../../../shared/interfaces";
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
+export interface IProfileSubscription {
+  categoryAddRemove: string;
+  bgColor: string;
+  added: boolean;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen'},
-  {position: 2, name: 'Helium'},
-  {position: 3, name: 'Lithium'},
-  {position: 4, name: 'Beryllium'},
-  {position: 5, name: 'Boron'},
-  {position: 6, name: 'Carbon'},
-  {position: 7, name: 'Nitrogen'},
-  {position: 8, name: 'Oxygen'},
-  {position: 9, name: 'Fluorine'},
-  {position: 10, name: 'Neon'},
-];
+// export interface IDescriptionActiveDiscount {
+//   discount: {
+//     description: string;
+//     name: string;
+//     promo: string;
+//     startTime: string;
+//     endTime: string;
+//   }
+// }
+
 
 @Component({
   selector: 'app-profile',
@@ -37,41 +37,40 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  coupons: any = { promo: '213123123', name: 'Vendor Name' };
+  displayedColumns: string[] = ['item', 'add'];
+  categoryAddRemove: string[] = ['add', 'remove'];
   user$: Observable<IUser>;
   categories$: Observable<ICategory[]>;
   subscribe$: Observable<any>;
   favorites$: Observable<any>;
-  discount$: Observable<IDiscount[]>;
-  // user: any;
+  DescriptionAll$: Observable<IDescription[]>;
 
-  displayedColumns: string[] = ['position', 'name'];
-  clickedRows = new Set<PeriodicElement>();
-  dataSource = ELEMENT_DATA;
-  
   constructor(
     private store: Store<{ profile: boolean }>,
     private http: HttpClient,
     private categories: CategoriesService,
     private profile: ProfileService,
-    private discount: DiscountService,
-    ) {
-      this.subscribe$ = store.select('profile');
-      this.categories$ = this.categories.getCategories();
-      this.user$ = this.profile.getUser();
-      this.favorites$ = this.profile.getFavorite();
-      this.discount$ = this.discount.getDiscounts();
-    }
-    
-    ngOnInit() {
-    
-    }
-
-    subscr() {
-      this.store.dispatch(addSubscribe());
-      console.log('sub');
-    }
-    unSubscr() {
-      this.store.dispatch(removeSubscribe());
-      console.log('unsub');
+  ) {
+    this.subscribe$ = store.select('profile');
+    this.categories$ = this.categories.getCategories();
+    this.user$ = this.profile.getUser();
+    this.favorites$ = this.profile.getFavorite('?userId=91cf19dd-2af7-49ee-825e-94c0831ba1f2');
+    this.favorites$.subscribe(data => console.log(data));
+    this.DescriptionAll$ = this.profile.getDescriptionAll();
   }
+
+  ngOnInit() {}
+
+  items(d: any) {
+    console.log(d);
+  }
+
+  subscr() {
+    this.store.dispatch(addSubscribe());
+  }
+  // unSubscr() {
+  //   this.store.dispatch(removeSubscribe());
+  //   console.log('removed');
+  // }
 }

@@ -1,140 +1,190 @@
-
 <div class="profile pt-5">
-    <div class="d-flex flex-wrap justify-content-center text-center m-0" *ngIf="(user$ | async) as data">
-        <div class="col-md-3 col-sm-12 h5" >You are loginded as: {{data.role}}</div>
-        <div class="col-md-4 col-sm-12 h5">Email: {{data.email}}</div>
-        <div class="col-md-3 col-sm-12 h5">Location:{{data.city.name}}</div>
+  <div
+    class="d-flex flex-wrap justify-content-center text-center m-0"
+    *ngIf="user$ | async as data"
+  >
+    <div class="col-md-3 col-sm-12 h5">
+      You are loginded as: <b>{{ data.role }}</b>
     </div>
+    <div class="col-md-4 col-sm-12 h5">
+      Email: <b>{{ data.email }}</b>
+    </div>
+    <div class="col-md-3 col-sm-12 h5">
+      Location: <b>{{ data.city.name }}</b>
+    </div>
+  </div>
 
-    <mat-tab-group color='none' class="mt-4">
-        <mat-tab label="Subscriptions" class="">
-            <p class="text-center mt-4">Here you specify what cathegory discount would you like get notification!</p>
-            <!--*ngFor надо,  классы можно оставить-->
+  <div class="container">
+    <div id="content">
+      <div id="main-content">
+        <mat-tab-group>
+          <mat-tab label="Subscriptions" *ngIf='categories$ | async as data'>
+  
+            <p class="text-center mt-4">
+              Here you specify what cathegory discount would you like get
+              notification!
+            </p>
             
-            <!-- <div class="d-flex justify-content-between w-100 col-10 col-md-6 mx-auto mt-4 border border-warning rounded p-2">
+            <table mat-table [dataSource]="data" class="mat-elevation-z8" >
+              <!-- Item Column -->
+              <ng-container matColumnDef="item">
+                <th mat-header-cell *matHeaderCellDef> Categories </th>
+                <td mat-cell *matCellDef="let data"> {{data.name}} </td>
+                <!-- <td mat-footer-cell *matFooterCellDef> Total </td> -->
+              </ng-container>
+            
+              <!-- Cost Column -->
+              <ng-container matColumnDef="add">
+                <th mat-header-cell *matHeaderCellDef> Add / Remove </th>
+                <td mat-cell *matCellDef="let data" (click)='items(data.id)'> {{categoryAddRemove[0]}}</td>
+                <!-- <td mat-footer-cell *matFooterCellDef></td> -->
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              <!-- <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr> -->
+            </table>
+          </mat-tab>
+
+          <mat-tab label="Favorit">
+            <!-- <app-tiles-box [discountsData$]="discount$ | async"></app-tiles-box> -->
+            <app-tile></app-tile>
+            <app-tile></app-tile>
+            <app-tile></app-tile>
+          </mat-tab>
+
+          <mat-tab label="History">
+            <!-- <table mat-table [dataSource]="" class="mat-elevation-z8" >
+              <ng-container matColumnDef="item">
+                <th mat-header-cell *matHeaderCellDef> Categories </th>
+                <td mat-cell *matCellDef="let coupons"> adad </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="add">
+                <th mat-header-cell *matHeaderCellDef> Add / Remove </th>
+                <td mat-cell *matCellDef="let coupons"> adad</td>
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table> -->
+          </mat-tab>
+            
+          <mat-tab label="Active discounts">
+            <div class="history" *ngIf="DescriptionAll$ | async as description">
+              <!--*ngFor надо,  классы можно оставить-->
+              <div class="history-item" *ngFor="let disc of description">
+                <p><strong>{{disc.name}}</strong></p>
+                <p class="text-danger h6">{{disc.promo}}</p>
+                <p>Start Date: {{disc.startTime}}</p>
+                <p>End Date: {{disc.endTime}}</p>
+              </div>
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+
+  <!-- <mat-tab-group color="none" class="mt-4">
+    <mat-tab label="Subscriptions" class="">
+      <p class="text-center mt-4">
+        Here you specify what cathegory discount would you like get
+        notification!
+      </p>
+      *ngFor надо,  классы можно оставить-->
+
+      <!-- <div class="d-flex justify-content-between w-100 col-10 col-md-6 mx-auto mt-4 border border-warning rounded p-2">
                 <span class="category">category</span>
                 <div>
                     <button mat-raised-button (click)='subscr()'>Subscribe</button>
                     <button mat-raised-button color='warn' (click)='unSubscr()'>Unsubscribe</button>
                 </div>
             </div> -->
-            
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-                <!-- Position Column -->
-                <ng-container matColumnDef="position">
-                  <th mat-header-cell *matHeaderCellDef>No.</th>
-                  <td mat-cell *matCellDef="let element">{{element.position}}</td>
-                </ng-container>
-              
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef>Name</th>
-                  <td mat-cell *matCellDef="let element">{{element.name}}</td>
-                </ng-container>
-              
-                <!-- Weight Column -->
-                <ng-container matColumnDef="weight">
-                  <th mat-header-cell *matHeaderCellDef>Weight</th>
-                  <td mat-cell *matCellDef="let element">{{element.weight}}</td>
-                </ng-container>
-              
-                <!-- Symbol Column -->
-                <ng-container matColumnDef="symbol">
-                  <th mat-header-cell *matHeaderCellDef>Symbol</th>
-                  <td mat-cell *matCellDef="let element">{{element.symbol}}</td>
-                </ng-container>
-              
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr
-                    mat-row
-                    (click)="clickedRows.add(row)"
-                    [class.demo-row-is-clicked]="clickedRows.has(row)"
-                    *matRowDef="let row; columns: displayedColumns;"
-                ></tr>
-              </table>
-              
-              <div>
-                <h3>
-                  Click Log
-                </h3>
-              </div>
-              
-              <div *ngIf="!clickedRows.size">
-                Clicked rows will be logged here
-              </div>
-              
-              <ul>
-                <li *ngFor="let clickedRow of clickedRows">
-                  Clicked on {{clickedRow.name}}
-                </li>
-              </ul>
 
-              <div *ngIf="user$ | async as user">
-                  lakdndlk
-                <p *ngFor='let us in user'>{{us.login}}</p>
-              </div>
-            
-            
-        </mat-tab>
-        <mat-tab label="Favorit" class="d-flex flex-column">
-            <div class="mt-4 d-flex flex-wrap justify-content-center" *ngIf='(discount$ | async) as discount'>
-                
-                    <div class="d-flex col-md-3 m-3 flex-column border rounded bg-light" *ngFor='let disc of discount'>
-                        <p>{{disc.name}}</p>
-                        <p>{{disc.description}}</p>
-                        <button mat-raised-button class="w-50 align-self-end">View</button>
-                    </div>
-                    
-            </div>
+      <!-- <table
+        mat-table
+        *ngIf='categories$ | async as data'
+        [dataSource]="data"
+        class="mat-elevation-z8 demo-table"
+      >
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        </ng-container>
 
-        </mat-tab>
-        <mat-tab label="History" class="d-flex flex-column">
-                <div class="history">
-                    <!--*ngFor надо,  классы можно оставить-->
-                    <div class="history-item">       
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">       
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">       
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">       
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">       
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">       
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">       
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    
-                </div>
-        </mat-tab>
-        
-        <mat-tab label="Active discounts" class="d-flex flex-column">
-          <div class="w-25 border"  >
-            <p></p>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
 
-</div>
+        <ng-container matColumnDef="weight">
+          <th mat-header-cell *matHeaderCellDef>Weight</th>
+          <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef>Symbol</th>
+          <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          (click)="clickedRows.add(row)"
+          [class.demo-row-is-clicked]="clickedRows.has(row)"
+          *matRowDef="let row; columns: displayedColumns"
+        ></tr>
+      </table>
+
+      <div>
+        <h3>Click Log</h3>
+      </div>
+
+      <div *ngIf="!clickedRows.size">Clicked rows will be logged here</div>
+
+      <ul>
+        <li *ngFor="let clickedRow of clickedRows">
+          Clicked on {{ clickedRow.name }}
+        </li>
+      </ul>
+
+    </mat-tab>
+    <mat-tab label="Favorit" class=" ">
+       <div
+        class="mt-4 d-flex flex-wrap justify-content-center"
+        *ngIf="discount$ | async as discount"
+      >
+        <div
+          class="d-flex col-md-3 m-3 flex-column border rounded bg-light"
+          *ngFor="let disc of discount"
+        >
+          <p>{{ disc.name }}</p>
+          <p>{{ disc.description }}</p>
+          <button mat-raised-button class="w-50 align-self-end">View</button>
+        </div>       
+      </div> -->
+      <!-- <div>
+        <p></p>
+        <app-tiles-box></app-tiles-box>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="History" class=" ">
+      <div class="history" *ngIf="discount$ | async as discount">
+        <div class="history-item" *ngFor="let disc of discount">
+          <p>{{ disc.name }}</p>
+          <p>Promo</p>
+          <p>Start Date</p>
+          <p>End Date</p>
+
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Active discounts" class=" ">
+    </mat-tab>
+  </mat-tab-group>-->
+</div> 
+
