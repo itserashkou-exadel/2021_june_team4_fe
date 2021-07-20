@@ -127,7 +127,7 @@ export class HeadComponent implements OnInit, OnDestroy {
         return event.target.value;
       })
       // if character length greater then 2
-      , filter(res => res.length > 2)
+      , filter(res => res.length > 2 || res.length == 0)
       // Time in milliseconds between key events
       , debounceTime(2000)
       // If previous query is different from current
@@ -168,7 +168,6 @@ export class HeadComponent implements OnInit, OnDestroy {
 
   searchGetCall(term: string) {
     if (term === '') {
-      debugger
       this.store.dispatch(getNewDiscounts({ sortParam: '' }));
       return of([]);
     }
