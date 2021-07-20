@@ -16,7 +16,6 @@ import { DialogComponent } from "./shared/dialog/dialog/dialog.component";
 
 import { DescriptionService } from "./core/services/description.service";
 import { MapComponent } from "./shared/map/map.component";
-import { LocationTreeComponent } from "./features/head/head/location-tree/location-tree.component";
 import { DescriptionEffects } from "./core/store/effects/description.effects";
 import { EffectsModule } from "@ngrx/effects";
 import { HomeEffects } from './core/store/effects/home.effects';
@@ -30,10 +29,10 @@ import { headReducer } from "./core/store/redeucers/head.reducer";
 import { notificationsReducer } from './core/store/redeucers/notifications.reducer';
 import { NotificationsEffects } from './core/store/effects/notifications.effects';
 import { vendorReducer } from './core/store/redeucers/vendor.reducer';
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   imports: [
-
     StoreModule.forRoot({
       head: headReducer,
       home: homeReducer,
@@ -56,6 +55,7 @@ import { vendorReducer } from './core/store/redeucers/vendor.reducer';
     // app
     AppRoutingModule,
     NgbModule,
+    SharedModule,
   ],
   declarations: [
     AppComponent,
@@ -68,7 +68,6 @@ import { vendorReducer } from './core/store/redeucers/vendor.reducer';
   entryComponents: [//for dynamical load components
     DialogComponent,
     MapComponent,
-    LocationTreeComponent,
   ]
 })
 export class AppModule {}

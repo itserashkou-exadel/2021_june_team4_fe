@@ -1,7 +1,7 @@
 <div class="cover">
   <div class="header">
     <div class="header-container">
-      <div class="left-block d-flex justify-content-between">
+      <div class="left-block d-flex">
         <div>
           <img src="../../../../assets/logo.png" alt="App logo" height="50" />
         </div>
@@ -12,31 +12,20 @@
           <span (click)="openDialog()"> City</span>
         </div>
 
-      <div class="search-container w-100 px-4 col-sm-5">
+      <div class="search-container w-100 px-4 col-sm-5" [hidden]="!isHomeTile">
         <form>
           <mat-form-field class="search w-100" appearance="legacy">
             <mat-label>{{ 'COMMON.Head.search' | translate }}</mat-label>
               <input
+                (focus)="onFocusEvent($event)"
+                #discountSearchInput
+                autocomplete="off"
                 matInput
                 type="text"
                 name="filter"
-                [(ngModel)]="form.filter"
-                (ngModelChange)="applyFilter()"
                 placeholder="{{ 'COMMON.Head.search' | translate }}"
-                autofocus
-                [matAutocomplete]="auto"
                 class="filter"
               />
-              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let match of matches" class="match" [value]="match.value.name">
-                	<span
-                    *ngFor="let segment of match.segments"
-                    class="match__segment"
-                    [class.match__segment--on]="segment.isMatch">
-                    {{ segment.value }}
-                  </span>
-                </mat-option>
-              </mat-autocomplete>
            </mat-form-field>
           </form>
         <mat-icon matPrefix>search</mat-icon>
@@ -88,8 +77,15 @@
     </a>
   </nav>
 </div>
+    <div class="overlay" *ngIf='isLoaded'>
+      <div class="center">
+        <mat-progress-spinner diameter=50
+                              mode="indeterminate">
+        </mat-progress-spinner>
+<!--        <mat-progress-bar mode='query'></mat-progress-bar>-->
+      </div>
+    </div>
 <router-outlet></router-outlet>
 </div>
-
 <app-footer></app-footer>
 </div>
