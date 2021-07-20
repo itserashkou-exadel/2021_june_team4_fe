@@ -5,21 +5,32 @@ import { IDiscount } from 'src/app/shared/interfaces';
 import { API_URL } from '../../shared/constants';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DiscountService {
+  constructor(private http: HttpClient) {}
 
-  constructor( private http: HttpClient ) { }
+  handleDiscout(rawDiscount: any){
+    const newDiscount ={}
+  }
+
+  getDiscountById(discountId: string): Observable<any> {
+    return this.http.get(`${API_URL}/discounts/${discountId}`);
+  }
 
   getDiscounts(): Observable<IDiscount[]> {
     return this.http.get<IDiscount[]>(`${API_URL}/discounts`);
-  };
+  }
 
   createDiscount(discount: IDiscount): Observable<any> {
-    return this.http.post<IDiscount>(`${API_URL}/discounts`, discount, httpOptions);
-  };
+    return this.http.post<IDiscount>(
+      `${API_URL}/discounts`,
+      discount,
+      httpOptions
+    );
+  }
 }

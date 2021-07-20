@@ -16,7 +16,7 @@ export class HomeService {
   }
 
   handleRemoteDiscount(remoteDiscount: any) {
- // console.log(remoteDiscount);
+    //console.log(remoteDiscount);
 
     let tags = '';
     remoteDiscount.tags.forEach((el: any) => {
@@ -33,10 +33,7 @@ export class HomeService {
 
       category: remoteDiscount.category.name,
       isActive: remoteDiscount.active,
-      description:
-        remoteDiscount.description === null
-          ? 'Default description'
-          : remoteDiscount.description,
+      description: remoteDiscount.description ,
       percent: (remoteDiscount.value +=
         remoteDiscount.discountType === 'PRICE' ? '%' : ''),
       image:
