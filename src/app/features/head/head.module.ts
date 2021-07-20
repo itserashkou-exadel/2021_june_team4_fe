@@ -15,7 +15,6 @@ import { CarouselComponent } from './description/carousel/carousel.component';
 import { NgbCarouselModule, NgbRatingModule, NgbTooltipModule } from "@ng-bootstrap/ng-bootstrap";
 import { DialogComponent } from '../../shared/dialog/dialog/dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
-import { LocationTreeComponent } from './head/location-tree/location-tree.component';
 import { MatTreeModule } from "@angular/material/tree";
 import {MatTableModule} from '@angular/material/table';
 import { SideBarFilterComponent } from './home/home/side-bar-filter/side-bar-filter.component';
@@ -55,7 +54,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     MapComponent,
     CarouselComponent,
     DialogComponent,
-    LocationTreeComponent,
     SideBarFilterComponent,
     CategoryComponent,
     DateComponent,

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IDiscount } from '../interfaces';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -10,6 +10,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TileComponent implements OnInit {
   remoteData: any;
+
+  @Output() sendId :EventEmitter<any> = new EventEmitter();
+  dropId(){
+    this.sendId.emit(this.discount$.id);
+  }
 
   @Input() discount$: IDiscount = {
     id: 1,
@@ -26,6 +31,7 @@ export class TileComponent implements OnInit {
     image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
     coordinates: [[45.094, 34.981]],
   };
+  
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -38,4 +44,5 @@ export class TileComponent implements OnInit {
   redirectToDescription(descriptionId: any): void {
     this.router.navigate([`home/${descriptionId}/description`]);
   }
+
 }

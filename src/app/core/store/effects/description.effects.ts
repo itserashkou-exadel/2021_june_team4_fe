@@ -33,8 +33,6 @@ export class DescriptionEffects {
         mergeMap((props) => this.descriptionService.addToFavoriteRequest({discountId: props.discountId})
           .pipe(
             map( (data: any) => {
-              console.log('FAVORITEdata', data)//todo check request and update data in store
-              // const description = this.descriptionService.handleRemoteDescription(data)
               const description = this.descriptionService.handleRemoteDescription(data)
               return { type: 'requestDescription', data: description};
             })
@@ -49,7 +47,6 @@ export class DescriptionEffects {
         mergeMap((props) => this.descriptionService.removeFromFavoriteRequest({discountId: props.discountId})
           .pipe(
             map( (data: any) => {
-              console.log('not favorite', data)//todo check request and update data in store
               const description = this.descriptionService.handleRemoteDescription(data)
               return { type: 'requestDescription', data: description};
             })

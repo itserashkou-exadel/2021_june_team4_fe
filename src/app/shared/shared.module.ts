@@ -33,7 +33,9 @@ import { CheckboxComponent } from './checkbox/checkbox/checkbox.component';
 import { TilesBoxComponent } from './tiles-box/tiles-box.component';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { TranslateModule } from "@ngx-translate/core";
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatSidenavModule } from "@angular/material/sidenav";
 
 @NgModule({
     imports: [
@@ -73,6 +75,8 @@ import {MatBadgeModule} from '@angular/material/badge';
         MatTreeModule,
         MatAutocompleteModule,
         MatBadgeModule,
+        MatProgressBarModule,
+        MatSidenavModule,
 
         RouterModule,
         TranslateModule,
@@ -81,7 +85,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 
   exports: [
     CommonModule,
-MatBadgeModule,
+    MatBadgeModule,
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -106,6 +110,8 @@ MatBadgeModule,
     MatButtonToggleModule,
     MatTreeModule,
     MatAutocompleteModule,
+    MatProgressBarModule,
+    MatSidenavModule,
 
     FooterComponent,
     TileComponent,

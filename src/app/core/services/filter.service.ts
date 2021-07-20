@@ -12,7 +12,6 @@ export class FilterService {
   requestFilteredData = (param: any) => {
     let reqParam = [];
     if (param.vendors.length) {
-      console.log(param.vendors.length);
       for (const key in param.vendors) {
         const paramString = `vendorId=${param.vendors[key]}`;
         reqParam.push(paramString);
