@@ -128,13 +128,10 @@ export class HeadComponent implements OnInit, OnDestroy {
       })
       // if character length greater then 2
       , filter(res => res.length > 2)
-
       // Time in milliseconds between key events
-      , debounceTime(1000)
-
+      , debounceTime(2000)
       // If previous query is different from current
       , distinctUntilChanged()
-
       // subscription for response
     ).subscribe((text: string) => {
 
