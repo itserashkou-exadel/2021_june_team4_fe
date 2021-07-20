@@ -1,32 +1,33 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { of } from "rxjs";
+import {
+  debounceTime,
+  map,
+  distinctUntilChanged,
+  filter
+} from "rxjs/operators";
+import { fromEvent } from 'rxjs';
 
 import { FormControl } from '@angular/forms';
 import { createSelector, Store, select } from '@ngrx/store';
 
 import { TranslateService } from '@ngx-translate/core';
-import {IAppState, IDescription, IUiConfigState} from '../../../shared/interfaces';
+import { IAppState, IUiConfigState } from '../../../shared/interfaces';
 
 import { MatDialog } from '@angular/material/dialog';
 
-import {Observable, Subscription} from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { setLanguage } from "../../../core/store/actions/ui-config.actions";
 
-// Import the application components and services.
-import { FuzzySegment, FuzzyMatcher } from "../../../core/services/fuzzy-matcher.service";
-import { Species, primates } from "../../../shared/primates";
-import {SEARCH_URL} from "../../../shared/constants";
-import {HttpClient} from "@angular/common/http";
-import {getNewDiscounts, requestDiscounts} from "../../../core/store/actions/home.actions";
-import {HomeService} from "../../../core/services/home.service";
+import { SEARCH_URL } from "../../../shared/constants";
+import { HttpClient } from "@angular/common/http";
+import { getNewDiscounts, requestDiscounts } from "../../../core/store/actions/home.actions";
+import { HomeService } from "../../../core/services/home.service";
 
-interface FilterMatch {
-  score: number;
-  value: Species;
-  segments: FuzzySegment[];
-}
 
-import { state } from '@angular/animations';
 import { clearNotifications } from 'src/app/core/store/actions/notifications.actions';
+import { SpinnerService } from "../../../core/services/spinner.service";
+import { Router, NavigationEnd } from "@angular/router";
 
 
 @Component({
@@ -35,29 +36,43 @@ import { clearNotifications } from 'src/app/core/store/actions/notifications.act
   styleUrls: ['./head.component.scss'],
 })
 export class HeadComponent implements OnInit, OnDestroy {
+  @ViewChild('discountSearchInput', { static: true }) discountSearchInput!: ElementRef;
+  isSearching!: boolean;
+
   activeLink: string;
   SETTING_KEY = 'SETTINGS';
   languages = ['en', 'ru'];
   language$: Observable<any>;
-  dataBySearch!:Subscription;
+  isLoaded: boolean = true; //spinner
+
+  isHomeTile:boolean = false;
 
   public form: {
     filter: string;
   };
-  public matches: FilterMatch[];
 
-  private fuzzyMatcher: FuzzyMatcher;
   iSnotifications$: number | undefined;
   unreadNotifications: any[] | undefined;
   aSub: Subscription;
   listIsVisibleOfUnreadNotes: boolean;
+  currentRoute: string | undefined;
 
   constructor(private store: Store<IAppState>,
+              private router: Router,
               public dialog: MatDialog,
               private http: HttpClient,
               public homeService: HomeService,
-              fuzzyMatcher: FuzzyMatcher,
+              private spinner: SpinnerService,
               private translateService: TranslateService) {
+
+    this.router.events.subscribe(value => {
+      let currentRoute = router.url.toString();
+      if(currentRoute != '/home') {
+        this.isHomeTile = false;
+      } else {
+        this.isHomeTile = true;
+      }
+    });
 
     const selectNotifications = (state: IAppState) => state.notifications;
     const soreNotifications = this.store.select(selectNotifications);
@@ -68,6 +83,7 @@ export class HeadComponent implements OnInit, OnDestroy {
     this.listIsVisibleOfUnreadNotes = false;
 
     this.activeLink = 'home';
+
 
     const selecUiConfig = (state: IAppState) => state.uiConfig;
     const selectSettingsLanguage = createSelector(
@@ -80,32 +96,85 @@ export class HeadComponent implements OnInit, OnDestroy {
       this.translateService.use(lang);
     });
 
-    this.fuzzyMatcher = fuzzyMatcher;
-
     this.form = {
       filter: ""
     };
-    this.matches = [];
   }
+
+  onFocusEvent(e:any) {
+    console.log(e)
+  }
+
+
   ngOnDestroy(): void {
-    this.aSub.unsubscribe();
-    this.dataBySearch.unsubscribe();
-   // throw new Error('Method not implemented.');
+    if(this.aSub) {
+      this.aSub.unsubscribe();
+    }
   }
 
   clearNotifications(){
     this.store.dispatch(clearNotifications())
-    console.log('asdf');
   }
 
   openDialog() { }
 
 
   ngOnInit(): void {
+
+    fromEvent(this.discountSearchInput.nativeElement, 'keyup').pipe(
+      // get value
+      map((event: any) => {
+        return event.target.value;
+      })
+      // if character length greater then 2
+      , filter(res => res.length > 2)
+      // Time in milliseconds between key events
+      , debounceTime(2000)
+      // If previous query is different from current
+      , distinctUntilChanged()
+      // subscription for response
+    ).subscribe((text: string) => {
+
+      this.isSearching = true;
+
+      this.searchGetCall(text).subscribe((res: any) => {
+        if(res) {
+          let searchData = res.map((discount:any)=>{
+            return this.homeService.handleRemoteDiscount(discount);
+          })
+          this.store.dispatch(requestDiscounts({data: searchData}))
+        } else {
+          this.store.dispatch(requestDiscounts({data: []}))
+        }
+        this.isSearching = false;
+      }, (err) => {
+        this.isSearching = false;
+        console.log('error', err);
+      });
+
+    });
+
+    this.spinner.returnAsObservable().subscribe(
+      subs =>{
+        this.isLoaded = subs;
+      })
+
+
     let localLang = localStorage.getItem(this.SETTING_KEY);
     if (localLang) {
       this.store.dispatch(setLanguage({ language: localLang }));
     }
+  }
+
+  searchGetCall(term: string) {
+    if (term === '') {
+      debugger
+      this.store.dispatch(getNewDiscounts({ sortParam: '' }));
+      return of([]);
+    }
+
+    const paramString = `searchText=${term}`;//size=2&
+    return this.http.get(`${SEARCH_URL}?${paramString}`);
   }
 
   changeLocale(lang: string) {
@@ -140,81 +209,6 @@ export class HeadComponent implements OnInit, OnDestroy {
     this.activeLink = val;
   }
 
-  public applyFilter() : void {
-
-    // If there is no filter, then hide the list entirely. We only want to show
-    // matches when we have something to match on.
-    if ( !this.form.filter || this.form.filter.length < 3) {
-      if(this.form.filter.length > 0) {
-        this.matches = [];
-        this.store.dispatch(requestDiscounts({data: []}))
-        return;
-      } else {
-        this.store.dispatch(getNewDiscounts({ sortParam: '' }));
-      }
-
-    } else if (this.form.filter.length >= 3) {
-      const paramString = `searchText=${this.form.filter}`;//size=2&
-      this.dataBySearch = this.http.get(`${SEARCH_URL}?${paramString}`).subscribe(
-        (data: any)=>{
-          if(data) {
-            let searchData = data.map((discount:any)=>{
-              return this.homeService.handleRemoteDiscount(discount);
-            })
-            this.store.dispatch(requestDiscounts({data: searchData}))
-          } else {
-            this.store.dispatch(requestDiscounts({data: []}))
-          }
-        }
-      )
-    }
-
-    // this.matches = primates
-      // First, we want to take the updated form input and use it to SCORE the
-      // collection of values. This phase will have to evaluate the entire set of
-      // values; but, will only do the minimal amount of work needed to calculate a
-      // scope. Then, we'll be able to use that score to narrow down and format the
-      // set of values that we end-up showing to the user.
-      // .map(
-      //   ( primate ) => {
-      //     return({
-      //       value: primate,
-      //       score: this.fuzzyMatcher.scoreValue( primate.name, this.form.filter )
-      //     });
-      //   }
-      // )
-      // Now that the entire set of values has been scored, let's sort them from
-      // highest to lowest.
-      // .sort(
-      //   ( a, b ) => {
-      //
-      //     return(
-      //       ( ( a.score > b.score ) && -1 ) || // Move item up.
-      //       ( ( a.score < b.score ) && 1 ) || // Move item down.
-      //       0
-      //     );
-      //
-      //   }
-      // )
-      // For the sake of the demo, we only want to show the top-scoring matches.
-      // Slice off the top of the scored values.
-      // .slice( 0, 20 )
-      // At this point, we've narrowed down the set of values to the ones we want
-      // to show to the user. Now, we can go back and create a data-structure that
-      // can be more easily rendered (but takes more processing).
-      // .map(
-      //   ( scoredValue ) => {
-      //
-      //     return({
-      //       score: scoredValue.score,
-      //       value: scoredValue.value,
-      //       segments: this.fuzzyMatcher.parseValue( scoredValue.value.name, this.form.filter )
-      //     });
-      //
-      //   }
-      // );
-
-  }
 
   controlListNotes(){
     this.listIsVisibleOfUnreadNotes = !this.listIsVisibleOfUnreadNotes;

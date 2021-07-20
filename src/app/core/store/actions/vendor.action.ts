@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
-export const SaveVendorId = createAction(
-  'saveVendorId',
-  props<{ id: string }>()
+export const saveVendorData = createAction(
+  'SaveVendorData',
+  props<{ id: string , name: string, description: string, contacts: string}>()
 );
 

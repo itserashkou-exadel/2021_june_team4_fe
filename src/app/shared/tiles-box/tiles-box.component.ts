@@ -1,23 +1,27 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DiscountService } from 'src/app/core/services/discount.service';
 import { IDiscount } from '../interfaces';
 
 @Component({
   selector: 'app-tiles-box',
   templateUrl: './tiles-box.component.html',
-  styleUrls: ['./tiles-box.component.scss']
+  styleUrls: ['./tiles-box.component.scss'],
 })
 export class TilesBoxComponent implements OnInit {
-
-  @Input() discountsData$ : IDiscount[] | null = [];
-
-  constructor( private discountService: DiscountService ) 
-  {
-   
+  @Output() transitId: EventEmitter<any> = new EventEmitter();
+  dropIdFromBox(ev: any) {
+    this.transitId.emit(ev);
+    console.log(ev);
   }
 
-  ngOnInit(): void {
+  @Input() discountsData$: IDiscount[] | null = [];
 
+  transitedId: any;
+
+  constructor(private discountService: DiscountService) {}
+
+  ngOnInit(): void {}
+  alertQ(ev: any) {
+    console.log('ev-> ' + ev);
   }
-
 }
