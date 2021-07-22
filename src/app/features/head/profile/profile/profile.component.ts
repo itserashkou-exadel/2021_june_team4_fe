@@ -12,7 +12,8 @@ import { IUser } from 'src/app/shared/interfaces';
 import { IDiscount } from 'src/app/shared/interfaces';
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { DescriptionService } from 'src/app/core/services/description.service';
-import { IDescription } from "../../../../shared/interfaces";
+import { IDescription } from '../../../../shared/interfaces';
+import { IFavoritesProfile } from '../../../../shared/interfaces';
 
 export interface IProfileSubscription {
   categoryAddRemove: string;
@@ -37,38 +38,42 @@ export interface IProfileSubscription {
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  coupons: any = { promo: '213123123', name: 'Vendor Name' };
-  displayedColumns: string[] = ['item', 'add'];
+  // coupons: any = { promo: '213123123', name: 'Vendor Name' };
+  displayCategory: string[] = ['Category', 'Add/Remove'];
   categoryAddRemove: string[] = ['add', 'remove'];
+  displayHistory: string[] = ['Name', 'Promo', 'EndDate'];
+  
   user$: Observable<IUser>;
   categories$: Observable<ICategory[]>;
-  subscribe$: Observable<any>;
-  favorites$: Observable<any>;
+  // subscribe$: Observable<any>;
   DescriptionAll$: Observable<IDescription[]>;
+  profileHistory$: Observable<IFavoritesProfile[]>;
+  profileCoupons$: Observable<IFavoritesProfile[]>;
 
   constructor(
     private store: Store<{ profile: boolean }>,
     private http: HttpClient,
     private categories: CategoriesService,
-    private profile: ProfileService,
+    private profile: ProfileService
   ) {
-    this.subscribe$ = store.select('profile');
+    // this.subscribe$ = store.select('profile');
     this.categories$ = this.categories.getCategories();
     this.user$ = this.profile.getUser();
-    this.favorites$ = this.profile.getFavorite('?userId=91cf19dd-2af7-49ee-825e-94c0831ba1f2');
-    this.favorites$.subscribe(data => console.log(data));
+    this.profileHistory$ = this.profile.getFavorite();
+    // this.favorites$.subscribe(data => console.log(data));
     this.DescriptionAll$ = this.profile.getDescriptionAll();
+    this.profileCoupons$ = this.profile.getCoupons();
   }
 
   ngOnInit() {}
 
-  items(d: any) {
-    console.log(d);
+  items(id: any) {
+    console.log('Category Id' + id);
   }
 
-  subscr() {
-    this.store.dispatch(addSubscribe());
-  }
+  // subscr() {
+  //   this.store.dispatch(addSubscribe());
+  // }
   // unSubscr() {
   //   this.store.dispatch(removeSubscribe());
   //   console.log('removed');

@@ -1,30 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IUser } from 'src/app/shared/interfaces';
-import { API_URL } from 'src/app/shared/constants';
-import {DISCOUNT_URL} from 'src/app/shared/constants';
-import { IDescription } from "../../shared/interfaces";
-
-// const httpOptions = {
-//   headers: new HttpHeaders({'Content-Type': 'application/json'})
-// };
+import { IFavoritesProfile, IUser } from 'src/app/shared/interfaces';
+import { COUPONS_URL, USERS_URL } from 'src/app/shared/constants';
+import { FAVORITE_URL } from 'src/app/shared/constants';
+import { DISCOUNT_URL } from 'src/app/shared/constants';
+import { IDescription } from '../../shared/interfaces';
+import { TokenStorageService } from './token-storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileService {
-
-
-  constructor( private http: HttpClient ) { }
+  tokenParsed: any;
+  constructor(
+    private http: HttpClient,
+    private tokenStorage: TokenStorageService
+  ) {
+    let token: any = this.tokenStorage.getToken();
+    this.tokenParsed = JSON.parse(atob(token.split('.')[1]));
+  }
 
   getDescriptionAll(): Observable<IDescription[]> {
     return this.http.get<IDescription[]>(`${DISCOUNT_URL}`);
-  };
+  }
   getUser(): Observable<IUser> {
-    return this.http.get<IUser>(`${API_URL}/users/91cf19dd-2af7-49ee-825e-94c0831ba1f2`);
-  };
-  getFavorite(id: any): Observable<any> {
-    return this.http.get<any>(`${API_URL}/favorites/${id}`);
-  };
+    return this.http.get<IUser>(`${USERS_URL}${this.tokenParsed.id}`);
+  }
+  getFavorite(): Observable<IFavoritesProfile[]> {
+    return this.http.get<IFavoritesProfile[]>(
+      `${FAVORITE_URL}/?userId=${this.tokenParsed.id}`
+    );
+  }
+  getCoupons(): Observable<IFavoritesProfile[]> {
+    return this.http.get<IFavoritesProfile[]>(
+      `${COUPONS_URL}?Id=${this.tokenParsed.id}`
+    );
+  }
 }

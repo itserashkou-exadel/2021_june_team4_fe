@@ -1,5 +1,5 @@
 export interface IUiConfigState {
-  searchIsActive: boolean,
+  searchIsActive: boolean;
   homeIsMap: boolean;
   appLanguage: string;
   requestConfig: {
@@ -158,4 +158,49 @@ export interface ITag {
   name: string;
 }
 
+export interface IFavoritesProfile {
+  id: string;
+  discount: {
+    id: string;
+    category: {
+      id: string;
+      name: string;
+    };
+    name: string;
+    description: string;
+    promo: string;
+    discountType: string;
+    value: number;
+    startTime: string;
+    endTime: string;
+    active: boolean;
+    archived: boolean;
+    tags: [
+      {
+        id: string;
+        name: string;
+      }
+    ];
+    vendorLocations: [
+      {
+        id: string;
+        latitude: number;
+        longitude: number;
+        city: {
+          id: string;
+          name: string;
+          countryId: string;
+          countryName: string;
+        };
+      }
+    ];
+    vendor: {
+      id: string;
+      name: string;
+      description: string;
+      contacts: string;
+    };
+    favorite: boolean;
+  };
+}
 

@@ -1,7 +1,19 @@
+$base-color: hsl(196, 85%, 59%);
+$grey: hsla(0, 0%, 60%, 0.5);
 
 .profile{
-  color: hsl(0, 0%, 40%)
+  font-weight: normal;
+  p{
+    color: $grey;
+    font-size: 16px;
+  }
+
+  span{
+    color: $base-color;
+    font-size: 24px;
+  }
 }
+
 .Subscriptions {
   width: 100%;
 }
@@ -9,17 +21,36 @@
   width: fit-content;
   display: flex;
   flex-wrap: wrap;
-  margin: 0 auto;
-  justify-content: center;
+  //margin: 0 auto;
+  justify-content: start;
 
   &-item {
-    width: 100%;
-    max-width: 30%;
+    width: 270px;
+    height: 180px;
     margin: 10px;
     background-color: #fff;
-    border: 1px solid #888;
+    border: 2px solid $grey;
     border-radius: 10px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .dicountName{
+      color: $base-color;
+    }
+    .dicountPromo{
+      font-size: 24px;
+      color: hsl(0, 0%, 0%);
+    }
+    .dicountStart{
+      color: hsla(150, 100%, 30%, 0.5);
+      font-weight: bold;
+    }
+    .dicountEnd{
+      color: hsla(0, 100%, 40%, 0.5);
+      font-weight: bold;
+    }
   }
 }
 .category {
@@ -67,9 +98,10 @@ tr.mat-footer-row {
 
 
 // tabs
+
 :host {
   > .container {
-    max-width: 1264px;
+    // max-width: 1264px;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -108,18 +140,10 @@ tr.mat-footer-row {
 }
 
 #content {
-  box-sizing: content-box;
-  margin: 0 auto;
-  padding: 15px;
-  width: 1264px;
-  background-color: #ffffff;
-}
-
-#content {
-  max-width: 1100px;
+  // max-width: 1100px;
   width: 100%;
   background-color: #ffffff;
-  padding: 24px;
+  padding: 24px 0;
   box-sizing: border-box;
 }
 

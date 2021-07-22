@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from "./home/home/home.component";
 import { DescriptionComponent } from "./description/description.component";
 import { ProfileComponent } from "./profile/profile/profile.component";
+import { TileProfileComponent } from "./profile/profile/tileProfile/tileProfile.component";
 import { StatisticComponent } from "./statistic/statistic/statistic.component";
 import { VendorComponent } from "./vendor/vendor/vendor.component";
 import { HeadComponent } from "./head/head.component";
@@ -48,6 +49,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     HomeComponent,
     DescriptionComponent,
     ProfileComponent,
+    TileProfileComponent,
     StatisticComponent,
     VendorComponent,
     NotFoundComponent,
