@@ -19,7 +19,7 @@ export class TagsService {
     return this.http.get<ITag[]>(`${API_URL}/tags`);
   };
 
-  createTag(tag: string): any {//Observable<string> { 
+  createTag(tag:{name: string}): any {//Observable<string> { 
       return this.http.post<string>(`${API_URL}/tags`, tag, httpOptions).subscribe(
         () => {},
         err => console.log(err),

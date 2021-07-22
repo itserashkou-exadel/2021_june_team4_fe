@@ -50,3 +50,16 @@
   width: 50;
   height: 30;
 }
+.edit-discount-head{
+  h3{
+    margin: 0; 
+    b{
+      color: #0082ca;
+      letter-spacing: 0.1em;
+    }
+  }
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
+}

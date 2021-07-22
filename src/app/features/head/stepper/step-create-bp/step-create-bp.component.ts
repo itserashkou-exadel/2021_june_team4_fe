@@ -76,10 +76,10 @@ export class StepCreateBpComponent implements OnInit, OnDestroy {
   };
 
   createCategory(category: string): void {
-    this.categoriesService.createCategory(JSON.stringify({ 'name': category }))
+  //  this.categoriesService.createCategory(JSON.stringify({ 'name': category }))
   };
 
   createTag(tag: string): void {
-    this.tagsService.createTag(JSON.stringify({ 'name': tag }))
+   // this.tagsService.createTag(JSON.stringify({ 'name': tag }))
   };
 }

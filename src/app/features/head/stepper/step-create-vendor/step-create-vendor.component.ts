@@ -63,16 +63,13 @@ export class StepCreateVendorComponent
   ) {
     this.vendors$ = this.vendorsService.getVendors();
 
-    // this.vendors$.subscribe((data) => console.log(data));
-
     const selectVendorState = (state: IAppState) => state.vendor;
     const selectVendorData = createSelector(
       selectVendorState,
       (state: IVendorState) => state.selectedVendor
     );
     this.selectedVendor$ = this.store.select(selectVendorData);
-
-    //b  this.vSub = this.selectedVendor$.subscribe((data) => console.log(data));
+    //END OF CONSTRUCTOR
   }
   ngAfterViewInit(): void {}
 
@@ -90,9 +87,6 @@ export class StepCreateVendorComponent
       contacts: new FormControl(null, [Validators.required]),
     });
 
-    // this.selectedVendor$.subscribe((data) => {
-
-    // });
   }
 
   ngOnDestroy(): void {
@@ -130,27 +124,18 @@ export class StepCreateVendorComponent
     this.longControl.enable();
   }
   selectCountry(countryId: string) {
-    //console.log(countryId)
     this.currentCountryId = countryId;
     this.cityControl.enable();
     this.initCities();
   }
 
-  // isCity(){
-  //   return this.currentCityId.length >0? true: false;
-  // }
-
   removeVendor() {
-    //ev.prevent;
     this.selectedVendor$.subscribe((data) => {
       const vendorId = data.id;
-     // console.log(data);
       this.http
         .delete<any>(`${API_URL}/vendors/${vendorId}`)
         .subscribe((resp) => console.log(resp));
     });
-
-  //  console.log('delete');
   }
 
   addCoordinates() {
@@ -210,19 +195,15 @@ export class StepCreateVendorComponent
   }
 
   selectVendor(vendor: any) {
-    //console.log('selectVendor -> ' + vendor.id);
-    //let target = null;
     this.subFindVendor = this.vendors$.subscribe((data) => {
       const target = data.find((el) => el.id === vendor.id);
       if (target) {
-        //console.log(target);
         const newSelectedVendor = {
           id: target.id,
           name: target.name,
           description: target.description,
           contacts: target.contacts,
         };
-       // console.log(newSelectedVendor);
         this.store.dispatch(saveVendorData(newSelectedVendor));
         this.vendorForm.patchValue({
           name: target.name,
@@ -247,7 +228,6 @@ export class StepCreateVendorComponent
           contacts: data.contacts,
         };
         this.store.dispatch(saveVendorData(vendorData));
-       // console.log(data);
       },
       (err) => {
         console.error(err);
@@ -259,11 +239,6 @@ export class StepCreateVendorComponent
         this.vendorForm.enable();
       }
     );
-
-    // Function for delete vendors from BD!!!!!!!!!! Warning!!!!!
-    // this.vendorsService._deleteVendor();
-
-    // this.store.dispatch(SaveVendorId({id: }))
   }
 
   focusOncountry() {}
