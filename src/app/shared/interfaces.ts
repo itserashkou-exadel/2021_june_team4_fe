@@ -17,21 +17,18 @@ export interface ISimpleVar {
   id: string;
   name: string;
 }
-
 export interface IFilterFormsValues {
   categories: ISimpleVar[];
   city: ILocationCountry | null;
   vendors: ISimpleVar[];
   chips: ISimpleVar[];
 }
-
 export interface IFilterControls {
   locations: ILocationCountry[];
   categories: { id: string; name: string }[];
   tags: { id: string; name: string }[];
   vendors: { id: string; name: string }[];
 }
-
 export interface ILocationCountry {
   id: string;
   name: string;
@@ -118,14 +115,20 @@ export interface IDiscount {
   coordinates: number[][];
 }
 
-// export interface IUser {
-//   id: number;
-//   name: string;
-//   email: string;
-//   isAdmin: boolean;
-//   subscribes: string[];
-//   favorite: string[];
-// }
+export interface IUser {
+  id: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  role: string;
+  city: {
+    id: string;
+    name: string;
+    countryId: string;
+    countryName: string;
+  };
+}
 
 export interface IUserLogin {
   username: string;
@@ -154,3 +157,50 @@ export interface ITag {
   id: string;
   name: string;
 }
+
+export interface IFavoritesProfile {
+  id: string;
+  discount: {
+    id: string;
+    category: {
+      id: string;
+      name: string;
+    };
+    name: string;
+    description: string;
+    promo: string;
+    discountType: string;
+    value: number;
+    startTime: string;
+    endTime: string;
+    active: boolean;
+    archived: boolean;
+    tags: [
+      {
+        id: string;
+        name: string;
+      }
+    ];
+    vendorLocations: [
+      {
+        id: string;
+        latitude: number;
+        longitude: number;
+        city: {
+          id: string;
+          name: string;
+          countryId: string;
+          countryName: string;
+        };
+      }
+    ];
+    vendor: {
+      id: string;
+      name: string;
+      description: string;
+      contacts: string;
+    };
+    favorite: boolean;
+  };
+}
+
