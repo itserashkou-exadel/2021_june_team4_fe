@@ -1,101 +1,103 @@
-
-<div class="profile pt-5 h-100">
-    <div class="d-flex flex-wrap justify-content-between text-center m-0">
-        <div class="col-3">You are loginded as: User</div>
-        <div class="col-4">User@gmai.com</div>
-        <div class="col-3">You are here: Kyiv</div>
-        <div class="col-2">
-            <button mat-raised-button color="warn">Logout</button>
-        </div>
+<div class="profile pt-5">
+  <div
+    class="d-flex flex-wrap justify-content-center text-center m-0"
+    *ngIf="user$ | async as data"
+  >
+    <div class="col-md-3 col-sm-12 h5">
+      <p>
+        You are loginded as: <span>{{ data.role }}</span>
+      </p>
     </div>
+    <div class="col-md-4 col-sm-12 h5">
+      <p>
+        Email: <span>{{ data.email }}</span>
+      </p>
+    </div>
+    <div class="col-md-3 col-sm-12 h5 blueColor">
+      <p>
+        Location: <span>{{ data.city.name }}</span>
+      </p>
+    </div>
+  </div>
 
-    <mat-tab-group color='accent' class="">
-        <mat-tab label="Subscriptions" class="">
-            <p class="text-center mt-4">Here you specify what cathegory discount would you like get notification!</p>
-            <!--*ngFor надо,  классы можно оставить-->
-            <div class="d-flex justify-content-between w-50 mx-auto mt-4 border border-warning rounded p-2 green">
-                <span class="category">Category</span>
-                <button mat-raised-button>Subscribe</button>
-            </div>
-            <div class="d-flex justify-content-between w-50 mx-auto mt-4 border border-warning rounded p-2 green">
-                <span class="category">Category</span>
-                <button mat-raised-button>Subscribe</button>
-            </div>
-            <div class="d-flex justify-content-between w-50 mx-auto mt-4 border border-warning rounded p-2 red">
-                <span class="category">Category</span>
-                <button mat-raised-button>Delete</button>
-            </div>
-            <div class="d-flex justify-content-between w-50 mx-auto mt-4 border border-warning rounded p-2 green">
-                <span class="category">Category</span>
-                <button mat-raised-button>Subscribe</button>
-            </div>
-            
-        </mat-tab>
-        <mat-tab label="Favorit" class="">
-            <div class="d-flex flex-wrap mt-4">
+  <div class="container">
+    <div id="content">
+      <div id="main-content">
+        <mat-tab-group>
 
-                <!--*ngFor надо,  классы можно оставить-->
-                <div class="d-flex flex-column col-3 border rounded bg-light">
-                    <p>Discount name</p>
-                    <p>Short description</p>
-                    <button mat-raised-button class="w-50 align-self-end">View</button>
+          <mat-tab label="Subscriptions" *ngIf="categories$ | async as data">
+            <p class="text-center mt-4 blueColor">
+              Here you can specify which categories would you like to get
+              notification from!
+            </p>
+
+            <table mat-table [dataSource]="data" class="mat-elevation-z8">
+              <ng-container matColumnDef="Category">
+                <th mat-header-cell *matHeaderCellDef>Category</th>
+                <td mat-cell *matCellDef="let data">{{ data.name }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Add/Remove">
+                <th mat-header-cell *matHeaderCellDef>Add / Remove</th>
+                <td mat-cell *matCellDef="let data" (click)="items(data.id)">
+                  {{ categoryAddRemove[0] }}
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayCategory"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayCategory"></tr>
+            </table>
+          </mat-tab>
+
+          <mat-tab label="Favorit">
+            <app-tile-profile></app-tile-profile>
+          </mat-tab>
+
+          <mat-tab label="History" *ngIf="profileCoupons$ | async as data">
+           
+            <table mat-table [dataSource]="data" class="mat-elevation-z8">
+              <ng-container matColumnDef="Name">
+                <th mat-header-cell *matHeaderCellDef>Discount Name</th>
+                <td mat-cell *matCellDef="let data">{{ data.discount.name }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Promo">
+                <th mat-header-cell *matHeaderCellDef>Promo</th>
+                <td mat-cell *matCellDef="let data">
+                  {{ data.discount.promo }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="EndDate">
+                <th mat-header-cell *matHeaderCellDef>End Date</th>
+                <td mat-cell *matCellDef="let data">
+                  {{ data.discount.endTime | date:'short' }}
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayHistory"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayHistory"></tr>
+            </table>
+
+          </mat-tab>
+
+          <mat-tab label="Active discounts">
+            <div class="history" *ngIf="profileCoupons$ | async as coupons">
+              <!--*ngFor надо,  классы можно оставить-->
+              <div class="history-item" *ngFor="let coupon of coupons">
+                <div>
+                  <p class="dicountName">{{ coupon.discount.name }}</p>
+                  <p class="dicountPromo">{{ coupon.discount.promo }}</p>
                 </div>
-
-            </div>
-        </mat-tab>
-        <mat-tab label="History" class="">
-                <div class="history">
-                    <!--*ngFor надо,  классы можно оставить-->
-                    <div class="history-item">       
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
-                    <div class="history-item">
-                        <p>Discount name</p>
-                        <p>Short description</p>
-                        <p>Date of use</p>
-                    </div>
+                <div>
+                  <p class="dicountStart">Start Date: {{ coupon.discount.startTime | date:'short' }}</p>
+                  <p class="dicountEnd">End Date: {{ coupon.discount.endTime | date:'short'}}</p>
                 </div>
-        </mat-tab>
-        <mat-tab label="Active discounts" class="">
-            discounts
-        </mat-tab>
-      </mat-tab-group>
-
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
 </div>
