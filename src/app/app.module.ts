@@ -25,10 +25,10 @@ import { uiConfigReducer } from './core/store/redeucers/ui-config.reducer';
 import { descriptionReducer } from "./core/store/redeucers/discription.reducer";
 import { filterReducer } from './core/store/redeucers/filter.reducer';
 import { headReducer } from "./core/store/redeucers/head.reducer";
-
 import { notificationsReducer } from './core/store/redeucers/notifications.reducer';
 import { NotificationsEffects } from './core/store/effects/notifications.effects';
 import { vendorReducer } from './core/store/redeucers/vendor.reducer';
+import { profileReducers } from './core/store/redeucers/profile.reducer';
 import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
@@ -41,6 +41,7 @@ import { SharedModule } from "./shared/shared.module";
       filter: filterReducer,
       notifications: notificationsReducer,
       vendor: vendorReducer,
+      profile: profileReducers,
     }),
     EffectsModule.forRoot([DescriptionEffects, HomeEffects, FilterEffects, NotificationsEffects]),
     // angular

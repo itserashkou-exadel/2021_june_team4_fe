@@ -7,10 +7,9 @@
         </div>
 
         <div class="location-block mr-4">
-          <mat-icon aria-hidden="false" aria-label="Home">location_on</mat-icon>
-          <span (click)="openDialog()">
-            City
-          </span>
+          <mat-icon aria-hidden="false" aria-label="Home"
+          >location_on</mat-icon>
+          <span (click)="openDialog()" *ngIf='user$ | async as user'>{{ user.city.name}}</span>
         </div>
 
         <div
@@ -91,6 +90,17 @@
           {{ language$ | async | uppercase }}
         </button>
         <mat-menu #langMenu="matMenu">
+         </mat-list>
+        </mat-icon>
+      </div>
+
+      <div class="user-block">
+        <button mat-button [matMenuTriggerFor]="menu" *ngIf='user$ | async as user'>
+          <mat-icon aria-hidden="false" class=""  aria-label="Example home icon">person_outline</mat-icon>
+          {{ user.firstName + ' ' + user.lastName  }} <!-- 'COMMON.Head.name' | translate-->
+        </button>
+
+        <mat-menu #menu="matMenu">
           <button
             mat-menu-item
             (click)="changeLocale(language)"
@@ -99,6 +109,7 @@
             {{ language.toUpperCase() }}
           </button>
         </mat-menu>
+        
       </div>
     </div>
     <div class="tabs">

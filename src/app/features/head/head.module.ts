@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from "./home/home/home.component";
 import { DescriptionComponent } from "./description/description.component";
 import { ProfileComponent } from "./profile/profile/profile.component";
+import { TileProfileComponent } from "./profile/profile/tileProfile/tileProfile.component";
 import { StatisticComponent } from "./statistic/statistic/statistic.component";
 import { VendorComponent } from "./vendor/vendor/vendor.component";
 import { HeadComponent } from "./head/head.component";
@@ -16,6 +17,7 @@ import { NgbCarouselModule, NgbRatingModule, NgbTooltipModule } from "@ng-bootst
 import { DialogComponent } from '../../shared/dialog/dialog/dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatTreeModule } from "@angular/material/tree";
+import {MatTableModule} from '@angular/material/table';
 import { SideBarFilterComponent } from './home/home/side-bar-filter/side-bar-filter.component';
 import { CategoryComponent } from './home/home/side-bar-filter/category/category.component';
 import { DateComponent } from './home/home/side-bar-filter/date/date.component';
@@ -47,6 +49,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     HomeComponent,
     DescriptionComponent,
     ProfileComponent,
+    TileProfileComponent,
     StatisticComponent,
     VendorComponent,
     NotFoundComponent,
@@ -78,6 +81,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         MatDialogModule,
         NgbTooltipModule,
         MatTreeModule,
+        MatTableModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
