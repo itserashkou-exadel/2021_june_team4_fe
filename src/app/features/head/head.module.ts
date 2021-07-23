@@ -19,13 +19,8 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatTreeModule } from "@angular/material/tree";
 import {MatTableModule} from '@angular/material/table';
 import { SideBarFilterComponent } from './home/home/side-bar-filter/side-bar-filter.component';
-import { CategoryComponent } from './home/home/side-bar-filter/category/category.component';
-import { DateComponent } from './home/home/side-bar-filter/date/date.component';
-import { RangeComponent } from './home/home/side-bar-filter/range/range.component';
-import { TagsComponent } from './home/home/side-bar-filter/tags/tags.component';
 import { StepperWrapperComponent } from "./stepper/stepper-wrapper/stepper-wrapper.component";
 import { StepCreateVendorComponent } from "./stepper/step-create-vendor/step-create-vendor.component";
-import { StepCreateBpComponent } from "./stepper/step-create-bp/step-create-bp.component";
 import { StepEditBpComponent } from "./stepper/step-edit-bp/step-edit-bp.component";
 import { FilterPipe } from 'src/app/core/pipes/filter.pipe';
 
@@ -57,13 +52,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     CarouselComponent,
     DialogComponent,
     SideBarFilterComponent,
-    CategoryComponent,
-    DateComponent,
-    RangeComponent,
-    TagsComponent,
+   
     StepperWrapperComponent,
     StepCreateVendorComponent,
-    StepCreateBpComponent,
     StepEditBpComponent,
     FilterPipe,
   ],

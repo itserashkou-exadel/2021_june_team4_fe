@@ -14,6 +14,10 @@ export class VendorsService {
 
   constructor( private http: HttpClient ) { }
 
+  getVendorLocations(id: string){
+    return this.http.get<any>(`${API_URL}/locations?vendorId=${id}`);
+  }
+
   getVendorDiscounts(id: string){
     return this.http.get<any>(`${API_URL}/discounts?vendorId=${id}`)
   }
