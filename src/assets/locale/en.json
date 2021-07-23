@@ -53,11 +53,16 @@
     },
     "Profile": {
       "logged": "You are logged in as",
-      "location": "You are here",
+      "location": "Location",
+      "heading": "Here you can specify which categories would you like to get notification from!",
       "subscriptions": "Subscriptions",
       "favorite": "Favorite",
       "history": "History",
-      "activeDiscounts":"Active Discounts"
+      "activeDiscounts": "Active Discounts",
+      "category": "Category",
+      "discountName": "Discount Name",
+      "promo": "Promo",
+      "endDate": "End Date"
     },
     "Stepper": {
       "vendorInfo": "Information about Vendor",

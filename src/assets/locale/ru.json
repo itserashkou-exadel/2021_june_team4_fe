@@ -53,11 +53,16 @@
     },
     "Profile": {
       "logged": "Вы вошли как",
-      "location": "Ваш город",
+      "location": "Локация",
+      "heading": "Здесь вы можете выбрать категории, из которых вы хотите получать уведомления!",
       "subscriptions": "Подписки",
       "favorite": "Избранное",
       "history": "История",
-      "activeDiscounts":"Активные дискаунты"
+      "activeDiscounts":"Активные дискаунты",
+      "category": "Категория",
+      "discountName": "Название дискаунта",
+      "promo": "Промо",
+      "endDate": "Дата окончания"
     },
     "Stepper": {
       "vendorInfo": "Информация о вендоре",

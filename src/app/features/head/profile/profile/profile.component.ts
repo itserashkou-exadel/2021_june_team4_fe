@@ -40,7 +40,7 @@ export interface IProfileSubscription {
 export class ProfileComponent implements OnInit {
   // coupons: any = { promo: '213123123', name: 'Vendor Name' };
   displayCategory: string[] = ['Category', 'Add/Remove'];
-  categoryAddRemove: string[] = ['add', 'remove'];
+  categoryAddRemove: string[] = ['COMMON.Global.add', 'COMMON.Global.remove'];
   displayHistory: string[] = ['Name', 'Promo', 'EndDate'];
   
   user$: Observable<IUser>;
