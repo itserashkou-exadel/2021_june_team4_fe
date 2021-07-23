@@ -17,7 +17,7 @@ import { IAppState, IUiConfigState } from '../../../shared/interfaces';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Observable, Subscription } from "rxjs";
-import { setLanguage } from "../../../core/store/actions/ui-config.actions";
+import {setContent, setDisable, setLanguage} from "../../../core/store/actions/ui-config.actions";
 
 import { SEARCH_URL } from "../../../shared/constants";
 import { HttpClient } from "@angular/common/http";
@@ -28,6 +28,7 @@ import { HomeService } from "../../../core/services/home.service";
 import { clearNotifications } from 'src/app/core/store/actions/notifications.actions';
 import { SpinnerService } from "../../../core/services/spinner.service";
 import { Router, NavigationEnd } from "@angular/router";
+import {selectMap, selecUiConfig} from "../home/home.selectors";
 
 
 @Component({
@@ -37,7 +38,7 @@ import { Router, NavigationEnd } from "@angular/router";
 })
 export class HeadComponent implements OnInit, OnDestroy {
   @ViewChild('discountSearchInput', { static: true }) discountSearchInput!: ElementRef;
-  isSearching!: boolean;
+  isSearchOnFocus$: Observable<boolean>;
 
   activeLink: string;
   SETTING_KEY = 'SETTINGS';
@@ -67,11 +68,7 @@ export class HeadComponent implements OnInit, OnDestroy {
 
     this.router.events.subscribe(value => {
       let currentRoute = router.url.toString();
-      if(currentRoute != '/home') {
-        this.isHomeTile = false;
-      } else {
-        this.isHomeTile = true;
-      }
+      this.isHomeTile = currentRoute == '/home';
     });
 
     const selectNotifications = (state: IAppState) => state.notifications;
@@ -91,6 +88,13 @@ export class HeadComponent implements OnInit, OnDestroy {
       (state: IUiConfigState) => state.appLanguage
     );
 
+    const selectSearchOnFocus = createSelector(
+      selecUiConfig,
+      (state: IUiConfigState) => state.searchIsActive
+    );
+
+    this.isSearchOnFocus$ = this.store.select(selectSearchOnFocus);
+
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.language$.subscribe((lang) => {
       this.translateService.use(lang);
@@ -102,7 +106,13 @@ export class HeadComponent implements OnInit, OnDestroy {
   }
 
   onFocusEvent(e:any) {
-    console.log(e)
+    console.log(e.type)//todo disable filter, sorting and clear filter and sorting data
+    this.setSearchOnFocus(e.type);
+  }
+
+  onBlur(e:any) {
+    console.log(e.type)//todo available filter and sor by default
+    this.setSearchOnFocus(e.type);
   }
 
 
@@ -120,7 +130,7 @@ export class HeadComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-
+    //search
     fromEvent(this.discountSearchInput.nativeElement, 'keyup').pipe(
       // get value
       map((event: any) => {
@@ -135,8 +145,6 @@ export class HeadComponent implements OnInit, OnDestroy {
       // subscription for response
     ).subscribe((text: string) => {
 
-      this.isSearching = true;
-
       this.searchGetCall(text).subscribe((res: any) => {
         if(res) {
           let searchData = res.map((discount:any)=>{
@@ -146,9 +154,7 @@ export class HeadComponent implements OnInit, OnDestroy {
         } else {
           this.store.dispatch(requestDiscounts({data: []}))
         }
-        this.isSearching = false;
       }, (err) => {
-        this.isSearching = false;
         console.log('error', err);
       });
 
@@ -158,7 +164,6 @@ export class HeadComponent implements OnInit, OnDestroy {
       subs =>{
         this.isLoaded = subs;
       })
-
 
     let localLang = localStorage.getItem(this.SETTING_KEY);
     if (localLang) {
@@ -208,8 +213,11 @@ export class HeadComponent implements OnInit, OnDestroy {
     this.activeLink = val;
   }
 
-
   controlListNotes(){
     this.listIsVisibleOfUnreadNotes = !this.listIsVisibleOfUnreadNotes;
   };
+
+  setSearchOnFocus(val: any): void {
+    this.store.dispatch(setDisable({ isSearchOnFocus: val !== 'blur' }));
+  }
 }

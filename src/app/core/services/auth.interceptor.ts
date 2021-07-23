@@ -2,7 +2,7 @@ import { HTTP_INTERCEPTORS, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from "rxjs";
-import { catchError, tap } from 'rxjs/operators';
+import {catchError, delay, tap} from 'rxjs/operators';
 
 import { TokenStorageService } from './token-storage.service';
 import { NotificationService } from "./notification.service";
@@ -32,7 +32,9 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(authReq)
       }
     }
-    return next.handle(authReq).pipe(tap(
+    return next.handle(authReq).pipe(
+      delay(0),
+      tap(
       event => {
         if(event instanceof HttpResponse) {
           this.spinner.hideSpinner();
