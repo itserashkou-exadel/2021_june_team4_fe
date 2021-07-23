@@ -42,6 +42,8 @@ export interface IMapMarker {
 
 export interface IDescription {
   id: string;
+  value: number,
+  discountType: string,
   favorite: boolean;
   active: boolean;
   archived: boolean;

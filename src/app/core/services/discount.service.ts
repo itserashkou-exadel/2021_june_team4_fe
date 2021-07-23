@@ -14,8 +14,8 @@ const httpOptions = {
 export class DiscountService {
   constructor(private http: HttpClient) {}
 
-  handleDiscout(rawDiscount: any){
-    const newDiscount ={}
+  handleDiscout(rawDiscount: any) {
+    const newDiscount = {};
   }
 
   getDiscountById(discountId: string): Observable<any> {
@@ -26,7 +26,7 @@ export class DiscountService {
     return this.http.get<IDiscount[]>(`${API_URL}/discounts`);
   }
 
-  createDiscount(discount: IDiscount): Observable<any> {
+  createDiscount(discount: any): Observable<any> {
     return this.http.post<IDiscount>(
       `${API_URL}/discounts`,
       discount,

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-7 pt-5">
-        <h1 class="vendorName">{{ data.name }}</h1>   
+        <h1 class="vendorName">{{ data.name }}</h1>
 
 <!--      <app-carousel *ngFor="let img of data.img | async" [images]="data.img"></app-carousel>-->
 
@@ -36,21 +36,21 @@
 
     <div class="col-md-3 pt-5">
       <div class="sticky-wrapper">
-        <div class="price align-items-center">650
-          <small>{{ 'COMMON.description.currency' | translate }}</small>
-        </div>
+<!--        <div class="price align-items-center">-->
+<!--          <small>{{ 'COMMON.description.currency' | translate }}</small>-->
+<!--        </div>-->
 
         <!-- <button mat-raised-button color="accent" (click)="activateCoupon()"> -->
-        
+
         <div class="discount mb-3 ">
-          <span>{{ 'COMMON.description.rightpanel.sale' | translate }}</span>
-          <span class="discount-num">- {{ data.percent }} %</span>
+          <span *ngIf="data.discountType === 'PERCENT'">{{ 'COMMON.description.rightpanel.sale' | translate }}</span>
+          <div class="discount-num"><span *ngIf="data.discountType === 'PERCENT'">-</span> {{ data.value }} <span *ngIf="data.discountType === 'PERCENT'">%</span></div>
         </div>
-        
+
         <button mat-raised-button color="accent">
           <div class="activate-btn" (click)="activateCoupon()">{{ 'COMMON.description.rightpanel.coupon' | translate }}</div>
         </button>
-        
+
         <div class="bpDate my-2">
           <span><strong>{{ 'COMMON.description.rightpanel.dateFrom' | translate }}</strong></span>
           {{ data.startTime | date :"dd.MM.yyyy" }}

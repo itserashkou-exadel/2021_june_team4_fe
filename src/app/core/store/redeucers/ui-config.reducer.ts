@@ -1,4 +1,5 @@
 import { IUiConfigState } from '../../../shared/interfaces';
+import {createAction, props} from "@ngrx/store";
 
 export const initialState: IUiConfigState = {
   searchIsActive: false,
@@ -27,6 +28,8 @@ export function uiConfigReducer(state: any = initialState, action: any) {
       };
     case 'ToggleHomeContent': //ToggleHomeContent
       return { ...state, homeIsMap: action.isMap };
+      case 'FocusBlurSearch':
+      return { ...state, searchIsActive: action.isSearchOnFocus };
     case 'ToggleLanguage':
       return { ...state, appLanguage: action.language };
     default:

@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="form" [formGroup]="vendorForm" (ngSubmit)="saveVendor()">
+  <form class="form" [formGroup]="vendorForm">
     <div class="form-row">
       <!-- Vendor name -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
@@ -16,13 +16,14 @@
           matInput
           formControlName="name"
           [matAutocomplete]="name"
+          (ngSubmit)="saveVendor()"
         />
-        <mat-autocomplete #name="matAutocomplete">
-          <mat-option
-            *ngFor="let vendor of vendors$ | async"
-            [value]="vendor.id"
-            (click)="selectVendor(vendor)"
-          >
+        <mat-autocomplete
+          #name="matAutocomplete"
+          (optionSelected)="selectVendor($event.option.value)"
+          [displayWith]="displayVendorName"
+        >
+          <mat-option *ngFor="let vendor of vendors$ | async" [value]="vendor">
             {{ vendor.name }}
           </mat-option>
         </mat-autocomplete>
@@ -66,50 +67,6 @@
       <!-- /Vendor Description -->
     </div>
 
-    <!-- <div class="form-row">
-      <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>{{ "COMMON.Stepper.vendorLogo" | translate }}</mat-label>
-        <input matInput placeholder="Add logo" formControlName="vendorLogo" />
-        <mat-error
-          *ngIf="
-            vendorForm.controls['vendorLogo'].invalid &&
-            vendorForm.controls['vendorLogo'].touched
-          "
-        >
-          <span *ngIf="vendorForm.controls.vendorLogo.errors?.required">
-            Vendor logo can't be empty
-          </span>
-        </mat-error>
-      </mat-form-field>
-    </div> -->
-
-    <!-- <div class="form-row">
-      <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>{{ "COMMON.Stepper.location" | translate }}</mat-label>
-        <input
-          matInput
-          placeholder="Add locations"
-          formControlName="locations"
-        />
-        <mat-error
-          *ngIf="
-            vendorForm.controls['locations'].invalid &&
-            vendorForm.controls['locations'].touched
-          "
-        >
-          <span *ngIf="vendorForm.controls.locations.errors?.required">
-            Locations can't be empty
-          </span>
-        </mat-error>
-      </mat-form-field>
-      <button
-        type="button"
-        class="add-btn"
-        (click)="addNewLocation(this.vendorForm.controls.locations.value)"
-      >
-        <mat-icon>add_box</mat-icon>
-      </button>
-    </div> -->
     <div class="form-row">
       <!-- Vendor contacts -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
@@ -145,7 +102,13 @@
       >
         {{ 'COMMON.Global.clear' | translate }}
       </button>
-      <button type="submit" class="save-btn" mat-flat-button color="primary">
+      <button
+        type="submit"
+        class="save-btn"
+        mat-flat-button
+        color="primary"
+        (click)="saveVendor()"
+      >
         {{ 'COMMON.Global.save' | translate }}
       </button>
       <button
@@ -239,11 +202,10 @@
         {{ 'COMMON.Global.add' | translate }}
       </button>
       <button
-        type="submit"
         class="save-btn"
         mat-flat-button
         color="warn"
-        (click)="removeCountry()"
+        (click)="removeCity()"
       >
         {{ 'COMMON.Global.delete' | translate }}
       </button>
@@ -260,7 +222,7 @@
 
         <mat-form-field appearance="fill">
           <mat-label>
-            {{ 'COMMON.Stepper.FirstStep.longtitude' | translate }}
+            {{ 'COMMON.Stepper.FirstStep.longitude' | translate }}
           </mat-label>
           <input type="number" matInput [formControl]="longControl" />
         </mat-form-field>
