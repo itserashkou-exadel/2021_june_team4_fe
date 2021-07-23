@@ -3,9 +3,9 @@ export interface IUiConfigState {
   homeIsMap: boolean;
   appLanguage: string;
   requestConfig: {
-    filterRequestParams:string;
+    filterRequestParams: string;
     sortValue: string;
-  }
+  };
 }
 
 export interface IFilterState {
@@ -17,24 +17,22 @@ export interface ISimpleVar {
   id: string;
   name: string;
 }
-
 export interface IFilterFormsValues {
   categories: ISimpleVar[];
   city: ILocationCountry | null;
   vendors: ISimpleVar[];
   chips: ISimpleVar[];
 }
-
 export interface IFilterControls {
   locations: ILocationCountry[];
   categories: { id: string; name: string }[];
   tags: { id: string; name: string }[];
   vendors: { id: string; name: string }[];
 }
-
 export interface ILocationCountry {
-   id: string; name: string;
-   cities: { id: string; name: string }[] ;
+  id: string;
+  name: string;
+  cities: { id: string; name: string }[];
 }
 
 export interface IMapMarker {
@@ -44,13 +42,15 @@ export interface IMapMarker {
 
 export interface IDescription {
   id: string;
+  value: number,
+  discountType: string,
   favorite: boolean;
   active: boolean;
   archived: boolean;
   category: {};
   description: string;
   name: string;
-  img: [string];
+  img: string[];
   endTime: string;
   startTime: string;
   percent: number;
@@ -61,15 +61,17 @@ export interface IDescription {
     description: any;
     contacts: any;
   };
-  vendorLocations: [{
-    vendorLocations: any;
-    city: {
-      countryName: string;
-      name: string;
-    },
-    latitude: number;
-    longitude: number;
-  }];
+  vendorLocations: [
+    {
+      vendorLocations: any;
+      city: {
+        countryName: string;
+        name: string;
+      };
+      latitude: number;
+      longitude: number;
+    }
+  ];
 }
 
 export interface IDescriptionState {
@@ -86,8 +88,17 @@ export interface IAppState {
   uiConfig: IUiConfigState;
   description: IDescriptionState;
   filter: IFilterState;
-  notifications: any
-  vendor: any;
+  notifications: any;
+  vendor: IVendorState;
+}
+
+export interface IVendorState {
+  selectedVendor: {
+    id: string;
+    name: string;
+    description: string;
+    contacts: string;
+  };
 }
 
 export interface IDiscount {
@@ -106,14 +117,20 @@ export interface IDiscount {
   coordinates: number[][];
 }
 
-// export interface IUser {
-//   id: number;
-//   name: string;
-//   email: string;
-//   isAdmin: boolean;
-//   subscribes: string[];
-//   favorite: string[];
-// }
+export interface IUser {
+  id: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  role: string;
+  city: {
+    id: string;
+    name: string;
+    countryId: string;
+    countryName: string;
+  };
+}
 
 export interface IUserLogin {
   username: string;
@@ -126,6 +143,7 @@ export interface IToken {
 }
 
 export interface IVendor {
+  [x: string]: any;
   id: string;
   name: string;
   description: string;
@@ -141,3 +159,50 @@ export interface ITag {
   id: string;
   name: string;
 }
+
+export interface IFavoritesProfile {
+  id: string;
+  discount: {
+    id: string;
+    category: {
+      id: string;
+      name: string;
+    };
+    name: string;
+    description: string;
+    promo: string;
+    discountType: string;
+    value: number;
+    startTime: string;
+    endTime: string;
+    active: boolean;
+    archived: boolean;
+    tags: [
+      {
+        id: string;
+        name: string;
+      }
+    ];
+    vendorLocations: [
+      {
+        id: string;
+        latitude: number;
+        longitude: number;
+        city: {
+          id: string;
+          name: string;
+          countryId: string;
+          countryName: string;
+        };
+      }
+    ];
+    vendor: {
+      id: string;
+      name: string;
+      description: string;
+      contacts: string;
+    };
+    favorite: boolean;
+  };
+}
+

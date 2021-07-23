@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TilesBoxComponent } from './tiles-box.component';
+import { TileProfileComponent } from './tileProfile.component';
 
-describe('TilesBoxComponent', () => {
-  let component: TilesBoxComponent;
-  let fixture: ComponentFixture<TilesBoxComponent>;
+describe('TileProfileComponent', () => {
+  let component: TileProfileComponent;
+  let fixture: ComponentFixture<TileProfileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TilesBoxComponent ]
+      declarations: [ TileProfileComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TilesBoxComponent);
+    fixture = TestBed.createComponent(TileProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -22,8 +22,4 @@ describe('TilesBoxComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  alertQ(){
-    alert('asdfsdf');
-  }
 });

@@ -25,7 +25,7 @@ export const selectMap = createSelector(
 export const selectMarkers = createSelector(selectHome, (state) =>
 state.discounts.map((el) => ({
   cords: el.coordinates,
-  text: el.description,
+  text: el.name,
 }))
 );
 

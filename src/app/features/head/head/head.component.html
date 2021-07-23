@@ -9,7 +9,7 @@
         <div class="location-block mr-4">
           <mat-icon aria-hidden="false" aria-label="Home"
           >location_on</mat-icon>
-          <span> City</span>
+          <span (click)="openDialog()" *ngIf='user$ | async as user'>{{ user.city.name}}</span>
         </div>
 
       <div class="search-container w-100 px-4 col-sm-5" [hidden]="!isHomeTile">
@@ -48,9 +48,13 @@
          </mat-list>
         </mat-icon>
       </div>
+
       <div class="user-block">
-        <mat-icon aria-hidden="false" class="mr-sm-5 mr-3"  aria-label="Example home icon">person_outline</mat-icon>
-        <button mat-button [matMenuTriggerFor]="menu">{{ 'COMMON.Head.name' | translate }}</button>
+        <button mat-button [matMenuTriggerFor]="menu" *ngIf='user$ | async as user'>
+          <mat-icon aria-hidden="false" class=""  aria-label="Example home icon">person_outline</mat-icon>
+          {{ user.firstName + ' ' + user.lastName  }} <!-- 'COMMON.Head.name' | translate-->
+        </button>
+
         <mat-menu #menu="matMenu">
           <button
             mat-menu-item
@@ -59,6 +63,7 @@
             {{ it }}
           </button>
         </mat-menu>
+
       </div>
 
       <button mat-button [matMenuTriggerFor]="langMenu">{{ language$ | async | uppercase }}</button>

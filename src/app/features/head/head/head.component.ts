@@ -12,7 +12,7 @@ import { FormControl } from '@angular/forms';
 import { createSelector, Store, select } from '@ngrx/store';
 
 import { TranslateService } from '@ngx-translate/core';
-import { IAppState, IUiConfigState } from '../../../shared/interfaces';
+import { IAppState, IUiConfigState, IUser } from '../../../shared/interfaces';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -27,9 +27,8 @@ import { HomeService } from "../../../core/services/home.service";
 
 import { clearNotifications } from 'src/app/core/store/actions/notifications.actions';
 import { SpinnerService } from "../../../core/services/spinner.service";
-import { Router, NavigationEnd } from "@angular/router";
-import {selectMap, selecUiConfig} from "../home/home.selectors";
-
+import { Router } from "@angular/router";
+import { ProfileService } from 'src/app/core/services/profile.service';
 
 @Component({
   selector: 'app-head',
@@ -45,6 +44,7 @@ export class HeadComponent implements OnInit, OnDestroy {
   languages = ['en', 'ru'];
   language$: Observable<any>;
   isLoaded: boolean = true; //spinner
+  user$: Observable<IUser>;
 
   isHomeTile:boolean = false;
 
@@ -64,7 +64,10 @@ export class HeadComponent implements OnInit, OnDestroy {
               private http: HttpClient,
               public homeService: HomeService,
               private spinner: SpinnerService,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              private profile: ProfileService) {
+
+    this.user$ = this.profile.getUser();
 
     this.router.events.subscribe(value => {
       let currentRoute = router.url.toString();
@@ -106,12 +109,12 @@ export class HeadComponent implements OnInit, OnDestroy {
   }
 
   onFocusEvent(e:any) {
-    console.log(e.type)//todo disable filter, sorting and clear filter and sorting data
+   //todo disable filter, sorting and clear filter and sorting data
     this.setSearchOnFocus(e.type);
   }
 
   onBlur(e:any) {
-    console.log(e.type)//todo available filter and sor by default
+   //todo available filter and sor by default
     this.setSearchOnFocus(e.type);
   }
 

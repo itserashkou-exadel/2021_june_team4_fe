@@ -1,4 +1,4 @@
-<mat-card class="example-card">
+<mat-card class="example-card" (click)="dropId()">
     <mat-card-header>
         <mat-card-title>{{discount$.name | slice: 0: 35}} {{setDotts(discount$.name, 35)}}</mat-card-title>
         <mat-card-subtitle>{{discount$.category}}</mat-card-subtitle>

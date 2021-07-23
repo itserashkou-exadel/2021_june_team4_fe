@@ -11,8 +11,8 @@ import { SpinnerService } from "./spinner.service";
 
 const TOKEN_HEADER_KEY = 'Authorization'; // for Spring Boot back-end
 
-@Injectable()
 // Function for adding token to http request
+@Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private token: TokenStorageService,
               private notification: NotificationService,
@@ -44,7 +44,7 @@ export class AuthInterceptor implements HttpInterceptor {
         this.spinner.hideSpinner();
         let errorMessage = `Error: ${error.error.message}`;
         this.notification.error(errorMessage);
-        if(error.status === 403) {//todo maybe 401/403 status code?
+        if(error.status === 401) {
           this.auth.logout();
         }
         return throwError(errorMessage);
