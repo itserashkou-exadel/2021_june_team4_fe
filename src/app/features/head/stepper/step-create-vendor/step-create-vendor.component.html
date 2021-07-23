@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="form" [formGroup]="vendorForm" (ngSubmit)="saveVendor()">
+  <form class="form" [formGroup]="vendorForm" >
     <div class="form-row">
       <!-- Vendor name -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
@@ -13,11 +13,14 @@
           formControlName="name"
           [matAutocomplete]="name"
         />
-        <mat-autocomplete #name="matAutocomplete">
+        <mat-autocomplete #name="matAutocomplete" 
+        (optionSelected)="selectVendor($event.option.value)"
+        [displayWith]="displayVendorName"
+        >
           <mat-option
             *ngFor="let vendor of vendors$ | async"
-            [value]="vendor.id"
-            (click)="selectVendor(vendor)"
+            [value]="vendor"
+
           >
             {{ vendor.name }}
           </mat-option>
@@ -170,11 +173,11 @@
         Add
       </button>
       <button
-        type="submit"
+       
         class="save-btn"
         mat-flat-button
         color="warn"
-        (click)="removeCountry()"
+        (click)="removeCity()"
       >
         Remove
       </button>

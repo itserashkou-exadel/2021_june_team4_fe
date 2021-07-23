@@ -14,8 +14,8 @@ const httpOptions = {
 export class DiscountService {
   constructor(private http: HttpClient) {}
 
-  handleDiscout(rawDiscount: any){
-    const newDiscount ={}
+  handleDiscout(rawDiscount: any) {
+    const newDiscount = {};
   }
 
   getDiscountById(discountId: string): Observable<any> {

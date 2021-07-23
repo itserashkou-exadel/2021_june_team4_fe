@@ -29,7 +29,7 @@
       >{{ discount$.vendor | slice: 0:30 }}{{ setDotts(discount$.vendor, 10) }}
     </div>
     <div class="info-box">
-      <b>{{ "COMMON.Tile.expired" | translate }}</b> {{ discount$.expired }}
+      <b>{{ "COMMON.Tile.expired" | translate }}</b> {{ discount$.expired | date: 'dd/MM/yyyy' }}
     </div>
   </mat-card-content>
   <mat-card-actions>

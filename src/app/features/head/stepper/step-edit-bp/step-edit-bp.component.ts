@@ -43,7 +43,6 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   remoteVendor!: Observable<any>;
   categories$: Observable<ICategory[]>;
   tags$: Observable<ITag[]>;
-  // vendorLocations$: Observable<any>;
 
   tagsSet: any;
 
@@ -68,8 +67,7 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     private categoriesService: CategoriesService,
     private tagsService: TagsService
   ) {
-
-    this.newCategoryInput = new  FormControl();
+    this.newCategoryInput = new FormControl();
     this.newTagInput = new FormControl();
     this.tags$ = this.tagsService.getTags();
     this.categories$ = this.categoriesService.getCategories();
@@ -84,18 +82,13 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     );
     this.selectedVendor$ = this.store.select(selectVendorData);
     this.subSlelectVendor = this.selectedVendor$.subscribe((vendor) => {
-      console.log(vendor);
-      console.log('--------------------')
       this.subSlelectLocations = this.vendorsService
         .getVendorLocations(vendor.id)
         .subscribe((data) => {
-          console.log(data);
           this.vendorLocations = data;
         });
       this.getVendorsById(vendor.id).subscribe((data) => {
         this.vendor = data;
-        //this.vendorLocations$ = this.vendorsService.getVendorLocation(this.vendor.id);
-        console.log(this.vendor);
       });
       this.subVendorDiscounts = this.vendorsService
         .getVendorDiscounts(vendor.id)
@@ -110,11 +103,8 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subTags = this.tagsService.getTags().subscribe((data) => {
-      console.log(data);
       this.tagsSet = data;
     });
-
-
 
     this.discountForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
@@ -143,31 +133,25 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     }
   }
 
-  selectTag() {
-      let res = this.discountForm.get('tags')?.value;
-      console.log(res);
-    
-  }
-
   saveDiscount() {
-    console.log('saveDiscount0');
     const newDiscount = {
       active: true,
-      categoryId: this.discountForm.get('category')?.value,//'3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      categoryId: this.discountForm.get('category')?.value, //'3fa85f64-5717-4562-b3fc-2c963f66afa6',
       description: this.discountForm.get('description')?.value,
       discountType: this.discountForm.get('discountType')?.value,
-      endTime:  new Date(this.discountForm.get('eventEnd')?.value).toISOString(),  // '2021-07-21T18:45:24.464Z',
+      endTime: new Date(this.discountForm.get('eventEnd')?.value).toISOString(), // '2021-07-21T18:45:24.464Z',
       name: this.discountForm.get('name')?.value,
       promo: this.discountForm.get('promo')?.value,
-      startTime: new Date(this.discountForm.get('eventStart')?.value).toISOString(),//'2021-07-21T18:45:24.464Z',
-      tagIds: this.discountForm.get('tags')?.value,//['3fa85f64-5717-4562-b3fc-2c963f66afa6'],
+      startTime: new Date(
+        this.discountForm.get('eventStart')?.value
+      ).toISOString(), //'2021-07-21T18:45:24.464Z',
+      tagIds: this.discountForm.get('tags')?.value, //['3fa85f64-5717-4562-b3fc-2c963f66afa6'],
       value: this.discountForm.get('size')?.value,
       vendorId: this.vendor.id,
       vendorLocationsIds: this.discountForm.get('locations')?.value,
     };
-    console.log('saveDiscount')
-    console.log(newDiscount);
-    this.discountService.createDiscount( JSON.stringify(newDiscount)).subscribe(data=>console.log(data));
+
+    this.discountService.createDiscount(JSON.stringify(newDiscount));
   }
 
   saveBP(): void {
@@ -191,33 +175,22 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     return this.vendorsService.getVendorsById(id);
   }
   createCategory(): void {
-    const newCategoryName : string =  this.newCategoryInput.value;
-    console.log(newCategoryName);
-    this.categoriesService.createCategory( {name: newCategoryName});
-
-  }
-
-  selectCat(){
-    console.log(this.discountForm.get('category')?.value)
+    const newCategoryName: string = this.newCategoryInput.value;
+    this.categoriesService.createCategory({ name: newCategoryName });
   }
 
   createTag(): void {
     const newTagName = this.newTagInput.value;
-    console.log(newTagName)
-    this.tagsService.createTag({name: newTagName});
+    this.tagsService.createTag({ name: newTagName });
   }
 
   setDiscountForm(ev: any) {
     this.discountService.getDiscountById(ev).subscribe((discount) => {
       this.activeComponent = 'create';
-      // console.log('setDiscountForm');
-      // console.log(discount);
-      // console.log(discount.tags);
-
       this.discountForm.patchValue({
         name: discount.name,
         category: discount.category.name,
-        tags: discount.tags.map((el:ISimpleVar) => el.id),
+        tags: discount.tags.map((el: ISimpleVar) => el.id),
         image:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
         description: discount.description,
@@ -227,28 +200,7 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
         size: discount.value,
         promo: discount.promo,
       });
-      // console.log('ev -> ');
-      // console.log(this.discountForm.get('tags')?.value);
     });
-    //console.log('ev -> ');
-    
   }
 
-  inputDate(ev: any) {
-    const cd = ev.target.value;
-    console.log(this.discountForm.get('eventStart')?.value)
-    let cd1 = new Date(cd);
-    console.log(new Date(cd).toISOString());
-
-
-  }
-
-  selectLocation(){
-    let temp = this.discountForm.get('locations')?.value;
-    console.log(temp);
-
-  }
-  // public compareWith(object1: any, object2: any) {
-  //   return object1 && object2 && object1.viewValue === object2.viewValue;
-  // }
 }

@@ -26,9 +26,5 @@ export class TagsService {
         () => alert('New tag has been saved successfully')
       )
   };
-
-  // createTag(tag: string): void { 
-  //   return sessionStorage.setItem('newTag', tag);
-  // };
 }
 

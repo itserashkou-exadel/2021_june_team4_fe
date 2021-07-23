@@ -52,43 +52,11 @@
       <!-- /Bonus program name -->
     </div>
 
-    <!-- <div class="form-row">
-      <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>{{ "COMMON.Stepper.vendorCategory" | translate }}</mat-label>
-        <input
-          type="text"
-          aria-label="Bonus program category"
-          matInput
-          formControlName="category"
-          [matAutocomplete]="category"
-        />
-        <mat-autocomplete #category="matAutocomplete">
-          <mat-option
-            *ngFor="
-              let category of categories$
-                | async
-                | filter: this.discountForm.controls.category.value
-            "
-            [value]="category"
-          >
-            {{ category }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <button
-        type="button"
-        class="add-btn"
-        (click)="createCategory(this.discountForm.controls.category.value)"
-      >
-        <mat-icon>add_box</mat-icon>
-      </button>
-    </div> -->
-
     <div class="form-row">
       <!-- Bonus program Category select -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
         <mat-label>Category</mat-label>
-        <mat-select formControlName="category" (selectionChange)="selectCat()">
+        <mat-select formControlName="category" >
           <mat-option
             *ngFor="let category of categories$ | async"
             [value]="category.id"
@@ -118,7 +86,6 @@
         <mat-select
           formControlName="tags"
           multiple
-          (selectionChange)="selectTag()"
         >
           <mat-option *ngFor="let tag of tags$ | async" [value]="tag.id">{{
             tag.name
@@ -171,7 +138,6 @@
           matInput
           type="date"
           formControlName="eventStart"
-          (input)="inputDate($event)"
         />
       </mat-form-field>
       <!-- /Bonus program event's start -->
@@ -183,7 +149,6 @@
           matInput
           type="date"
           formControlName="eventEnd"
-          (input)="inputDate($event)"
         />
       </mat-form-field>
       <!-- /Bonus program event's end -->
@@ -226,7 +191,7 @@
         <mat-label>Location</mat-label>
         <mat-select
           multiple
-          (selectionChange)="selectLocation()"
+         
           formControlName="locations"
         >
           <mat-option
