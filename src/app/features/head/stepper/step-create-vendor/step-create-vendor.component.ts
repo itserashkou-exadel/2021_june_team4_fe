@@ -35,6 +35,7 @@ export class StepCreateVendorComponent
   subFindVendor!: Subscription;
   subInitCountries!: Subscription;
   subInitCities!: Subscription;
+  subDeleteVendor!: Subscription;
 
   latControl = new FormControl();
   longControl = new FormControl();
@@ -129,16 +130,22 @@ export class StepCreateVendorComponent
   }
 
   removeVendor() {
-    this.selectedVendor$.subscribe((vendor) => {
-      if (!confirm(`Do you really want delete vendor ${vendor.name}?`)) { 
-        return;
-      }
+   this.subDeleteVendor =   this.selectedVendor$.subscribe((vendor) => {
+      if (!confirm(`Do you really want delete vendor ${vendor.name}?`)) {
         const vendorId = vendor.id;
-        this.http
-          .delete<any>(`${API_URL}/vendors/${vendorId}`)
-          //.subscribe((resp) => console.log(resp));
-     // }
+        this.http.delete<any>(`${API_URL}/vendors/${vendorId}`);
+      }
     });
+    this.subDeleteVendor.unsubscribe();
+  }
+
+  selectVendor(vendor: any) {
+    this.store.dispatch(saveVendorData(vendor));
+    this.vendorForm.patchValue({
+      description: vendor.description,
+      contacts: vendor.contacts,
+    });
+    this.countryControl.enable();
   }
 
   addCoordinates() {
@@ -220,29 +227,6 @@ export class StepCreateVendorComponent
       return val.name;
     }
   }
-
-  selectVendor(vendor: any) {
-    console.log(vendor);
-    // const vendorId = vendor;
-    // this.subFindVendor = this.vendors$.subscribe((data) => {
-    //   const target = data.find((el) => el.id === vendor.id);
-    //   if (target) {
-    //     const newSelectedVendor = {
-    //       id: target.id,
-    //       name: target.name,
-    //       description: target.description,
-    //       contacts: target.contacts,
-    //     };
-      //  this.store.dispatch(saveVendorData(vendor));
-        this.vendorForm.patchValue({
-         // name: vendor.name,
-          description: vendor.description,
-          contacts: vendor.contacts,
-        });
-        this.countryControl.enable();
-      }
-    //});
-  //}
 
   saveVendor(): void {
     this.vendorForm.disable();

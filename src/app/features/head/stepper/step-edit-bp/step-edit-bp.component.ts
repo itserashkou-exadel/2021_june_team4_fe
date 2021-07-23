@@ -133,6 +133,10 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     }
   }
 
+  selectCategory(ev: any){
+    console.log(ev);
+  }
+
   saveDiscount() {
     const newDiscount = {
       active: true,
@@ -184,12 +188,15 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     this.tagsService.createTag({ name: newTagName });
   }
 
-  setDiscountForm(ev: any) {
+  editDiscount(ev: any) {
+
     this.discountService.getDiscountById(ev).subscribe((discount) => {
+      console.log(discount);
       this.activeComponent = 'create';
+
       this.discountForm.patchValue({
         name: discount.name,
-        category: discount.category.name,
+        category: discount.category.id,
         tags: discount.tags.map((el: ISimpleVar) => el.id),
         image:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
@@ -200,6 +207,7 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
         size: discount.value,
         promo: discount.promo,
       });
+      console.log( this.discountForm.get('category')?.value);
     });
   }
 
