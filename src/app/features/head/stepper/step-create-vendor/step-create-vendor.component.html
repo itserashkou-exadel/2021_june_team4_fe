@@ -12,6 +12,7 @@
           matInput
           formControlName="name"
           [matAutocomplete]="name"
+          (ngSubmit)="saveVendor()"
         />
         <mat-autocomplete #name="matAutocomplete" 
         (optionSelected)="selectVendor($event.option.value)"
@@ -88,7 +89,9 @@
       >
         {{ "COMMON.Global.clear" | translate }}
       </button>
-      <button type="submit" class="save-btn" mat-flat-button color="primary">
+      <button type="submit" class="save-btn" mat-flat-button color="primary"
+      (click)="saveVendor()"
+      >
         {{ "COMMON.Global.save" | translate }}
       </button>
       <button class="save-btn" mat-flat-button color="warn" (click)="removeVendor();$event.preventDefault()">

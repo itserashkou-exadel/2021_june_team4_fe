@@ -138,6 +138,7 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   }
 
   saveDiscount() {
+    console.log('saveDiscount');
     const newDiscount = {
       active: true,
       categoryId: this.discountForm.get('category')?.value, //'3fa85f64-5717-4562-b3fc-2c963f66afa6',
@@ -154,8 +155,8 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
       vendorId: this.vendor.id,
       vendorLocationsIds: this.discountForm.get('locations')?.value,
     };
-
-    this.discountService.createDiscount(JSON.stringify(newDiscount));
+    console.log(newDiscount)
+    this.discountService.createDiscount(JSON.stringify(newDiscount)).subscribe(resp => console.log(resp));
   }
 
   saveBP(): void {

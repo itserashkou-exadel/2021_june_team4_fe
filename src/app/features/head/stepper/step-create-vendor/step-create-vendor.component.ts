@@ -216,11 +216,11 @@ export class StepCreateVendorComponent
     );
   }
 
-  selectVendorEv(ev: any) {
-    const temp = this.vendorForm.get('name')?.value;
-    console.log(temp);
-    console.log(ev);
-  }
+  // selectVendorEv(ev: any) {
+  //   const temp = this.vendorForm.get('name')?.value;
+  //   console.log(temp);
+  //   console.log(ev);
+  // }
 
   displayVendorName(val: any) {
     if (val) {
@@ -230,7 +230,7 @@ export class StepCreateVendorComponent
 
   saveVendor(): void {
     this.vendorForm.disable();
-
+      console.log('saveVendor');
     const vendorFormData = this.vendorForm.value;
     this.svSub = this.vendorsService.createVendor(vendorFormData).subscribe(
       (data) => {
@@ -241,6 +241,7 @@ export class StepCreateVendorComponent
           contacts: data.contacts,
         };
         this.store.dispatch(saveVendorData(vendorData));
+        this.vendors$ = this.vendorsService.getVendors();
       },
       (err) => {
         console.error(err);
