@@ -21,6 +21,11 @@ export const setContent = createAction(
   props<{ isMap: boolean }>()
 );
 
+export const setDisable = createAction(
+  'FocusBlurSearch',
+  props<{ isSearchOnFocus: boolean }>()
+);
+
 export const setLanguage = createAction(
   'ToggleLanguage',
   props<{ language: string }>()

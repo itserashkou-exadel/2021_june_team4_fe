@@ -18,6 +18,7 @@
             <mat-label>{{ 'COMMON.Head.search' | translate }}</mat-label>
               <input
                 (focus)="onFocusEvent($event)"
+                (blur)="onBlur($event)"
                 #discountSearchInput
                 autocomplete="off"
                 matInput
@@ -62,7 +63,7 @@
             {{ it }}
           </button>
         </mat-menu>
-        
+
       </div>
 
       <button mat-button [matMenuTriggerFor]="langMenu">{{ language$ | async | uppercase }}</button>
