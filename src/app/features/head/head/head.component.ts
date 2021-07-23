@@ -27,7 +27,7 @@ import { HomeService } from "../../../core/services/home.service";
 
 import { clearNotifications } from 'src/app/core/store/actions/notifications.actions';
 import { SpinnerService } from "../../../core/services/spinner.service";
-import { Router, NavigationEnd } from "@angular/router";
+import { Router } from "@angular/router";
 import { ProfileService } from 'src/app/core/services/profile.service';
 
 
