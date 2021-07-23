@@ -1,22 +1,20 @@
 <div class="sideBar" *ngIf="storedFormValues | async as formData">
   <form [formGroup]="filterForm">
-    <mat-form-field appearance="fill">
-      <mat-label>Select a vendor</mat-label>
+    <mat-form-field appearance="fill" class="sideBar__form-field">
+      <mat-label>{{ 'COMMON.SideBar.vendor' | translate }}</mat-label>
       <mat-select
         formControlName="vendor"
         (selectionChange)="selectCathegory()"
         multiple
       >
-        <mat-option
-          *ngFor="let vendor of vendors$ | async"
-          [value]="vendor.id"
-          >{{ vendor.name }}</mat-option
-        >
+        <mat-option *ngFor="let vendor of vendors$ | async" [value]="vendor.id">
+          {{ vendor.name }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Select an cathegory</mat-label>
+    <mat-form-field appearance="fill" class="sideBar__form-field">
+      <mat-label>{{ 'COMMON.SideBar.category' | translate }}</mat-label>
       <mat-select
         formControlName="category"
         (selectionChange)="selectCathegory()"
@@ -25,15 +23,16 @@
         <mat-option
           *ngFor="let category of categories$ | async"
           [value]="category.id"
-          >{{ category.name }}</mat-option
         >
+          {{ category.name }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Locations</mat-label>
+    <mat-form-field appearance="fill" class="sideBar__form-field">
+      <mat-label>{{ 'COMMON.SideBar.location' | translate }}</mat-label>
       <mat-select formControlName="city">
-        <mat-option>-- None --</mat-option>
+        <mat-option>-- {{ 'COMMON.SideBar.none' | translate }} --</mat-option>
         <mat-optgroup
           *ngFor="let country of locations$ | async"
           [label]="country.name"
@@ -45,14 +44,14 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-chip-list #chipList aria-label="Color selection" >
+    <mat-chip-list #chipList aria-label="Color selection">
       <mat-chip *ngFor="let chip of chips$ | async" [removable]="true">
         {{ chip.name }}
         <mat-icon matChipRemove (click)="removeChips(chip)">cancel</mat-icon>
       </mat-chip>
       <input
         type="text"
-        placeholder="Pick tag"
+        placeholder="{{ 'COMMON.SideBar.tag' | translate }}"
         aria-label="Number"
         matInput
         formControlName="chips"
@@ -63,7 +62,9 @@
         #auto="matAutocomplete"
         (optionSelected)="addChip($event.option.value)"
       >
-        <mat-option [value]="{ id: '9', name: 'none' }">None</mat-option>
+        <mat-option [value]="{ id: '9', name: 'none' }">
+          {{ 'COMMON.SideBar.none' | translate }}
+        </mat-option>
         <mat-option *ngFor="let tag of tags$ | async" [value]="tag">
           {{ tag.name }}
         </mat-option>
@@ -71,11 +72,21 @@
     </mat-chip-list>
 
     <div class="buttons-container">
-      <button mat-stroked-button color="primary" (click)="filterDiscounts()" class="apply">
-        Apply
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="filterDiscounts()"
+        class="apply"
+      >
+        {{ 'COMMON.SideBar.apply' | translate }}
       </button>
-      <button class="reset" mat-stroked-button color="warn" (click)="resetForm()">
-        Reset
+      <button
+        class="reset"
+        mat-stroked-button
+        color="warn"
+        (click)="resetForm()"
+      >
+        {{ 'COMMON.SideBar.reset' | translate }}
       </button>
     </div>
   </form>

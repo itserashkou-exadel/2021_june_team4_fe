@@ -16,7 +16,14 @@
     },
     "Head": {
       "name": "Nikita Martinov",
+      "city": "City",
       "search": "Search",
+      "selectCategory": "Select category" ,
+      "history": "History" ,
+      "favorite": "Favorite" ,
+      "activeDiscounts": "Active discounts" ,
+      "logout": "Logout" ,
+      "close": "Close", 
       "home": "Home",
       "profile": "Profile",
       "vendor": "Vendor",
@@ -24,18 +31,19 @@
     },
     "Home": {
       "sort": "Sort by",
-      "date": "by Date",
-      "time": "by Time",
-      "rating": "by Score",
-      "default": "by default",
-      "filter": {
-        "vendor": "Select a vendor",
-        "category": "Select an category",
-        "locations": "Locations",
-        "tag": "Select tag",
-        "tags": "Selected tags",
-        "apply": "Apply"
-      }
+      "default": "By default",
+      "startTime": "Start time",
+      "endTime": "Time to expire",
+      "name": "Name"
+    },
+    "SideBar": {
+      "vendor": "Select a vendor",
+      "category": "Select a category",
+      "location": "Location",
+      "tag": "Pick tag",
+      "none": "None",
+      "apply": "Apply",
+      "reset": "Reset"
     },
     "Tile": {
       "info": "More info",
@@ -44,20 +52,41 @@
       "vendor": "Vendor",
       "expired": "Expired"
     },
+    "Profile": {
+      "logged": "You are logged in as",
+      "location": "You are here",
+      "subscriptions": "Subscriptions",
+      "favorite": "Favorite",
+      "history": "History",
+      "activeDiscounts":"Active Discounts"
+    },
     "Stepper": {
-      "description": "Description",
+      "vendorInfo": "Information about Vendor",
+      "FirstStep": {
+        "vendorName": "Vendor Name",
+        "vendorNamePlaceholder": "Add vendor name",
+        "vendorNameError": "Vendor name can't be empty",
+        "vendorDescription": "Description",
+        "vendorDescriptionPlaceholder": "Add description",
+        "vendorDescriptionError": "Description can't be empty",
+        "vendorContacts": "Vendor Contacts",
+        "vendorContactsPlaceholder": "Add contacts",
+        "vendorContactsError": "Contacts can't be empty",
+        "country": "Select or add country",
+        "countryLabel": "Country",
+        "city": "Select or add city",
+        "cityLabel": "City",
+        "coordinates": "Add coordinates",
+        "latitude": "Latitude",
+        "longtitude": "Longtitude"
+      },
       "eventStart": "Event's start",
       "eventEnd": "Event's end",
       "location": "Location",
       "bonusSize": "Discount size",
-      "vendorName": "Vendor Name",
-      "vendorCategory": "Vendor category",
-      "vendorTag": "Vendor Tag",
       "vendorLogo": "Vendor Logo",
       "vendorSchedule": "Vendor Shedule",
-      "vendorContacts": "Vendor Contacts",
       "addBp": "Add BP",
-      "vendorInfo": "Information about Vendor",
       "vendorBpInfo": "Information about Bonus program",
       "vendorMessage": "Message",
       "finalMessage": "All information were saved successfully!"
@@ -65,7 +94,10 @@
     "Global": {
       "back": "Back",
       "clear": "Clear",
-      "save": "Save"
+      "save": "Save",
+      "delete": "Delete", 
+      "add": "Add",
+      "logout": "Logout"
     }
   },
   "LANGUAGES": {

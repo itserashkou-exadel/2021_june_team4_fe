@@ -1,10 +1,10 @@
-.cover{
+.cover {
   display: flex;
   height: 100%;
   flex-direction: column;
   justify-content: space-between;
 }
-.header{
+.header {
   width: 1280px;
   max-width: 100%;
   margin: 0 auto;
@@ -19,12 +19,12 @@
   flex-wrap: wrap;
   width: 100%;
   margin: 0;
-  border-bottom: 1px solid rgba(0,0,0,.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 
-  mat-icon{
+  mat-icon {
     transition: color 0.2s;
     cursor: pointer;
-    &:hover{
+    &:hover {
       color: gold;
     }
   }
@@ -51,43 +51,41 @@
   }
 }
 
-
 a {
   text-decoration: none;
 }
 .tabs {
-
-  *{
+  * {
     color: #0082ca;
   }
 }
 
 mat-list {
   z-index: 999;
-  position:absolute;
+  position: absolute;
 
   border-radius: 10px;
   width: 300px;
 }
 
-.mat-list-item{
+.mat-list-item {
   font-size: 0.6em;
-  background-color: #F2F3F4 ;
+  background-color: #f2f3f4;
   word-wrap: break-word;
   white-space: pre-wrap;
   text-align: left;
 
-  box-shadow:inset 0 0 3px 0 black;
-  transition: .5s ;
+  box-shadow: inset 0 0 3px 0 black;
+  transition: 0.5s;
   border-radius: 5px;
   &:hover {
-    transition: .5s ;
-    box-shadow:inset 0 0 15px 0 #0082ca;
+    transition: 0.5s;
+    box-shadow: inset 0 0 15px 0 #0082ca;
   }
 }
 
-.langButton{
-  &:hover{
+.langButton {
+  &:hover {
     color: gold;
   }
 }
@@ -102,16 +100,15 @@ mat-list {
 }
 
 .overlay {
-  height:100vh;
-  width:100%;
-  background-color:rgba(255,255,255, 0.5);
-  z-index:    1001;// for overlay map
-  top:        0;
-  left:       0;
-  position:   fixed;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 1001; // for overlay map
+  top: 0;
+  left: 0;
+  position: fixed;
 }
 
-.mat-progress-spinner::ng-deep circle{
-  stroke: #2A79FF!important;
+.mat-progress-spinner::ng-deep circle {
+  stroke: #2a79ff !important;
 }
-

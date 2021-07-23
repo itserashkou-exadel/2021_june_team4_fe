@@ -44,10 +44,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     private filterService: HomeService
   ) {
     this.sortValuesSet = [
-      { value: 'id', uiValue: 'Default' },
-      { value: 'startTime', uiValue: 'Start time' },
-      { value: 'endTime', uiValue: 'Time to expire' },
-      { value: 'name', uiValue: 'Name' },
+      { value: 'id', uiValue: 'COMMON.Home.default' },
+      { value: 'startTime', uiValue: 'COMMON.Home.startTime' },
+      { value: 'endTime', uiValue: 'COMMON.Home.endTime' },
+      { value: 'name', uiValue: 'COMMON.Home.name' },
     ];
 
     this.isMap = this.store.select(selectMap);

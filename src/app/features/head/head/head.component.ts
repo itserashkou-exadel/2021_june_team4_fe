@@ -186,12 +186,12 @@ export class HeadComponent implements OnInit, OnDestroy {
   discountSearch = new FormControl('');
   profileMenu = new FormControl('');
   profileMenuItems = [
-    'Select category',
-    'History',
-    'Favorite',
-    'Active discounts',
-    'Logout',
-    'Close',
+    { link: '', label: 'COMMON.Head.selectCategory' },
+    { link: '', label: 'COMMON.Head.history' },
+    { link: '', label: 'COMMON.Head.favorite' },
+    { link: '', label: 'COMMON.Head.activeDiscounts' },
+    { link: '', label: 'COMMON.Head.logout' },
+    { link: '', label: 'COMMON.Head.close' },
   ];
 
   tabItems = [

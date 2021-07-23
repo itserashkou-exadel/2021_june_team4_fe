@@ -16,7 +16,14 @@
     },
     "Head": {
       "name": "Никита Мартынов",
+      "city": "Город",
       "search": "Поиск",
+      "selectCategory": "Выбрать категорию" ,
+      "history": "История" ,
+      "favorite": "Избранное" ,
+      "activeDiscounts": "Активные дискаунты" ,
+      "logout": "Выйти" ,
+      "close": "Закрыть", 
       "home": "Домашняя",
       "profile": "Профиль",
       "vendor": "Вендор",
@@ -24,18 +31,19 @@
     },
     "Home": {
       "sort": "Сортировать по",
-      "date": "По дате",
-      "time": "По времени",
-      "rating": "По рейтингу",
       "default": "По умолчанию",
-      "filter": {
-        "vendor": "Выбрать вендора",
-        "category": "Выбрать категорию",
-        "locations": "Локации",
-        "tag": "Выбрать тег",
-        "tags": "Выбранные теги",
-        "apply": "Применить"
-      }
+      "startTime": "По дате начала",
+      "endTime": "По дате окончания",
+      "name": "По имени"
+    },
+    "SideBar": {
+      "vendor": "Выберите вендора",
+      "category": "Выберите категорию",
+      "location": "Локация",
+      "tag": "Выберите тeг",
+      "none": "Ничего",
+      "apply": "Применить",
+      "reset": "Сбросить"
     },
     "Tile": {
       "info": "Подробнее",
@@ -44,20 +52,41 @@
       "vendor": "Вендор",
       "expired": "Срок действия"
     },
+    "Profile": {
+      "logged": "Вы вошли как",
+      "location": "Ваш город",
+      "subscriptions": "Подписки",
+      "favorite": "Избранное",
+      "history": "История",
+      "activeDiscounts":"Активные дискаунты"
+    },
     "Stepper": {
-      "description": "Описание",
+      "vendorInfo": "Информация о вендоре",
+      "FirstStep": {
+        "vendorName": "Имя вендора",
+        "vendorNamePlaceholder": "Добавьте имя вендора",
+        "vendorNameError": "Имя вендора не может быть пустым",
+        "vendorDescription": "Описание",
+        "vendorDescriptionPlaceholder": "Добавьте описание",
+        "vendorDescriptionError": "Описание не может быть пустым",
+        "vendorContacts": "Контакты вендора",
+        "vendorContactsPlaceholder": "Добавьте контакты",
+        "vendorContactsError": "Контакты не могут быть пустыми",
+        "country": "Выберите или добавьте страну",
+        "countryLabel": "Страна",
+        "city": "Выберите или добавьте город",
+        "cityLabel": "Город",
+        "coordinates": "Добавьте координаты",
+        "latitude": "Широта",
+        "longtitude": "Долгота"
+      },
       "eventStart": "Начало Программы",
       "eventEnd": "Конец Программы",
       "location": "Местоположение",
       "bonusSize": "Размер скидки",
-      "vendorName": "Имя вендора",
-      "vendorCategory": "Категория",
-      "vendorTag": "Тег",
       "vendorLogo": "Логотип Вендора",
       "vendorSchedule": "График вендора",
-      "vendorContacts": "Контакты вендора",
       "addBp": "Добавить БП",
-      "vendorInfo": "Информация о вендоре",
       "vendorBpInfo": "Информация о БП",
       "vendorMessage": "Сообщение",
       "finalMessage": "Вся информация была успешно сохранена!"
@@ -65,7 +94,10 @@
     "Global": {
       "back": "Назад",
       "clear": "Очистить",
-      "save": "Сохранить"
+      "save": "Сохранить",
+      "delete": "Удалить",
+      "add": "Добавить",
+      "logout": "Выйти"
     }
   },
   "LANGUAGES": {
