@@ -10,7 +10,7 @@
         [(value)]="currentSortValue"
       >
         <mat-option *ngFor="let el of sortValuesSet" [value]="el.value">
-          {{ el.uiValue }}
+          {{ el.uiValue | translate }}
         </mat-option>
       </mat-select>
     </mat-form-field>
