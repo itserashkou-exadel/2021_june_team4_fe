@@ -14,10 +14,8 @@ import { createSelector, Store, select } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { IAppState, IUiConfigState, IUser } from '../../../shared/interfaces';
 
-import { MatDialog } from '@angular/material/dialog';
-
 import { Observable, Subscription } from "rxjs";
-import {setContent, setDisable, setLanguage} from "../../../core/store/actions/ui-config.actions";
+import { setDisable, setLanguage} from "../../../core/store/actions/ui-config.actions";
 
 import { SEARCH_URL } from "../../../shared/constants";
 import { HttpClient } from "@angular/common/http";
@@ -29,6 +27,7 @@ import { clearNotifications } from 'src/app/core/store/actions/notifications.act
 import { SpinnerService } from "../../../core/services/spinner.service";
 import { Router } from "@angular/router";
 import { ProfileService } from 'src/app/core/services/profile.service';
+import { AuthService } from "../../../core/services/auth.service";
 
 @Component({
   selector: 'app-head',
@@ -38,7 +37,6 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 export class HeadComponent implements OnInit, OnDestroy {
   @ViewChild('discountSearchInput', { static: true }) discountSearchInput!: ElementRef;
   isSearchOnFocus$: Observable<boolean>;
-
   activeLink: string;
   SETTING_KEY = 'SETTINGS';
   languages = ['en', 'ru'];
@@ -60,10 +58,10 @@ export class HeadComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<IAppState>,
               private router: Router,
-              public dialog: MatDialog,
               private http: HttpClient,
               public homeService: HomeService,
               private spinner: SpinnerService,
+              private auth: AuthService,
               private translateService: TranslateService,
               private profile: ProfileService) {
 
@@ -192,18 +190,40 @@ export class HeadComponent implements OnInit, OnDestroy {
 
   discountSearch = new FormControl('');
   profileMenu = new FormControl('');
+  toHistory(s:any, tabName:string){
+    console.log('toHistory')
+    s.router.navigate(['/profile',`${tabName}`]);
+  }
+  toFavorite(s:any, tabName:string) {
+    console.log('toFavorite')
+    s.router.navigate(['/profile',`${tabName}`]);
+  }
+
+  toActiveDiscounts(s:any,tabName:string) {
+    console.log('toActiveDiscounts')
+    s.router.navigate(['/profile',`${tabName}`]);
+  }
+
+  logout(s:any) {
+    console.log('logout')
+    s.auth.logout();
+  }
+
   profileMenuItems = [
-    'Select category',
-    'History',
-    'Favorite',
-    'Active discounts',
-    'Logout',
-    'Close',
+    { link: 'history', label: 'COMMON.Head.history', function: this.toHistory },
+    { link: 'favorite', label: 'COMMON.Head.favorite', function: this.toFavorite },
+    { link: 'active', label: 'COMMON.Head.active', function: this.toActiveDiscounts },
+    { link: 'logout', label: 'COMMON.Head.logout', function: this.logout },
   ];
+
+  onClick(func:any, self:any, tabName:string){
+    console.log('onClick', self)
+    func(self, tabName);
+  }
 
   tabItems = [
     { link: 'home', label: 'COMMON.Head.home' },
-    { link: 'profile', label: 'COMMON.Head.profile' },
+    { link: 'profile/history', label: 'COMMON.Head.profile' },
     { link: 'vendor', label: 'COMMON.Head.vendor' },
     { link: 'statistic', label: 'COMMON.Head.statistic' },
   ];
