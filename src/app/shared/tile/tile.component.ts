@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TileComponent implements OnInit {
   remoteData: any;
+  isEditable: boolean;
 
   @Output() sendId :EventEmitter<any> = new EventEmitter();
   dropId(){
@@ -33,7 +34,9 @@ export class TileComponent implements OnInit {
   };
   
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) {
+    this.isEditable = this.router.url.includes('vendor')?true: false;
+  }
 
   setDotts(value: string, limit: number): string {
     return value.length < limit ? '' : '...';
