@@ -14,10 +14,8 @@ import { createSelector, Store, select } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { IAppState, IUiConfigState, IUser } from '../../../shared/interfaces';
 
-import { MatDialog } from '@angular/material/dialog';
-
 import { Observable, Subscription } from "rxjs";
-import { setLanguage } from "../../../core/store/actions/ui-config.actions";
+import { setDisable, setLanguage} from "../../../core/store/actions/ui-config.actions";
 
 import { SEARCH_URL } from "../../../shared/constants";
 import { HttpClient } from "@angular/common/http";
@@ -27,9 +25,9 @@ import { HomeService } from "../../../core/services/home.service";
 
 import { clearNotifications } from 'src/app/core/store/actions/notifications.actions';
 import { SpinnerService } from "../../../core/services/spinner.service";
-import { Router, NavigationEnd } from "@angular/router";
+import { Router } from "@angular/router";
 import { ProfileService } from 'src/app/core/services/profile.service';
-
+import { AuthService } from "../../../core/services/auth.service";
 
 @Component({
   selector: 'app-head',
@@ -38,8 +36,7 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 })
 export class HeadComponent implements OnInit, OnDestroy {
   @ViewChild('discountSearchInput', { static: true }) discountSearchInput!: ElementRef;
-  isSearching!: boolean;
-
+  isSearchOnFocus$: Observable<boolean>;
   activeLink: string;
   SETTING_KEY = 'SETTINGS';
   languages = ['en', 'ru'];
@@ -61,10 +58,10 @@ export class HeadComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<IAppState>,
               private router: Router,
-              public dialog: MatDialog,
               private http: HttpClient,
               public homeService: HomeService,
               private spinner: SpinnerService,
+              private auth: AuthService,
               private translateService: TranslateService,
               private profile: ProfileService) {
 
@@ -72,11 +69,7 @@ export class HeadComponent implements OnInit, OnDestroy {
 
     this.router.events.subscribe(value => {
       let currentRoute = router.url.toString();
-      if(currentRoute != '/home') {
-        this.isHomeTile = false;
-      } else {
-        this.isHomeTile = true;
-      }
+      this.isHomeTile = currentRoute == '/home';
     });
 
     const selectNotifications = (state: IAppState) => state.notifications;
@@ -96,6 +89,13 @@ export class HeadComponent implements OnInit, OnDestroy {
       (state: IUiConfigState) => state.appLanguage
     );
 
+    const selectSearchOnFocus = createSelector(
+      selecUiConfig,
+      (state: IUiConfigState) => state.searchIsActive
+    );
+
+    this.isSearchOnFocus$ = this.store.select(selectSearchOnFocus);
+
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.language$.subscribe((lang) => {
       this.translateService.use(lang);
@@ -107,7 +107,13 @@ export class HeadComponent implements OnInit, OnDestroy {
   }
 
   onFocusEvent(e:any) {
-    console.log(e)
+   //todo disable filter, sorting and clear filter and sorting data
+    this.setSearchOnFocus(e.type);
+  }
+
+  onBlur(e:any) {
+   //todo available filter and sor by default
+    this.setSearchOnFocus(e.type);
   }
 
 
@@ -125,22 +131,20 @@ export class HeadComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-
+    //search
     fromEvent(this.discountSearchInput.nativeElement, 'keyup').pipe(
       // get value
       map((event: any) => {
         return event.target.value;
       })
       // if character length greater then 2
-      , filter(res => res.length > 2)
+      , filter(res => res.length > 2 || res.length == 0)
       // Time in milliseconds between key events
       , debounceTime(2000)
       // If previous query is different from current
       , distinctUntilChanged()
       // subscription for response
     ).subscribe((text: string) => {
-
-      this.isSearching = true;
 
       this.searchGetCall(text).subscribe((res: any) => {
         if(res) {
@@ -151,9 +155,7 @@ export class HeadComponent implements OnInit, OnDestroy {
         } else {
           this.store.dispatch(requestDiscounts({data: []}))
         }
-        this.isSearching = false;
       }, (err) => {
-        this.isSearching = false;
         console.log('error', err);
       });
 
@@ -164,7 +166,6 @@ export class HeadComponent implements OnInit, OnDestroy {
         this.isLoaded = subs;
       })
 
-
     let localLang = localStorage.getItem(this.SETTING_KEY);
     if (localLang) {
       this.store.dispatch(setLanguage({ language: localLang }));
@@ -173,7 +174,6 @@ export class HeadComponent implements OnInit, OnDestroy {
 
   searchGetCall(term: string) {
     if (term === '') {
-      debugger
       this.store.dispatch(getNewDiscounts({ sortParam: '' }));
       return of([]);
     }
@@ -190,18 +190,40 @@ export class HeadComponent implements OnInit, OnDestroy {
 
   discountSearch = new FormControl('');
   profileMenu = new FormControl('');
+  toHistory(s:any, tabName:string){
+    console.log('toHistory')
+    s.router.navigate(['/profile',`${tabName}`]);
+  }
+  toFavorite(s:any, tabName:string) {
+    console.log('toFavorite')
+    s.router.navigate(['/profile',`${tabName}`]);
+  }
+
+  toActiveDiscounts(s:any,tabName:string) {
+    console.log('toActiveDiscounts')
+    s.router.navigate(['/profile',`${tabName}`]);
+  }
+
+  logout(s:any) {
+    console.log('logout')
+    s.auth.logout();
+  }
+
   profileMenuItems = [
-    'Select category',
-    'History',
-    'Favorite',
-    'Active discounts',
-    'Logout',
-    'Close',
+    { link: 'history', label: 'COMMON.Head.history', function: this.toHistory },
+    { link: 'favorite', label: 'COMMON.Head.favorite', function: this.toFavorite },
+    { link: 'active', label: 'COMMON.Head.active', function: this.toActiveDiscounts },
+    { link: 'logout', label: 'COMMON.Head.logout', function: this.logout },
   ];
+
+  onClick(func:any, self:any, tabName:string){
+    console.log('onClick', self)
+    func(self, tabName);
+  }
 
   tabItems = [
     { link: 'home', label: 'COMMON.Head.home' },
-    { link: 'profile', label: 'COMMON.Head.profile' },
+    { link: 'profile/history', label: 'COMMON.Head.profile' },
     { link: 'vendor', label: 'COMMON.Head.vendor' },
     { link: 'statistic', label: 'COMMON.Head.statistic' },
   ];
@@ -214,8 +236,11 @@ export class HeadComponent implements OnInit, OnDestroy {
     this.activeLink = val;
   }
 
-
   controlListNotes(){
     this.listIsVisibleOfUnreadNotes = !this.listIsVisibleOfUnreadNotes;
   };
+
+  setSearchOnFocus(val: any): void {
+    this.store.dispatch(setDisable({ isSearchOnFocus: val !== 'blur' }));
+  }
 }

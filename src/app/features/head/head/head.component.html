@@ -18,6 +18,7 @@
             <mat-label>{{ 'COMMON.Head.search' | translate }}</mat-label>
               <input
                 (focus)="onFocusEvent($event)"
+                (blur)="onBlur($event)"
                 #discountSearchInput
                 autocomplete="off"
                 matInput
@@ -57,12 +58,12 @@
         <mat-menu #menu="matMenu">
           <button
             mat-menu-item
-            (click)="pmClick($event)"
+            (click)="onClick(it.function, this, it.link)"
             *ngFor="let it of profileMenuItems">
-            {{ it }}
+            {{ it.label | translate}}
           </button>
         </mat-menu>
-        
+
       </div>
 
       <button mat-button [matMenuTriggerFor]="langMenu">{{ language$ | async | uppercase }}</button>

@@ -2,7 +2,7 @@ import { HTTP_INTERCEPTORS, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from "rxjs";
-import { catchError, tap } from 'rxjs/operators';
+import {catchError, delay, tap} from 'rxjs/operators';
 
 import { TokenStorageService } from './token-storage.service';
 import { NotificationService } from "./notification.service";
@@ -11,8 +11,8 @@ import { SpinnerService } from "./spinner.service";
 
 const TOKEN_HEADER_KEY = 'Authorization'; // for Spring Boot back-end
 
-@Injectable()
 // Function for adding token to http request
+@Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private token: TokenStorageService,
               private notification: NotificationService,
@@ -32,7 +32,9 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(authReq)
       }
     }
-    return next.handle(authReq).pipe(tap(
+    return next.handle(authReq).pipe(
+      delay(0),
+      tap(
       event => {
         if(event instanceof HttpResponse) {
           this.spinner.hideSpinner();
@@ -42,7 +44,7 @@ export class AuthInterceptor implements HttpInterceptor {
         this.spinner.hideSpinner();
         let errorMessage = `Error: ${error.error.message}`;
         this.notification.error(errorMessage);
-        if(error.status === 403) {//todo maybe 401/403 status code?
+        if(error.status === 401) {
           this.auth.logout();
         }
         return throwError(errorMessage);

@@ -35,6 +35,7 @@ export class StepCreateVendorComponent
   subFindVendor!: Subscription;
   subInitCountries!: Subscription;
   subInitCities!: Subscription;
+  subDeleteVendor!: Subscription;
 
   latControl = new FormControl();
   longControl = new FormControl();
@@ -63,16 +64,13 @@ export class StepCreateVendorComponent
   ) {
     this.vendors$ = this.vendorsService.getVendors();
 
-    // this.vendors$.subscribe((data) => console.log(data));
-
     const selectVendorState = (state: IAppState) => state.vendor;
     const selectVendorData = createSelector(
       selectVendorState,
       (state: IVendorState) => state.selectedVendor
     );
     this.selectedVendor$ = this.store.select(selectVendorData);
-
-    //b  this.vSub = this.selectedVendor$.subscribe((data) => console.log(data));
+    //END OF CONSTRUCTOR
   }
   ngAfterViewInit(): void {}
 
@@ -89,10 +87,6 @@ export class StepCreateVendorComponent
       description: new FormControl(null, [Validators.required]),
       contacts: new FormControl(null, [Validators.required]),
     });
-
-    // this.selectedVendor$.subscribe((data) => {
-
-    // });
   }
 
   ngOnDestroy(): void {
@@ -130,27 +124,28 @@ export class StepCreateVendorComponent
     this.longControl.enable();
   }
   selectCountry(countryId: string) {
-    //console.log(countryId)
     this.currentCountryId = countryId;
     this.cityControl.enable();
     this.initCities();
   }
 
-  // isCity(){
-  //   return this.currentCityId.length >0? true: false;
-  // }
-
   removeVendor() {
-    //ev.prevent;
-    this.selectedVendor$.subscribe((data) => {
-      const vendorId = data.id;
-     // console.log(data);
-      this.http
-        .delete<any>(`${API_URL}/vendors/${vendorId}`)
-        .subscribe((resp) => console.log(resp));
+   this.subDeleteVendor =   this.selectedVendor$.subscribe((vendor) => {
+      if (!confirm(`Do you really want delete vendor ${vendor.name}?`)) {
+        const vendorId = vendor.id;
+        this.http.delete<any>(`${API_URL}/vendors/${vendorId}`);
+      }
     });
+    this.subDeleteVendor.unsubscribe();
+  }
 
-  //  console.log('delete');
+  selectVendor(vendor: any) {
+    this.store.dispatch(saveVendorData(vendor));
+    this.vendorForm.patchValue({
+      description: vendor.description,
+      contacts: vendor.contacts,
+    });
+    this.countryControl.enable();
   }
 
   addCoordinates() {
@@ -168,17 +163,23 @@ export class StepCreateVendorComponent
       .post<any>(`${API_URL}/locations`, req)
       .subscribe((resp) => console.log(resp));
   }
-  addCountry() {
-    const newCountry = this.countryControl.value;
-    this.subAddCountry = this.http
-      .post<any>(`${API_URL}/countries`, { name: newCountry })
-      .subscribe((data) => this.initCountries());
+
+  removeCity() {
+    const targetCity = this.cityControl.value;
+    if (window.confirm(`Do you really want delete city ${targetCity}?`)) {
+      this.http
+        .delete<any>(`${API_URL}/cities/${targetCity}`)
+        .subscribe((data) => this.initCountries());
+    }
   }
+
   removeCountry() {
     const targetCountry = this.countryControl.value;
-    this.http
-      .delete<any>(`${API_URL}/countries/${targetCountry}`)
-      .subscribe((data) => this.initCountries());
+    if (window.confirm(`Do you really want delete country ${targetCountry}?`)) {
+      this.http
+        .delete<any>(`${API_URL}/countries/${targetCountry}`)
+        .subscribe((data) => this.initCountries());
+    }
   }
 
   addCity() {
@@ -190,13 +191,19 @@ export class StepCreateVendorComponent
       .subscribe((data) => this.initCities());
   }
 
+  addCountry() {
+    const newCountry = this.countryControl.value;
+    this.subAddCountry = this.http
+      .post<any>(`${API_URL}/countries`, { name: newCountry })
+      .subscribe((data) => this.initCountries());
+  }
+
   reformatLocation(country: any) {
     return { id: country.id, name: country.name };
   }
 
   private _filter(value: string): any {
     const filterValue = value.toLowerCase();
-
     return this.countryOptions.filter((option) =>
       option.name.toLowerCase().includes(filterValue)
     );
@@ -209,34 +216,21 @@ export class StepCreateVendorComponent
     );
   }
 
-  selectVendor(vendor: any) {
-    //console.log('selectVendor -> ' + vendor.id);
-    //let target = null;
-    this.subFindVendor = this.vendors$.subscribe((data) => {
-      const target = data.find((el) => el.id === vendor.id);
-      if (target) {
-        //console.log(target);
-        const newSelectedVendor = {
-          id: target.id,
-          name: target.name,
-          description: target.description,
-          contacts: target.contacts,
-        };
-       // console.log(newSelectedVendor);
-        this.store.dispatch(saveVendorData(newSelectedVendor));
-        this.vendorForm.patchValue({
-          name: target.name,
-          description: target.description,
-          contacts: target.contacts,
-        });
-        this.countryControl.enable();
-      }
-    });
+  // selectVendorEv(ev: any) {
+  //   const temp = this.vendorForm.get('name')?.value;
+  //   console.log(temp);
+  //   console.log(ev);
+  // }
+
+  displayVendorName(val: any) {
+    if (val) {
+      return val.name;
+    }
   }
 
   saveVendor(): void {
     this.vendorForm.disable();
-
+      console.log('saveVendor');
     const vendorFormData = this.vendorForm.value;
     this.svSub = this.vendorsService.createVendor(vendorFormData).subscribe(
       (data) => {
@@ -247,7 +241,7 @@ export class StepCreateVendorComponent
           contacts: data.contacts,
         };
         this.store.dispatch(saveVendorData(vendorData));
-       // console.log(data);
+        this.vendors$ = this.vendorsService.getVendors();
       },
       (err) => {
         console.error(err);
@@ -259,11 +253,6 @@ export class StepCreateVendorComponent
         this.vendorForm.enable();
       }
     );
-
-    // Function for delete vendors from BD!!!!!!!!!! Warning!!!!!
-    // this.vendorsService._deleteVendor();
-
-    // this.store.dispatch(SaveVendorId({id: }))
   }
 
   focusOncountry() {}

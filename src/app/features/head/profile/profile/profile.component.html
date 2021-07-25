@@ -5,7 +5,7 @@
   >
     <div class="col-md-3 col-sm-12 h5">
       <p>
-        You are loginded as: <span>{{ data.role }}</span>
+        You are login as: <span>{{ data.role }}</span>
       </p>
     </div>
     <div class="col-md-4 col-sm-12 h5">
@@ -23,7 +23,8 @@
   <div class="container">
     <div id="content">
       <div id="main-content">
-        <mat-tab-group>
+        <button mat-raised-button (click)="demo1BtnClick()">Tab Demo 1!</button>
+        <mat-tab-group [(selectedIndex)]="profileTabIndex">
 
           <mat-tab label="Subscriptions" *ngIf="categories$ | async as data">
             <p class="text-center mt-4 blueColor">
@@ -49,13 +50,13 @@
             </table>
           </mat-tab>
 
-          <mat-tab label="Favorit">
+          <mat-tab label="Favorite">
             <app-tile-profile></app-tile-profile>
           </mat-tab>
 
           <mat-tab label="History" *ngIf="profileCoupons$ | async as data">
-           
-            <table mat-table [dataSource]="data" class="mat-elevation-z8">
+
+            <table mat-table [dataSource]="data">
               <ng-container matColumnDef="Name">
                 <th mat-header-cell *matHeaderCellDef>Discount Name</th>
                 <td mat-cell *matCellDef="let data">{{ data.discount.name }}</td>

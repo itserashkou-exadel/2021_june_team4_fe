@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 import { IDiscount, IAppState, IMapMarker } from 'src/app/shared/interfaces';
@@ -25,6 +25,8 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  @Input() isSearchOnFocus$: Observable<boolean> | undefined;
+
   isMap: Observable<boolean>;
   discountsData: Observable<IDiscount[]>;
   markers$: Observable<IMapMarker[]>;

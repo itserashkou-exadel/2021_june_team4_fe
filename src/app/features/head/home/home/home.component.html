@@ -4,11 +4,11 @@
     <mat-form-field appearance="fill">
       <mat-label>{{ "COMMON.Home.sort" | translate }}</mat-label>
       <mat-select matNativeControl (selectionChange)="sortDiscountsData($event.value)"
-      [disabled]="isMap | async"  [(value)]="currentSortValue">
+      [disabled]="isMap | async" [(value)]="currentSortValue">
 
       <mat-option *ngFor="let el of sortValuesSet" [value]="el.value">{{ el.uiValue }}</mat-option>
 
-       
+
       </mat-select>
     </mat-form-field>
 
