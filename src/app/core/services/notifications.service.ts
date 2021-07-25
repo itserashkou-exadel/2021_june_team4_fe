@@ -1,17 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { API_URL, MOCK_API_URL } from 'src/app/shared/constants';
+import { COUPONS_URL } from 'src/app/shared/constants';
+import { httpOptions } from './description.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationsService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   requestPromo(discountId: string): Observable<any> {
-    const response = this.http.get(`${API_URL}/discounts/${discountId}`);
+    const response = this.http.post(
+      `${COUPONS_URL}?discountId=${discountId}`,
+      httpOptions
+    );
     return response;
   }
 }
+// function httpOptions(arg0: string, httpOptions: any) {
+//   throw new Error('Function not implemented.');
+// }
