@@ -16,7 +16,7 @@ export class HomeService {
   }
 
   handleRemoteDiscount(remoteDiscount: any) {
-    //console.log(remoteDiscount);
+    console.log(remoteDiscount);
 
     let tags = '';
     remoteDiscount.tags.forEach((el: any) => {
@@ -36,8 +36,8 @@ export class HomeService {
       description: remoteDiscount.description ,
       percent: (remoteDiscount.value +=
         remoteDiscount.discountType === 'PRICE' ? '%' : ''),
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
+      image: remoteDiscount.discountImages.length ? remoteDiscount.discountImages[0].image: 'https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png',
+        //'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
       coordinates: remoteDiscount.vendorLocations ? getCoordinates(remoteDiscount) : [[50.094, 26.981]],
     };
     //console.log(localDiscount);

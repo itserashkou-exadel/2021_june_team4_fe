@@ -77,7 +77,6 @@
     <a mat-tab-link  *ngFor="let tab of tabItems" class="pl-3 p-0"
     (click)="activeLink = tab.link"
     [active]="activeLink == tab.link"
-
        [routerLink]="tab.link">
       {{tab.label | translate}}
     </a>
