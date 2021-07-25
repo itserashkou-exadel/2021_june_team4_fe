@@ -26,7 +26,11 @@
       "home": "Home",
       "profile": "Profile",
       "vendor": "Vendor",
-      "statistic": "Statistic"
+      "statistic": "Statistic",
+      "history": "History",
+      "favorite": "Favorites",
+      "active": "Active discounts",
+      "logout": "Logout"
     },
     "Home": {
       "sort": "Sort by",

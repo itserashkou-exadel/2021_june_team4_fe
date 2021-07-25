@@ -26,7 +26,8 @@
   <div class="container">
     <div id="content">
       <div id="main-content">
-        <mat-tab-group>
+        <button mat-raised-button (click)="demo1BtnClick()">Tab Demo 1!</button>
+        <mat-tab-group [(selectedIndex)]="profileTabIndex">
           <mat-tab
             label="{{ 'COMMON.Profile.subscriptions' | translate }}"
             *ngIf="categories$ | async as data"

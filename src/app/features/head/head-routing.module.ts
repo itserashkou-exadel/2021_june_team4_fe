@@ -35,7 +35,7 @@ const routes: Routes = [
         component: StatisticComponent,
       },
       {
-        path: 'profile',
+        path: 'profile/:profileTabName',
         component: ProfileComponent
       }
     ]
