@@ -28,11 +28,12 @@ export class TileComponent implements OnInit {
     category: 'category',
     isActive: true,
     description: 'string',
+    favorite: false,
     percent: '10%',
     image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
     coordinates: [[45.094, 34.981]],
   };
-  
+
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.isEditable = this.router.url.includes('vendor')?true: false;

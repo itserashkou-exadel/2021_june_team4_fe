@@ -30,7 +30,7 @@ export class HomeService {
       expired: remoteDiscount.endTime,
       location: 'remoteDiscount',
       tag: tags,
-
+      favorite: remoteDiscount.favorite,
       category: remoteDiscount.category.name,
       isActive: remoteDiscount.active,
       description: remoteDiscount.description ,

@@ -38,7 +38,7 @@
       {{ "COMMON.Tile.info" | translate }}
     </button>
 
-    <mat-icon aria-hidden="false" aria-label="Example home icon">
+    <mat-icon aria-hidden="false" [ngStyle]="{'color': discount$.favorite ? 'red' : 'grey'}" aria-label="Favorite">
       favorite
     </mat-icon>
   </mat-card-actions>

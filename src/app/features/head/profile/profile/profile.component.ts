@@ -79,6 +79,7 @@ export class ProfileComponent implements OnInit {
     this.DescriptionAll$ = this.profile.getDescriptionAll();
     this.profileCoupons$ = this.profile.getCoupons();
   }
+
   public demo1BtnClick() {
     const tabCount = 3;
     this.profileTabIndex = (this.profileTabIndex + 1) % tabCount;
@@ -90,7 +91,7 @@ export class ProfileComponent implements OnInit {
     )
       .subscribe(data => {
         let objTab:any = this.tabs.find(el => el.tabName === data);
-        // this.profileTabIndex = objTab.index;
+        this.profileTabIndex = objTab.index;
         // this.profileTabIndex = 2;
 
         this.change.markForCheck();
