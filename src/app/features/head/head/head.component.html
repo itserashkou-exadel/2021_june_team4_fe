@@ -58,9 +58,9 @@
         <mat-menu #menu="matMenu">
           <button
             mat-menu-item
-            (click)="pmClick($event)"
+            (click)="onClick(it.function, this, it.link)"
             *ngFor="let it of profileMenuItems">
-            {{ it }}
+            {{ it.label | translate}}
           </button>
         </mat-menu>
 
