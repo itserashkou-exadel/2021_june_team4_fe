@@ -201,11 +201,12 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
       vendorId: this.vendor.id,
       vendorLocationsIds: this.discountForm.get('locations')?.value,
     };
-
+console.log(newDiscount)
     if (this.currentDiscount) {
       this.subUpdateRequest = this.discountService
         .updateDiscount(JSON.stringify(newDiscount), this.currentDiscount)
         .subscribe((resp) => {
+          console.log(resp);
           this.getDisounts(this.vendor.id);
           this.currentDiscount = null;
           this.notification.success(
