@@ -22,15 +22,10 @@
       "favorite": "Favorite" ,
       "activeDiscounts": "Active discounts" ,
       "logout": "Logout" ,
-      "close": "Close", 
       "home": "Home",
       "profile": "Profile",
       "vendor": "Vendor",
-      "statistic": "Statistic",
-      "history": "History",
-      "favorite": "Favorites",
-      "active": "Active discounts",
-      "logout": "Logout"
+      "statistic": "Statistic"
     },
     "Home": {
       "sort": "Sort by",
@@ -58,8 +53,6 @@
     "Profile": {
       "logged": "You are logged in as",
       "location": "Location",
-      "heading": "Here you can specify which categories would you like to get notification from!",
-      "subscriptions": "Subscriptions",
       "favorite": "Favorite",
       "history": "History",
       "activeDiscounts": "Active Discounts",
