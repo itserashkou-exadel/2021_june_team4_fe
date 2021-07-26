@@ -1,29 +1,27 @@
 <div class="second-step__btn-top-wrapper">
-<div class="edit-discount-head" *ngIf=" selectedVendor$ | async as data">
-  <h3>Vendor : <b>{{data.name}}</b></h3>
-  <button
-    mat-flat-button
-    color="primary"
-    label="create"
-    (click)="activeComponent = 'create'"
-    *ngIf="activeComponent === 'edit'"
-  >
-    <mat-icon>add_box</mat-icon>
-    {{ "COMMON.Stepper.addBp" | translate }}
-  </button>
+  <div class="edit-discount-head">
+    <button
+      mat-flat-button
+      color="primary"
+      label="create"
+      (click)="activeComponent = 'create'"
+      *ngIf="activeComponent === 'edit'"
+    >
+      <mat-icon>add_box</mat-icon>
+      {{ "COMMON.Stepper.addBp" | translate }}
+    </button>
 
-  <button
-    mat-flat-button
-    color="primary"
-    label="create"
-    (click)="activeComponent = 'edit'"
-    *ngIf="activeComponent === 'create'"
-  >
-    <mat-icon>edit_box</mat-icon>
-    Edit BP
-  </button>
-</div>
-
+    <button
+      mat-flat-button
+      color="primary"
+      label="create"
+      (click)="activeComponent = 'edit'"
+      *ngIf="activeComponent === 'create'"
+    >
+      <mat-icon>edit_box</mat-icon>
+      Edit BP
+    </button>
+  </div>
 </div>
 <div class="tile-wrapper">
   <div class="tiles" *ngIf="activeComponent === 'edit'">
@@ -56,9 +54,10 @@
       <!-- Bonus program Category select -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
         <mat-label>Category</mat-label>
-        <mat-select formControlName="category"
-         (selectionChange)="selectCategory($event.value)"
-         >
+        <mat-select
+          formControlName="category"
+          (selectionChange)="selectCategory($event.value)"
+        >
           <mat-option
             *ngFor="let category of categories$ | async"
             [value]="category.id"
@@ -67,11 +66,7 @@
         </mat-select>
       </mat-form-field>
 
-      <button
-        type="button"
-        class="add-btn"
-        (click)="createCategory()"
-      >
+      <button type="button" class="add-btn" (click)="createCategory()">
         <mat-icon>add_box</mat-icon>
       </button>
       <mat-form-field class="example-full-width" appearance="fill">
@@ -85,21 +80,14 @@
       <!-- Bonus program Tags select -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
         <mat-label>Tags</mat-label>
-        <mat-select
-          formControlName="tags"
-          multiple
-        >
+        <mat-select formControlName="tags" multiple>
           <mat-option *ngFor="let tag of tags$ | async" [value]="tag.id">{{
             tag.name
           }}</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <button
-        type="button"
-        class="add-btn"
-        (click)="createTag()"
-      >
+      <button type="button" class="add-btn" (click)="createTag()">
         <mat-icon>add_box</mat-icon>
       </button>
       <mat-form-field class="example-full-width" appearance="fill">
@@ -136,22 +124,14 @@
       <!-- Bonus program event's start -->
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>{{ "COMMON.Stepper.eventStart" | translate }}</mat-label>
-        <input
-          matInput
-          type="date"
-          formControlName="eventStart"
-        />
+        <input matInput type="date" formControlName="eventStart" />
       </mat-form-field>
       <!-- /Bonus program event's start -->
 
       <!-- Bonus program event's end -->
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>{{ "COMMON.Stepper.eventEnd" | translate }}</mat-label>
-        <input
-          matInput
-          type="date"
-          formControlName="eventEnd"
-        />
+        <input matInput type="date" formControlName="eventEnd" />
       </mat-form-field>
       <!-- /Bonus program event's end -->
     </div>
@@ -191,11 +171,7 @@
       <!-- Select location -->
       <mat-form-field appearance="fill" class="example-full-width form-field">
         <mat-label>Location</mat-label>
-        <mat-select
-          multiple
-         
-          formControlName="locations"
-        >
+        <mat-select multiple formControlName="locations">
           <mat-option
             *ngFor="let location of vendorLocations"
             [value]="location.id"
@@ -209,9 +185,26 @@
     </div>
 
     <div class="second-step__btns btns-wrapper">
-      <button class="save-btn" mat-flat-button color="warn" matStepperPrevious>
+      <button
+        class="save-btn"
+        mat-flat-button
+        color="primary"
+        matStepperPrevious
+      >
         {{ "COMMON.Global.back" | translate }}
       </button>
+      <button
+        *ngIf="currentDiscount"
+        type="submit"
+        class="save-btn"
+        mat-flat-button
+        color="warn"
+        matStepperNext
+        (click)="removeDiscount(); $event.preventDefault()"
+      >
+        Delete
+      </button>
+
       <button
         type="submit"
         class="save-btn"

@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { createSelector, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { NotificationService } from 'src/app/core/core.module';
 import { CategoriesService } from 'src/app/core/services/categories.service';
 import { DiscountService } from 'src/app/core/services/discount.service';
 import { HomeService } from 'src/app/core/services/home.service';
@@ -51,12 +52,18 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   subVendorDiscounts!: Subscription;
   subTags!: Subscription;
   subSlelectLocations!: Subscription;
+  subUpdateRequest!: Subscription;
+  subCreateRequest!: Subscription;
+  subRemoveDiscountReq!: Subscription;
 
   vendor: any;
   vendorDiscounts!: IDiscount[];
   vendorLocations: any;
 
   DiscountsTypes: string[] = ['PERCENT', 'PRICE'];
+
+  currentDiscount: any = null;
+  currentDiscountName: string = '';
 
   constructor(
     private discountService: DiscountService,
@@ -65,7 +72,8 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     private store: Store<IAppState>,
     private http: HttpClient,
     private categoriesService: CategoriesService,
-    private tagsService: TagsService
+    private tagsService: TagsService,
+    private notification: NotificationService
   ) {
     this.newCategoryInput = new FormControl();
     this.newTagInput = new FormControl();
@@ -74,31 +82,37 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     this.discounts$ = this.discountService.getDiscounts();
     this.vendors$ = this.vendorsService.getVendors();
 
-    // this.vendorLocations$ = this.vendorsService.getVendorDiscounts(this.vendor.id);
     const selectVendorState = (state: IAppState) => state.vendor;
     const selectVendorData = createSelector(
       selectVendorState,
       (state: IVendorState) => state.selectedVendor
     );
+
     this.selectedVendor$ = this.store.select(selectVendorData);
-    this.subSlelectVendor = this.selectedVendor$.subscribe((vendor) => {
+
+    this.subSlelectVendor = this.selectedVendor$.subscribe((vendor) => { 
       this.subSlelectLocations = this.vendorsService
         .getVendorLocations(vendor.id)
         .subscribe((data) => {
           this.vendorLocations = data;
         });
+
       this.getVendorsById(vendor.id).subscribe((data) => {
         this.vendor = data;
+        this.getDisounts(vendor.id);
       });
-      this.subVendorDiscounts = this.vendorsService
-        .getVendorDiscounts(vendor.id)
-        .subscribe((data) => {
-          this.vendorDiscounts = data.map((rawDiscount: any) =>
-            this.handleDiscount.handleRemoteDiscount(rawDiscount)
-          );
-        });
     });
     //END OF CONSTRUCTOR
+  }
+
+  getDisounts(vendorId: string) {
+    this.subVendorDiscounts = this.vendorsService
+      .getVendorDiscounts(vendorId)
+      .subscribe((data) => {
+        this.vendorDiscounts = data.map((rawDiscount: any) =>
+          this.handleDiscount.handleRemoteDiscount(rawDiscount)
+        );
+      });
   }
 
   ngOnInit(): void {
@@ -131,14 +145,37 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     if (this.subVendorDiscounts) {
       this.subVendorDiscounts.unsubscribe();
     }
+    if (this.subUpdateRequest) {
+      this.subUpdateRequest.unsubscribe();
+    }
+    if (this.subCreateRequest) {
+      this.subCreateRequest.unsubscribe();
+    }
+    if (this.subRemoveDiscountReq) {
+      this.subRemoveDiscountReq.unsubscribe();
+    }
   }
 
-  selectCategory(ev: any){
+  selectCategory(ev: any) {
     console.log(ev);
   }
 
+  removeDiscount() {
+    if (
+      confirm(`Do you really want delete vendor ${this.currentDiscountName}?`)
+    ) {
+      this.subRemoveDiscountReq = this.discountService
+        .removeDiscountById(this.currentDiscount)
+        .subscribe((resp) => {
+          this.getDisounts(this.vendor.id);
+          this.notification.info(
+            `Discount ${this.currentDiscountName} successfully removed !`
+          );
+        });
+    }
+  }
+
   saveDiscount() {
-    console.log('saveDiscount');
     const newDiscount = {
       active: true,
       categoryId: this.discountForm.get('category')?.value, //'3fa85f64-5717-4562-b3fc-2c963f66afa6',
@@ -155,8 +192,27 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
       vendorId: this.vendor.id,
       vendorLocationsIds: this.discountForm.get('locations')?.value,
     };
-    console.log(newDiscount)
-    this.discountService.createDiscount(JSON.stringify(newDiscount)).subscribe(resp => console.log(resp));
+
+    if (this.currentDiscount) {
+      this.subUpdateRequest = this.discountService
+        .updateDiscount(JSON.stringify(newDiscount), this.currentDiscount)
+        .subscribe((resp) => {
+          this.getDisounts(this.vendor.id);
+          this.currentDiscount = null;
+          this.notification.success(
+            `Dicscount ${newDiscount.name} successfully updated !`
+          );
+        });
+    } else {
+      this.subCreateRequest = this.discountService
+        .createDiscount(JSON.stringify(newDiscount))
+        .subscribe((resp) => {
+          this.getDisounts(this.vendor.id);
+          this.notification.success(
+            `Dicscount ${newDiscount.name} successfully created !`
+          );
+        });
+    }
   }
 
   saveBP(): void {
@@ -189,12 +245,11 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     this.tagsService.createTag({ name: newTagName });
   }
 
-  editDiscount(ev: any) {
-
-    this.discountService.getDiscountById(ev).subscribe((discount) => {
-      console.log(discount);
+  editDiscount(discountId: any) {
+    this.currentDiscount = discountId;
+    this.discountService.getDiscountById(discountId).subscribe((discount) => {
       this.activeComponent = 'create';
-
+      this.currentDiscountName = discount.name;
       this.discountForm.patchValue({
         name: discount.name,
         category: discount.category.id,
@@ -208,8 +263,6 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
         size: discount.value,
         promo: discount.promo,
       });
-      console.log( this.discountForm.get('category')?.value);
     });
   }
-
 }

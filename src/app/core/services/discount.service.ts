@@ -14,8 +14,8 @@ const httpOptions = {
 export class DiscountService {
   constructor(private http: HttpClient) {}
 
-  handleDiscout(rawDiscount: any) {
-    const newDiscount = {};
+  removeDiscountById(discountId: string){
+    return this.http.delete(`${API_URL}/discounts/${discountId}`)
   }
 
   getDiscountById(discountId: string): Observable<any> {
@@ -29,6 +29,14 @@ export class DiscountService {
   createDiscount(discount: any): Observable<any> {
     return this.http.post<IDiscount>(
       `${API_URL}/discounts`,
+      discount,
+      httpOptions
+    );
+  }
+
+  updateDiscount(discount: any, discountId: string): Observable<any> {
+    return this.http.put<IDiscount>(
+      `${API_URL}/discounts/${discountId}`,
       discount,
       httpOptions
     );
