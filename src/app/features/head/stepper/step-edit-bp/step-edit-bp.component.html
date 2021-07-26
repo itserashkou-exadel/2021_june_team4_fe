@@ -118,7 +118,13 @@
         <mat-label>
           {{ 'COMMON.Stepper.SecondStep.bpPhotos' | translate }}
         </mat-label>
-        <input matInput placeholder="Add some photos" formControlName="image" />
+        <input
+          matInput
+          placeholder="{{
+            'COMMON.Stepper.SecondStep.bpPhotosPlaceholder' | translate
+          }}"
+          formControlName="image"
+        />
       </mat-form-field>
 
       <!-- /Bonus program photos -->
@@ -132,7 +138,9 @@
         </mat-label>
         <textarea
           matInput
-          placeholder="Description"
+          placeholder="{{
+            'COMMON.Stepper.SecondStep.descriptionPlaceholder' | translate
+          }}"
           formControlName="description"
         ></textarea>
       </mat-form-field>
