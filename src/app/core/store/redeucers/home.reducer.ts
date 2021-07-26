@@ -12,6 +12,7 @@ export const initialState: IHomeState = {
       location: 'Vitebsk',
       tag: 'tag',
       category: 'category',
+      favorite: false,
       isActive: true,
       description:
         'Here is a short description Here is a short description Here is a short description Here is a short description',
@@ -26,6 +27,7 @@ export const initialState: IHomeState = {
       added: '2021-06-20T12:00:00',
       expired: '2021-07-20T12:00:00',
       location: 'Vitebsk',
+      favorite: false,
       tag: 'tag',
       category: 'category',
       isActive: true,

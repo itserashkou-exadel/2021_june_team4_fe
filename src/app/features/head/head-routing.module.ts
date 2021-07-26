@@ -7,6 +7,9 @@ import { StatisticComponent } from "./statistic/statistic/statistic.component";
 import { ProfileComponent } from "./profile/profile/profile.component";
 import { DescriptionComponent } from "./description/description.component";
 import { HomeComponent } from "./home/home/home.component";
+import {FavoriteComponent} from "./profile/profile/favorite/favorite.component";
+import {HistoryComponent} from "./profile/profile/history/history.component";
+import {ActiveComponent} from "./profile/profile/active/active.component";
 
 const routes: Routes = [
   {
@@ -35,8 +38,22 @@ const routes: Routes = [
         component: StatisticComponent,
       },
       {
-        path: 'profile/:profileTabName',
-        component: ProfileComponent
+        path: 'profile',
+        component: ProfileComponent,
+        children: [
+          {
+            path: 'history',
+            component: HistoryComponent,
+          },
+          {
+            path: 'favorite',
+            component: FavoriteComponent,
+          },
+          {
+            path: 'active',
+            component: ActiveComponent,
+          },
+        ]
       }
     ]
   }

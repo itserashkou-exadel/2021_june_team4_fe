@@ -14,6 +14,7 @@ import {
   IVendor,
   IVendorState,
 } from 'src/app/shared/interfaces';
+import {NotificationService} from "../../../../core/services/notification.service";
 
 @Component({
   selector: 'app-step-create-vendor',
@@ -60,6 +61,7 @@ export class StepCreateVendorComponent
   constructor(
     private vendorsService: VendorsService,
     private store: Store<IAppState>,
+    private notification: NotificationService,
     private http: HttpClient
   ) {
     this.vendors$ = this.vendorsService.getVendors();
@@ -249,6 +251,7 @@ export class StepCreateVendorComponent
       },
       () => {
         console.log('All data were saved successfully');
+        this.notification.success('All data were saved successfully');
         this.resetForm();
         this.vendorForm.enable();
       }
