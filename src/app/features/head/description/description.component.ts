@@ -56,13 +56,16 @@ export class DescriptionComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(getDescription({ id: this.discountId }));
     this.descriptionData$.subscribe((discount) => {
+      if (!discount) {
+        return;
+      }
       const cords = discount.vendorLocations.map((location: any) => [
         location.latitude,
         location.longitude,
       ]);
       let marker: IMapMarker = {
         cords: cords,
-        text: discount.name
+        text: discount.name,
       };
       this.discountMarker = [marker];
     });

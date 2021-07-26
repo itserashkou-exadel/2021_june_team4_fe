@@ -11,6 +11,7 @@ import { DiscountService } from 'src/app/core/services/discount.service';
 import { HomeService } from 'src/app/core/services/home.service';
 import { TagsService } from 'src/app/core/services/tags.service';
 import { VendorsService } from 'src/app/core/services/vendors.service';
+import { saveVendorData } from 'src/app/core/store/actions/vendor.action';
 import { API_URL } from 'src/app/shared/constants';
 import {
   IAppState,
@@ -61,8 +62,8 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   vendorLocations: any;
 
   DiscountsTypes: Array<DiscountType> = [
-    {value: '', viewValue: 'COMMON.Stepper.SecondStep.typePercent'}, 
-    {value: '', viewValue: 'COMMON.Stepper.SecondStep.typePrice'}
+    { value: '', viewValue: 'COMMON.Stepper.SecondStep.typePercent' },
+    { value: '', viewValue: 'COMMON.Stepper.SecondStep.typePrice' },
   ];
 
   currentDiscount: any = null;
@@ -118,7 +119,6 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
       .getVendorDiscounts(vendorId)
       .subscribe((data) => {
         this.vendorDiscounts = data.map((rawDiscount: any) => {
-          console.log(vendorId);
           return this.handleDiscount.handleRemoteDiscount(rawDiscount);
         });
       });
@@ -145,6 +145,14 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.store.dispatch(
+      saveVendorData({
+        id: '',
+        name: '',
+        description: '',
+        contacts: '',
+      })
+    );
     if (this.aSub) {
       this.aSub.unsubscribe();
     }
@@ -201,7 +209,7 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
       vendorId: this.vendor.id,
       vendorLocationsIds: this.discountForm.get('locations')?.value,
     };
-console.log(newDiscount)
+    console.log(newDiscount);
     if (this.currentDiscount) {
       this.subUpdateRequest = this.discountService
         .updateDiscount(JSON.stringify(newDiscount), this.currentDiscount)
@@ -260,7 +268,6 @@ console.log(newDiscount)
     this.discountService.getDiscountById(discountId).subscribe((discount) => {
       this.activeComponent = 'create';
       this.currentDiscountName = discount.name;
-      console.log(discount);
       this.discountForm.setValue({
         name: discount.name,
         category: discount.category.id,
@@ -278,8 +285,6 @@ console.log(newDiscount)
           // this.makeLocation(el)
         ),
       });
-      console.log(this.vendorLocations);
-      console.log(this.discountForm.get('locations')?.value);
     });
   }
 
