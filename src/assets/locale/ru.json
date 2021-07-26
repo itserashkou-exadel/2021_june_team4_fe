@@ -17,29 +17,31 @@
     "Head": {
       "name": "Никита Мартынов",
       "search": "Поиск",
+      "selectCategory": "Выбрать категорию" ,
+      "history": "История" ,
+      "favorite": "Избранное" ,
+      "activeDiscounts": "Активные дискаунты" ,
+      "logout": "Выйти" , 
       "home": "Домашняя",
       "profile": "Профиль",
       "vendor": "Вендор",
-      "statistic": "Статистика",
-      "history": "История",
-      "favorite": "Избранные",
-      "active": "Активные скидки",
-      "logout": "Выход"
+      "statistic": "Статистика"
     },
     "Home": {
       "sort": "Сортировать по",
-      "date": "По дате",
-      "time": "По времени",
-      "rating": "По рейтингу",
       "default": "По умолчанию",
-      "filter": {
-        "vendor": "Выбрать вендора",
-        "category": "Выбрать категорию",
-        "locations": "Локации",
-        "tag": "Выбрать тег",
-        "tags": "Выбранные теги",
-        "apply": "Применить"
-      }
+      "startTime": "По дате начала",
+      "endTime": "По дате окончания",
+      "name": "По имени"
+    },
+    "SideBar": {
+      "vendor": "Выберите вендора",
+      "category": "Выберите категорию",
+      "location": "Локация",
+      "tag": "Выберите тeг",
+      "none": "Ничего",
+      "apply": "Применить",
+      "reset": "Сбросить"
     },
     "Tile": {
       "info": "Подробнее",
@@ -48,28 +50,73 @@
       "vendor": "Вендор",
       "expired": "Срок действия"
     },
+    "Profile": {
+      "logged": "Вы вошли как",
+      "location": "Локация",
+      "favorite": "Избранное",
+      "history": "История",
+      "activeDiscounts":"Активные дискаунты",
+      "category": "Категория",
+      "discountName": "Название дискаунта",
+      "promo": "Промо",
+      "endDate": "Дата окончания"
+    },
     "Stepper": {
-      "description": "Описание",
-      "eventStart": "Начало Программы",
-      "eventEnd": "Конец Программы",
-      "location": "Местоположение",
-      "bonusSize": "Размер скидки",
-      "vendorName": "Имя вендора",
-      "vendorCategory": "Категория",
-      "vendorTag": "Тег",
-      "vendorLogo": "Логотип Вендора",
-      "vendorSchedule": "График вендора",
-      "vendorContacts": "Контакты вендора",
-      "addBp": "Добавить БП",
       "vendorInfo": "Информация о вендоре",
-      "vendorBpInfo": "Информация о БП",
+      "FirstStep": {
+        "vendorName": "Имя вендора",
+        "vendorNamePlaceholder": "Добавьте имя вендора",
+        "vendorNameError": "Имя вендора не может быть пустым",
+        "vendorDescription": "Описание",
+        "vendorDescriptionPlaceholder": "Добавьте описание",
+        "vendorDescriptionError": "Описание не может быть пустым",
+        "vendorContacts": "Контакты вендора",
+        "vendorContactsPlaceholder": "Добавьте контакты",
+        "vendorContactsError": "Контакты не могут быть пустыми",
+        "country": "Выберите или добавьте страну",
+        "countryLabel": "Страна",
+        "city": "Выберите или добавьте город",
+        "cityLabel": "Город",
+        "coordinates": "Добавьте координаты",
+        "latitude": "Широта",
+        "longitude": "Долгота"
+      },
+      "vendorBpInfo": "Информация о дискаунте",
+      "SecondStep": {
+        "vendor": "Вендор",
+        "addBp": "Добавить дискаунт",
+        "editBp": "Редактировать дискаунт",
+        "bpName": "Название",
+        "addBpName": "Добавьте название дискаунта",
+        "category": "Категория",
+        "addCategory": "Добавьте новую категорию",
+        "tags": "Теги",
+        "addTags": "Добавьте новый тег",
+        "bpPhotos": "Фотографии",
+        "bpPhotosPlaceholder": "Добавьте фотографии",
+        "description": "Описание",
+        "descriptionPlaceholder": "Добавьте описание",
+        "eventStart": "Начало Программы",
+        "eventEnd": "Конец Программы",
+        "type": "Тип скидки",
+        "typePercent": "ПРОЦЕНТ",
+        "typePrice": "ЦЕНА",
+        "bonusSize": "Размер скидки",
+        "promo": "Промо",
+        "location": "Локации",
+        "lat": "Широта",
+        "long": "Долгота"
+      },
       "vendorMessage": "Сообщение",
       "finalMessage": "Вся информация была успешно сохранена!"
     },
     "Global": {
       "back": "Назад",
       "clear": "Очистить",
-      "save": "Сохранить"
+      "save": "Сохранить",
+      "delete": "Удалить",
+      "add": "Добавить",
+      "logout": "Выйти"
     }
   },
   "LANGUAGES": {
