@@ -5,17 +5,20 @@
   >
     <div class="col-md-3 col-sm-12 h5">
       <p>
-        You are login as: <span>{{ data.role }}</span>
+        {{ 'COMMON.Profile.logged' | translate }}:
+        <span>{{ data.role }}</span>
       </p>
     </div>
     <div class="col-md-4 col-sm-12 h5">
       <p>
-        Email: <span>{{ data.email }}</span>
+        Email:
+        <span>{{ data.email }}</span>
       </p>
     </div>
     <div class="col-md-3 col-sm-12 h5 blueColor">
       <p>
-        Location: <span>{{ data.city.name }}</span>
+        {{ 'COMMON.Profile.location' | translate }}:
+        <span>{{ data.city.name }}</span>
       </p>
     </div>
   </div>

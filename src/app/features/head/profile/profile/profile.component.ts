@@ -10,7 +10,6 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 import { IDescription } from '../../../../shared/interfaces';
 import { ActivatedRoute, Router } from "@angular/router";
 
-
 export interface IProfileSubscription {
   categoryAddRemove: string;
   bgColor: string;
@@ -25,7 +24,7 @@ export interface IProfileSubscription {
 export class ProfileComponent implements OnInit {
   // coupons: any = { promo: '213123123', name: 'Vendor Name' };
   displayCategory: string[] = ['Category', 'Add/Remove'];
-  categoryAddRemove: string[] = ['add', 'remove'];
+  categoryAddRemove: string[] = ['COMMON.Global.add', 'COMMON.Global.remove'];
   displayHistory: string[] = ['Name', 'Promo', 'EndDate'];
   user$: Observable<IUser>;
 
@@ -57,7 +56,6 @@ export class ProfileComponent implements OnInit {
     // this.profileHistory$ = this.profile.getFavorite();
     // this.favorites$.subscribe(data => console.log(data));
     this.DescriptionAll$ = this.profile.getDescriptionAll();
-
   }
 
   ngOnInit() {}

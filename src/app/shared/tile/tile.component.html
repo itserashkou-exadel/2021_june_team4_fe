@@ -1,11 +1,17 @@
-<mat-card class="example-card" >
+<mat-card class="example-card">
   <mat-card-header>
-    <mat-card-title
-      >{{ discount$.name | slice: 0:35 }}
-      {{ setDotts(discount$.name, 35) }}</mat-card-title
-    >
+    <mat-card-title>
+      {{ discount$.name | slice: 0:35 }} {{ setDotts(discount$.name, 35) }}
+    </mat-card-title>
     <mat-card-subtitle>{{ discount$.category }}</mat-card-subtitle>
-    <button  *ngIf="isEditable" mat-raised-button color="warn" (click)="dropId()">Edit</button>
+    <button
+      *ngIf="isEditable"
+      mat-raised-button
+      color="warn"
+      (click)="dropId()"
+    >
+      Edit
+    </button>
   </mat-card-header>
   <img
     height="150"
@@ -20,22 +26,22 @@
     </p>
     <span></span>
     <div class="info-box">
-      <b>{{ "COMMON.Tile.discount" | translate }}</b
-      ><b>{{ discount$.percent }} </b>
+      <b>{{ 'COMMON.Tile.discount' | translate }}</b>
+      <b>{{ discount$.percent }}</b>
     </div>
     <!-- <div class="info-box"><b>Location :</b>{{discount$.location | slice: 0:10}}</div> -->
     <div class="info-box">
-      <b>{{ "COMMON.Tile.vendor" | translate }}</b
-      >{{ discount$.vendor | slice: 0:30 }}{{ setDotts(discount$.vendor, 10) }}
+      <b>{{ 'COMMON.Tile.vendor' | translate }}</b>
+      {{ discount$.vendor | slice: 0:30 }}{{ setDotts(discount$.vendor, 10) }}
     </div>
     <div class="info-box">
-      <b>{{ "COMMON.Tile.expired" | translate }}</b> {{ discount$.expired | date: 'dd/MM/yyyy' }}
+      <b>{{ 'COMMON.Tile.expired' | translate }}</b>
+      {{ discount$.expired | date: 'dd/MM/yyyy' }}
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>{{ "COMMON.Tile.want" | translate }}</button>
     <button mat-button (click)="redirectToDescription(discount$.id)">
-      {{ "COMMON.Tile.info" | translate }}
+      {{ 'COMMON.Tile.info' | translate }}
     </button>
 
     <mat-icon aria-hidden="false" [ngStyle]="{'color': discount$.favorite ? 'red' : 'grey'}" aria-label="Favorite">

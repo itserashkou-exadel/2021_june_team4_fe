@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { IDescription } from "../../shared/interfaces";
 import { DISCOUNT_URL, FAVORITE_URL, NOT_FAVORITE_URL} from "../../shared/constants";
 
-const httpOptions = {
+export const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
