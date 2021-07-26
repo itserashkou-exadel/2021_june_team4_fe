@@ -175,9 +175,7 @@
           <mat-option
             *ngFor="let location of vendorLocations"
             [value]="location.id"
-            >Lat: {{ location.latitude | number }}, Long:
-            {{ location.longitude | number }} -
-            {{ location.city.name }}</mat-option
+            >{{ location.name }}</mat-option
           >
         </mat-select>
       </mat-form-field>

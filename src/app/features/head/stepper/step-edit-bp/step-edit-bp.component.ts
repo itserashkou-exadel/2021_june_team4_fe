@@ -65,6 +65,11 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   currentDiscount: any = null;
   currentDiscountName: string = '';
 
+  venLocations: { id: string; name: string } = {
+    id: 'string_ID',
+    name: 'string',
+  };
+
   constructor(
     private discountService: DiscountService,
     private handleDiscount: HomeService,
@@ -90,11 +95,11 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
 
     this.selectedVendor$ = this.store.select(selectVendorData);
 
-    this.subSlelectVendor = this.selectedVendor$.subscribe((vendor) => { 
+    this.subSlelectVendor = this.selectedVendor$.subscribe((vendor) => {
       this.subSlelectLocations = this.vendorsService
         .getVendorLocations(vendor.id)
         .subscribe((data) => {
-          this.vendorLocations = data;
+          this.vendorLocations = data.map((el: any) => this.makeLocation(el));
         });
 
       this.getVendorsById(vendor.id).subscribe((data) => {
@@ -109,9 +114,10 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     this.subVendorDiscounts = this.vendorsService
       .getVendorDiscounts(vendorId)
       .subscribe((data) => {
-        this.vendorDiscounts = data.map((rawDiscount: any) =>
-          this.handleDiscount.handleRemoteDiscount(rawDiscount)
-        );
+        this.vendorDiscounts = data.map((rawDiscount: any) => {
+          console.log(vendorId);
+          return this.handleDiscount.handleRemoteDiscount(rawDiscount);
+        });
       });
   }
 
@@ -250,7 +256,8 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     this.discountService.getDiscountById(discountId).subscribe((discount) => {
       this.activeComponent = 'create';
       this.currentDiscountName = discount.name;
-      this.discountForm.patchValue({
+      console.log(discount);
+      this.discountForm.setValue({
         name: discount.name,
         category: discount.category.id,
         tags: discount.tags.map((el: ISimpleVar) => el.id),
@@ -262,7 +269,24 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
         discountType: discount.discountType,
         size: discount.value,
         promo: discount.promo,
+        locations: discount.vendorLocations.map(
+          (el: any) => el.id
+          // this.makeLocation(el)
+        ),
       });
+      console.log(this.vendorLocations);
+      console.log(this.discountForm.get('locations')?.value);
     });
+  }
+
+  makeLocation(vendorLocation: any) {
+    const vl = vendorLocation;
+    return {
+      id: vl.id,
+      name: `${(vl.latitude + '').substr(0, 6)} : ${(vl.longitude + '').substr(
+        0,
+        6
+      )} - ${vl.city.name + ''}`,
+    };
   }
 }
