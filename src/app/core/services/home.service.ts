@@ -17,6 +17,9 @@ export class HomeService {
 
   handleRemoteDiscount(remoteDiscount: any) {
     //console.log(remoteDiscount);
+    if(remoteDiscount.discount) {
+      remoteDiscount = remoteDiscount.discount
+    }
 
     let tags = '';
     remoteDiscount.tags.forEach((el: any) => {

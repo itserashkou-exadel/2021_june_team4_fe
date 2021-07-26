@@ -191,21 +191,17 @@ export class HeadComponent implements OnInit, OnDestroy {
   discountSearch = new FormControl('');
   profileMenu = new FormControl('');
   toHistory(s:any, tabName:string){
-    console.log('toHistory')
     s.router.navigate(['/profile',`${tabName}`]);
   }
   toFavorite(s:any, tabName:string) {
-    console.log('toFavorite')
     s.router.navigate(['/profile',`${tabName}`]);
   }
 
   toActiveDiscounts(s:any,tabName:string) {
-    console.log('toActiveDiscounts')
     s.router.navigate(['/profile',`${tabName}`]);
   }
 
   logout(s:any) {
-    console.log('logout')
     s.auth.logout();
   }
 
@@ -217,13 +213,12 @@ export class HeadComponent implements OnInit, OnDestroy {
   ];
 
   onClick(func:any, self:any, tabName:string){
-    console.log('onClick', self)
     func(self, tabName);
   }
 
   tabItems = [
     { link: 'home', label: 'COMMON.Head.home' },
-    { link: 'profile/history', label: 'COMMON.Head.profile' },
+    { link: 'profile', label: 'COMMON.Head.profile' },
     { link: 'vendor', label: 'COMMON.Head.vendor' },
     { link: 'statistic', label: 'COMMON.Head.statistic' },
   ];
