@@ -1,0 +1,13 @@
+<div class="history" *ngIf="profileCoupons$ | async as coupons">
+  <!--*ngFor надо,  классы можно оставить-->
+  <div class="history-item" *ngFor="let coupon of coupons">
+    <div>
+      <p class="dicountName">{{ coupon.discount.name }}</p>
+      <p class="dicountPromo">{{ coupon.discount.promo }}</p>
+    </div>
+    <div>
+      <p class="dicountStart">Start Date: {{ coupon.discount.startTime | date:'short' }}</p>
+      <p class="dicountEnd">End Date: {{ coupon.discount.endTime | date:'short'}}</p>
+    </div>
+  </div>
+</div>

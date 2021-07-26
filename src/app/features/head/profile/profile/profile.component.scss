@@ -96,12 +96,10 @@ tr.mat-footer-row {
   font-weight: bold;
 }
 
-
-// tabs
-
+//tabs
 :host {
   > .container {
-    // max-width: 1264px;
+    max-width: 1264px;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -109,16 +107,21 @@ tr.mat-footer-row {
     background: none;
   }
   ::ng-deep {
-    .mat-tab-group {
+    .mat-tab-nav-bar{
+      display:table-cell;
+      text-align: left;
+      vertical-align: top;
+    }
+    .wrapper {
       flex-direction: row;
     }
-    .mat-tab-header {
-      border-bottom: none;
-    }
-    .mat-tab-header-pagination {
-      display: none !important;
-    }
-    .mat-tab-labels {
+    //.mat-tab-list {
+    //  border-bottom: none;
+    //}
+    //.mat-tab-header-pagination {
+    //  display: none !important;
+    //}
+    .mat-tab-links {
       flex-direction: column;
     }
     .mat-ink-bar {
@@ -126,7 +129,8 @@ tr.mat-footer-row {
       left: 98% !important;
     }
     .mat-tab-body-wrapper {
-      flex: 1 1 auto;
+      //flex: 1 1 auto;
+      display: table-cell;
     }
   }
 }

@@ -86,7 +86,7 @@
           <mat-menu #menu="matMenu">
             <button
               mat-menu-item
-              (click)="onClick(it.function, this, it.link)"
+              (click)="onClick(it.function, this)"
               *ngFor="let it of profileMenuItems"
             >
               {{ it.label | translate }}

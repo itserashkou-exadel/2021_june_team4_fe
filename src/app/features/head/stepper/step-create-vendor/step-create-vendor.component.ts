@@ -323,7 +323,6 @@ export class StepCreateVendorComponent
         this.vendorForm.enable();
       },
       () => {
-       // console.log('All data were saved successfully');
         this.resetForm();
         this.vendorForm.enable();
         this.notification.success(`Vendor ${vendorName} successfully added!`);

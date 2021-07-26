@@ -47,7 +47,7 @@ export interface IDescription {
   favorite: boolean;
   active: boolean;
   archived: boolean;
-  category: {};
+  category:{};
   description: string;
   name: string;
   img: string[];
@@ -115,6 +115,7 @@ export interface IDiscount {
   percent: string;
   image: string;
   coordinates: number[][];
+  favorite: boolean;
 }
 
 export interface IUser {

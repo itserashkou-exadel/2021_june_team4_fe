@@ -17,6 +17,9 @@ export class HomeService {
 
   handleRemoteDiscount(remoteDiscount: any) {
     console.log(remoteDiscount);
+    if(remoteDiscount.discount) {
+      remoteDiscount = remoteDiscount.discount
+    }
 
     let tags = '';
     remoteDiscount.tags.forEach((el: any) => {
@@ -30,7 +33,7 @@ export class HomeService {
       expired: remoteDiscount.endTime,
       location: 'remoteDiscount',
       tag: tags,
-
+      favorite: remoteDiscount.favorite,
       category: remoteDiscount.category.name,
       isActive: remoteDiscount.active,
       description: remoteDiscount.description ,
@@ -40,7 +43,6 @@ export class HomeService {
         //'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU',
       coordinates: remoteDiscount.vendorLocations ? getCoordinates(remoteDiscount) : [[50.094, 26.981]],
     };
-    //console.log(localDiscount);
     return localDiscount;
   }
 }
