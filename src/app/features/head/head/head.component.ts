@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterContentChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { of } from "rxjs";
 import {
   debounceTime,
@@ -34,7 +34,7 @@ import { AuthService } from "../../../core/services/auth.service";
   templateUrl: './head.component.html',
   styleUrls: ['./head.component.scss'],
 })
-export class HeadComponent implements OnInit, OnDestroy {
+export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
   @ViewChild('discountSearchInput', { static: true }) discountSearchInput!: ElementRef;
   isSearchOnFocus$: Observable<boolean>;
   activeLink: string;
@@ -63,7 +63,8 @@ export class HeadComponent implements OnInit, OnDestroy {
               private spinner: SpinnerService,
               private auth: AuthService,
               private translateService: TranslateService,
-              private profile: ProfileService) {
+              private profile: ProfileService,
+              private change: ChangeDetectorRef) {
 
     this.user$ = this.profile.getUser();
 
@@ -172,6 +173,10 @@ export class HeadComponent implements OnInit, OnDestroy {
     }
   }
 
+  ngAfterContentChecked() {
+    this.change.detectChanges()
+  }
+
   searchGetCall(term: string) {
     if (term === '') {
       this.store.dispatch(getNewDiscounts({ sortParam: '' }));
@@ -201,7 +206,7 @@ export class HeadComponent implements OnInit, OnDestroy {
 
   toActiveDiscounts(s:any,tabName:string) {
     console.log('toActiveDiscounts')
-    s.router.navigate(['/profile',`${tabName}`]);
+    s.router.navigate(['/profile', `${tabName}`]);
   }
 
   logout(s:any) {
@@ -210,9 +215,9 @@ export class HeadComponent implements OnInit, OnDestroy {
   }
 
   profileMenuItems = [
-    { link: 'history', label: 'COMMON.Head.history', function: this.toHistory },
     { link: 'favorite', label: 'COMMON.Head.favorite', function: this.toFavorite },
-    { link: 'active', label: 'COMMON.Head.active', function: this.toActiveDiscounts },
+    { link: 'history', label: 'COMMON.Head.history', function: this.toHistory },
+    { link: 'active', label: 'COMMON.Head.activeDiscounts', function: this.toActiveDiscounts },
     { link: 'logout', label: 'COMMON.Head.logout', function: this.logout },
   ];
 

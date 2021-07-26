@@ -14,7 +14,7 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 import { DescriptionService } from 'src/app/core/services/description.service';
 import { IDescription } from '../../../../shared/interfaces';
 import { IFavoritesProfile } from '../../../../shared/interfaces';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Params, Router, Route } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { MatTabGroup } from "@angular/material/tabs";
 
@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
   // @ViewChild('tabs', { static: false }) tabGroup!: MatTabGroup;
   // coupons: any = { promo: '213123123', name: 'Vendor Name' };
   displayCategory: string[] = ['Category', 'Add/Remove'];
-  categoryAddRemove: string[] = ['add', 'remove'];
+  categoryAddRemove: string[] = ['COMMON.Global.add', 'COMMON.Global.remove'];
   displayHistory: string[] = ['Name', 'Promo', 'EndDate'];
   user$: Observable<IUser>;
 
@@ -54,6 +54,7 @@ export class ProfileComponent implements OnInit {
   profileHistory$: Observable<IFavoritesProfile[]>;
   profileCoupons$: Observable<IFavoritesProfile[]>;
 
+  // profileTabIndex: number = 0;
   profileTabIndex: number = 0;
   tabs:[{ tabName: string; index: number }, { tabName: string; index: number }, { tabName: string; index: number }] = [
     { tabName: 'history', index: 0},
@@ -81,7 +82,8 @@ export class ProfileComponent implements OnInit {
   }
   public demo1BtnClick() {
     const tabCount = 3;
-    this.profileTabIndex = (this.profileTabIndex + 1) % tabCount;
+    // this.profileTabIndex = (this.profileTabIndex + 1) % tabCount;
+    this.profileTabIndex = 2;
   }
 
   ngOnInit() {

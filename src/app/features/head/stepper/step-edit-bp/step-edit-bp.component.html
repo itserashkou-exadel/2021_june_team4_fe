@@ -1,5 +1,9 @@
 <div class="second-step__btn-top-wrapper">
-  <div class="edit-discount-head">
+  <div class="edit-discount-head" *ngIf="selectedVendor$ | async as data">
+    <h3>
+      {{ "COMMON.Stepper.SecondStep.vendor" | translate }} :
+      <b>{{ data.name }}</b>
+    </h3>
     <button
       mat-flat-button
       color="primary"
@@ -8,7 +12,8 @@
       *ngIf="activeComponent === 'edit'"
     >
       <mat-icon>add_box</mat-icon>
-      {{ "COMMON.Stepper.addBp" | translate }}
+
+      {{ "COMMON.Stepper.SecondStep.addBp" | translate }}
     </button>
 
     <button
@@ -19,7 +24,8 @@
       *ngIf="activeComponent === 'create'"
     >
       <mat-icon>edit_box</mat-icon>
-      Edit BP
+
+      {{ "COMMON.Stepper.SecondStep.editBp" | translate }}
     </button>
   </div>
 </div>
@@ -40,10 +46,12 @@
     <div class="form-row">
       <!-- Bonus program name -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>Bonus program name</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.SecondStep.bpName" | translate }}
+        </mat-label>
         <input
           matInput
-          placeholder="Add Bonus program"
+          placeholder="{{ 'COMMON.Stepper.SecondStep.addBpName' | translate }}"
           formControlName="name"
         />
       </mat-form-field>
@@ -53,7 +61,9 @@
     <div class="form-row">
       <!-- Bonus program Category select -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>Category</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.SecondStep.category" | translate }}
+        </mat-label>
         <mat-select
           formControlName="category"
           (selectionChange)="selectCategory($event.value)"
@@ -61,8 +71,9 @@
           <mat-option
             *ngFor="let category of categories$ | async"
             [value]="category.id"
-            >{{ category.name }}</mat-option
           >
+            {{ category.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -70,7 +81,9 @@
         <mat-icon>add_box</mat-icon>
       </button>
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Add new category</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.SecondStep.addCategory" | translate }}
+        </mat-label>
         <input matInput [formControl]="newCategoryInput" />
       </mat-form-field>
       <!-- /Bonus program Category select -->
@@ -79,11 +92,13 @@
     <div class="form-row">
       <!-- Bonus program Tags select -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>Tags</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.SecondStep.tags" | translate }}
+        </mat-label>
         <mat-select formControlName="tags" multiple>
-          <mat-option *ngFor="let tag of tags$ | async" [value]="tag.id">{{
-            tag.name
-          }}</mat-option>
+          <mat-option *ngFor="let tag of tags$ | async" [value]="tag.id">
+            {{ tag.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -91,7 +106,9 @@
         <mat-icon>add_box</mat-icon>
       </button>
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Add new tag</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.SecondStep.addTags" | translate }}
+        </mat-label>
         <input matInput [formControl]="newTagInput" />
       </mat-form-field>
       <!-- /Bonus program Tags select -->
@@ -100,8 +117,16 @@
     <div class="form-row">
       <!-- Bonus program photos -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>Bonus program photos</mat-label>
-        <input matInput placeholder="Add some photos" formControlName="image" />
+        <mat-label>
+          {{ "COMMON.Stepper.SecondStep.bpPhotos" | translate }}
+        </mat-label>
+        <input
+          matInput
+          placeholder="{{
+            'COMMON.Stepper.SecondStep.bpPhotosPlaceholder' | translate
+          }}"
+          formControlName="image"
+        />
       </mat-form-field>
 
       <!-- /Bonus program photos -->
@@ -110,10 +135,14 @@
     <div class="form-row">
       <!-- Bonus program Description -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>{{ "COMMON.Stepper.description" | translate }}</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.SecondStep.description" | translate }}
+        </mat-label>
         <textarea
           matInput
-          placeholder="Description"
+          placeholder="{{
+            'COMMON.Stepper.SecondStep.descriptionPlaceholder' | translate
+          }}"
           formControlName="description"
         ></textarea>
       </mat-form-field>
@@ -123,14 +152,18 @@
     <div class="form-row date-wrap">
       <!-- Bonus program event's start -->
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>{{ "COMMON.Stepper.eventStart" | translate }}</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.SecondStep.eventStart" | translate }}
+        </mat-label>
         <input matInput type="date" formControlName="eventStart" />
       </mat-form-field>
       <!-- /Bonus program event's start -->
 
       <!-- Bonus program event's end -->
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>{{ "COMMON.Stepper.eventEnd" | translate }}</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.SecondStep.eventEnd" | translate }}
+        </mat-label>
         <input matInput type="date" formControlName="eventEnd" />
       </mat-form-field>
       <!-- /Bonus program event's end -->
@@ -139,10 +172,12 @@
     <div class="form-row">
       <!-- Discount's type -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>Discount's type</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.SecondStep.type" | translate }}
+        </mat-label>
         <mat-select matNativeControl formControlName="discountType">
           <mat-option *ngFor="let type of DiscountsTypes" [value]="type">
-            {{ type }}
+            {{ type.viewValue | translate }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -152,7 +187,9 @@
     <div class="form-row">
       <!-- Bonus size -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>{{ "COMMON.Stepper.bonusSize" | translate }}</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.SecondStep.bonusSize" | translate }}
+        </mat-label>
         <input type="number" matInput formControlName="size" />
       </mat-form-field>
       <!-- /Bonus size -->
@@ -161,7 +198,9 @@
     <div class="form-row">
       <!-- Promo -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>Promo</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.SecondStep.promo" | translate }}
+        </mat-label>
         <input matInput formControlName="promo" />
       </mat-form-field>
       <!-- /Promo -->
@@ -170,7 +209,9 @@
     <div class="form-row">
       <!-- Select location -->
       <mat-form-field appearance="fill" class="example-full-width form-field">
-        <mat-label>Location</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.SecondStep.location" | translate }}
+        </mat-label>
         <mat-select multiple formControlName="locations">
           <mat-option
             *ngFor="let location of vendorLocations"
@@ -183,12 +224,7 @@
     </div>
 
     <div class="second-step__btns btns-wrapper">
-      <button
-        class="save-btn"
-        mat-flat-button
-        color="primary"
-        matStepperPrevious
-      >
+      <button class="save-btn" mat-flat-button color="warn" matStepperPrevious>
         {{ "COMMON.Global.back" | translate }}
       </button>
       <button

@@ -60,7 +60,10 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   vendorDiscounts!: IDiscount[];
   vendorLocations: any;
 
-  DiscountsTypes: string[] = ['PERCENT', 'PRICE'];
+  DiscountsTypes: Array<DiscountType> = [
+    {value: '', viewValue: 'COMMON.Stepper.SecondStep.typePercent'}, 
+    {value: '', viewValue: 'COMMON.Stepper.SecondStep.typePrice'}
+  ];
 
   currentDiscount: any = null;
   currentDiscountName: string = '';

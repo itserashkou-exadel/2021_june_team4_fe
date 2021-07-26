@@ -7,15 +7,19 @@
         </div>
 
         <div class="location-block mr-4">
-          <mat-icon aria-hidden="false" aria-label="Home"
-          >location_on</mat-icon>
-          <span (click)="openDialog()" *ngIf='user$ | async as user'>{{ user.city.name}}</span>
+          <mat-icon aria-hidden="false" aria-label="Home">location_on</mat-icon>
+          <span (click)="openDialog()" *ngIf="user$ | async as user">
+            {{ user.city.name }}
+          </span>
         </div>
 
-      <div class="search-container w-100 px-4 col-sm-5" [hidden]="!isHomeTile">
-        <form>
-          <mat-form-field class="search w-100" appearance="legacy">
-            <mat-label>{{ 'COMMON.Head.search' | translate }}</mat-label>
+        <div
+          class="search-container w-100 px-4 col-sm-5"
+          [hidden]="!isHomeTile"
+        >
+          <form>
+            <mat-form-field class="search w-100" appearance="legacy">
+              <mat-label>{{ "COMMON.Head.search" | translate }}</mat-label>
               <input
                 (focus)="onFocusEvent($event)"
                 (blur)="onBlur($event)"
@@ -27,70 +31,108 @@
                 placeholder="{{ 'COMMON.Head.search' | translate }}"
                 class="filter"
               />
-           </mat-form-field>
+            </mat-form-field>
           </form>
-        <mat-icon matPrefix>search</mat-icon>
+          <mat-icon matPrefix>search</mat-icon>
+        </div>
       </div>
-    </div>
 
-    <div class="right-block ml-auto">
-      <div class="notifications">
-        <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"
-
+      <div class="right-block ml-auto">
+        <div class="notifications">
+          <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"
         >favorite_border</mat-icon
         > -->
-        <mat-icon [matBadge]="iSnotifications$" matBadgeColor="warn" matBadgeSize="small" class="mr-sm-5 mr-3"
-                  [matBadgeHidden]="iSnotifications$==0" (click)="controlListNotes()"
-        >notifications_none
-        <mat-list *ngIf="listIsVisibleOfUnreadNotes" (click)="clearNotifications()">
-          <mat-list-item *ngFor="let note of unreadNotifications"> <span>{{note.nType}} <b>{{note.nPromo}}</b> for  {{note.nName}}</span></mat-list-item>
+          <mat-icon
+            [matBadge]="iSnotifications$"
+            matBadgeColor="warn"
+            matBadgeSize="small"
+            class="mr-sm-5 mr-3"
+            [matBadgeHidden]="iSnotifications$ == 0"
+            (click)="controlListNotes()"
+          >
+            notifications_none
+            <mat-list
+              *ngIf="listIsVisibleOfUnreadNotes"
+              (click)="clearNotifications()"
+            >
+              <mat-list-item *ngFor="let note of unreadNotifications">
+                <span>
+                  {{ note.nType }}
+                  <b>{{ note.nPromo }}</b>
+                  for {{ note.nName }}
+                </span>
+              </mat-list-item>
+            </mat-list>
+          </mat-icon>
+        </div>
 
-         </mat-list>
-        </mat-icon>
-      </div>
+        <div class="user-block">
+          <button
+            mat-button
+            [matMenuTriggerFor]="menu"
+            *ngIf="user$ | async as user"
+          >
+            <mat-icon
+              aria-hidden="false"
+              class=""
+              aria-label="Example home icon"
+            >
+              person_outline
+            </mat-icon>
+            {{ user.firstName + " " + user.lastName }}
+            <!-- 'COMMON.Head.name' | translate -->
+          </button>
 
-      <div class="user-block">
-        <button mat-button [matMenuTriggerFor]="menu" *ngIf='user$ | async as user'>
-          <mat-icon aria-hidden="false" class=""  aria-label="Example home icon">person_outline</mat-icon>
-          {{ user.firstName + ' ' + user.lastName  }} <!-- 'COMMON.Head.name' | translate-->
+          <mat-menu #menu="matMenu">
+            <button
+              mat-menu-item
+              (click)="onClick(it.function, this, it.link)"
+              *ngFor="let it of profileMenuItems"
+            >
+              {{ it.label | translate }}
+            </button>
+          </mat-menu>
+        </div>
+
+        <button mat-button [matMenuTriggerFor]="langMenu">
+          {{ language$ | async | uppercase }}
         </button>
-
-        <mat-menu #menu="matMenu">
+        <mat-menu #langMenu="matMenu">
           <button
             mat-menu-item
-            (click)="onClick(it.function, this, it.link)"
-            *ngFor="let it of profileMenuItems">
-            {{ it.label | translate}}
+            (click)="changeLocale(language)"
+            *ngFor="let language of languages"
+          >
+            {{ language.toUpperCase() }}
           </button>
         </mat-menu>
-
       </div>
-
-      <button mat-button [matMenuTriggerFor]="langMenu">{{ language$ | async | uppercase }}</button>
-      <mat-menu #langMenu="matMenu" >
-        <button mat-menu-item (click)="changeLocale(language)" *ngFor="let language of languages">{{ language.toUpperCase() }}</button>
-      </mat-menu>
     </div>
-  </div>
-  <div class="tabs">
-  <nav mat-tab-nav-bar class="d-none d-sm-flex">
-    <a mat-tab-link  *ngFor="let tab of tabItems" class="pl-3 p-0"
-    (click)="activeLink = tab.link"
-    [active]="activeLink == tab.link"
-       [routerLink]="tab.link">
-      {{tab.label | translate}}
-    </a>
-  </nav>
-</div>
-    <div class="overlay" *ngIf='isLoaded'>
+
+    <div class="tabs">
+      <nav mat-tab-nav-bar class="d-none d-sm-flex">
+        <a
+          mat-tab-link
+          *ngFor="let tab of tabItems"
+          class="pl-3 p-0"
+          (click)="activeLink = tab.link"
+          [active]="activeLink == tab.link"
+          [routerLink]="tab.link"
+        >
+          {{ tab.label | translate }}
+        </a>
+      </nav>
+    </div>
+    <div class="overlay" *ngIf="isLoaded">
       <div class="center">
-        <mat-progress-spinner diameter=50
-                              mode="indeterminate">
-        </mat-progress-spinner>
-<!--        <mat-progress-bar mode='query'></mat-progress-bar>-->
+        <mat-progress-spinner
+          diameter="50"
+          mode="indeterminate"
+        ></mat-progress-spinner>
+        <!--        <mat-progress-bar mode='query'></mat-progress-bar>-->
       </div>
     </div>
-<router-outlet></router-outlet>
-</div>
-<app-footer></app-footer>
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
 </div>

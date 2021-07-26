@@ -3,11 +3,15 @@
     <div class="form-row">
       <!-- Vendor name -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>{{ "COMMON.Stepper.vendorName" | translate }}</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.FirstStep.vendorName" | translate }}
+        </mat-label>
         <input
           type="text"
           aria-label="vendor name"
-          placeholder="Add Vendor name"
+          placeholder="{{
+            'COMMON.Stepper.FirstStep.vendorNamePlaceholder' | translate
+          }}"
           class="form-input"
           matInput
           formControlName="name"
@@ -30,7 +34,7 @@
           "
         >
           <span *ngIf="vendorForm.controls.name.errors?.required">
-            Vendor name can't be empty
+            {{ "COMMON.Stepper.FirstStep.vendorNameError" | translate }}
           </span>
         </mat-error>
       </mat-form-field>
@@ -39,10 +43,14 @@
     <div class="form-row">
       <!-- Vendor Description -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>{{ "COMMON.Stepper.description" | translate }}</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.FirstStep.vendorDescription" | translate }}
+        </mat-label>
         <textarea
           matInput
-          placeholder="Add description"
+          placeholder="{{
+            'COMMON.Stepper.FirstStep.vendorDescriptionPlaceholder' | translate
+          }}"
           formControlName="description"
         ></textarea>
         <mat-error
@@ -52,7 +60,7 @@
           "
         >
           <span *ngIf="vendorForm.controls.description.errors?.required">
-            Description can't be empty
+            {{ "COMMON.Stepper.FirstStep.vendorDescriptionError" | translate }}
           </span>
         </mat-error>
       </mat-form-field>
@@ -62,8 +70,16 @@
     <div class="form-row">
       <!-- Vendor contacts -->
       <mat-form-field class="example-full-width form-field" appearance="fill">
-        <mat-label>{{ "COMMON.Stepper.vendorContacts" | translate }}</mat-label>
-        <input matInput placeholder="Add contacts" formControlName="contacts" />
+        <mat-label>
+          {{ "COMMON.Stepper.FirstStep.vendorContacts" | translate }}
+        </mat-label>
+        <input
+          matInput
+          placeholder="{{
+            'COMMON.Stepper.FirstStep.vendorContactsPlaceholder' | translate
+          }}"
+          formControlName="contacts"
+        />
         <mat-error
           *ngIf="
             vendorForm.controls['contacts'].invalid &&
@@ -71,7 +87,7 @@
           "
         >
           <span *ngIf="vendorForm.controls.contacts.errors?.required">
-            Contacts can't be empty
+            {{ "COMMON.Stepper.FirstStep.vendorContactsError" | translate }}
           </span>
         </mat-error>
       </mat-form-field>
@@ -101,16 +117,18 @@
         color="warn"
         (click)="removeVendor(); $event.preventDefault()"
       >
-        Delete
+        {{ "COMMON.Global.delete" | translate }}
       </button>
     </div>
   </form>
 
   <div class="form-location">
-    <h3>Select or add country</h3>
+    <h3>{{ "COMMON.Stepper.FirstStep.country" | translate }}</h3>
     <form class="add-city">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Country</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.FirstStep.countryLabel" | translate }}
+        </mat-label>
         <input
           type="text"
           (focus)="focusOncountry()"
@@ -137,7 +155,7 @@
         color="primary"
         (click)="addCountry()"
       >
-        Add
+        {{ "COMMON.Global.add" | translate }}
       </button>
       <button
         type="submit"
@@ -146,13 +164,15 @@
         color="warn"
         (click)="removeCountry()"
       >
-        Remove
+        {{ "COMMON.Global.delete" | translate }}
       </button>
     </form>
-    <h3>Select or add city</h3>
+    <h3>{{ "COMMON.Stepper.FirstStep.city" | translate }}</h3>
     <form class="add-city">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>City</mat-label>
+        <mat-label>
+          {{ "COMMON.Stepper.FirstStep.cityLabel" | translate }}
+        </mat-label>
         <input
           type="text"
           (focus)="focusOncountry()"
@@ -179,7 +199,7 @@
         color="primary"
         (click)="addCity()"
       >
-        Add
+        {{ "COMMON.Global.add" | translate }}
       </button>
       <button
         class="save-btn"
@@ -187,19 +207,23 @@
         color="warn"
         (click)="removeCity()"
       >
-        Remove
+        {{ "COMMON.Global.delete" | translate }}
       </button>
     </form>
-    <h3>Add coordinates</h3>
+    <h3>{{ "COMMON.Stepper.FirstStep.coordinates" | translate }}</h3>
     <form action="" class="input-cords">
       <div>
         <mat-form-field appearance="fill">
-          <mat-label>Latitude</mat-label>
+          <mat-label>
+            {{ "COMMON.Stepper.FirstStep.latitude" | translate }}
+          </mat-label>
           <input type="number" matInput [formControl]="latControl" />
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-          <mat-label>Longtitude</mat-label>
+          <mat-label>
+            {{ "COMMON.Stepper.FirstStep.longitude" | translate }}
+          </mat-label>
           <input type="number" matInput [formControl]="longControl" />
         </mat-form-field>
       </div>
@@ -211,7 +235,7 @@
         color="primary"
         (click)="addCoordinates()"
       >
-        Add
+        {{ "COMMON.Global.add" | translate }}
       </button>
     </form>
 
