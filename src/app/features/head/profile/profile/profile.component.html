@@ -30,7 +30,6 @@
         <mat-tab-group [(selectedIndex)]="profileTabIndex">
           <mat-tab label="{{ 'COMMON.Profile.favorite' | translate }}">
             <ng-template matTabContent>
-              <h2>FAVORITE</h2>
               <app-tile-profile></app-tile-profile>
             </ng-template>
           </mat-tab>
@@ -73,7 +72,6 @@
           </mat-tab>
 
           <mat-tab label="{{ 'COMMON.Profile.activeDiscounts' | translate }}">
-            <h2>ACTIVE</h2>
             <div class="history" *ngIf="profileCoupons$ | async as coupons">
               <!--*ngFor надо,  классы можно оставить-->
               <div class="history-item" *ngFor="let coupon of coupons">
