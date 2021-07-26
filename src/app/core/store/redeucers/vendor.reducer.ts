@@ -1,7 +1,7 @@
 const initialState = {
   selectedVendor: {
-    id: 'string',
-    name: 'Vendor',
+    id: '',
+    name: '. . .',
     description: 'description',
     contacts: 'action.contacts ',
   },
