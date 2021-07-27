@@ -19,7 +19,7 @@
         >
           <form>
             <mat-form-field class="search w-100" appearance="legacy">
-              <mat-label>{{ 'COMMON.Head.search' | translate }}</mat-label>
+              <mat-label>{{ "COMMON.Head.search" | translate }}</mat-label>
               <input
                 (focus)="onFocusEvent($event)"
                 (blur)="onBlur($event)"
@@ -79,7 +79,7 @@
             >
               person_outline
             </mat-icon>
-            {{ user.firstName + ' ' + user.lastName }}
+            {{ user.firstName + " " + user.lastName }}
             <!-- 'COMMON.Head.name' | translate -->
           </button>
 
@@ -108,6 +108,7 @@
         </mat-menu>
       </div>
     </div>
+
     <div class="tabs">
       <nav mat-tab-nav-bar class="d-none d-sm-flex">
         <a
