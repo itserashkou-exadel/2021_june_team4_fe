@@ -1,0 +1,2 @@
+<app-tiles-box [discountsData$]="profileFavorite$ | async"></app-tiles-box>
+<div *ngIf="(profileFavorite$ | async)?.length==0">No records found.</div>

@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from "./home/home/home.component";
 import { DescriptionComponent } from "./description/description.component";
 import { ProfileComponent } from "./profile/profile/profile.component";
-import { TileProfileComponent } from "./profile/profile/tileProfile/tileProfile.component";
 import { StatisticComponent } from "./statistic/statistic/statistic.component";
 import { VendorComponent } from "./vendor/vendor/vendor.component";
 import { HeadComponent } from "./head/head.component";
@@ -32,6 +31,11 @@ import {
   TranslateModule
 } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { FavoriteComponent } from './profile/profile/favorite/favorite.component';
+import { ActiveComponent } from './profile/profile/active/active.component';
+import { HistoryComponent } from './profile/profile/history/history.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
@@ -44,7 +48,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     HomeComponent,
     DescriptionComponent,
     ProfileComponent,
-    TileProfileComponent,
     StatisticComponent,
     VendorComponent,
     NotFoundComponent,
@@ -52,36 +55,40 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     CarouselComponent,
     DialogComponent,
     SideBarFilterComponent,
-   
+
     StepperWrapperComponent,
     StepCreateVendorComponent,
     StepEditBpComponent,
     FilterPipe,
+    FavoriteComponent,
+    ActiveComponent,
+    HistoryComponent,
   ],
   exports: [
     MapComponent,
     StepCreateVendorComponent
   ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        RouterModule,
-        HeadRoutingModule,
-        NgbCarouselModule,
-        NgbRatingModule,
-        MatDialogModule,
-        NgbTooltipModule,
-        MatTreeModule,
-        MatTableModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient],
-            },
-            missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MissingTranslationService},
-            useDefaultLang: false,
-        }),
-    ],
+  imports: [
+    NgxSpinnerModule,
+    CommonModule,
+    SharedModule,
+    RouterModule,
+    HeadRoutingModule,
+    NgbCarouselModule,
+    NgbRatingModule,
+    MatDialogModule,
+    NgbTooltipModule,
+    MatTreeModule,
+    MatTableModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MissingTranslationService},
+      useDefaultLang: false,
+    }),
+  ],
 })
 export class HeadModule { }

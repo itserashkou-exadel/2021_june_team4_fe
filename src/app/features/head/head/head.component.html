@@ -19,7 +19,7 @@
         >
           <form>
             <mat-form-field class="search w-100" appearance="legacy">
-              <mat-label>{{ 'COMMON.Head.search' | translate }}</mat-label>
+              <mat-label>{{ "COMMON.Head.search" | translate }}</mat-label>
               <input
                 (focus)="onFocusEvent($event)"
                 (blur)="onBlur($event)"
@@ -79,14 +79,14 @@
             >
               person_outline
             </mat-icon>
-            {{ user.firstName + ' ' + user.lastName }}
+            {{ user.firstName + " " + user.lastName }}
             <!-- 'COMMON.Head.name' | translate -->
           </button>
 
           <mat-menu #menu="matMenu">
             <button
               mat-menu-item
-              (click)="onClick(it.function, this, it.link)"
+              (click)="onClick(it.function, this)"
               *ngFor="let it of profileMenuItems"
             >
               {{ it.label | translate }}
@@ -108,6 +108,7 @@
         </mat-menu>
       </div>
     </div>
+
     <div class="tabs">
       <nav mat-tab-nav-bar class="d-none d-sm-flex">
         <a
@@ -122,15 +123,7 @@
         </a>
       </nav>
     </div>
-    <div class="overlay" *ngIf="isLoaded">
-      <div class="center">
-        <mat-progress-spinner
-          diameter="50"
-          mode="indeterminate"
-        ></mat-progress-spinner>
-        <!--        <mat-progress-bar mode='query'></mat-progress-bar>-->
-      </div>
-    </div>
+    <ngx-spinner></ngx-spinner>
     <router-outlet></router-outlet>
   </div>
   <app-footer></app-footer>

@@ -11,7 +11,6 @@ export class TilesBoxComponent implements OnInit {
   @Output() transitId: EventEmitter<any> = new EventEmitter();
   dropIdFromBox(ev: any) {
     this.transitId.emit(ev);
-    console.log(ev);
   }
 
   @Input() discountsData$: IDiscount[] | null = [];
@@ -21,7 +20,4 @@ export class TilesBoxComponent implements OnInit {
   constructor(private discountService: DiscountService) {}
 
   ngOnInit(): void {}
-  alertQ(ev: any) {
-    console.log('ev-> ' + ev);
-  }
 }

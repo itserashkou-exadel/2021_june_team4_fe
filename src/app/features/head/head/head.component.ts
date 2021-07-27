@@ -24,7 +24,6 @@ import { HomeService } from "../../../core/services/home.service";
 
 
 import { clearNotifications } from 'src/app/core/store/actions/notifications.actions';
-import { SpinnerService } from "../../../core/services/spinner.service";
 import { Router } from "@angular/router";
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { AuthService } from "../../../core/services/auth.service";
@@ -41,7 +40,6 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
   SETTING_KEY = 'SETTINGS';
   languages = ['en', 'ru'];
   language$: Observable<any>;
-  isLoaded: boolean = true; //spinner
   user$: Observable<IUser>;
 
   isHomeTile:boolean = false;
@@ -60,7 +58,6 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
               private router: Router,
               private http: HttpClient,
               public homeService: HomeService,
-              private spinner: SpinnerService,
               private auth: AuthService,
               private translateService: TranslateService,
               private profile: ProfileService,
@@ -162,11 +159,6 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
 
     });
 
-    this.spinner.returnAsObservable().subscribe(
-      subs =>{
-        this.isLoaded = subs;
-      })
-
     let localLang = localStorage.getItem(this.SETTING_KEY);
     if (localLang) {
       this.store.dispatch(setLanguage({ language: localLang }));
@@ -195,35 +187,30 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   discountSearch = new FormControl('');
   profileMenu = new FormControl('');
-  toHistory(s:any, tabName:string){
-    console.log('toHistory')
-    s.router.navigate(['/profile',`${tabName}`]);
+  toHistory(s:any){
+    s.router.navigate(['/profile/history']);
   }
-  toFavorite(s:any, tabName:string) {
-    console.log('toFavorite')
-    s.router.navigate(['/profile',`${tabName}`]);
+  toFavorite(s:any) {
+    s.router.navigate(['/profile/favorite',]);
   }
 
-  toActiveDiscounts(s:any,tabName:string) {
-    console.log('toActiveDiscounts')
-    s.router.navigate(['/profile', `${tabName}`]);
+  toActiveDiscounts(s:any) {
+    s.router.navigate(['/profile/active']);
   }
 
   logout(s:any) {
-    console.log('logout')
     s.auth.logout();
   }
 
   profileMenuItems = [
-    { link: 'favorite', label: 'COMMON.Head.favorite', function: this.toFavorite },
     { link: 'history', label: 'COMMON.Head.history', function: this.toHistory },
+    { link: 'favorite', label: 'COMMON.Head.favorite', function: this.toFavorite },
     { link: 'active', label: 'COMMON.Head.activeDiscounts', function: this.toActiveDiscounts },
     { link: 'logout', label: 'COMMON.Head.logout', function: this.logout },
   ];
 
-  onClick(func:any, self:any, tabName:string){
-    console.log('onClick', self)
-    func(self, tabName);
+  onClick(func:any, self:any){
+    func(self);
   }
 
   tabItems = [
