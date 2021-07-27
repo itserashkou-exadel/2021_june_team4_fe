@@ -1,10 +1,11 @@
-import {HttpClient} from '@angular/common/http';
 import {Component, ViewChild, AfterViewInit, OnInit} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSort, SortDirection} from '@angular/material/sort';
-import {merge, Observable, of as observableOf} from 'rxjs';
-import {catchError, map, startWith, switchMap} from 'rxjs/operators';
-import { API_URL } from 'src/app/shared/constants';
+import { MatSort, SortDirection} from '@angular/material/sort';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { IAppState, VendorStatistic } from "../../../../shared/interfaces";
+import { createSelector, select, Store } from "@ngrx/store";
+import { StatisticService } from "../../../../core/services/statistic.service";
 
 /**
  * @title Table retrieving data through HTTP
@@ -15,14 +16,12 @@ import { API_URL } from 'src/app/shared/constants';
   styleUrls: ['./statistic.component.scss']
 })
 
-
 export class StatisticComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['name', 'discountsNumber', 'viewNumber','numberOfGettingPromo'];
-  exampleDatabase!: ExampleHttpDatabase;
-  data: GithubIssue[] = [];
+  dataSource: VendorStatistic[] = [];
+  statisticVData$: Observable<any>;
 
   resultsLength = 0;
-  isLoadingResults = false; // spinner
   isRateLimitReached = false;
 
   @ViewChild(MatPaginator, {static:false})
@@ -30,69 +29,45 @@ export class StatisticComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort, {static:false})
   sort!: MatSort;
 
-  constructor(private _httpClient: HttpClient, ) {}
+  constructor(private store: Store<IAppState>,
+              private statisticService: StatisticService) {
+
+    const selectStatistic = (state: IAppState) => state.statistic;
+
+    const selectDStatisticVendors = createSelector(
+      selectStatistic,
+      (state: any) => state.vendors
+    );
+    this.statisticVData$ = this.store.pipe(select(selectDStatisticVendors));
+  }
 
   ngOnInit(): void {
-    const requestUrl = API_URL + `/statistics/vendors`;
-    this._httpClient.get<any>(requestUrl).subscribe(
-      data => this.data = data
-    );
-
   }
 
   ngAfterViewInit() {
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    // this.exampleDatabase = new ExampleHttpDatabase(this._httpClient);
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          return this.statisticService.getStatisticVendors({
+            sortBy: this.sort.active,
+            sortDirection: this.sort.direction,
+            page: this.paginator.pageIndex
+          })
+            .pipe(catchError(() => observableOf(null)));
+        }),
+        map(data => {
+          this.isRateLimitReached = data === null;
 
-    // // If the user changes the sort order, reset back to the first page.
-    // this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+          if (data === null) {
+            return [];
+          }
 
-    // merge(this.sort.sortChange, this.paginator.page)
-    //   .pipe(
-    //     startWith({}),
-    //     switchMap(() => {
-    //       this.isLoadingResults = true;
-    //       return this.exampleDatabase!.getRepoIssues(
-    //           this.sort.active, this.sort.direction, this.paginator.pageIndex)
-    //         .pipe(catchError(() => observableOf(null)));
-    //     }),
-    //     map(data => {
-    //       // Flip flag to show that loading has finished.
-    //       this.isLoadingResults = false;
-    //       this.isRateLimitReached = data === null;
-
-    //       if (data === null) {
-    //         return [];
-    //       }
-
-    //       // Only refresh the result length if there is new data. In case of rate
-    //       // limit errors, we do not want to reset the paginator to zero, as that
-    //       // would prevent users from re-triggering requests.
-    //       this.resultsLength = data.total_count;
-    //       return data.items;
-    //     })
-    //   ).subscribe(data => this.data = data);
-  }
-}
-
-export interface GithubApi {
-  items: GithubIssue[];
-  total_count: number;
-}
-
-export interface GithubIssue {
-  numberOfGettingPromo: number;
-  name: string;
-  discountsNumber: number;
-  viewNumber: number;
-}
-
-/** An example database that the data source uses to retrieve data for the table. */
-export class ExampleHttpDatabase {
-  constructor(private _httpClient: HttpClient) {}
-
-  getRepoIssues(sort: string, order: SortDirection, page: number): Observable<GithubApi> {
-    const requestUrl = API_URL + `/statistics/vendors`;
-    return this._httpClient.get<any>(requestUrl);
+          this.resultsLength = data.total_count;
+          return data;
+        })
+      ).subscribe(data => this.dataSource = data);
   }
 }

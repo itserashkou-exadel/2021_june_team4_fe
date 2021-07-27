@@ -35,6 +35,7 @@ import { FavoriteComponent } from './profile/profile/favorite/favorite.component
 import { ActiveComponent } from './profile/profile/active/active.component';
 import { HistoryComponent } from './profile/profile/history/history.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 // required for AOT compilation
@@ -89,6 +90,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
       missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MissingTranslationService},
       useDefaultLang: false,
     }),
+    MatPaginatorModule,
   ],
 })
 export class HeadModule { }
