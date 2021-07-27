@@ -99,6 +99,10 @@ export class StepCreateVendorComponent
       description: new FormControl(null, [Validators.required]),
       contacts: new FormControl(null, [Validators.required]),
     });
+
+    this.http.get(`${API_URL}/coupons`).subscribe(resp => {
+      console.log(resp);
+    })
   }
 
   ngOnDestroy(): void {

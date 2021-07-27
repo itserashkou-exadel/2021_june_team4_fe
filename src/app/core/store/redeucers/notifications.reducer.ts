@@ -1,6 +1,6 @@
 export const initialState: any = {
   notificationsUnread: [
-    { nType: 'New promo received', nName: 'A some discount', nPromo: 'word' },
+    //{ nType: 'New promo received', nName: 'A some discount', nPromo: 'word' },
   ],
   notificationsRead :[]
 };

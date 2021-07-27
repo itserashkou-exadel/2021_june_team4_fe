@@ -253,6 +253,7 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   getVendorsById(id: string) {
     return this.vendorsService.getVendorsById(id);
   }
+  
   createCategory(): void {
     const newCategoryName: string = this.newCategoryInput.value;
     this.categoriesService.createCategory({ name: newCategoryName });
