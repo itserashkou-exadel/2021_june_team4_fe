@@ -100,16 +100,16 @@ mat-list {
   transform: translateX(-50%) translateY(-50%);
 }
 
-.overlay {
-  height: 100vh;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.5);
-  z-index: 1001; // for overlay map
-  top: 0;
-  left: 0;
-  position: fixed;
-}
-
-.mat-progress-spinner::ng-deep circle {
-  stroke: #2a79ff !important;
-}
+//.overlay {
+//  height: 100vh;
+//  width: 100%;
+//  background-color: rgba(255, 255, 255, 0.5);
+//  z-index: 1001; // for overlay map
+//  top: 0;
+//  left: 0;
+//  position: fixed;
+//}
+//
+//.mat-progress-spinner::ng-deep circle {
+//  stroke: #2a79ff !important;
+//}

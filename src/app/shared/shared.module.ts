@@ -23,6 +23,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSortModule } from "@angular/material/sort";
 
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
@@ -77,6 +78,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
         MatBadgeModule,
         MatProgressBarModule,
         MatSidenavModule,
+      MatSortModule,
 
         RouterModule,
         TranslateModule,
@@ -112,6 +114,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
     MatAutocompleteModule,
     MatProgressBarModule,
     MatSidenavModule,
+    MatSortModule,
 
     FooterComponent,
     TileComponent,

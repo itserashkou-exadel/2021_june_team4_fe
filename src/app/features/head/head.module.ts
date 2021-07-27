@@ -34,6 +34,8 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { FavoriteComponent } from './profile/profile/favorite/favorite.component';
 import { ActiveComponent } from './profile/profile/active/active.component';
 import { HistoryComponent } from './profile/profile/history/history.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
@@ -66,26 +68,27 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     MapComponent,
     StepCreateVendorComponent
   ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        RouterModule,
-        HeadRoutingModule,
-        NgbCarouselModule,
-        NgbRatingModule,
-        MatDialogModule,
-        NgbTooltipModule,
-        MatTreeModule,
-        MatTableModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient],
-            },
-            missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MissingTranslationService},
-            useDefaultLang: false,
-        }),
-    ],
+  imports: [
+    NgxSpinnerModule,
+    CommonModule,
+    SharedModule,
+    RouterModule,
+    HeadRoutingModule,
+    NgbCarouselModule,
+    NgbRatingModule,
+    MatDialogModule,
+    NgbTooltipModule,
+    MatTreeModule,
+    MatTableModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MissingTranslationService},
+      useDefaultLang: false,
+    }),
+  ],
 })
 export class HeadModule { }

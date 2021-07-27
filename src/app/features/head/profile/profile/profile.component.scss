@@ -112,6 +112,9 @@ tr.mat-footer-row {
       text-align: left;
       vertical-align: top;
     }
+    .mat-tab-header, .mat-tab-nav-bar {
+      border-bottom: 0;
+    }
     .wrapper {
       flex-direction: row;
     }
