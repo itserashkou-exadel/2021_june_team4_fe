@@ -39,9 +39,6 @@
 
       <div class="right-block ml-auto">
         <div class="notifications">
-          <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"
-        >favorite_border</mat-icon
-        > -->
           <mat-icon
             [matBadge]="iSnotifications$"
             matBadgeColor="warn"
@@ -77,10 +74,9 @@
               class=""
               aria-label="Example home icon"
             >
-              person_outline
+              {{ this.userRole === 'ROLE_USER' ? 'person_outline' : 'person' }}
             </mat-icon>
             {{ user.firstName + ' ' + user.lastName }}
-            <!-- 'COMMON.Head.name' | translate -->
           </button>
 
           <mat-menu #menu="matMenu">

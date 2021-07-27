@@ -29,6 +29,10 @@ import { Router } from "@angular/router";
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { AuthService } from "../../../core/services/auth.service";
 
+interface ITabItem {
+  link: string,
+  label: string
+}
 @Component({
   selector: 'app-head',
   templateUrl: './head.component.html',
@@ -43,6 +47,8 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
   language$: Observable<any>;
   isLoaded: boolean = true; //spinner
   user$: Observable<IUser>;
+  userRole: string | null;
+  tabItems!: Array<ITabItem>; 
 
   isHomeTile:boolean = false;
 
@@ -105,6 +111,7 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
     this.form = {
       filter: ""
     };
+    this.userRole = sessionStorage.getItem('role');
   }
 
   onFocusEvent(e:any) {
@@ -171,6 +178,19 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
     if (localLang) {
       this.store.dispatch(setLanguage({ language: localLang }));
     }
+
+    this.tabItems = (this.userRole === 'ROLE_ADMIN') ?
+    [
+     { link: 'home', label: 'COMMON.Head.home' },
+     { link: 'profile', label: 'COMMON.Head.profile' },
+     { link: 'vendor', label: 'COMMON.Head.vendor' },
+     { link: 'statistic', label: 'COMMON.Head.statistic' },
+    ]
+    :
+    [
+     { link: 'home', label: 'COMMON.Head.home' },
+     { link: 'profile', label: 'COMMON.Head.profile' },
+    ];
   }
 
   ngAfterContentChecked() {
@@ -220,13 +240,6 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
   onClick(func:any, self:any){
     func(self);
   }
-
-  tabItems = [
-    { link: 'home', label: 'COMMON.Head.home' },
-    { link: 'profile', label: 'COMMON.Head.profile' },
-    { link: 'vendor', label: 'COMMON.Head.vendor' },
-    { link: 'statistic', label: 'COMMON.Head.statistic' },
-  ];
 
   pmClick(ev: Event) {
     console.log((ev.target as HTMLButtonElement).innerText);

@@ -10,6 +10,7 @@ import { HomeComponent } from "./home/home/home.component";
 import {FavoriteComponent} from "./profile/profile/favorite/favorite.component";
 import {HistoryComponent} from "./profile/profile/history/history.component";
 import {ActiveComponent} from "./profile/profile/active/active.component";
+import { AdminGuard } from 'src/app/core/guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -32,10 +33,12 @@ const routes: Routes = [
       {
         path: 'vendor',
         component: VendorComponent,
+        canActivate: [AdminGuard]
       },
       {
         path: 'statistic',
         component: StatisticComponent,
+        canActivate: [AdminGuard]
       },
       {
         path: 'profile',
