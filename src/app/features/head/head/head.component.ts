@@ -24,7 +24,6 @@ import { HomeService } from "../../../core/services/home.service";
 
 
 import { clearNotifications } from 'src/app/core/store/actions/notifications.actions';
-import { SpinnerService } from "../../../core/services/spinner.service";
 import { Router } from "@angular/router";
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { AuthService } from "../../../core/services/auth.service";
@@ -41,7 +40,6 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
   SETTING_KEY = 'SETTINGS';
   languages = ['en', 'ru'];
   language$: Observable<any>;
-  isLoaded: boolean = true; //spinner
   user$: Observable<IUser>;
 
   isHomeTile:boolean = false;
@@ -60,7 +58,6 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
               private router: Router,
               private http: HttpClient,
               public homeService: HomeService,
-              private spinner: SpinnerService,
               private auth: AuthService,
               private translateService: TranslateService,
               private profile: ProfileService,
@@ -162,11 +159,6 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
 
     });
 
-    this.spinner.returnAsObservable().subscribe(
-      subs =>{
-        this.isLoaded = subs;
-      })
-
     let localLang = localStorage.getItem(this.SETTING_KEY);
     if (localLang) {
       this.store.dispatch(setLanguage({ language: localLang }));
@@ -211,8 +203,8 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
   }
 
   profileMenuItems = [
-    { link: 'favorite', label: 'COMMON.Head.favorite', function: this.toFavorite },
     { link: 'history', label: 'COMMON.Head.history', function: this.toHistory },
+    { link: 'favorite', label: 'COMMON.Head.favorite', function: this.toFavorite },
     { link: 'active', label: 'COMMON.Head.activeDiscounts', function: this.toActiveDiscounts },
     { link: 'logout', label: 'COMMON.Head.logout', function: this.logout },
   ];
@@ -223,7 +215,7 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   tabItems = [
     { link: 'home', label: 'COMMON.Head.home' },
-    { link: 'profile', label: 'COMMON.Head.profile' },
+    { link: 'profile/history', label: 'COMMON.Head.profile' },
     { link: 'vendor', label: 'COMMON.Head.vendor' },
     { link: 'statistic', label: 'COMMON.Head.statistic' },
   ];
