@@ -1,3 +1,5 @@
+@import "../profile.component.scss";
+
 .example-card {
   width: 270px;
   display: inline-block;
@@ -56,4 +58,13 @@
 .tooltip-block {
   background-color: #0082ca;
   font-size: .9em;
+}
+
+.tabEmpty{
+  font-size: 24px;
+  color: $grey;
+  text-align: center;
+  &::selection{
+    color:red;
+  }
 }

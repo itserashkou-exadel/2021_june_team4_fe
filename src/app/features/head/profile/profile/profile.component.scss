@@ -1,3 +1,4 @@
+
 $base-color: hsl(196, 85%, 59%);
 $grey: hsla(0, 0%, 60%, 0.5);
 
@@ -17,7 +18,7 @@ $grey: hsla(0, 0%, 60%, 0.5);
 .Subscriptions {
   width: 100%;
 }
-.history {
+.discount {
   width: fit-content;
   display: flex;
   flex-wrap: wrap;
@@ -44,12 +45,10 @@ $grey: hsla(0, 0%, 60%, 0.5);
       color: hsl(0, 0%, 0%);
     }
     .dicountStart{
-      color: hsla(150, 100%, 30%, 0.5);
-      font-weight: bold;
+      color: hsl(150, 100%, 30%);
     }
     .dicountEnd{
-      color: hsla(0, 100%, 40%, 0.5);
-      font-weight: bold;
+      color: hsl(0, 100%, 30%);
     }
   }
 }
@@ -58,10 +57,10 @@ $grey: hsla(0, 0%, 60%, 0.5);
   line-height: 30px;
 }
 .green {
-  background-color: rgb(183, 255, 183);
+  background-color: hsl(120, 100%, 30%);
 }
 .red {
-  background-color: rgb(255, 183, 183);
+  background-color: hsl(0, 100%, 30%);
 }
 .white {
   background-color: #fff;
@@ -156,5 +155,14 @@ tr.mat-footer-row {
   }
   &::after {
     clear: both;
+  }
+}
+
+.tabEmpty{
+  font-size: 24px;
+  color: $grey;
+  text-align: center;
+  &::selection{
+    color:rgb(255, 234, 0);
   }
 }

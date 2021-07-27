@@ -41,20 +41,17 @@ export interface IProfileSubscription {
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  // @ViewChild('tabs', { static: false }) tabGroup!: MatTabGroup;
-  // coupons: any = { promo: '213123123', name: 'Vendor Name' };
+
   displayCategory: string[] = ['Category', 'Add/Remove'];
   categoryAddRemove: string[] = ['COMMON.Global.add', 'COMMON.Global.remove'];
   displayHistory: string[] = ['Name', 'Promo', 'EndDate'];
   user$: Observable<IUser>;
 
   categories$: Observable<ICategory[]>;
-  // subscribe$: Observable<any>;
   DescriptionAll$: Observable<IDescription[]>;
   profileHistory$: Observable<IFavoritesProfile[]>;
   profileCoupons$: Observable<IFavoritesProfile[]>;
 
-  // profileTabIndex: number = 0;
   profileTabIndex: number = 0;
   tabs:[{ tabName: string; index: number }, { tabName: string; index: number }, { tabName: string; index: number }] = [
     { tabName: 'history', index: 0},
@@ -72,11 +69,9 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private change: ChangeDetectorRef
   ) {
-    // this.subscribe$ = store.select('profile');
     this.categories$ = this.categories.getCategories();
     this.user$ = this.profile.getUser();
     this.profileHistory$ = this.profile.getFavorite();
-    // this.favorites$.subscribe(data => console.log(data));
     this.DescriptionAll$ = this.profile.getDescriptionAll();
     this.profileCoupons$ = this.profile.getCoupons();
   }

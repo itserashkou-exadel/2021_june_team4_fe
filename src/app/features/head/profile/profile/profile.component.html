@@ -26,7 +26,7 @@
   <div class="container">
     <div id="content">
       <div id="main-content">
-        <button mat-raised-button (click)="demo1BtnClick()">Tab Demo 1!</button>
+        <!--<button mat-raised-button (click)="demo1BtnClick()">Tab Demo 1!</button>-->
         <mat-tab-group [(selectedIndex)]="profileTabIndex">
           <mat-tab label="{{ 'COMMON.Profile.favorite' | translate }}">
             <ng-template matTabContent>
@@ -38,6 +38,9 @@
             label="{{ 'COMMON.Profile.history' | translate }}"
             *ngIf="profileCoupons$ | async as data"
           >
+
+          <p class="tabEmpty mt-5" *ngIf='data.length == 0'>You don't have any history :(</p>
+
             <table mat-table [dataSource]="data" class="mat-elevation-z8">
               <ng-container matColumnDef="Name">
                 <th mat-header-cell *matHeaderCellDef>
@@ -72,9 +75,11 @@
           </mat-tab>
 
           <mat-tab label="{{ 'COMMON.Profile.activeDiscounts' | translate }}">
-            <div class="history" *ngIf="profileCoupons$ | async as coupons">
-              <!--*ngFor надо,  классы можно оставить-->
-              <div class="history-item" *ngFor="let coupon of coupons">
+            <div class="discount" *ngIf="profileCoupons$ | async as coupons">
+
+              <p class="tabEmpty mt-5" *ngIf='coupons.length == 0'>You don't have any active discounts :(</p>
+
+              <div class="discount-item" *ngFor="let coupon of coupons">
                 <div>
                   <p class="dicountName">{{ coupon.discount.name }}</p>
                   <p class="dicountPromo">{{ coupon.discount.promo }}</p>

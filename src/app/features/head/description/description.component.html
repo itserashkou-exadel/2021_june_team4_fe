@@ -44,7 +44,7 @@
 
         <div class="discount mb-3 ">
           <span *ngIf="data.discountType === 'PERCENT'">{{ 'COMMON.description.rightpanel.sale' | translate }}</span>
-          <div class="discount-num"><span *ngIf="data.discountType === 'PERCENT'">-</span> {{ data.value }} <span *ngIf="data.discountType === 'PERCENT'">%</span></div>
+          <div class="discount-num"><span *ngIf="data.discountType === 'PERCENT'">-</span> {{ data.value }} <span *ngIf="data.discountType === 'PERCENT'">%</span><span *ngIf="data.discountType === 'PRICE'">USD</span></div>
         </div>
 
         <button mat-raised-button color="accent">
