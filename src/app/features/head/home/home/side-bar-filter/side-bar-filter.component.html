@@ -6,6 +6,7 @@
         formControlName="vendor"
         (selectionChange)="selectCathegory()"
         multiple
+        [disabled]="isDisabled"
       >
         <mat-option *ngFor="let vendor of vendors$ | async" [value]="vendor.id">
           {{ vendor.name }}
@@ -19,6 +20,7 @@
         formControlName="category"
         (selectionChange)="selectCathegory()"
         multiple
+        [disabled]="isDisabled"
       >
         <mat-option
           *ngFor="let category of categories$ | async"
@@ -31,7 +33,7 @@
 
     <mat-form-field appearance="fill" class="sideBar__form-field">
       <mat-label>{{ 'COMMON.SideBar.location' | translate }}</mat-label>
-      <mat-select formControlName="city">
+      <mat-select formControlName="city" [disabled]="isDisabled">
         <mat-option>-- {{ 'COMMON.SideBar.none' | translate }} --</mat-option>
         <mat-optgroup
           *ngFor="let country of locations$ | async"
@@ -44,7 +46,11 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-chip-list #chipList aria-label="Color selection">
+    <mat-chip-list
+      #chipList
+      aria-label="Color selection"
+      [disabled]="isDisabled"
+    >
       <mat-chip *ngFor="let chip of chips$ | async" [removable]="true">
         {{ chip.name }}
         <mat-icon matChipRemove (click)="removeChips(chip)">cancel</mat-icon>
@@ -77,6 +83,7 @@
         color="primary"
         (click)="filterDiscounts()"
         class="apply"
+        [disabled]="isDisabled"
       >
         {{ 'COMMON.SideBar.apply' | translate }}
       </button>
@@ -85,6 +92,7 @@
         mat-stroked-button
         color="warn"
         (click)="resetForm()"
+        [disabled]="isDisabled"
       >
         {{ 'COMMON.SideBar.reset' | translate }}
       </button>

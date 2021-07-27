@@ -35,7 +35,9 @@
   </div>
   <div class="main-row">
     <div class="sidebar">
-      <app-side-bar-filter></app-side-bar-filter>
+      <app-side-bar-filter
+        [isDisabled]="(isMap | async) ? true : false"
+      ></app-side-bar-filter>
     </div>
 
     <div class="content-area">

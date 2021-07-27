@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
@@ -50,6 +50,8 @@ export class SideBarFilterComponent implements OnInit, OnDestroy {
   selectedChips: any;
 
   inputControl: FormControl;
+
+  @Input() isDisabled!: boolean;
 
   constructor(
     private store: Store<IAppState>,
