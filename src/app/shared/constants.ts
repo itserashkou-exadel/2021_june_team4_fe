@@ -8,3 +8,4 @@ export const SEARCH_URL = API_URL + '/discounts/search';
 export const USERS_URL = API_URL + '/users/';
 export const COUPONS_URL = API_URL + '/coupons/';
 export const STATISTIC_VENDORS_URL = API_URL + `/statistics/vendors`;
+export const STATISTIC_DISCOUNTS_URL = API_URL + `/statistics/discounts`;

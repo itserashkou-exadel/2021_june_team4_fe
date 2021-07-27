@@ -6,6 +6,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { IAppState, VendorStatistic } from "../../../../shared/interfaces";
 import { createSelector, select, Store } from "@ngrx/store";
 import { StatisticService } from "../../../../core/services/statistic.service";
+import {MatTableDataSource} from "@angular/material/table";
 
 /**
  * @title Table retrieving data through HTTP
@@ -18,43 +19,43 @@ import { StatisticService } from "../../../../core/services/statistic.service";
 
 export class StatisticComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['name', 'discountsNumber', 'viewNumber','numberOfGettingPromo'];
-  dataSource: VendorStatistic[] = [];
-  statisticVData$: Observable<any>;
+  // dataSourceVendors: VendorStatistic[] = [];
+  // statisticVData$: Observable<any>;
 
   resultsLength = 0;
   isRateLimitReached = false;
 
-  @ViewChild(MatPaginator, {static:false})
-  paginator!: MatPaginator;
-  @ViewChild(MatSort, {static:false})
-  sort!: MatSort;
+  dataSourceVendors: MatTableDataSource<VendorStatistic>;
+  @ViewChild('TableOnePaginator', {static: true}) tableOnePaginator!: MatPaginator;
+  @ViewChild('TableOneSort', {static: true}) tableOneSort!: MatSort;
+
+  // @ViewChild(MatPaginator, {static:false})
+  // paginator!: MatPaginator;
+  // @ViewChild(MatSort, {static:false})
+  // sort!: MatSort;
 
   constructor(private store: Store<IAppState>,
               private statisticService: StatisticService) {
-
-    const selectStatistic = (state: IAppState) => state.statistic;
-
-    const selectDStatisticVendors = createSelector(
-      selectStatistic,
-      (state: any) => state.vendors
-    );
-    this.statisticVData$ = this.store.pipe(select(selectDStatisticVendors));
+    this.dataSourceVendors = new MatTableDataSource;
   }
 
   ngOnInit(): void {
-  }
+    // this.dataSourceVendors.paginator = this.tableOnePaginator;
+    // this.dataSourceVendors.sort = this.tableOneSort;
+    this.dataSourceVendors.paginator = this.tableOnePaginator;
+    this.dataSourceVendors.sort = this.tableOneSort;
 
-  ngAfterViewInit() {
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    this.tableOneSort.sortChange.subscribe(() => this.tableOnePaginator.pageIndex = 0);
 
-    merge(this.sort.sortChange, this.paginator.page)
+    merge(this.tableOneSort.sortChange, this.tableOnePaginator.page)
       .pipe(
         startWith({}),
         switchMap(() => {
+          console.log( 'page:', this.tableOnePaginator.pageIndex)
           return this.statisticService.getStatisticVendors({
-            sortBy: this.sort.active,
-            sortDirection: this.sort.direction,
-            page: this.paginator.pageIndex
+            sortBy: this.tableOneSort.active,
+            sortDirection: this.tableOneSort.direction,
+            page: this.tableOnePaginator.pageIndex
           })
             .pipe(catchError(() => observableOf(null)));
         }),
@@ -66,8 +67,12 @@ export class StatisticComponent implements AfterViewInit, OnInit {
           }
 
           this.resultsLength = data.total_count;
-          return data;
+          return data.items;
         })
-      ).subscribe(data => this.dataSource = data);
+      ).subscribe(data => this.dataSourceVendors = data);
+  }
+
+  ngAfterViewInit() {
+
   }
 }
