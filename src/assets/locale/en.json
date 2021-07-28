@@ -27,6 +27,7 @@
         "name": "Category's name",
         "used": "Used discounts"
       },
+      "excel": "Export as Excel",
       "title": {
         "discounts": "Statistic by discounts",
         "vendors": "Statistic by vendors",
