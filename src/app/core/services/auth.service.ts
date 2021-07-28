@@ -56,7 +56,6 @@ export class AuthService {
           this.tokenStorage.saveToken(jwtToken);
           this.startRefreshTokenTimer();
           this.spinner.hide ();
-          this.notification.success('Token was updated! TEST REFRESH');
         } else {
           this.spinner.hide ();
           this.notification.error(data.message);
