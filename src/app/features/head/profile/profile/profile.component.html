@@ -3,7 +3,7 @@
     class="d-flex flex-wrap justify-content-center text-center m-0"
     *ngIf="user$ | async as data"
   >
-    <div class="col-md-3 col-sm-12 h5">
+    <div class="col-md-4 col-sm-12 h5">
       <p>
         {{ 'COMMON.Profile.logged' | translate }}:
         <span>{{ data.role }}</span>
@@ -15,7 +15,7 @@
         <span>{{ data.email }}</span>
       </p>
     </div>
-    <div class="col-md-3 col-sm-12 h5 blueColor">
+    <div class="col-md-4 col-sm-12 h5 blueColor">
       <p>
         {{ 'COMMON.Profile.location' | translate }}:
         <span>{{ data.city.name }}</span>
@@ -26,11 +26,12 @@
   <div class="container">
     <div id="content">
       <div id="main-content">
-      <div class="wrapper">
-          <nav mat-tab-nav-bar>
+      <div class="wrapper row px-3">
+          <nav mat-tab-nav-bar class="col-md-3 col-lg-2 border rounded">
             <a mat-tab-link
                *ngFor="let link of tabs"
                [routerLink]="link.path"
+               
 
             >
     <!--          routerLinkActive #rla="routerLinkActive"-->
@@ -38,12 +39,14 @@
               {{link.tabName}}
             </a>
           </nav>
-        <div class="mat-tab-body-wrapper">
+        <div class="mat-tab-body-wrapper col-11 col-md-9 mx-auto">
           <router-outlet></router-outlet>
         </div>
       </div>
 
-
+    </div>
+  </div>
+</div>
 
 
 <!--      <div id="main-content">-->
@@ -74,35 +77,30 @@
 <!--            </table>-->
 <!--          </mat-tab>-->
 
+  <!-- <mat-tab label="History" *ngIf="profileCoupons$ | async as data">
 
-<!--&lt;!&ndash;          <mat-tab label="History" *ngIf="profileCoupons$ | async as data">&ndash;&gt;-->
+            <table mat-table [dataSource]="data">
+              <ng-container matColumnDef="Name">
+                <th mat-header-cell *matHeaderCellDef>Discount Name</th>
+                <td mat-cell *matCellDef="let data">{{ data.discount.name }}</td>
+              </ng-container>
 
-<!--&lt;!&ndash;            <table mat-table [dataSource]="data">&ndash;&gt;-->
-<!--&lt;!&ndash;              <ng-container matColumnDef="Name">&ndash;&gt;-->
-<!--&lt;!&ndash;                <th mat-header-cell *matHeaderCellDef>Discount Name</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                <td mat-cell *matCellDef="let data">{{ data.discount.name }}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;              </ng-container>&ndash;&gt;-->
+              <ng-container matColumnDef="Promo">
+                <th mat-header-cell *matHeaderCellDef>Promo</th>
+                <td mat-cell *matCellDef="let data">
+                  {{ data.discount.promo }}
+                </td>
+            </ng-container>
 
-<!--&lt;!&ndash;              <ng-container matColumnDef="Promo">&ndash;&gt;-->
-<!--&lt;!&ndash;                <th mat-header-cell *matHeaderCellDef>Promo</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                <td mat-cell *matCellDef="let data">&ndash;&gt;-->
-<!--&lt;!&ndash;                  {{ data.discount.promo }}&ndash;&gt;-->
-<!--&lt;!&ndash;                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;              </ng-container>&ndash;&gt;-->
+             <ng-container matColumnDef="EndDate">
+               <th mat-header-cell *matHeaderCellDef>End Date</th>
+              <td mat-cell *matCellDef="let data">
+                {{ data.discount.endTime | date:'short' }}
+              </td>
+            </ng-container>
 
-<!--&lt;!&ndash;              <ng-container matColumnDef="EndDate">&ndash;&gt;-->
-<!--&lt;!&ndash;                <th mat-header-cell *matHeaderCellDef>End Date</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                <td mat-cell *matCellDef="let data">&ndash;&gt;-->
-<!--&lt;!&ndash;                  {{ data.discount.endTime | date:'short' }}&ndash;&gt;-->
-<!--&lt;!&ndash;                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;              </ng-container>&ndash;&gt;-->
+             <tr mat-header-row *matHeaderRowDef="displayHistory"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayHistory"></tr>
+            </table>
 
-<!--&lt;!&ndash;              <tr mat-header-row *matHeaderRowDef="displayHistory"></tr>&ndash;&gt;-->
-<!--&lt;!&ndash;              <tr mat-row *matRowDef="let row; columns: displayHistory"></tr>&ndash;&gt;-->
-<!--&lt;!&ndash;            </table>&ndash;&gt;-->
-
-<!--&lt;!&ndash;          </mat-tab>&ndash;&gt;-->
-    </div>
-  </div>
-</div>
-</div>
+        </mat-tab> -->

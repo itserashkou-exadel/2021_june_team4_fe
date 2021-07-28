@@ -1,7 +1,7 @@
 <div class="cover">
   <div class="header">
     <div class="header-container">
-      <div class="left-block d-flex">
+      <div class="left-block col-12 col-md-8">
         <div>
           <img src="../../../../assets/logo.png" alt="App logo" height="50" />
         </div>
@@ -14,11 +14,11 @@
         </div>
 
         <div
-          class="search-container w-100 px-4 col-sm-5"
+          class="search-container col-12 col-sm-5 col-md-4"
           [hidden]="!isHomeTile"
         >
           <form>
-            <mat-form-field class="search w-100" appearance="legacy">
+            <mat-form-field class="w-100" appearance="legacy">
               <mat-label>{{ "COMMON.Head.search" | translate }}</mat-label>
               <input
                 (focus)="onFocusEvent($event)"
@@ -29,7 +29,7 @@
                 type="text"
                 name="filter"
                 placeholder="{{ 'COMMON.Head.search' | translate }}"
-                class="filter"
+                class=""
               />
             </mat-form-field>
           </form>
@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <div class="right-block ml-auto">
+      <div class="right-block ml-auto col-4">
         <div class="notifications">
           <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"
         >favorite_border</mat-icon
@@ -46,7 +46,7 @@
             [matBadge]="iSnotifications$"
             matBadgeColor="warn"
             matBadgeSize="small"
-            class="mr-sm-5 mr-3"
+            class="notification mr-sm-5 mr-3"
             [matBadgeHidden]="iSnotifications$ == 0"
             (click)="controlListNotes()"
           >
@@ -110,7 +110,7 @@
     </div>
 
     <div class="tabs">
-      <nav mat-tab-nav-bar class="d-none d-sm-flex">
+      <nav mat-tab-nav-bar class="">
         <a
           mat-tab-link
           *ngFor="let tab of tabItems"
