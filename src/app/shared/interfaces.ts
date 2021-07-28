@@ -90,6 +90,9 @@ export interface IAppState {
   filter: IFilterState;
   notifications: any;
   vendor: IVendorState;
+  statistic:{
+    vendors: any;
+  }
 }
 
 export interface IVendorState {
@@ -205,5 +208,24 @@ export interface IFavoritesProfile {
     };
     favorite: boolean;
   };
+}
+
+export interface StatisticApi {
+  items: VendorStatistic[];
+  total_count: number;
+}
+
+export interface VendorStatistic {
+  numberOfGettingPromo: number;
+  name: string;
+  discountsNumber: number;
+  viewNumber: number;
+}
+
+export interface CategoriesStatistic {
+  numberOfGettingPromo: number;
+  name: string;
+  discountsNumber: number;
+  viewNumber: number;
 }
 

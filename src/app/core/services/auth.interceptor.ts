@@ -36,24 +36,17 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     return next.handle(authReq).pipe ( tap (
 
-      event => {
-      //  console.log(event)
-      },
-
+      event => {},
       error => {
-        console.log( error )
         let errorMessage = `Error: ${error.error.message}`;
         this.notification.error(errorMessage);
         if(error.status === 401) {
           this.auth.logout();
         }
         return throwError(errorMessage);
-      }
-
-      ), finalize(() => {
+      }), finalize(() => {
         this.count--;
         if ( this.count == 0 ) this.spinner.hide ();
-      this.spinner.hide ();
       })
     );
   }
