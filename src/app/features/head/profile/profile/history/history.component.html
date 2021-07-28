@@ -26,7 +26,7 @@
   
 </div>
 <p class="notFound" *ngIf="(profileCoupons$ | async)?.length == 0">
-  Your history is empty :(
+  {{ 'COMMON.Profile.historyTab' | translate }}
 </p>
 
 
