@@ -1,17 +1,21 @@
 <div class="statistic-container mat-elevation-z8">
   <mat-accordion>
-    <mat-expansion-panel hideToggle>
+    <mat-expansion-panel hideToggle (opened)="panelOpenStateVendors = true"
+                         (closed)="panelOpenStateVendors = false">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ 'COMMON.statistic.title.vendors' | translate }}
+          <button *ngIf="panelOpenStateVendors" mat-raised-button color="primary" class="excel" (click)="ExportTOExcel('vendors')">
+            {{'COMMON.statistic.excel' | translate}}
+          </button>
         </mat-panel-title>
         <mat-panel-description>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <div class="table-container">
-
+      <div class="table-container" #TABLE_ONE>
         <table mat-table
+               #TABLE_ONE
                [dataSource]="dataSourceVendors"
                class="table"
                matSort
@@ -49,8 +53,7 @@
       <mat-paginator #TableOnePaginator="matPaginator" [length]="resultsLength" [pageSize]="10"></mat-paginator>
     </mat-expansion-panel>
 
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ 'COMMON.statistic.title.discounts' | translate }}
@@ -75,21 +78,25 @@
 
     </mat-expansion-panel>
 
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
+    <mat-expansion-panel (opened)="panelOpenStateCategories = true"
+                         (closed)="panelOpenStateCategories = false">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ 'COMMON.statistic.title.categories' | translate }}
+          <button *ngIf="panelOpenStateCategories" mat-raised-button color="primary" class="excel" (click)="ExportTOExcel('categories')">
+            {{'COMMON.statistic.excel' | translate}}
+          </button>
         </mat-panel-title>
         <mat-panel-description>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <div class="table-container">
+      <div class="table-container" #TABLE_TWO>
 
         <table mat-table
                [dataSource]="dataSourceCategories"
                class="table"
+               #TABLE_TWO
                matSort
                #TableTwoSort="matSort"
                matSortActive="created"
