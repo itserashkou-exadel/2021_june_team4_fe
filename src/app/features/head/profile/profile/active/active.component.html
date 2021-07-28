@@ -1,6 +1,6 @@
 <div class="history " *ngIf="profileCoupons$ | async as coupons">
 
-    <div class="history-item col-11 col-md-5 col-xl-3" *ngFor="let coupon of coupons">
+    <div class="history-item col-12 col-md-5 col-xl-3" *ngFor="let coupon of coupons">
         <div>
           <p class="dicountName">{{ coupon.discount.name }}</p>
           <p class="dicountPromo">{{ coupon.discount.promo }}</p>
