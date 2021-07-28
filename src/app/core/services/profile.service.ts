@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {IDiscount, IFavoritesProfile, IUser} from 'src/app/shared/interfaces';
+import { IDiscount, IFavoritesProfile, IUser } from 'src/app/shared/interfaces';
 import { COUPONS_URL, USERS_URL } from 'src/app/shared/constants';
 import { FAVORITE_URL } from 'src/app/shared/constants';
 import { DISCOUNT_URL } from 'src/app/shared/constants';
@@ -22,9 +22,6 @@ export class ProfileService {
     this.tokenParsed = JSON.parse(atob(token.split('.')[1]));
   }
 
-  getDescriptionAll(): Observable<IDescription[]> {
-    return this.http.get<IDescription[]>(`${DISCOUNT_URL}`);
-  }
   getUser(): Observable<IUser> {
     return this.http.get<IUser>(`${USERS_URL}${this.tokenParsed.id}`);
   }
