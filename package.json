@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open",
-    "build": "ng build",
+    "dev": "ng serve --open",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "extract-translations": "ngx-translate-extract --input ./src --output ./src/assets/locale/*.json --clean --sort --format namespaced-json --marker _"
+    "extract-translations": "ngx-translate-extract --input ./src --output ./src/assets/locale/*.json --clean --sort --format namespaced-json --marker _",
+    "start": "node ./server/server.js"
   },
   "private": true,
   "dependencies": {
