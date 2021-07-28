@@ -50,7 +50,7 @@ export interface IDescription {
   category:{};
   description: string;
   name: string;
-  img: string[];
+  discountImages: string[];
   endTime: string;
   startTime: string;
   percent: number;

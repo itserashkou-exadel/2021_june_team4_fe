@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   path = '/home'
 
-
   ngOnInit(): void {
     this.form = new FormGroup({
       username: new FormControl(null, [Validators.required, Validators.email]),

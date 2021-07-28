@@ -31,8 +31,7 @@
             <a mat-tab-link
                *ngFor="let link of tabs"
                [routerLink]="link.path"
-               
-
+               routerLinkActive="active-link"
             >
               {{link.tabName | translate}}
             </a>
