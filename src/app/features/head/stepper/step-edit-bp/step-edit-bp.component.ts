@@ -123,7 +123,7 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   }
 
   clickGetLocation(){
-    this.getLocations(this.vendor.is);
+    this.getLocations(this.vendor.id);
   }
 
   getDisounts(vendorId: string) {
