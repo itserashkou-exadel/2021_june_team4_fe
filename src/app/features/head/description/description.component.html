@@ -2,10 +2,7 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-7 pt-5">
-        <h1 class="vendorName">{{ data.name }}</h1>
-
-<!--      <app-carousel *ngFor="let img of data.img | async" [images]="data.img"></app-carousel>-->
-
+      <h1 class="vendorName">{{ data.name }}</h1>
       <section class="article-title">
         <mat-icon class="icon">place</mat-icon>
         <span>{{ data.vendorLocations[0].city.countryName}}</span>, <span>{{data.vendorLocations[0].city.name }}</span>
@@ -57,7 +54,7 @@
         </button>
 
         <div class="carousel my-5">
-          <app-carousel  [images]="data.img"></app-carousel>
+          <app-carousel  [images]="data.discountImages"></app-carousel>
         </div>
 
         <div class="address-block" id="address">

@@ -1,8 +1,8 @@
 import { HTTP_INTERCEPTORS, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpHandler, HttpRequest, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Observable, throwError } from "rxjs";
-import {catchError, count, delay, finalize, tap} from 'rxjs/operators';
+import { finalize, tap} from 'rxjs/operators';
 
 import { TokenStorageService } from './token-storage.service';
 import { NotificationService } from "./notification.service";
@@ -31,7 +31,6 @@ export class AuthInterceptor implements HttpInterceptor {
       if(authReq.url.endsWith('/authenticate/refresh') ){
         const refreshToken = window.sessionStorage.getItem('refreshToken');
         authReq = req.clone({headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + refreshToken)})
-        // return next.handle(authReq)
       }
     }
     return next.handle(authReq).pipe ( tap (

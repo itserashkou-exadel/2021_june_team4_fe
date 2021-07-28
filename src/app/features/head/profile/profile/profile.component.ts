@@ -9,10 +9,8 @@ import { ProfileService } from 'src/app/core/services/profile.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  //categoryAddRemove: string[] = ['COMMON.Global.add', 'COMMON.Global.remove'];
   displayHistory: string[] = ['Name', 'Promo', 'EndDate'];
   user$: Observable<IUser>;
-
 
   tabs:[{ tabName: string; path: string ,isActive: boolean}, { tabName: string; path: string,isActive: boolean }, { tabName: string; path: string,isActive: boolean }] = [
     { tabName: 'COMMON.Profile.title.history', path: 'history', isActive: true},
@@ -20,10 +18,7 @@ export class ProfileComponent implements OnInit {
     { tabName: 'COMMON.Profile.title.active', path: 'active', isActive: false}
   ]
 
-
-  constructor(
-    private profile: ProfileService,)
-  {
+  constructor ( private profile: ProfileService ) {
     this.user$ = this.profile.getUser();
   }
 

@@ -46,7 +46,7 @@ export class DescriptionService {
       archived: remoteData.archived,
       description: remoteData.description === null ? 'Default description': remoteData.description,
       percent: remoteData.percent,
-      img: remoteData.img ? remoteData.img : ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU'],
+      discountImages: remoteData.discountImages.length ? remoteData.discountImages : ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVe9r47bhQVcZJ4jEd4wQuYH0LsAz5qKOTBATYRG8c7C3waYKbB2Z1My-HtoY2nzv4XmY&usqp=CAU'],
       promo: remoteData.promo,
       value: remoteData.value,
       discountType: remoteData.discountType

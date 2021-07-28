@@ -32,11 +32,13 @@ interface ITabItem {
   link: string,
   label: string
 }
+
 @Component({
   selector: 'app-head',
   templateUrl: './head.component.html',
   styleUrls: ['./head.component.scss'],
 })
+
 export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
   @ViewChild('discountSearchInput', { static: true }) discountSearchInput!: ElementRef;
   isSearchOnFocus$: Observable<boolean>;
@@ -46,7 +48,7 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
   language$: Observable<any>;
   user$: Observable<IUser>;
   userRole: string | null;
-  tabItems!: Array<ITabItem>; 
+  tabItems!: Array<ITabItem>;
 
   isHomeTile:boolean = false;
 
@@ -117,10 +119,9 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
   }
 
   onBlur(e:any) {
-   //todo available filter and sor by default
+   //todo available filter and sort by default
     this.setSearchOnFocus(e.type);
   }
-
 
   ngOnDestroy(): void {
     if(this.aSub) {
@@ -131,9 +132,6 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
   clearNotifications(){
     this.store.dispatch(clearNotifications())
   }
-
-  openDialog() { }
-
 
   ngOnInit(): void {
     //search
@@ -174,14 +172,14 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
     this.tabItems = (this.userRole === 'ROLE_ADMIN') ?
     [
      { link: 'home', label: 'COMMON.Head.home' },
-     { link: 'profile', label: 'COMMON.Head.profile' },
+     { link: 'profile/history', label: 'COMMON.Head.profile' },
      { link: 'vendor', label: 'COMMON.Head.vendor' },
      { link: 'statistic', label: 'COMMON.Head.statistic' },
     ]
     :
     [
      { link: 'home', label: 'COMMON.Head.home' },
-     { link: 'profile', label: 'COMMON.Head.profile' },
+     { link: 'profile/history', label: 'COMMON.Head.profile' },
     ];
   }
 
@@ -205,21 +203,20 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
     localStorage.setItem(this.SETTING_KEY, lang);
   }
 
-  discountSearch = new FormControl('');
-  profileMenu = new FormControl('');
-  toHistory(s:any){
-    s.router.navigate(['/profile/history']);
-  }
-  toFavorite(s:any) {
-    s.router.navigate(['/profile/favorite',]);
+  toHistory(self:any){
+    self.router.navigate(['/profile/history']);
   }
 
-  toActiveDiscounts(s:any) {
-    s.router.navigate(['/profile/active']);
+  toFavorite(self:any) {
+    self.router.navigate(['/profile/favorite',]);
   }
 
-  logout(s:any) {
-    s.auth.logout();
+  toActiveDiscounts(self:any) {
+    self.router.navigate(['/profile/active']);
+  }
+
+  logout(self:any) {
+    self.auth.logout();
   }
 
   profileMenuItems = [
@@ -229,16 +226,9 @@ export class HeadComponent implements OnInit, AfterContentChecked, OnDestroy {
     { link: 'logout', label: 'COMMON.Head.logout', function: this.logout },
   ];
 
+  //function for menu items
   onClick(func:any, self:any){
     func(self);
-  }
-
-  pmClick(ev: Event) {
-    console.log((ev.target as HTMLButtonElement).innerText);
-  }
-
-  setActiveLink(val: string) {
-    this.activeLink = val;
   }
 
   controlListNotes(){
