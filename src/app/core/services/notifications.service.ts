@@ -18,6 +18,4 @@ export class NotificationsService {
     return response;
   }
 }
-// function httpOptions(arg0: string, httpOptions: any) {
-//   throw new Error('Function not implemented.');
-// }
+
