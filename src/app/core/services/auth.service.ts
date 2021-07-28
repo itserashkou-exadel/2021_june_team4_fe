@@ -8,6 +8,7 @@ import { NotificationService } from "./notification.service";
 
 import {LOGIN_URL, REFRESH_URL} from '../../shared/constants';
 import {Router} from "@angular/router";
+import {NgxSpinnerService} from "ngx-spinner";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -23,6 +24,7 @@ export class AuthService {
   constructor( private http: HttpClient,
                private tokenStorage: TokenStorageService,
                private router: Router,
+               private spinner: NgxSpinnerService,
                private notification: NotificationService) { }
 
   login(user: IUserLogin): Observable<IToken> {
@@ -53,8 +55,9 @@ export class AuthService {
           }
           this.tokenStorage.saveToken(jwtToken);
           this.startRefreshTokenTimer();
-          this.notification.success('Token was updated! TEST REFRESH');
+          this.spinner.hide ();
         } else {
+          this.spinner.hide ();
           this.notification.error(data.message);
           this.logout();
         }

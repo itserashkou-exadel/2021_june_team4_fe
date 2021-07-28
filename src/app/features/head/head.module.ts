@@ -34,6 +34,11 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { FavoriteComponent } from './profile/profile/favorite/favorite.component';
 import { ActiveComponent } from './profile/profile/active/active.component';
 import { HistoryComponent } from './profile/profile/history/history.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { ChartsModule } from 'ng2-charts';
+import {MatExpansionModule} from "@angular/material/expansion";
+
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
@@ -66,26 +71,30 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     MapComponent,
     StepCreateVendorComponent
   ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        RouterModule,
-        HeadRoutingModule,
-        NgbCarouselModule,
-        NgbRatingModule,
-        MatDialogModule,
-        NgbTooltipModule,
-        MatTreeModule,
-        MatTableModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient],
-            },
-            missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MissingTranslationService},
-            useDefaultLang: false,
-        }),
-    ],
+  imports: [
+    ChartsModule,
+    NgxSpinnerModule,
+    CommonModule,
+    SharedModule,
+    RouterModule,
+    HeadRoutingModule,
+    NgbCarouselModule,
+    NgbRatingModule,
+    MatDialogModule,
+    NgbTooltipModule,
+    MatTreeModule,
+    MatTableModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MissingTranslationService},
+      useDefaultLang: false,
+    }),
+    MatPaginatorModule,
+    MatExpansionModule,
+  ],
 })
 export class HeadModule { }

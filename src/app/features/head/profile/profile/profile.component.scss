@@ -17,42 +17,7 @@ $grey: hsla(0, 0%, 60%, 0.5);
 .Subscriptions {
   width: 100%;
 }
-.history {
-  width: fit-content;
-  display: flex;
-  flex-wrap: wrap;
-  //margin: 0 auto;
-  justify-content: flex-start;
 
-  &-item {
-    width: 270px;
-    height: 180px;
-    margin: 10px;
-    background-color: #fff;
-    border: 2px solid $grey;
-    border-radius: 10px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    .dicountName{
-      color: $base-color;
-    }
-    .dicountPromo{
-      font-size: 24px;
-      color: hsl(0, 0%, 0%);
-    }
-    .dicountStart{
-      color: hsla(150, 100%, 30%, 0.5);
-      font-weight: bold;
-    }
-    .dicountEnd{
-      color: hsla(0, 100%, 40%, 0.5);
-      font-weight: bold;
-    }
-  }
-}
 .category {
   font-size: 18px;
   line-height: 30px;
@@ -112,15 +77,12 @@ tr.mat-footer-row {
       text-align: left;
       vertical-align: top;
     }
+    .mat-tab-header, .mat-tab-nav-bar {
+      border-bottom: 0;
+    }
     .wrapper {
       flex-direction: row;
     }
-    //.mat-tab-list {
-    //  border-bottom: none;
-    //}
-    //.mat-tab-header-pagination {
-    //  display: none !important;
-    //}
     .mat-tab-links {
       flex-direction: column;
     }
@@ -129,7 +91,6 @@ tr.mat-footer-row {
       left: 98% !important;
     }
     .mat-tab-body-wrapper {
-      //flex: 1 1 auto;
       display: table-cell;
     }
   }
