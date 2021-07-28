@@ -32,7 +32,7 @@ export class ProfileService {
   }
   getCoupons(): Observable<IFavoritesProfile[]> {
     return this.http.get<IFavoritesProfile[]>(
-      `${COUPONS_URL}?Id=${this.tokenParsed.id}`
+      `${COUPONS_URL}?userId=${this.tokenParsed.id}`
     );
   }
 }
