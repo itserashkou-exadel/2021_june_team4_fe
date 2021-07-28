@@ -1,27 +1,23 @@
 $base-color: hsl(196, 85%, 59%);
 $grey: hsla(0, 0%, 60%, 0.5);
 
-.profile{
+.profile {
   font-weight: normal;
-  p{
+  p {
     color: $grey;
     font-size: 16px;
   }
 
-  span{
+  span {
     color: $base-color;
     font-size: 24px;
   }
 }
 
-.Subscriptions {
-  width: 100%;
-}
+// .mat-tab-body-wrapper {
+//   width: 100%;
+// }
 
-.category {
-  font-size: 18px;
-  line-height: 30px;
-}
 .green {
   background-color: rgb(183, 255, 183);
 }
@@ -32,36 +28,45 @@ $grey: hsla(0, 0%, 60%, 0.5);
   background-color: #fff;
 }
 
-.demo-table {
-  width: 100%;
-}
+// .Subscriptions {
+//   width: 100%;
+// }
 
-.mat-row .mat-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  cursor: pointer;
-}
+// .category {
+//   font-size: 18px;
+//   line-height: 30px;
+// }
 
-.mat-row:hover .mat-cell {
-  border-color: currentColor;
-}
+// .demo-table {
+//   width: 100%;
+// }
 
-.demo-row-is-clicked {
-  font-weight: bold;
-}
+// .mat-row .mat-cell {
+//   border-bottom: 1px solid transparent;
+//   border-top: 1px solid transparent;
+//   cursor: pointer;
+// }
 
+// .mat-row:hover .mat-cell {
+//   border-color: currentColor;
+// }
+
+// .demo-row-is-clicked {
+//   font-weight: bold;
+// }
 
 // categories
 
-table {
-  width: 100%;
-}
+// table {
+//   width: 100%;
+// }
 
-tr.mat-footer-row {
-  font-weight: bold;
-}
+// tr.mat-footer-row {
+//   font-weight: bold;
+// }
 
 //tabs
+
 :host {
   > .container {
     max-width: 1264px;
@@ -72,13 +77,17 @@ tr.mat-footer-row {
     background: none;
   }
   ::ng-deep {
-    .mat-tab-nav-bar{
-      display:table-cell;
+    .mat-tab-nav-bar {
+      display: table-cell;
       text-align: left;
       vertical-align: top;
     }
-    .mat-tab-header, .mat-tab-nav-bar {
+    .mat-tab-header,
+    .mat-tab-nav-bar {
       border-bottom: 0;
+    }
+    .mat-tab-link{
+      padding: 0;
     }
     .wrapper {
       flex-direction: row;
@@ -92,6 +101,7 @@ tr.mat-footer-row {
     }
     .mat-tab-body-wrapper {
       display: table-cell;
+      padding: 0;
     }
   }
 }
