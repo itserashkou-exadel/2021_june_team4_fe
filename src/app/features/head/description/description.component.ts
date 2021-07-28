@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { createSelector, Store, select } from '@ngrx/store';
 import {
   IAppState,
@@ -12,7 +12,7 @@ import {
   removeFromFavourite,
 } from '../../../core/store/actions/description.actions';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { getPromo } from 'src/app/core/store/actions/notifications.actions';
 
 @Component({
@@ -80,6 +80,6 @@ export class DescriptionComponent implements OnInit {
   }
 
   activateCoupon() {
-    this.store.dispatch(getPromo({ id: this.discountId }));
+    this.store.dispatch(getPromo({ discountId: this.discountId }));
   }
 }

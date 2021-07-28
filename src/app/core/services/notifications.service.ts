@@ -12,8 +12,7 @@ export class NotificationsService {
 
   requestPromo(discountId: string): Observable<any> {
     const response = this.http.post(
-      `${COUPONS_URL}?discountId=${discountId}`,
-      httpOptions
+      `${COUPONS_URL}?discountId=${discountId}`, httpOptions
     );
     return response;
   }
