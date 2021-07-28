@@ -6,7 +6,5 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./carousel.component.scss']
 })
 export class CarouselComponent {
-  @Input() images: any = [{
-    image:['https://material.angular.io/assets/img/examples/shiba2.jpg'],
-  }];
+  @Input() images: any = ['https://assets.intergiro.net.br/arquivos/labtemp/img/no-image.png'];
 }
