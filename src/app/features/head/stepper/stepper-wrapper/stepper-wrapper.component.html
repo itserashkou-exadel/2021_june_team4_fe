@@ -1,15 +1,15 @@
-<div class="vendor" *ngIf=" selectedVendor$ | async as data">
-  
+<div class="vendor" *ngIf="selectedVendor$ | async as data">
   <mat-stepper orientation="vertical">
-    
     <!-- Step 1: Create vendor -->
     <mat-step>
-      <ng-template matStepLabel >
+      <ng-template matStepLabel>
         <div class="vendor-info">
-          {{ 'COMMON.Stepper.vendorInfo' | translate }} 
-          <h3>Selected vendor : <b>{{data.name}}</b></h3>
+          {{ 'COMMON.Stepper.vendorInfo' | translate }}
+          <h3>
+            {{ 'COMMON.Stepper.selectedVendor' | translate }} :
+            <b>{{ data.name }}</b>
+          </h3>
         </div>
-       
       </ng-template>
       <ng-template matStepContent>
         <app-step-create-vendor></app-step-create-vendor>
