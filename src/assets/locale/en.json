@@ -21,9 +21,16 @@
         "name": "Vendor's name",
         "used": "Used discounts"
       },
+      "categories": {
+        "views": "Number of views",
+        "discounts": "Number of discounts",
+        "name": "Category's name",
+        "used": "Used discounts"
+      },
       "title": {
         "discounts": "Statistic by discounts",
-        "vendors": "Statistic by vendors"
+        "vendors": "Statistic by vendors",
+        "categories": "Statistic by category"
       }
     },
     "Head": {

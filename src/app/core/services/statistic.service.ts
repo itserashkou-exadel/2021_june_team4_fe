@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-import {STATISTIC_DISCOUNTS_URL, STATISTIC_VENDORS_URL} from '../../shared/constants';
+import {STATISTIC_DISCOUNTS_URL,
+        STATISTIC_VENDORS_URL,
+        STATISTIC_CATEGORIES_URL} from '../../shared/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -21,11 +23,18 @@ export class StatisticService {
     }
   }
 
-  getStatisticDiscounts() {//params: any
-    // let paramsForRequest = `?sortBy=${params.sortActive}`
-    //   + `&sortDirection=${params.sortDirection}`
-    //   + `&page=${params.paginatorPageIndex}`;
+  getStatisticCategories(params: any) {
+    if (params.sortBy === 'created') {
+      return this.http.get<any>(`${STATISTIC_CATEGORIES_URL}`);
+    } else {
+      let paramsForRequest = `?sortBy=${params.sortBy}`
+        + `&sortDirection=${params.sortDirection}`
+        + `&page=${params.page}`;
+      return this.http.get<any>(`${STATISTIC_CATEGORIES_URL}${paramsForRequest}`);
+    }
+  }
 
-    return this.http.get<any>(`${STATISTIC_DISCOUNTS_URL}`);//${paramsForRequest}
+  getStatisticDiscounts() {
+    return this.http.get<any>(`${STATISTIC_DISCOUNTS_URL}`);
   }
 }

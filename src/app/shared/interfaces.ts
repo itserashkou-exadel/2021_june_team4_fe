@@ -222,3 +222,10 @@ export interface VendorStatistic {
   viewNumber: number;
 }
 
+export interface CategoriesStatistic {
+  numberOfGettingPromo: number;
+  name: string;
+  discountsNumber: number;
+  viewNumber: number;
+}
+
