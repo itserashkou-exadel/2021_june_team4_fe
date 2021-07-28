@@ -1,10 +1,6 @@
 <div class="second-step__btn-top-wrapper">
   <div class="edit-discount-head" *ngIf="selectedVendor$ | async as data">
 
-    <!-- <h3>
-      {{ 'COMMON.Stepper.SecondStep.vendor' | translate }} :
-      <b>{{ data.name }}</b>
-    </h3> --> 
     <button
       mat-flat-button
       color="primary"
@@ -40,7 +36,6 @@
   <form
     class="form"
     [formGroup]="discountForm"
-    (ngSubmit)="saveBP()"
     *ngIf="activeComponent !== 'edit'"
   >
     <div class="form-row">

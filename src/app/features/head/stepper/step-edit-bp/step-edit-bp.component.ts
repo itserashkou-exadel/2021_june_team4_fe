@@ -67,11 +67,6 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   currentDiscount: any = null;
   currentDiscountName: string = '';
 
-  // venLocations: { id: string; name: string } = {
-  //   id: 'string_ID',
-  //   name: 'string',
-  // };
-
   constructor(
     private discountService: DiscountService,
     private handleDiscount: HomeService,
@@ -97,14 +92,9 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     this.selectedVendor$ = this.store.select(selectVendorData);
 
     this.subSlelectVendor = this.selectedVendor$.subscribe((vendor) => {
-      this.getLocations(vendor.id);
-      // this.subSlelectLocations = this.vendorsService
-      //   .getVendorLocations(vendor.id)
-      //   .subscribe((data) => {
-      //     console.log('getVendorLocations',data)
-      //     this.vendorLocations = data.map((el: any) => this.makeLocation(el));
-      //   });
-
+      if(vendor.id){
+        this.getLocations(vendor.id);
+      }
       this.getVendorsById(vendor.id).subscribe((data) => {
         this.vendor = data;
         this.getDisounts(vendor.id);
@@ -117,7 +107,6 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     this.subSlelectLocations = this.vendorsService
         .getVendorLocations(vendorId)
         .subscribe((data) => {
-          console.log('getVendorLocations',data)
           this.vendorLocations = data.map((el: any) => this.makeLocation(el));
         });
   }
@@ -137,7 +126,6 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-   // console.log('edit bp init');
     
     this.subTags = this.tagsService.getTags().subscribe((data) => {
       this.tagsSet = data;
@@ -234,8 +222,6 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
       this.subUpdateRequest = this.discountService
         .updateDiscount(JSON.stringify(newDiscount), this.currentDiscount)
         .subscribe((resp) => {
-         // console.log('edit----------------------------')
-          // console.log(resp);
           this.getDisounts(this.vendor.id);
           this.currentDiscount = null;
           this.notification.success(
@@ -254,23 +240,6 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     }
   }
 
-  saveBP(): void {
-    this.discountForm.disable();
-
-    const bpFormData = this.discountForm.value;
-    this.aSub = this.discountService.createDiscount(bpFormData).subscribe(
-      () => {},
-      (err) => {
-        console.error(err);
-        this.discountForm.enable();
-      },
-      () => {
-        console.log('All data were saved successfully');
-        this.discountForm.enable();
-      }
-    );
-  }
-
   getVendorsById(id: string) {
     return this.vendorsService.getVendorsById(id);
   }
@@ -281,7 +250,7 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
       .createCategory({ name: newCategoryName })
       .subscribe((resp: any) => {
         this.notification.success(`Category ${newCategoryName} successfully created !`)
-        console.log(resp);
+        this.categories$ = this.categoriesService.getCategories();
       });
   }
 
