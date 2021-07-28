@@ -20,11 +20,7 @@ export class TagsService {
   };
 
   createTag(tag:{name: string}): any {//Observable<string> { 
-      return this.http.post<string>(`${API_URL}/tags`, tag, httpOptions).subscribe(
-        () => {},
-        err => console.log(err),
-        () => alert('New tag has been saved successfully')
-      )
+      return this.http.post<string>(`${API_URL}/tags`, tag, httpOptions)
   };
 }
 

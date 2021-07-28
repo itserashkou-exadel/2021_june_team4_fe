@@ -10,7 +10,6 @@ const initialState = {
 export function vendorReducer(state: any = initialState, action: any) {
   switch (action.type) {
     case 'SaveVendorData':
-     // console.log(action);
       return {
         selectedVendor: {
           id: action.id,

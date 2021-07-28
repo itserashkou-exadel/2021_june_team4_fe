@@ -35,6 +35,7 @@ export class AuthInterceptor implements HttpInterceptor {
       }
     }
     return next.handle(authReq).pipe ( tap (
+
       event => {},
       error => {
         let errorMessage = `Error: ${error.error.message}`;

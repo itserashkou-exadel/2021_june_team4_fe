@@ -1,9 +1,11 @@
+
 import { OnInit, Component } from '@angular/core';
 import { ProfileService } from '../../../../../core/services/profile.service';
 import { Observable } from 'rxjs';
 import { IFavoritesProfile } from '../../../../../shared/interfaces';
 import { map } from 'rxjs/operators';
 import { HomeService } from '../../../../../core/services/home.service';
+
 import {AfterViewInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -34,6 +36,7 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent implements OnInit {
+
   displayHistory: string[] = ['Name', 'Promo', 'EndDate'];
   profileCoupons$!: Observable<IFavoritesProfile[]>;
   //dataSource: IFavoritesProfile[] = new MatTableDataSource(this.profileCoupons$);
@@ -42,6 +45,7 @@ export class HistoryComponent implements OnInit {
     private profile: ProfileService,
     public homeService: HomeService
   ) {}
+
 
   // @ViewChild(MatSort) sort!: MatSort;
 
