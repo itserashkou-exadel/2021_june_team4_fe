@@ -22,22 +22,22 @@
       </p>
     </div>
   </div>
-
+  
   <div class="container">
     <div id="content">
       <div id="main-content">
       <div class="wrapper row px-3">
-          <nav mat-tab-nav-bar class="col-md-3 col-lg-2 border rounded">
+          <nav mat-tab-nav-bar class="col-12 col-md-3 col-lg-3 col-xl-2">
             <a mat-tab-link
                *ngFor="let link of tabs"
                [routerLink]="link.path"
-               
+
 
             >
               {{link.tabName | translate}}
             </a>
           </nav>
-        <div class="mat-tab-body-wrapper col-11 col-md-9 mx-auto">
+        <div class="mat-tab-body-wrapper mx-auto col-9 col-sm-5 col-md-8 col-lg-8 col-xl-10">
           <router-outlet></router-outlet>
         </div>
       </div>
