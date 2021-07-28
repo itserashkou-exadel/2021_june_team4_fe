@@ -39,9 +39,6 @@
 
       <div class="right-block ml-auto col-4">
         <div class="notifications">
-          <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"
-        >favorite_border</mat-icon
-        > -->
           <mat-icon
             [matBadge]="iSnotifications$"
             matBadgeColor="warn"
@@ -59,7 +56,8 @@
                 <span>
                   {{ note.nType }}
                   <b>{{ note.nPromo }}</b>
-                  for {{ note.nName }}
+                  for
+                  <b>{{ note.nName }}</b>
                 </span>
               </mat-list-item>
             </mat-list>
@@ -77,10 +75,9 @@
               class=""
               aria-label="Example home icon"
             >
-              person_outline
+              {{ this.userRole === 'ROLE_USER' ? 'person_outline' : 'person' }}
             </mat-icon>
-            {{ user.firstName + " " + user.lastName }}
-            <!-- 'COMMON.Head.name' | translate -->
+            {{ user.firstName + ' ' + user.lastName }}
           </button>
 
           <mat-menu #menu="matMenu">

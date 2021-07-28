@@ -36,7 +36,7 @@ export interface Fruit {
   styleUrls: ['./side-bar-filter.component.scss'],
 })
 export class SideBarFilterComponent implements OnInit, OnDestroy {
-  filterForm: FormGroup;
+  filterForm!: FormGroup;
   chips$: Observable<ISimpleVar[]>;
   tags$: Observable<ISimpleVar[]>;
   categories$: Observable<ISimpleVar[]>;
@@ -53,7 +53,7 @@ export class SideBarFilterComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<IAppState>,
-    private filterServices: FilterService
+    private filterServices: FilterService, 
   ) {
     this.locations$ = this.store.select(selectControlsLocations);
     this.categories$ = this.store.select(selectControlsCathegories);
@@ -62,8 +62,6 @@ export class SideBarFilterComponent implements OnInit, OnDestroy {
     this.vendors$ = this.store.select(selectControlsVendors);
     this.storedFormValues = this.store.select(selectFormValues);
 
-    // this.storedFormValues.subscribe((data) => console.log(data));
-    // this.locations$.subscribe(d => console.log(d))
 
     this.subscribedFormValues = this.storedFormValues.subscribe(
       (data) => (this.formValues = data)
@@ -79,7 +77,7 @@ export class SideBarFilterComponent implements OnInit, OnDestroy {
       chips: new FormControl(),
     });
     this.inputControl = new FormControl();
-    // END OF CONSTRUCTOR
+    // END OF CONSTRUCTOR    
   }
 
   ngOnInit(): void {
@@ -87,7 +85,6 @@ export class SideBarFilterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
     const configControls = {
       values: {
         vendors: this.filterForm.get('vendor')?.value

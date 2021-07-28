@@ -13,6 +13,7 @@ import { TokenStorageService } from './token-storage.service';
 })
 export class ProfileService {
   tokenParsed: any;
+  
   constructor(
     private http: HttpClient,
     private tokenStorage: TokenStorageService
