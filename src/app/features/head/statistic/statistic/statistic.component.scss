@@ -7,6 +7,17 @@ table {
   font-size: 14px;
   width: 100%;
 }
+
+.statistic-chart-container {
+  position: relative;
+  margin: 20px;
+  .chart-container {
+    position: relative;
+    min-height: 200px;
+    overflow: auto;
+  }
+}
+
 .statistic-container {
   position: relative;
   margin: 20px;

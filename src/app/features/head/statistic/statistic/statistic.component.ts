@@ -1,12 +1,14 @@
 import {Component, ViewChild, AfterViewInit, OnInit} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import { MatSort, SortDirection} from '@angular/material/sort';
-import { merge, Observable, of as observableOf } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import {merge, Observable, of as observableOf} from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { IAppState, VendorStatistic } from "../../../../shared/interfaces";
-import { createSelector, select, Store } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { StatisticService } from "../../../../core/services/statistic.service";
-import {MatTableDataSource} from "@angular/material/table";
+import { MatTableDataSource } from "@angular/material/table";
+import { ChartDataSets, ChartOptions, ChartType} from "chart.js";
+import { Label } from "ng2-charts";
 
 /**
  * @title Table retrieving data through HTTP
@@ -19,20 +21,25 @@ import {MatTableDataSource} from "@angular/material/table";
 
 export class StatisticComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['name', 'discountsNumber', 'viewNumber','numberOfGettingPromo'];
-  // dataSourceVendors: VendorStatistic[] = [];
-  // statisticVData$: Observable<any>;
-
   resultsLength = 0;
   isRateLimitReached = false;
-
   dataSourceVendors: MatTableDataSource<VendorStatistic>;
   @ViewChild('TableOnePaginator', {static: true}) tableOnePaginator!: MatPaginator;
   @ViewChild('TableOneSort', {static: true}) tableOneSort!: MatSort;
 
-  // @ViewChild(MatPaginator, {static:false})
-  // paginator!: MatPaginator;
-  // @ViewChild(MatSort, {static:false})
-  // sort!: MatSort;
+  barChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  barChartLabels: Label[] = [];
+  barChartType: ChartType = 'bar';
+  barChartLegend = true;
+  barChartPlugins = [];
+  labels:Observable<any>[] = [];
+
+  barChartData: ChartDataSets[] = [
+    { data: [], label: 'Number of discount views' }
+  ];
+  chartColors: any[] = [{ backgroundColor: "#40bfef" }];
 
   constructor(private store: Store<IAppState>,
               private statisticService: StatisticService) {
@@ -40,8 +47,6 @@ export class StatisticComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
-    // this.dataSourceVendors.paginator = this.tableOnePaginator;
-    // this.dataSourceVendors.sort = this.tableOneSort;
     this.dataSourceVendors.paginator = this.tableOnePaginator;
     this.dataSourceVendors.sort = this.tableOneSort;
 
@@ -51,7 +56,6 @@ export class StatisticComponent implements AfterViewInit, OnInit {
       .pipe(
         startWith({}),
         switchMap(() => {
-          console.log( 'page:', this.tableOnePaginator.pageIndex)
           return this.statisticService.getStatisticVendors({
             sortBy: this.tableOneSort.active,
             sortDirection: this.tableOneSort.direction,
@@ -70,6 +74,18 @@ export class StatisticComponent implements AfterViewInit, OnInit {
           return data.items;
         })
       ).subscribe(data => this.dataSourceVendors = data);
+
+    this.statisticService.getStatisticDiscounts().subscribe(res => {
+      let labels = res.items.map((el:any)=>{
+        return el.name;
+      })
+      let barData = res.items.map((el:any)=>{
+        return el.viewNumber;
+      })
+      this.barChartLabels.push(...labels);
+      this.barChartData[0].data!.push(...barData);
+    });
+
   }
 
   ngAfterViewInit() {

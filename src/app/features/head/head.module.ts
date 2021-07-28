@@ -35,7 +35,8 @@ import { FavoriteComponent } from './profile/profile/favorite/favorite.component
 import { ActiveComponent } from './profile/profile/active/active.component';
 import { HistoryComponent } from './profile/profile/history/history.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import {MatPaginatorModule} from "@angular/material/paginator";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { ChartsModule } from 'ng2-charts';
 
 
 // required for AOT compilation
@@ -70,6 +71,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     StepCreateVendorComponent
   ],
   imports: [
+    ChartsModule,
     NgxSpinnerModule,
     CommonModule,
     SharedModule,
