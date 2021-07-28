@@ -20,6 +20,10 @@
         "discounts": "Number of discounts",
         "name": "Vendor's name",
         "used": "Used discounts"
+      },
+      "title": {
+        "discounts": "Statistic by discounts",
+        "vendors": "Statistic by vendors"
       }
     },
     "Head": {

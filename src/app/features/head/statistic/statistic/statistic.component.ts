@@ -20,6 +20,8 @@ import { Label } from "ng2-charts";
 })
 
 export class StatisticComponent implements AfterViewInit, OnInit {
+  panelOpenState = false;
+
   displayedColumns: string[] = ['name', 'discountsNumber', 'viewNumber','numberOfGettingPromo'];
   resultsLength = 0;
   isRateLimitReached = false;
@@ -88,7 +90,5 @@ export class StatisticComponent implements AfterViewInit, OnInit {
 
   }
 
-  ngAfterViewInit() {
-
-  }
+  ngAfterViewInit() {}
 }

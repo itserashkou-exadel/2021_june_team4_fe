@@ -37,6 +37,7 @@ import { HistoryComponent } from './profile/profile/history/history.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { ChartsModule } from 'ng2-charts';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 // required for AOT compilation
@@ -93,6 +94,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
       useDefaultLang: false,
     }),
     MatPaginatorModule,
+    MatExpansionModule,
   ],
 })
 export class HeadModule { }
