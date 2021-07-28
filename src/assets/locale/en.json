@@ -88,6 +88,7 @@
     },
     "Stepper": {
       "vendorInfo": "Information about Vendor",
+      "selectedVendor": "Selected vendor",
       "FirstStep": {
         "vendorName": "Vendor Name",
         "vendorNamePlaceholder": "Add vendor name",
@@ -104,7 +105,9 @@
         "cityLabel": "City",
         "coordinates": "Add coordinates",
         "latitude": "Latitude",
-        "longitude": "Longtitude"
+        "longitude": "Longtitude",
+        "removeCoordinates": "Remove coordinates",
+        "locations": "Locations"
       },
       "vendorBpInfo": "Information about Discount",
       "SecondStep": {

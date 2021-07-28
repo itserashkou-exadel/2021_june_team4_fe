@@ -88,6 +88,7 @@
     },
     "Stepper": {
       "vendorInfo": "Информация о вендоре",
+      "selectedVendor": "Выбранный вендор",
       "FirstStep": {
         "vendorName": "Имя вендора",
         "vendorNamePlaceholder": "Добавьте имя вендора",
@@ -104,7 +105,9 @@
         "cityLabel": "Город",
         "coordinates": "Добавьте координаты",
         "latitude": "Широта",
-        "longitude": "Долгота"
+        "longitude": "Долгота",
+        "removeCoordinates": "Удалить координаты",
+        "locations": "Локации"
       },
       "vendorBpInfo": "Информация о дискаунте",
       "SecondStep": {
