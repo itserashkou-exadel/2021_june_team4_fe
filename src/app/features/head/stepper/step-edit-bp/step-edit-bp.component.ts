@@ -1,8 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { compileNgModule } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { createSelector, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { NotificationService } from 'src/app/core/core.module';
@@ -12,7 +9,6 @@ import { HomeService } from 'src/app/core/services/home.service';
 import { TagsService } from 'src/app/core/services/tags.service';
 import { VendorsService } from 'src/app/core/services/vendors.service';
 import { saveVendorData } from 'src/app/core/store/actions/vendor.action';
-import { API_URL } from 'src/app/shared/constants';
 import {
   IAppState,
   ICategory,
@@ -56,30 +52,31 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   subUpdateRequest!: Subscription;
   subCreateRequest!: Subscription;
   subRemoveDiscountReq!: Subscription;
+  subCreateCategoryReq!: Subscription;
+  subCreateTagReq!: Subscription;
 
   vendor: any;
   vendorDiscounts!: IDiscount[];
   vendorLocations: any;
 
   DiscountsTypes: Array<DiscountType> = [
-    { value: '', viewValue: 'COMMON.Stepper.SecondStep.typePercent' },
-    { value: '', viewValue: 'COMMON.Stepper.SecondStep.typePrice' },
+    { value: 'PRICE', viewValue: 'COMMON.Stepper.SecondStep.typePercent' },
+    { value: 'PERCENT', viewValue: 'COMMON.Stepper.SecondStep.typePrice' },
   ];
 
   currentDiscount: any = null;
   currentDiscountName: string = '';
 
-  venLocations: { id: string; name: string } = {
-    id: 'string_ID',
-    name: 'string',
-  };
+  // venLocations: { id: string; name: string } = {
+  //   id: 'string_ID',
+  //   name: 'string',
+  // };
 
   constructor(
     private discountService: DiscountService,
     private handleDiscount: HomeService,
     private vendorsService: VendorsService,
     private store: Store<IAppState>,
-    private http: HttpClient,
     private categoriesService: CategoriesService,
     private tagsService: TagsService,
     private notification: NotificationService
@@ -100,11 +97,13 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     this.selectedVendor$ = this.store.select(selectVendorData);
 
     this.subSlelectVendor = this.selectedVendor$.subscribe((vendor) => {
-      this.subSlelectLocations = this.vendorsService
-        .getVendorLocations(vendor.id)
-        .subscribe((data) => {
-          this.vendorLocations = data.map((el: any) => this.makeLocation(el));
-        });
+      this.getLocations(vendor.id);
+      // this.subSlelectLocations = this.vendorsService
+      //   .getVendorLocations(vendor.id)
+      //   .subscribe((data) => {
+      //     console.log('getVendorLocations',data)
+      //     this.vendorLocations = data.map((el: any) => this.makeLocation(el));
+      //   });
 
       this.getVendorsById(vendor.id).subscribe((data) => {
         this.vendor = data;
@@ -112,6 +111,19 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
       });
     });
     //END OF CONSTRUCTOR
+  }
+
+  getLocations(vendorId: string){
+    this.subSlelectLocations = this.vendorsService
+        .getVendorLocations(vendorId)
+        .subscribe((data) => {
+          console.log('getVendorLocations',data)
+          this.vendorLocations = data.map((el: any) => this.makeLocation(el));
+        });
+  }
+
+  clickGetLocation(){
+    this.getLocations(this.vendor.is);
   }
 
   getDisounts(vendorId: string) {
@@ -125,6 +137,8 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+   // console.log('edit bp init');
+    
     this.subTags = this.tagsService.getTags().subscribe((data) => {
       this.tagsSet = data;
     });
@@ -171,10 +185,16 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
     if (this.subRemoveDiscountReq) {
       this.subRemoveDiscountReq.unsubscribe();
     }
+    if (this.subCreateCategoryReq) {
+      this.subCreateCategoryReq.unsubscribe();
+    }
+    if(this.subCreateTagReq){
+      this.subCreateTagReq.unsubscribe()
+    }
   }
 
   selectCategory(ev: any) {
-    console.log(ev);
+    // console.log(ev);
   }
 
   removeDiscount() {
@@ -209,12 +229,13 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
       vendorId: this.vendor.id,
       vendorLocationsIds: this.discountForm.get('locations')?.value,
     };
-    console.log(newDiscount);
+    // console.log(newDiscount);
     if (this.currentDiscount) {
       this.subUpdateRequest = this.discountService
         .updateDiscount(JSON.stringify(newDiscount), this.currentDiscount)
         .subscribe((resp) => {
-          console.log(resp);
+         // console.log('edit----------------------------')
+          // console.log(resp);
           this.getDisounts(this.vendor.id);
           this.currentDiscount = null;
           this.notification.success(
@@ -253,18 +274,28 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
   getVendorsById(id: string) {
     return this.vendorsService.getVendorsById(id);
   }
-  
+
   createCategory(): void {
     const newCategoryName: string = this.newCategoryInput.value;
-    this.categoriesService.createCategory({ name: newCategoryName });
+    this.subCreateCategoryReq = this.categoriesService
+      .createCategory({ name: newCategoryName })
+      .subscribe((resp: any) => {
+        this.notification.success(`Category ${newCategoryName} successfully created !`)
+        console.log(resp);
+      });
   }
 
   createTag(): void {
     const newTagName = this.newTagInput.value;
-    this.tagsService.createTag({ name: newTagName });
+    this.subCreateTagReq =
+    this.tagsService.createTag({ name: newTagName }).subscribe((resp: any)=>{
+      this.notification.success(`Tag ${newTagName} successfully created !`)
+      this.tags$ = this.tagsService.getTags();
+    });
   }
 
   editDiscount(discountId: any) {
+    this.getLocations(this.vendor.id);
     this.currentDiscount = discountId;
     this.discountService.getDiscountById(discountId).subscribe((discount) => {
       this.activeComponent = 'create';
@@ -298,5 +329,11 @@ export class StepEditBpComponent implements OnInit, OnDestroy {
         6
       )} - ${vl.city.name + ''}`,
     };
+  }
+
+  resetDiscount() {
+    this.discountForm.reset();
+    this.currentDiscount = '';
+    // console.log('hello');
   }
 }

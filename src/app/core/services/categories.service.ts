@@ -24,10 +24,6 @@ export class CategoriesService {
   // };
 
   createCategory(category: {name: string}): any { 
-    return this.http.post<string>(`${API_URL}/categories`, category).subscribe(
-      () => {},
-      err => console.log(err),
-      () => alert('New category has been saved successfully')
-    )
+    return this.http.post<string>(`${API_URL}/categories`, category)
   };
 }

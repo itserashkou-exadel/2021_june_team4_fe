@@ -100,9 +100,9 @@ export class StepCreateVendorComponent
       contacts: new FormControl(null, [Validators.required]),
     });
 
-    this.http.get(`${API_URL}/coupons`).subscribe(resp => {
-      console.log(resp);
-    })
+    // this.http.get(`${API_URL}/coupons`).subscribe(resp => {
+    //   console.log(resp);
+    // })
   }
 
   ngOnDestroy(): void {
@@ -151,6 +151,7 @@ export class StepCreateVendorComponent
     this.latControl.enable();
     this.longControl.enable();
   }
+  
   selectCountry(countryId: string) {
     this.currentCountryId = countryId;
     this.cityControl.enable();
@@ -160,6 +161,17 @@ export class StepCreateVendorComponent
 
   selectLocation(location: any) {
     this.selectedLocation = location;
+  }
+
+  selectVendor(vendor: any) {
+    this.store.dispatch(saveVendorData(vendor));
+    this.vendorForm.patchValue({
+      description: vendor.description,
+      contacts: vendor.contacts,
+    });
+    this.countryControl.enable();
+    this.locationsControl.enable();
+    this.getLocations();
   }
 
   removeVendor() {
@@ -187,17 +199,6 @@ export class StepCreateVendorComponent
     this.subDeleteVendor.unsubscribe();
   }
 
-  selectVendor(vendor: any) {
-    this.store.dispatch(saveVendorData(vendor));
-    this.vendorForm.patchValue({
-      description: vendor.description,
-      contacts: vendor.contacts,
-    });
-    this.countryControl.enable();
-    this.locationsControl.enable();
-    this.getLocations();
-  }
-
   addCoordinates() {
     let vendorid = '';
     this.subVendorId = this.selectedVendor$.subscribe(
@@ -209,6 +210,9 @@ export class StepCreateVendorComponent
       longitude: this.longControl.value,
       vendorId: vendorid,
     };
+    // console.log(this.latControl.value)
+    // console.log(this.longControl.value)
+    // console.log(req)
     this.subAddCoordinates = this.http
       .post<any>(`${API_URL}/locations`, req)
       .subscribe((resp) => {

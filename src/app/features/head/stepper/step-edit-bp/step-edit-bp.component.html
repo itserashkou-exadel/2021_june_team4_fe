@@ -1,14 +1,14 @@
 <div class="second-step__btn-top-wrapper">
   <div class="edit-discount-head" *ngIf="selectedVendor$ | async as data">
-    <h3>
+    <!-- <h3>
       {{ "COMMON.Stepper.SecondStep.vendor" | translate }} :
       <b>{{ data.name }}</b>
-    </h3>
+    </h3> -->
     <button
       mat-flat-button
       color="primary"
       label="create"
-      (click)="activeComponent = 'create'"
+      (click)="activeComponent = 'create'; clickGetLocation()"
       *ngIf="activeComponent === 'edit'"
     >
       <mat-icon>add_box</mat-icon>
@@ -20,7 +20,7 @@
       mat-flat-button
       color="primary"
       label="create"
-      (click)="activeComponent = 'edit'"
+      (click)="activeComponent = 'edit';resetDiscount();clickGetLocation()"
       *ngIf="activeComponent === 'create'"
     >
       <mat-icon>edit_box</mat-icon>
@@ -176,7 +176,7 @@
           {{ "COMMON.Stepper.SecondStep.type" | translate }}
         </mat-label>
         <mat-select matNativeControl formControlName="discountType">
-          <mat-option *ngFor="let type of DiscountsTypes" [value]="type">
+          <mat-option *ngFor="let type of DiscountsTypes" [value]="type.value">
             {{ type.viewValue | translate }}
           </mat-option>
         </mat-select>

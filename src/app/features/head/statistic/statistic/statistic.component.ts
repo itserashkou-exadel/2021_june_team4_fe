@@ -78,7 +78,7 @@ export class StatisticComponent implements AfterViewInit, OnInit {
 export interface GithubApi {
   items: GithubIssue[];
   total_count: number;
-}
+} 
 
 export interface GithubIssue {
   numberOfGettingPromo: number;
