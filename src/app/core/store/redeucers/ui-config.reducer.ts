@@ -3,7 +3,7 @@ import {createAction, props} from "@ngrx/store";
 
 export const initialState: IUiConfigState = {
   searchIsActive: false,
-  homeIsMap: true,
+  homeIsMap: false,
   appLanguage: 'en',
   requestConfig: {
     filterRequestParams: '',
