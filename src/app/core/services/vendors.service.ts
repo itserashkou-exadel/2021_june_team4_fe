@@ -35,11 +35,4 @@ export class VendorsService {
   createVendor(vendorFormData: Observable<any>): Observable<any> {
     return this.http.post<any>(`${API_URL}/vendors`, vendorFormData, httpOptions);
   };
-
-  // Function for delete vendors from BD!!!!!!!!!! Warning!!!!!
-  // _deleteVendor(): any {
-  //   return this.http.get<any>(`${API_URL}/vendors`).subscribe(
-  //     data => console.log(data)
-  //   )
-  // }
 }

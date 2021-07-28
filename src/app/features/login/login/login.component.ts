@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  // roles: string[] = [];
 
   constructor ( private auth: AuthService,
                 private tokenStorage: TokenStorageService,
@@ -64,6 +63,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.router.navigate(['/home']);
 
         this.tokenStorage.saveToken(data);
+
+        const role = JSON.parse(atob(data.accessToken.split('.')[1])).role;
+        sessionStorage.setItem('role', role);
 
         this.auth.startRefreshTokenTimer();
         this.isLoginFailed = false;

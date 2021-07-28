@@ -1,4 +1,4 @@
-import {Component, ViewChild, AfterViewInit, OnInit} from '@angular/core';
+import {Component, ViewChild, AfterViewInit, OnInit, ElementRef} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import {merge, Observable, of as observableOf} from 'rxjs';
@@ -9,6 +9,7 @@ import { StatisticService } from "../../../../core/services/statistic.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { ChartDataSets, ChartOptions, ChartType} from "chart.js";
 import { Label } from "ng2-charts";
+import * as XLSX from 'xlsx';
 
 /**
  * @title Table retrieving data through HTTP
@@ -20,7 +21,8 @@ import { Label } from "ng2-charts";
 })
 
 export class StatisticComponent implements AfterViewInit, OnInit {
-  panelOpenState = false;
+  panelOpenStateVendors = false;
+  panelOpenStateCategories = false;
 
   //variables for vendors table
   displayedColumns: string[] = ['name', 'discountsNumber', 'viewNumber','numberOfGettingPromo'];
@@ -29,6 +31,7 @@ export class StatisticComponent implements AfterViewInit, OnInit {
   dataSourceVendors: MatTableDataSource<VendorStatistic>;
   @ViewChild('TableOnePaginator', {static: true}) tableOnePaginator!: MatPaginator;
   @ViewChild('TableOneSort', {static: true}) tableOneSort!: MatSort;
+  @ViewChild('TABLE_ONE') tableVendors!: ElementRef;
 
   //variables chart by discounts
   barChartOptions: ChartOptions = {
@@ -52,6 +55,8 @@ export class StatisticComponent implements AfterViewInit, OnInit {
   dataSourceCategories: MatTableDataSource<CategoriesStatistic>;
   @ViewChild('TableTwoPaginator', {static: true}) tableTwoPaginator!: MatPaginator;
   @ViewChild('TableTwoSort', {static: true}) tableTwoSort!: MatSort;
+  @ViewChild('TABLE_TWO') tableCategories!: ElementRef;
+
 
   constructor(private store: Store<IAppState>,
               private statisticService: StatisticService) {
@@ -126,6 +131,26 @@ export class StatisticComponent implements AfterViewInit, OnInit {
       this.barChartData[0].data!.push(...barData);
     });
 
+  }
+
+  ExportTOExcel(type: string) {
+    let table:any= {};
+    let text:string = '';
+
+    if (type === 'vendors') {
+      table = this.tableVendors;
+      text = 'Statistic by vendors';
+    } else if (type === 'categories') {
+      table = this.tableCategories;
+      text = 'Statistic by categories';
+    }
+
+    const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(table.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, text);
+
+    /* save to file */
+    XLSX.writeFile(wb, `${text}.xlsx`);
   }
 
   ngAfterViewInit() {}
