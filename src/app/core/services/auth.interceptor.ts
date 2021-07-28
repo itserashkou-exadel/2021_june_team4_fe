@@ -31,7 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
       if(authReq.url.endsWith('/authenticate/refresh') ){
         const refreshToken = window.sessionStorage.getItem('refreshToken');
         authReq = req.clone({headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + refreshToken)})
-        return next.handle(authReq)
+        // return next.handle(authReq)
       }
     }
     return next.handle(authReq).pipe ( tap (

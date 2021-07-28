@@ -5,7 +5,6 @@ import { getPromo } from '../actions/notifications.actions';
 import { NotificationsService } from '../../services/notifications.service';
 import { NotificationService } from "../../services/notification.service";
 
-
 @Injectable()
 export class NotificationsEffects {
   constructor(private actions$: Actions,
@@ -13,15 +12,15 @@ export class NotificationsEffects {
               private notification: NotificationService
     ) {}
 
-  newDiscounts$ = createEffect(
+  activatePromo$ = createEffect(
     ()=> this.actions$.pipe(
       ofType(getPromo),
-      mergeMap((action)=> this.notificationsService.requestPromo(action.id)
+      mergeMap((action)=> this.notificationsService.requestPromo( action.discountId )
       .pipe(
          map( (data: any) => {
-           const newData =  {promo : data.discount.promo, discountName: data.discount.name };
+           const newData =  { promo : data.discount.promo, discountName: data.discount.name };
            this.notification.success("Coupon is activated");
-          return { type: 'RequestPromo',data: newData};
+          return { type: 'RequestPromo', data: newData};
           }))
     )
   ))

@@ -10,20 +10,20 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 })
 export class ProfileComponent implements OnInit {
   //categoryAddRemove: string[] = ['COMMON.Global.add', 'COMMON.Global.remove'];
-
+  displayHistory: string[] = ['Name', 'Promo', 'EndDate'];
   user$: Observable<IUser>;
 
-  tabs: [
-    { tabName: string; path: string; isActive: boolean },
-    { tabName: string; path: string; isActive: boolean },
-    { tabName: string; path: string; isActive: boolean }
-  ] = [
-    { tabName: 'History', path: 'history', isActive: true },
-    { tabName: 'Favorites', path: 'favorite', isActive: false },
-    { tabName: 'Active Discounts', path: 'active', isActive: false },
-  ];
 
-  constructor(private profile: ProfileService) {
+  tabs:[{ tabName: string; path: string ,isActive: boolean}, { tabName: string; path: string,isActive: boolean }, { tabName: string; path: string,isActive: boolean }] = [
+    { tabName: 'COMMON.Profile.title.history', path: 'history', isActive: true},
+    { tabName: 'COMMON.Profile.title.favorite', path: 'favorite', isActive: false},
+    { tabName: 'COMMON.Profile.title.active', path: 'active', isActive: false}
+  ]
+
+
+  constructor(
+    private profile: ProfileService,)
+  {
     this.user$ = this.profile.getUser();
   }
 

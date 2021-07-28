@@ -6,7 +6,10 @@ interface Action {
 
 export const clearNotifications = createAction('ClearNotifications');
 
-export const getPromo = createAction('GetPromo', props<{ id: string }>());
+export const getPromo = createAction(
+  'GetPromo',
+  props<{ discountId: string }>()
+);
 
 export const requestPromo = createAction(
   'RequestPromo',

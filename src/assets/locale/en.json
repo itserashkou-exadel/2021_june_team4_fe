@@ -79,7 +79,12 @@
       "category": "Category",
       "discountName": "Discount Name",
       "promo": "Promo",
-      "endDate": "End Date"
+      "endDate": "End Date",
+      "title": {
+        "history": "History",
+        "favorite": "Favourites",
+        "active": "Active discounts"
+      }
     },
     "Stepper": {
       "vendorInfo": "Information about Vendor",
