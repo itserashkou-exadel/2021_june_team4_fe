@@ -22,21 +22,17 @@ export interface IProfileSubscription {
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  // coupons: any = { promo: '213123123', name: 'Vendor Name' };
-  displayCategory: string[] = ['Category', 'Add/Remove'];
   categoryAddRemove: string[] = ['COMMON.Global.add', 'COMMON.Global.remove'];
   displayHistory: string[] = ['Name', 'Promo', 'EndDate'];
   user$: Observable<IUser>;
 
   categories$: Observable<ICategory[]>;
-  // subscribe$: Observable<any>;
   DescriptionAll$: Observable<IDescription[]>;
-  // profileHistory$: Observable<IFavoritesProfile[]>;
 
   tabs:[{ tabName: string; path: string ,isActive: boolean}, { tabName: string; path: string,isActive: boolean }, { tabName: string; path: string,isActive: boolean }] = [
-    { tabName: 'history', path: 'history', isActive: true},
-    { tabName: 'favorite', path: 'favorite', isActive: false},
-    { tabName: 'active', path: 'active', isActive: false}
+    { tabName: 'COMMON.Profile.title.history', path: 'history', isActive: true},
+    { tabName: 'COMMON.Profile.title.favorite', path: 'favorite', isActive: false},
+    { tabName: 'COMMON.Profile.title.active', path: 'active', isActive: false}
   ]
 
 
@@ -44,31 +40,12 @@ export class ProfileComponent implements OnInit {
     private store: Store<{ profile: boolean }>,
     private http: HttpClient,
     private categories: CategoriesService,
-    private profile: ProfileService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private change: ChangeDetectorRef,
-
-  ) {
-    // this.subscribe$ = store.select('profile');
+    private profile: ProfileService,)
+  {
     this.categories$ = this.categories.getCategories();
     this.user$ = this.profile.getUser();
-    // this.profileHistory$ = this.profile.getFavorite();
-    // this.favorites$.subscribe(data => console.log(data));
     this.DescriptionAll$ = this.profile.getDescriptionAll();
   }
 
   ngOnInit() {}
-
-  // items(id: any) {
-  //   console.log('Category Id' + id);
-  // }
-
-  // subscr() {
-  //   this.store.dispatch(addSubscribe());
-  // }
-  // unSubscr() {
-  //   this.store.dispatch(removeSubscribe());
-  //   console.log('removed');
-  // }
 }

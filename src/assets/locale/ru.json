@@ -79,7 +79,12 @@
       "category": "Категория",
       "discountName": "Название дискаунта",
       "promo": "Промо",
-      "endDate": "Дата окончания"
+      "endDate": "Дата окончания",
+      "title": {
+        "history": "История",
+        "favorite": "Избранное",
+        "active": "Активные скидки"
+      }
     },
     "Stepper": {
       "vendorInfo": "Информация о вендоре",
