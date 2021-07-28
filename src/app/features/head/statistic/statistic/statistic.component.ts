@@ -1,18 +1,17 @@
-import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+
+import {Component, ViewChild, AfterViewInit, OnInit, ElementRef} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import {
-  CategoriesStatistic,
-  IAppState,
-  VendorStatistic,
-} from '../../../../shared/interfaces';
-import { Store } from '@ngrx/store';
-import { StatisticService } from '../../../../core/services/statistic.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Label } from 'ng2-charts';
+
+import {CategoriesStatistic, IAppState, VendorStatistic} from "../../../../shared/interfaces";
+import { Store } from "@ngrx/store";
+import { StatisticService } from "../../../../core/services/statistic.service";
+import { MatTableDataSource } from "@angular/material/table";
+import { ChartDataSets, ChartOptions, ChartType} from "chart.js";
+import { Label } from "ng2-charts";
+import * as XLSX from 'xlsx';
 
 /**
  * @title Table retrieving data through HTTP
@@ -23,7 +22,8 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./statistic.component.scss'],
 })
 export class StatisticComponent implements AfterViewInit, OnInit {
-  panelOpenState = false;
+  panelOpenStateVendors = false;
+  panelOpenStateCategories = false;
 
   //variables for vendors table
   displayedColumns: string[] = [
@@ -35,9 +35,10 @@ export class StatisticComponent implements AfterViewInit, OnInit {
   resultsLength = 0;
   isRateLimitReached = false;
   dataSourceVendors: MatTableDataSource<VendorStatistic>;
-  @ViewChild('TableOnePaginator', { static: true })
-  tableOnePaginator!: MatPaginator;
-  @ViewChild('TableOneSort', { static: true }) tableOneSort!: MatSort;
+
+  @ViewChild('TableOnePaginator', {static: true}) tableOnePaginator!: MatPaginator;
+  @ViewChild('TableOneSort', {static: true}) tableOneSort!: MatSort;
+  @ViewChild('TABLE_ONE') tableVendors!: ElementRef;
 
   //variables chart by discounts
   barChartOptions: ChartOptions = {
@@ -64,16 +65,16 @@ export class StatisticComponent implements AfterViewInit, OnInit {
   resultsLengthTwo = 0;
   isRateLimitReachedTwo = false;
   dataSourceCategories: MatTableDataSource<CategoriesStatistic>;
-  @ViewChild('TableTwoPaginator', { static: true })
-  tableTwoPaginator!: MatPaginator;
-  @ViewChild('TableTwoSort', { static: true }) tableTwoSort!: MatSort;
 
-  constructor(
-    private store: Store<IAppState>,
-    private statisticService: StatisticService
-  ) {
-    this.dataSourceVendors = new MatTableDataSource();
-    this.dataSourceCategories = new MatTableDataSource();
+  @ViewChild('TableTwoPaginator', {static: true}) tableTwoPaginator!: MatPaginator;
+  @ViewChild('TableTwoSort', {static: true}) tableTwoSort!: MatSort;
+  @ViewChild('TABLE_TWO') tableCategories!: ElementRef;
+
+
+  constructor(private store: Store<IAppState>,
+              private statisticService: StatisticService) {
+    this.dataSourceVendors = new MatTableDataSource;
+    this.dataSourceCategories = new MatTableDataSource;
   }
 
   ngOnInit(): void {
@@ -150,6 +151,26 @@ export class StatisticComponent implements AfterViewInit, OnInit {
       this.barChartLabels.push(...labels);
       this.barChartData[0].data!.push(...barData);
     });
+  }
+
+  ExportTOExcel(type: string) {
+    let table:any= {};
+    let text:string = '';
+
+    if (type === 'vendors') {
+      table = this.tableVendors;
+      text = 'Statistic by vendors';
+    } else if (type === 'categories') {
+      table = this.tableCategories;
+      text = 'Statistic by categories';
+    }
+
+    const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(table.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, text);
+
+    /* save to file */
+    XLSX.writeFile(wb, `${text}.xlsx`);
   }
 
   ngAfterViewInit() {}

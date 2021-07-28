@@ -19,7 +19,7 @@ export class NotificationsEffects {
       mergeMap((action)=> this.notificationsService.requestPromo(action.id)
       .pipe(
          map( (data: any) => {
-           const newData =  {promo : data.promo, discountName: data.name };
+           const newData =  {promo : data.discount.promo, discountName: data.discount.name };
            this.notification.success("Coupon is activated");
           return { type: 'RequestPromo',data: newData};
           }))
